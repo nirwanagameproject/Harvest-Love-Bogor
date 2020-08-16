@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
+    AppIdRealtime: 162f4fbb-2882-405f-a12f-9f6ab04df729
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -28,6 +28,29 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
+  RpcList:
+  - addBale
+  - changeweapon
+  - ClickRpc
+  - cowaktif
+  - deleteBale
+  - DestroyRpc
+  - DestroySpaceship
+  - dropBale
+  - Fire
+  - gantiWarna
+  - getChat
+  - gunaintools
+  - jump
+  - keluarBobo
+  - ngajakBobo
+  - OrangJoin
+  - paculan
+  - pickBale
+  - pindahlevel
+  - pindahposisikasur
+  - RespawnSpaceship
+  - sinkronWaktu
+  - tidursemua
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
