@@ -89,7 +89,8 @@ public class Language : MonoBehaviour
         bahasaID.Add("Kuning");
         bahasaID.Add("Hijau");
         bahasaID.Add("Abu-abu");
-
+        bahasaID.Add("Baju");
+        
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
         bahasaUS.Add("Tap for continue");
@@ -165,6 +166,8 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Yellow");
         bahasaUS.Add("Green");
         bahasaUS.Add("Grey");
+        bahasaUS.Add("Clothes");
+        bahasaUS.Add("Hair1");
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -233,14 +236,16 @@ public class Language : MonoBehaviour
         bahasaJP.Add("Apa ini sesuai ?");
         bahasaJP.Add("Tidak");
         bahasaJP.Add("Rambut");
-        bahasaJP.Add("Warna");
-        bahasaJP.Add("Hitam");
-        bahasaJP.Add("Putih");
-        bahasaJP.Add("Biru");
-        bahasaJP.Add("Merah");
-        bahasaJP.Add("Kuning");
-        bahasaJP.Add("Hijau");
-        bahasaJP.Add("Abu-abu");
+        bahasaJP.Add("Warna"); //42
+        bahasaJP.Add("Hitam"); //43
+        bahasaJP.Add("Putih"); //44
+        bahasaJP.Add("Biru"); //45
+        bahasaJP.Add("Merah"); //46
+        bahasaJP.Add("Kuning"); //47
+        bahasaJP.Add("Hijau"); //48
+        bahasaJP.Add("Abu-abu"); //49
+        bahasaJP.Add("Baju"); //50
+        bahasaJP.Add("Rambut1"); //51
 
     }
 
