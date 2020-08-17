@@ -168,20 +168,20 @@ public class Language : MonoBehaviour
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
-        bahasaJP.Add("Tap to continue..");
-        bahasaJP.Add("シングルプレーヤー");
-        bahasaJP.Add("マルチプレーヤー");
-        bahasaJP.Add("ひとこと");
-        bahasaJP.Add("言語");
-        bahasaJP.Add("はじめから");
-        bahasaJP.Add("続く");
-        bahasaJP.Add("戻る");
-        bahasaJP.Add("ホスト");
-        bahasaJP.Add("入る");
-        bahasaJP.Add("ホストロード中");
-        bahasaJP.Add("初めから");
-        bahasaJP.Add("パブリックロビーに入る");
-        bahasaJP.Add("スペシャル・サンクス : \n " +
+        bahasaJP.Add("Tap untuk melanjutkan");
+        bahasaJP.Add("Bermain Sendiri");
+        bahasaJP.Add("Bermain Bersama");
+        bahasaJP.Add("Tentang kami");
+        bahasaJP.Add("Bahasa");
+        bahasaJP.Add("Permainan Baru");
+        bahasaJP.Add("Memuat Permainan");
+        bahasaJP.Add("Kembali");
+        bahasaJP.Add("Tuan Rumah");
+        bahasaJP.Add("Bergabung");
+        bahasaJP.Add("Memuat untuk Tuan Rumah");
+        bahasaJP.Add("Mulai Baru");
+        bahasaJP.Add("Join ke Ruangan Publik");
+        bahasaJP.Add("Special Thanks To : \n " +
             "\n3D Modeling : \n" +
             "1.Free3D \n" +
             " - Hernando Mora\n" +
@@ -205,42 +205,42 @@ public class Language : MonoBehaviour
             " - Artist Management\n" +
             "4.Fajar M F\n" +
             " - Programmer");
-        bahasaJP.Add("杉のページ");
-        bahasaJP.Add("お名前は？");
-        bahasaJP.Add("はい");
-        bahasaJP.Add("お誕生日は？");
-        bahasaJP.Add("Springは春");
-        bahasaJP.Add("Summerは夏");
-        bahasaJP.Add("Fallは秋");
-        bahasaJP.Add("Winterは冬");
-        bahasaJP.Add("名前");
-        bahasaJP.Add("ボゴールへようこそ！　:)");
+        bahasaJP.Add("Tap untuk melanjutkan..");
+        bahasaJP.Add("Siapa nama kamu?");
+        bahasaJP.Add("Ya");
+        bahasaJP.Add("Kapan tanggal ulang tahun kamu?");
+        bahasaJP.Add("Spring adalah musim semi");
+        bahasaJP.Add("Summer adalah musim panas");
+        bahasaJP.Add("Fall adalah musim gugur");
+        bahasaJP.Add("Winter adalah musim dingin");
+        bahasaJP.Add("Nama");
+        bahasaJP.Add("Selamat datang di Kota Bogor :)");
         bahasaJP.Add("");
-        bahasaJP.Add("君は一人っ子。ご両親はもういなくなった。");
-        bahasaJP.Add("この街にご両親からの遺産で生きている。");
-        bahasaJP.Add("まずは、君の名は？");
-        bahasaJP.Add("こんにちは ");
-        bahasaJP.Add(", お誕生日は？");
-        bahasaJP.Add("1‐30日");
-        bahasaJP.Add("農場の名前は？?");
-        bahasaJP.Add("猫の名前は？");
-        bahasaJP.Add("性別は？");
-        bahasaJP.Add("農場の名");
-        bahasaJP.Add("ねこの名");
-        bahasaJP.Add("男");
-        bahasaJP.Add("女");
-        bahasaJP.Add("誕生日");
-        bahasaJP.Add("これでいい？");
-        bahasaJP.Add("いいえ");
-        bahasaJP.Add("髪型");
-        bahasaJP.Add("色");
-        bahasaJP.Add("黒");
-        bahasaJP.Add("白");
-        bahasaJP.Add("青");
-        bahasaJP.Add("赤");
-        bahasaJP.Add("金色");
-        bahasaJP.Add("緑");
-        bahasaJP.Add("グレー");
+        bahasaJP.Add("Kamu adalah seorang anak tunggal dari petani yang ditinggalkan oleh orang tua kamu.");
+        bahasaJP.Add("Di Kota Bogor kamu akan berjuang dengan sisa warisan dari orang tua berupa lahan pertanian dan peternakan.");
+        bahasaJP.Add("Pertama, silahkan masukkan nama kamu...");
+        bahasaJP.Add("Hai ");
+        bahasaJP.Add(", kapan ulang tahun kamu?");
+        bahasaJP.Add("Tgl 1-30");
+        bahasaJP.Add("Apa nama kebunmu?");
+        bahasaJP.Add("Apa nama kucing kamu?");
+        bahasaJP.Add("Pilih gender kamu...");
+        bahasaJP.Add("Nama kebun");
+        bahasaJP.Add("Nama kucing");
+        bahasaJP.Add("Laki-laki");
+        bahasaJP.Add("Perempuan");
+        bahasaJP.Add("Ulang Tahun");
+        bahasaJP.Add("Apa ini sesuai ?");
+        bahasaJP.Add("Tidak");
+        bahasaJP.Add("Rambut");
+        bahasaJP.Add("Warna");
+        bahasaJP.Add("Hitam");
+        bahasaJP.Add("Putih");
+        bahasaJP.Add("Biru");
+        bahasaJP.Add("Merah");
+        bahasaJP.Add("Kuning");
+        bahasaJP.Add("Hijau");
+        bahasaJP.Add("Abu-abu");
 
     }
 
