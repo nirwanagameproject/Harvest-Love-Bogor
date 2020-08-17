@@ -3,10 +3,7 @@ Permainan simulasi **multiplayer** perkebunan Indonesia yang dibuat tahun 2020.P
 *Story of Seasons* dan *Stardew Valley*.
 
 ## Gameplay
-Permainan ini tentang para mahasiswa/mahasiswi yang ingin membuat tugas akhir meneliti tentang pertanian di Indonesia.
-Mereka diberi tugas oleh kepala desa untuk mengurus perkebunan yang sudah tidak terawat.Tujuan utamanya agar dapat mempertahankan perkebunan
-agar tidak jatuh ke orang yang salah.Pemain bisa memutuskan untuk membuat kebun seperti apa selanjutnya,seperti membersihkan ladang,
-menanam dan memanen, menjual hasil panen, berbagi hasil panen antar pemain,mengikuti perlombaan di desa dan membangun hubungan baik dengan warga.
+Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti program pemuda masuk desa* untuk mengelola sebuah lahan pertanian kosong yang harus diolah menjadi lahan produktif. Desa tersebut juga terancam oleh pengalihan fungsi desa oleh developer korup yang mempengaruhi penduduk desa, player akan mengatur antara mengelola lahan pertanian, mengeksplor desa dan menjalankan main / optional quest  untuk mencegah objek desa diambil oleh developer tersebut atau berinterkasi dengan NPC.
 
 ## Fitur yang sudah ada
 1. Menanam
