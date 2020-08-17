@@ -11,6 +11,7 @@ public class MyDialog : MonoBehaviour
     public int buka;
     public Text isitext;
     public GameObject taptocontinue;
+    public GameObject textDialog;
     public string isidialog;
     public bool percakapanaktif;
     public bool lanjutGa;
@@ -31,19 +32,28 @@ public class MyDialog : MonoBehaviour
 
     IEnumerator intro1()
     {
-        PercakapanBaru("Selamat datang di Kota Bogor :)", true);
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(23);
+        PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, true);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
-        PercakapanBaru("Kamu adalah seorang anak tunggal dari petani yang ditinggalkan oleh orang tua kamu.", true);
+        {
+            isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(25);
+            PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, true);
+        }
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
-        PercakapanBaru("Di Kota Bogor kamu akan berjuang dengan sisa warisan dari orang tua berupa lahan pertanian dan peternakan.", true);
-        while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
-        StartCoroutine("intro2");
+        {
+            isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(26);
+            PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, true);
+        } while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
+        {
+            StartCoroutine("intro2");
+        }
     }
 
         IEnumerator intro2()
     {
         //Masukin Nama
-        PercakapanBaru("Pertama, silahkan masukkan nama kamu...", false);
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(27);
+        PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, false);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         namakamu.SetActive(true);
         PlayerPrefs.DeleteKey("myname");
@@ -51,7 +61,11 @@ public class MyDialog : MonoBehaviour
         namakamu.SetActive(false);
 
         //Ultang tahun
-        PercakapanBaru("Hai "+ PlayerPrefs.GetString("myname")+", kapan ulang tahunmu ?", false);
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(28);
+        string dialog1 = isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate;
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(29);
+        string dialog2 = isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate;
+        PercakapanBaru(dialog1+ PlayerPrefs.GetString("myname")+dialog2, false);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         ulantahun.SetActive(true);
         PlayerPrefs.DeleteKey("mytanggallahir");
@@ -60,7 +74,8 @@ public class MyDialog : MonoBehaviour
         ulantahun.SetActive(false);
 
         //Nama Kebun
-        PercakapanBaru("Apa nama kebunmu ?", false);
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(31);
+        PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, false);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         namafarm.SetActive(true);
         PlayerPrefs.DeleteKey("mykebun");
@@ -68,7 +83,8 @@ public class MyDialog : MonoBehaviour
         namafarm.SetActive(false);
 
         //Nama Kebun
-        PercakapanBaru("Apa nama kucing kamu ?", false);
+        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(32);
+        PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, false);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         namakucing.SetActive(true);
         PlayerPrefs.DeleteKey("mykucing");
@@ -88,7 +104,8 @@ public class MyDialog : MonoBehaviour
         {
             //PILIH GENDER
             konfirmasi.SetActive(false);
-            PercakapanBaru("Pilih gender kamu...", false);
+            isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(33);
+            PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, false);
             PlayerPrefs.DeleteKey("gender");
             while (PlayerPrefs.HasKey("gender") == false) yield return new WaitUntil(() => PlayerPrefs.HasKey("gender") == true);
             exitpercakapan();

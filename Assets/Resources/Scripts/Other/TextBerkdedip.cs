@@ -13,6 +13,7 @@ public class TextBerkdedip : MonoBehaviour
     {
         sr = GetComponent<RectTransform>();
         InvokeRepeating("berkedip",0,1f);
+
     }
 
     // Update is called once per frame
