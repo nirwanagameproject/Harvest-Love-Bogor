@@ -26,3 +26,12 @@ Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti prog
 6. membuat **Cube** pembatas (agar tidak jatuh dari terrain)
 7. membuat object sesual peta dengan *mesh collider* (untuk tabrakan).
 8. klik **File - Build Settings** - *drag scane* ke *scène in build*
+
+### Cara membuat text dengan Terjemahan baru :
+1. membuat *component* **UI** *text*
+2. buka *script* **Language.cs**
+    1. tambahkan `bahasaID.Add(“Terjemahan Indonesia”);`
+    2. tambahkan `bahasaUS.Add(“Terjemahan Inggris”);`
+    3. tambahkan `bahasaJP.Add(“Terjemahan Jepang”);`
+4. buka tambahkan script **ChangeLanguage.cs** dengan **indexText** dari *script* **Language.cs**
+5. ubah *tag* di *inspector* menjadi **Language**

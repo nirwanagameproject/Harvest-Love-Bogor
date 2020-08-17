@@ -40,21 +40,20 @@ public class Credits : MonoBehaviour
         float x = transform.GetComponent<RectTransform>().localPosition.x;
         float y = transform.GetComponent<RectTransform>().localPosition.y;
 
-        float lebar = (90f * (jumlahBaris));
+        float lebar = (60f * (jumlahBaris));
         float panjang = transform.GetComponent<RectTransform>().rect.width;
 
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(panjang, lebar);
-        transform.GetComponent<RectTransform>().localPosition = new Vector2(x, y - (90f * (jumlahBaris - 1)) / 2);
+        transform.GetComponent<RectTransform>().localPosition = new Vector2(x, y - (60f * (jumlahBaris - 1)) / 2);
 
         x = transform.parent.GetComponent<RectTransform>().localPosition.x;
         y = transform.parent.GetComponent<RectTransform>().localPosition.y;
 
-        lebar = 90f * jumlahBaris;
+        lebar = 60f * jumlahBaris;
         panjang = transform.parent.GetComponent<RectTransform>().rect.width;
 
         transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(panjang, lebar);
-        transform.parent.GetComponent<RectTransform>().localPosition = new Vector2(x, y - (90f * (jumlahBaris - 1)) / 2);
-
+        transform.parent.GetComponent<RectTransform>().localPosition = new Vector2(x, y - (60f * (jumlahBaris - 1)) / 2);
 
         GetComponent<Text>().text = credits;
     }

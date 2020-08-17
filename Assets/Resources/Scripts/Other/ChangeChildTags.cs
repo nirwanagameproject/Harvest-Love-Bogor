@@ -24,10 +24,13 @@ public class ChangeChildTags : MonoBehaviour
                 foreach (Transform childTransform in transforms)
                 {
                     counter++;
-                    /*EditorUtility.DisplayProgressBar("Changing tags", "Changing all child object tags to " + parentTag +
-                        "\n  (" + (int)counter + "/" + (int)numberOfTransforms + ")",
-                        counter / numberOfTransforms);*/
-                    childTransform.gameObject.tag = parentTag;
+                /*EditorUtility.DisplayProgressBar("Changing tags", "Changing all child object tags to " + parentTag +
+                    "\n  (" + (int)counter + "/" + (int)numberOfTransforms + ")",
+                    counter / numberOfTransforms);*/
+                    if (childTransform.gameObject.tag != "Language")
+                    {
+                        childTransform.gameObject.tag = parentTag;
+                    }
                 }
                 //EditorUtility.ClearProgressBar();
             //}

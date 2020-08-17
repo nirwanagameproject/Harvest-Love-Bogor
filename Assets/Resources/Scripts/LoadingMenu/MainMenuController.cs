@@ -134,7 +134,10 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             GameObject.Find("MyMusic").GetComponent<AudioSource>().Play();
         }
 
-        
+        if (PlayerPrefs.GetString("Bahasa") == null)
+        {
+            PlayerPrefs.SetString("Bahasa", "Indonesia");
+        }
     }
 
     void Start()
@@ -239,6 +242,27 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         AudioSource audio = GameObject.Find("ClickedWrong").GetComponent<AudioSource>();
         audio.Play();
+    }
+
+    public void ClickChangeLanguage(Dropdown dropdown)
+    {
+        if (dropdown.options[dropdown.value].text == "Indonesia")
+        {
+            PlayerPrefs.SetString("bahasa","Indonesia");
+        }
+        else if (dropdown.options[dropdown.value].text == "English")
+        {
+            PlayerPrefs.SetString("bahasa", "Inggris");
+        }
+        else if (dropdown.options[dropdown.value].text == "Japan")
+        {
+            PlayerPrefs.SetString("bahasa", "Jepang");
+        }
+
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Language").Length; i++)
+        {
+            GameObject.FindGameObjectsWithTag("Language")[i].GetComponent<ChangeLanguage>().ChangedLanguge();
+        }
     }
 
     public void ClickSinglePlayer()
@@ -365,10 +389,26 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         callAudioClicked();
 
-        if(inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value==0) inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<Text>().text = "Spring adalah musim semi";
-        if(inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value==1) inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<Text>().text = "Summer adalah musim panas";
-        if(inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value==2) inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<Text>().text = "Fall adalah musim gugur";
-        if(inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value==3) inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<Text>().text = "Winter adalah musim dingin";
+        if (inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value == 0)
+        {
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().indexText = 18;
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().ChangedLanguge();
+        }
+        if (inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value == 1)
+        {
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().indexText = 19;
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().ChangedLanguge();
+        }
+        if (inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value == 2)
+        {
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().indexText = 20;
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().ChangedLanguge();
+        }
+        if (inputulangtaun.transform.Find("BotNotif").Find("Dropdown").GetComponent<Dropdown>().value == 3)
+        {
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().indexText = 21;
+            inputulangtaun.transform.Find("BotNotif").Find("TextKeterangan").GetComponent<ChangeLanguage>().ChangedLanguge();
+        }
     }
 
     public void ClickOKSetTanggalUltah()
@@ -423,12 +463,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             PlayerPrefs.SetString("mykucing", inputkucing.GetComponent<Text>().text);
             Debug.Log(PlayerPrefs.GetString("mykucing"));
 
-            string namaku = PlayerPrefs.GetString("myname");
-            string namakebunku = PlayerPrefs.GetString("mykebun");
-            string namakucingku = PlayerPrefs.GetString("mykucing");
-            int namatgllahir = PlayerPrefs.GetInt("mytanggallahir");
-            string namamusimlahir = PlayerPrefs.GetString("mymusimlahir");
-            inputkonfirmasi.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama: "+ namaku + "\nKebun: "+namakebunku+"\nUlang Tahun: "+namatgllahir+" "+namamusimlahir+"\nNama Kucing: "+namakucingku+"\n\nApa ini sesuai ?";
         }
 
     }
