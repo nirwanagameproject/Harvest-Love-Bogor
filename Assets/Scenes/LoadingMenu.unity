@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4483745, g: 0.49841112, b: 0.575617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44837403, g: 0.4984104, b: 0.5756162, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 20837626}
   - component: {fileID: 20837625}
   - component: {fileID: 20837624}
-  - component: {fileID: 20837627}
   - component: {fileID: 20837628}
   m_Layer: 5
   m_Name: Text
@@ -211,20 +210,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0025024414, y: 84.51099}
   m_SizeDelta: {x: -0, y: -168.98}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &20837627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20837623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indexText: 24
-  textTranslate: 
 --- !u!114 &20837628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8565ea710bc467aab819a2fc092fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indexText: 0
+  textTranslate: 
 --- !u!1 &31456983
 GameObject:
   m_ObjectHideFlags: 0
