@@ -167,43 +167,53 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+
+        //Warna
+        string HitamText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(43);
+        string PutihText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(44);
+        string BiruText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(45);
+        string MerahText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(46);
+        string KuningText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(47);
+        string HijauText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(48);
+        string AbuabuText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(49);
+
         if (inputhaircolor.transform.Find("Dropdown List") != null)
         {
-            if(inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih").Find("Item Image").GetComponent<Image>().color == Color.black)
+            if (inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+PutihText).Find("Item Image").GetComponent<Image>().color == Color.black)
             {
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih").Find("Item Image").GetComponent<Image>().color = Color.white;
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: Biru").Find("Item Image").GetComponent<Image>().color = Color.blue;
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: Merah").Find("Item Image").GetComponent<Image>().color = Color.red;
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: Kuning").Find("Item Image").GetComponent<Image>().color = Color.yellow;
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: Hijau").Find("Item Image").GetComponent<Image>().color = Color.green;
-                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: Abu-abu").Find("Item Image").GetComponent<Image>().color = Color.gray;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: " + PutihText).Find("Item Image").GetComponent<Image>().color = Color.white;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: "+BiruText).Find("Item Image").GetComponent<Image>().color = Color.blue;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: "+MerahText).Find("Item Image").GetComponent<Image>().color = Color.red;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: "+KuningText).Find("Item Image").GetComponent<Image>().color = Color.yellow;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: "+HijauText).Find("Item Image").GetComponent<Image>().color = Color.green;
+                inputhaircolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: "+AbuabuText).Find("Item Image").GetComponent<Image>().color = Color.gray;
 
             }
         }
         if (inputclothescolor.transform.Find("Dropdown List") != null)
         {
-            if (inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Hitam").Find("Item Image").GetComponent<Image>().color == Color.white)
+            if (inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+HitamText).Find("Item Image").GetComponent<Image>().color == Color.white)
             {
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Hitam").Find("Item Image").GetComponent<Image>().color = Color.black;
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: Biru").Find("Item Image").GetComponent<Image>().color = Color.blue;
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: Merah").Find("Item Image").GetComponent<Image>().color = Color.red;
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: Kuning").Find("Item Image").GetComponent<Image>().color = Color.yellow;
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: Hijau").Find("Item Image").GetComponent<Image>().color = Color.green;
-                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: Abu-abu").Find("Item Image").GetComponent<Image>().color = Color.gray;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+HitamText).Find("Item Image").GetComponent<Image>().color = Color.black;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: "+BiruText).Find("Item Image").GetComponent<Image>().color = Color.blue;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: "+MerahText).Find("Item Image").GetComponent<Image>().color = Color.red;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: "+KuningText).Find("Item Image").GetComponent<Image>().color = Color.yellow;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: "+HijauText).Find("Item Image").GetComponent<Image>().color = Color.green;
+                inputclothescolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: "+AbuabuText).Find("Item Image").GetComponent<Image>().color = Color.gray;
 
             }
         }
         
         if (inputpantscolor.transform.Find("Dropdown List") != null)
         {
-            if (inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih").Find("Item Image").GetComponent<Image>().color == Color.black)
+            if (inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+PutihText).Find("Item Image").GetComponent<Image>().color == Color.black)
             {
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih").Find("Item Image").GetComponent<Image>().color = Color.white;
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: Biru").Find("Item Image").GetComponent<Image>().color = Color.blue;
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: Merah").Find("Item Image").GetComponent<Image>().color = Color.red;
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: Kuning").Find("Item Image").GetComponent<Image>().color = Color.yellow;
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: Hijau").Find("Item Image").GetComponent<Image>().color = Color.green;
-                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: Abu-abu").Find("Item Image").GetComponent<Image>().color = Color.gray;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+PutihText).Find("Item Image").GetComponent<Image>().color = Color.white;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: "+BiruText).Find("Item Image").GetComponent<Image>().color = Color.blue;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: "+MerahText).Find("Item Image").GetComponent<Image>().color = Color.red;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: "+KuningText).Find("Item Image").GetComponent<Image>().color = Color.yellow;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 5: "+HijauText).Find("Item Image").GetComponent<Image>().color = Color.green;
+                inputpantscolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 6: "+AbuabuText).Find("Item Image").GetComponent<Image>().color = Color.gray;
 
             }
         }
