@@ -133,11 +133,11 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             GameObject.Find("MyMusic").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Audio/backsound1");
             GameObject.Find("MyMusic").GetComponent<AudioSource>().Play();
         }
-
-        if (PlayerPrefs.GetString("Bahasa") == null)
+        if (PlayerPrefs.HasKey("bahasa") == false)
         {
-            PlayerPrefs.SetString("Bahasa", "Indonesia");
+            PlayerPrefs.SetString("bahasa", "Indonesia");
         }
+
     }
 
     void Start()
