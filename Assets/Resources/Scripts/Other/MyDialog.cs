@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MyDialog : MonoBehaviour
+public class MyDialog : ChangeLanguage
 {
     RectTransform sr;
     double worldScreenHeight = Screen.height;
@@ -32,8 +32,9 @@ public class MyDialog : MonoBehaviour
 
     IEnumerator intro1()
     {
-        isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(23);
-        PercakapanBaru(isitext.gameObject.GetComponent<ChangeLanguage>().textTranslate, true);
+        Debug.Log("Mulai");
+        Debug.Log(GetLanguage(23));
+        PercakapanBaru(GetLanguage(23), true);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         {
             isitext.gameObject.GetComponent<ChangeLanguage>().GetLanguage(25);

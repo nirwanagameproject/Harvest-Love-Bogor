@@ -13,6 +13,12 @@ public class Language : MonoBehaviour
     {
         instance = this;
 
+        bahasa();
+
+    }
+
+    private void bahasa()
+    {
 
         //Translate Bahasa Indonesia
         bahasaID = new List<string>();
@@ -173,7 +179,7 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Hair1");  //51
         bahasaUS.Add("Pants"); //52
         bahasaUS.Add("Pants1"); //53
-        
+
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
         bahasaJP.Add("Tap to continue..");
