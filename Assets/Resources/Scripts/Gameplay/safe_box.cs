@@ -44,7 +44,7 @@ public class safe_box : MonoBehaviour
                 {
                     if (!PhotonNetwork.IsConnected || mycolliderPlayer[i].GetComponent<PhotonView>().IsMine)
                     {
-                        cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+                        cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
                         cubeaction.SetActive(true);
 
                         PlayerPrefs.SetString("buttonSafeBox", konfirmtidur.name);
