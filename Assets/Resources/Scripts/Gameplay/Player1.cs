@@ -191,9 +191,11 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             pos.z = transform.position.z - 3f;
             pos.y = transform.position.y + 3f;
             Vector3 velocity = Vector3.zero;
-            Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0.1f);
-            Camera.main.transform.LookAt(transform);
-
+            if (Camera.main != null)
+            {
+                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0.1f);
+                Camera.main.transform.LookAt(transform);
+            }
             for(int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
                 if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)

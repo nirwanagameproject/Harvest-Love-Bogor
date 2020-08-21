@@ -499,7 +499,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 30
   m_IsActive: 1
 --- !u!4 &435493591
 Transform:
@@ -1545,7 +1545,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 30
   m_IsActive: 1
 --- !u!154 &852715878
 TerrainCollider:
@@ -1855,6 +1855,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: DontDestroy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433755001185483957, guid: ef150909da782514cb041fbb6a311d1e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606543373305925171, guid: ef150909da782514cb041fbb6a311d1e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961444105730009, guid: ef150909da782514cb041fbb6a311d1e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8588206600482072502, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
