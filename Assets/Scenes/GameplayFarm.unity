@@ -679,7 +679,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: ClickExit
         m_Mode: 1
         m_Arguments:
@@ -743,7 +743,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 30
   m_IsActive: 1
 --- !u!154 &55134531
 TerrainCollider:
@@ -1938,7 +1938,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.9472e-41, z: 0, w: NaN}
+  m_BoundingSphereOverride: {x: 0, y: 949048300, z: 4.583e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4791,7 +4791,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: ClickTampilinSurat
         m_Mode: 3
         m_Arguments:
@@ -6057,13 +6057,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 856323992}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: savestate3
           m_BoolArgument: 0
@@ -6633,13 +6633,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 856323992}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: savestate4
           m_BoolArgument: 0
@@ -7480,7 +7480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f52f65a5a9d7eb41a82bcb6256cbbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mymail: {fileID: 1360715191}
+  mymail: {fileID: 803726644}
   transisi: {fileID: 0}
   cubeaction: {fileID: 519352943}
   mysave: 
@@ -9702,13 +9702,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 856323992}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: savestate5
           m_BoolArgument: 0
@@ -10680,7 +10680,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: CloseDapetDuit
         m_Mode: 1
         m_Arguments:
@@ -11579,7 +11579,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: CloseTunggu
         m_Mode: 1
         m_Arguments:
@@ -11709,7 +11709,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: ClickOpenAds
         m_Mode: 1
         m_Arguments:
@@ -11951,7 +11951,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400004, guid: 85fc30cebf911488fbe767ff736e970a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 85fc30cebf911488fbe767ff736e970a, type: 3}
 --- !u!1 &1504630703
 GameObject:
@@ -12502,13 +12503,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 856323992}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: savestate2
           m_BoolArgument: 0
@@ -15599,7 +15600,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 856323992}
         m_MethodName: ClickGajadiKlikIklan
         m_Mode: 1
         m_Arguments:
@@ -17120,7 +17121,7 @@ PrefabInstance:
     - target: {fileID: 8776354131279813220, guid: 4068deab56583ec4d881d3e4168bc94d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8776354131279813220, guid: 4068deab56583ec4d881d3e4168bc94d,
         type: 3}
@@ -17169,7 +17170,7 @@ PrefabInstance:
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038000003
+      value: 0.037999988
       objectReference: {fileID: 0}
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
@@ -17184,12 +17185,12 @@ PrefabInstance:
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
@@ -17199,7 +17200,7 @@ PrefabInstance:
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
@@ -17224,7 +17225,12 @@ PrefabInstance:
     - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.0105
+      value: 0.010500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729306646038102205, guid: ef150909da782514cb041fbb6a311d1e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.010000001
       objectReference: {fileID: 0}
     - target: {fileID: 3433755001185483957, guid: ef150909da782514cb041fbb6a311d1e,
         type: 3}
