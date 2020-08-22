@@ -73,45 +73,41 @@ public class bed : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("mautidur"))
         {
+
             Collider[] mycolliderPlayer = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Player"));
+            bool enterPlayer = mycolliderPlayer.Length != 0;
 
-            bool enterPlayer = false;
-
-            for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") {enterPlayer = true; break; }
-
-
-            if (enterPlayer && (cek == 1 || cek==3))
+            if (enterPlayer)
             {
                 for (int i = 0; i < mycolliderPlayer.Length; i++)
                 {
-                    if (!PhotonNetwork.IsConnected || mycolliderPlayer[i].GetComponent<PhotonView>().IsMine)
+                    if (mycolliderPlayer[i].GetComponent<PhotonView>().IsMine)
                     {
-                        cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-                        cubeaction.SetActive(true);
-
+                        if (!PlayerPrefs.HasKey("buttonTidur"))
+                        {
+                            cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                            cubeaction.SetActive(true);
+                        }
                         PlayerPrefs.SetString("buttonTidur", konfirmtidur.name);
-                        if (cek > 2) cek = 1;
-                        else cek++;
-                        /*konfirmtidur.SetActive(true);
-                        mycolliderPlayer[i].GetComponent<Player1>().Inputs.JoystickX = 0;
-                        mycolliderPlayer[i].GetComponent<Player1>().Inputs.JoystickZ = 0;
-                        mycolliderPlayer[i].GetComponent<Player1>().Inputs.pmrPos = mycolliderPlayer[i].GetComponent<Player1>().transform.position;
 
-                        mycolliderPlayer[i].GetComponent<Controller>().enabled = false;*/
+                        break;
+                    }
+                    else
+                    {
+                        if (PlayerPrefs.HasKey("buttonTidur") && i == mycolliderPlayer.Length - 1)
+                        {
+                            cubeaction.SetActive(false);
+                            PlayerPrefs.DeleteKey("buttonTidur");
+                        }
                     }
                 }
             }
             else
-            if (!enterPlayer && cek == 3)
+            if (!enterPlayer)
             {
                 cubeaction.SetActive(false);
                 PlayerPrefs.DeleteKey("buttonTidur");
-                if (cek > 2) cek = 1;
-                else cek++;
             }
-            else
-            if (!enterPlayer && cek == 2) cek = 3;
-            else if (enterPlayer && cek == 3) cek = 1;
         }
         
 
