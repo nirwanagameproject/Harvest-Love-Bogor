@@ -88,7 +88,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Tidak");
         bahasaID.Add("Rambut");
         bahasaID.Add("Warna"); //42
-        bahasaID.Add("Hitam");
+        bahasaID.Add("Hitam"); //43
         bahasaID.Add("Putih");
         bahasaID.Add("Biru");
         bahasaID.Add("Merah");
@@ -99,6 +99,14 @@ public class Language : MonoBehaviour
         bahasaID.Add("Rambut1"); //51
         bahasaID.Add("Celana"); // 52
         bahasaID.Add("Celana1"); //53
+        bahasaID.Add("Baju1");//54
+        bahasaID.Add("Kulit");//55
+        bahasaID.Add("Putih Cokelat");//56
+        bahasaID.Add("Cokelat");//57
+        bahasaID.Add("Cokelat Gelap");//58
+        bahasaID.Add("Lanjut");//59
+        bahasaID.Add("Apa kamu yakin?"); //60
+        bahasaID.Add("Pengaturan"); //61
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -141,7 +149,7 @@ public class Language : MonoBehaviour
             " - Programmer");
         bahasaUS.Add("Tap for continue..");
         bahasaUS.Add("Who is your name?");
-        bahasaUS.Add("OK");
+        bahasaUS.Add("Ok");
         bahasaUS.Add("When is your birthday?");
         bahasaUS.Add("Spring is season after winter");
         bahasaUS.Add("Summer is season after spring");
@@ -149,7 +157,7 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Winter is season after fall");
         bahasaUS.Add("Name");
         bahasaUS.Add("Welcome to Bogor City :)");
-        bahasaUS.Add("");
+        bahasaUS.Add(""); //24
         bahasaUS.Add("You're an only child from a farmer who was abandoned by your parents.");
         bahasaUS.Add("In Bogor City, you will struggle with the remaining inheritance from your parents in the form of agricultural land and livestock.");
         bahasaUS.Add("First, please enter your name...");
@@ -179,6 +187,14 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Hair1");  //51
         bahasaUS.Add("Pants"); //52
         bahasaUS.Add("Pants1"); //53
+        bahasaUS.Add("Clothes1");//54
+        bahasaUS.Add("Skin");//55
+        bahasaUS.Add("Bright Chocolate");//56
+        bahasaUS.Add("Chocolate");//57
+        bahasaUS.Add("Dark Chocolate");//58
+        bahasaUS.Add("Continue");//59
+        bahasaUS.Add("Are you sure?"); //60
+        bahasaUS.Add("Settings"); //61
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -259,7 +275,14 @@ public class Language : MonoBehaviour
         bahasaJP.Add("髪型1"); //51
         bahasaJP.Add("Celana"); //51
         bahasaJP.Add("Celana1"); //53
-
+        bahasaJP.Add("Baju1");//54
+        bahasaJP.Add("Kulit");//55
+        bahasaJP.Add("Putih Cokelat");//56
+        bahasaJP.Add("Cokelat");//57
+        bahasaJP.Add("Cokelat Gelap");//58
+        bahasaJP.Add("Lanjut");//59
+        bahasaJP.Add("Apa kamu yakin?"); //60
+        bahasaJP.Add("Pengaturan"); //61
     }
 
     // Update is called once per frame
