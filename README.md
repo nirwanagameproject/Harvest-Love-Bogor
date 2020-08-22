@@ -10,6 +10,7 @@ Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti prog
 2. **Multiplayer**
 
 ## Dokumentasi
+[Lihat Wiki disini](https://github.com/nirwanagameproject/Harvest-Love-Bogor-Wiki/wiki)
 ### Cara membuat lahan baru (scene)
 1. membuat **Terrain** 
     1. buka *tab inspector* pada *layer* rubah menjadi **Ground**
