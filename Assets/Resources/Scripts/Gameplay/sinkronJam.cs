@@ -95,6 +95,7 @@ public class sinkronJam : MonoBehaviour
             {
                 GameObject.Find("Sun").transform.eulerAngles = new Vector3(0f, -30f, 0f);
                 GameObject.Find("Sun").transform.Rotate(PlayerPrefs.GetFloat("directionalSun"), 0, 0, Space.Self);
+                //GameObject.Find("Sun").transform.Rotate(0, 0, 0, Space.Self);
             }
         }
         if (PhotonNetwork.IsConnected)
