@@ -107,6 +107,9 @@ public class Language : MonoBehaviour
         bahasaID.Add("Lanjut");//59
         bahasaID.Add("Apa kamu yakin?"); //60
         bahasaID.Add("Pengaturan"); //61
+        bahasaID.Add("Nama tidak boleh kosong"); //62
+        bahasaID.Add("Nama kucing tidak boleh kosong"); //63
+        bahasaID.Add("Batal"); //64
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -149,7 +152,7 @@ public class Language : MonoBehaviour
             " - Programmer");
         bahasaUS.Add("Tap for continue..");
         bahasaUS.Add("Who is your name?");
-        bahasaUS.Add("Ok");
+        bahasaUS.Add("Ok"); // 16
         bahasaUS.Add("When is your birthday?");
         bahasaUS.Add("Spring is season after winter");
         bahasaUS.Add("Summer is season after spring");
@@ -195,6 +198,9 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Continue");//59
         bahasaUS.Add("Are you sure?"); //60
         bahasaUS.Add("Settings"); //61
+        bahasaUS.Add("Name cannot be empty"); //62
+        bahasaUS.Add("Cat's name cannot be empty"); //63
+        bahasaUS.Add("Cancel"); //64
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -283,6 +289,11 @@ public class Language : MonoBehaviour
         bahasaJP.Add("Lanjut");//59
         bahasaJP.Add("Apa kamu yakin?"); //60
         bahasaJP.Add("Pengaturan"); //61
+        bahasaJP.Add("Nama tidak boleh kosong"); //62
+        bahasaJP.Add("Nama kucing tidak boleh kosong"); //63
+        bahasaJP.Add("Batal"); //64
+
+
     }
 
     // Update is called once per frame

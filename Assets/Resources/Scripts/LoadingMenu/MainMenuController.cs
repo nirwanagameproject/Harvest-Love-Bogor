@@ -376,7 +376,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputnama.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(62);
             notifwrong.SetActive(true);
         }
         else
@@ -467,7 +467,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputkucing.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama kucing tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(63);
             notifwrong.SetActive(true);
         }
         else
