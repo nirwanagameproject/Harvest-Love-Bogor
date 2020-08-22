@@ -8,7 +8,6 @@ Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti prog
 ## Fitur yang sudah ada
 1. Menanam
 2. **Multiplayer**
-3. Memetik
 
 ## Dokumentasi
 ### Cara membuat lahan baru (scene)
