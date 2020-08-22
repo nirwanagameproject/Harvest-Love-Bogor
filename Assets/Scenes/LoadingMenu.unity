@@ -6369,6 +6369,7 @@ GameObject:
   - component: {fileID: 340453848}
   - component: {fileID: 340453847}
   - component: {fileID: 340453846}
+  - component: {fileID: 340453849}
   m_Layer: 5
   m_Name: DropdownSkinColor
   m_TagString: Untagged
@@ -6509,6 +6510,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340453844}
   m_CullTransparentMesh: 0
+--- !u!114 &340453849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340453844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566c334d8ea20491abd91657db901959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &342987562
 GameObject:
   m_ObjectHideFlags: 0
@@ -17225,6 +17238,7 @@ GameObject:
   - component: {fileID: 728712872}
   - component: {fileID: 728712871}
   - component: {fileID: 728712870}
+  - component: {fileID: 728712873}
   m_Layer: 5
   m_Name: ButtonLanjut
   m_TagString: Untagged
@@ -17343,6 +17357,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728712868}
   m_CullTransparentMesh: 0
+--- !u!114 &728712873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728712868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexText: 59
+  textTranslate: 
 --- !u!1 &732870876
 GameObject:
   m_ObjectHideFlags: 0
@@ -32095,6 +32123,7 @@ GameObject:
   - component: {fileID: 1288531185}
   - component: {fileID: 1288531187}
   - component: {fileID: 1288531186}
+  - component: {fileID: 1288531188}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -32162,6 +32191,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288531184}
   m_CullTransparentMesh: 0
+--- !u!114 &1288531188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288531184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexText: 43
+  textTranslate: 
 --- !u!1 &1288548383
 GameObject:
   m_ObjectHideFlags: 0
@@ -34509,6 +34552,7 @@ GameObject:
   - component: {fileID: 1369440903}
   - component: {fileID: 1369440902}
   - component: {fileID: 1369440901}
+  - component: {fileID: 1369440904}
   m_Layer: 5
   m_Name: DropdownPants
   m_TagString: Untagged
@@ -34640,6 +34684,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369440899}
   m_CullTransparentMesh: 0
+--- !u!114 &1369440904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369440899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eed3523a7c974a6ea194df6966ae8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1396706135
 GameObject:
   m_ObjectHideFlags: 0
@@ -35075,6 +35131,7 @@ GameObject:
   - component: {fileID: 1420983509}
   - component: {fileID: 1420983511}
   - component: {fileID: 1420983510}
+  - component: {fileID: 1420983512}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -35142,6 +35199,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420983508}
   m_CullTransparentMesh: 0
+--- !u!114 &1420983512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420983508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexText: 55
+  textTranslate: 
 --- !u!1 &1425847024
 GameObject:
   m_ObjectHideFlags: 0
@@ -43527,6 +43598,7 @@ GameObject:
   - component: {fileID: 1746015831}
   - component: {fileID: 1746015830}
   - component: {fileID: 1746015829}
+  - component: {fileID: 1746015832}
   m_Layer: 5
   m_Name: DropdownHair
   m_TagString: Untagged
@@ -43658,6 +43730,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746015827}
   m_CullTransparentMesh: 0
+--- !u!114 &1746015832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746015827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3195380e7a8044073a64240b836ce59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1758752250
 GameObject:
   m_ObjectHideFlags: 0
@@ -46124,6 +46208,7 @@ GameObject:
   - component: {fileID: 1920459302}
   - component: {fileID: 1920459304}
   - component: {fileID: 1920459303}
+  - component: {fileID: 1920459305}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -46191,6 +46276,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920459301}
   m_CullTransparentMesh: 0
+--- !u!114 &1920459305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920459301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexText: 44
+  textTranslate: 
 --- !u!1 &1921451347
 GameObject:
   m_ObjectHideFlags: 0
@@ -46669,6 +46768,7 @@ GameObject:
   - component: {fileID: 1931650574}
   - component: {fileID: 1931650573}
   - component: {fileID: 1931650572}
+  - component: {fileID: 1931650575}
   m_Layer: 5
   m_Name: DropdownClothes
   m_TagString: Untagged
@@ -46800,6 +46900,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931650570}
   m_CullTransparentMesh: 0
+--- !u!114 &1931650575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931650570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caed7eefa9faf4bf1a5555e0d509f169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1932034665
 GameObject:
   m_ObjectHideFlags: 0
@@ -48610,6 +48722,7 @@ GameObject:
   - component: {fileID: 2052190137}
   - component: {fileID: 2052190139}
   - component: {fileID: 2052190138}
+  - component: {fileID: 2052190140}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -48677,6 +48790,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052190136}
   m_CullTransparentMesh: 0
+--- !u!114 &2052190140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052190136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8388488116a24bfab0cf6011002281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexText: 54
+  textTranslate: 
 --- !u!1 &2068056124
 GameObject:
   m_ObjectHideFlags: 0
@@ -48837,6 +48964,7 @@ GameObject:
   - component: {fileID: 2085267316}
   - component: {fileID: 2085267315}
   - component: {fileID: 2085267314}
+  - component: {fileID: 2085267317}
   m_Layer: 5
   m_Name: DropdownPantsColor
   m_TagString: Untagged
@@ -48981,6 +49109,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085267312}
   m_CullTransparentMesh: 0
+--- !u!114 &2085267317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085267312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625927055efdf42ea82786b2f047f9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2087092883
 GameObject:
   m_ObjectHideFlags: 0
