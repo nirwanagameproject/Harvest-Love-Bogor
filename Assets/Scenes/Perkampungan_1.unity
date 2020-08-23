@@ -5053,7 +5053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: Perkampungan_2
-  respawn: Spawn_perkampungan2
+  respawn: Spawn_perkampungan1
   pintu: 1
   transisi: {fileID: 0}
 --- !u!1 &1780789177
@@ -5498,7 +5498,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.76e-43, y: 2.4753e-41, z: 0, w: -1}
+  m_BoundingSphereOverride: {x: 0, y: 1.0549e-41, z: 0, w: -1}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
