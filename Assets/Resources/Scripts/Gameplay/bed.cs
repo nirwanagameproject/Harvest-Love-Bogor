@@ -11,7 +11,7 @@ public class bed : MonoBehaviour
     public GameObject konfirmsave;
     public GameObject transisi;
     public GameObject cubeaction;
-    
+
     public string mysave;
     public string respawn;
     public int cek;
@@ -36,15 +36,16 @@ public class bed : MonoBehaviour
                     konfirmtidur = GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjutClient").gameObject;
                 else konfirmtidur = GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjutClient2").gameObject;
             }
-        }else
+        }
+        else
         {
             if (name == "Bed1")
                 konfirmtidur = GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjut").gameObject;
             else konfirmtidur = GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjut2").gameObject;
         }
-        
-        if(name == "Bed1")
-        konfirmsave = GameObject.Find("CanvasHome").transform.Find("KonfirmasiSave").gameObject;
+
+        if (name == "Bed1")
+            konfirmsave = GameObject.Find("CanvasHome").transform.Find("KonfirmasiSave").gameObject;
         else konfirmsave = GameObject.Find("CanvasHome").transform.Find("KonfirmasiSave2").gameObject;
         PlayerPrefs.DeleteKey("tidur");
     }
@@ -64,7 +65,7 @@ public class bed : MonoBehaviour
 
                 collision.collider.GetComponent<Controller>().enabled = false;
             }
-            
+
         }*/
     }
 
@@ -77,10 +78,10 @@ public class bed : MonoBehaviour
 
             bool enterPlayer = false;
 
-            for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") {enterPlayer = true; break; }
+            for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") { enterPlayer = true; break; }
 
 
-            if (enterPlayer && (cek == 1 || cek==3))
+            if (enterPlayer && (cek == 1 || cek == 3))
             {
                 for (int i = 0; i < mycolliderPlayer.Length; i++)
                 {
@@ -113,7 +114,7 @@ public class bed : MonoBehaviour
             if (!enterPlayer && cek == 2) cek = 3;
             else if (enterPlayer && cek == 3) cek = 1;
         }
-        
+
 
         if ((int)(255 * transisi.GetComponent<Image>().color.a) < 255 && PlayerPrefs.HasKey("tidur"))
         {
@@ -138,8 +139,8 @@ public class bed : MonoBehaviour
                         else if (PlayerPrefs.GetString("musim") == "Fall") { PlayerPrefs.SetString("musim", "Winter"); }
                         else if (PlayerPrefs.GetString("musim") == "Winter") { PlayerPrefs.SetString("musim", "Spring"); PlayerPrefs.SetInt("tahun", PlayerPrefs.GetInt("tahun") + 1); }
                     }
-                    GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextJam").GetComponent<Text>().text ="06";
-                    GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text ="00";
+                    GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextJam").GetComponent<Text>().text = "06";
+                    GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text = "00";
 
                     if (PhotonNetwork.IsMasterClient)
                     {
@@ -151,16 +152,16 @@ public class bed : MonoBehaviour
                         setTgl.Add("detik", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text);
                         PhotonNetwork.CurrentRoom.SetCustomProperties(setTgl);
                     }
-                    
+
 
                     PlayerPrefs.DeleteKey("nosave");
                 }
                 else
-                
+
                     PlayerPrefs.SetString("respawn", respawn);
                 PlayerPrefs.DeleteKey("tidur");
                 PlayerPrefs.DeleteKey("mautidur");
-                if(PlayerPrefs.HasKey("save")) PlayerPrefs.DeleteKey("save");
+                if (PlayerPrefs.HasKey("save")) PlayerPrefs.DeleteKey("save");
                 SceneManager.LoadSceneAsync("LoadingScreen");
             }
             else
@@ -194,29 +195,29 @@ public class bed : MonoBehaviour
     public void ClickYes()
     {
         //PlayerPrefs.SetString("tidur", "");
-        
+
         //konfirmtidur.SetActive(false);
-        if(name == "Bed1")
-        GameObject.Find("CanvasHome").transform.Find("SaveGame").gameObject.SetActive(true);
+        if (name == "Bed1")
+            GameObject.Find("CanvasHome").transform.Find("SaveGame").gameObject.SetActive(true);
         else GameObject.Find("CanvasHome").transform.Find("SaveGame2").gameObject.SetActive(true);
 
     }
 
     public void ClickYesNoSave()
     {
-        if(PhotonNetwork.IsConnected)
-            {
-                
+        if (PhotonNetwork.IsConnected)
+        {
+
             if (orangtidur.Count < 2)
             {
                 GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjut").gameObject.SetActive(false);
                 GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjut2").gameObject.SetActive(false);
                 GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjutClient").gameObject.SetActive(false);
                 GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjutClient2").gameObject.SetActive(false);
-                PlayerPrefs.SetString("mautidur","yes");
+                PlayerPrefs.SetString("mautidur", "yes");
 
-                int tempattidur=1;
-                if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(name+"1") || PhotonNetwork.CurrentRoom.CustomProperties[name+1].ToString()=="")
+                int tempattidur = 1;
+                if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(name + "1") || PhotonNetwork.CurrentRoom.CustomProperties[name + 1].ToString() == "")
                 {
                     tempattidur = 1;
                     GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position = gameObject.transform.Find("tempatbobo1").position;
@@ -227,8 +228,9 @@ public class bed : MonoBehaviour
                     GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position = gameObject.transform.Find("tempatbobo2").position;
                 }
                 //Debug.Log("nama bed "+name);
-                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("ngajakBobo", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,name, tempattidur);
-            }else
+                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("ngajakBobo", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, name, tempattidur);
+            }
+            else
             {
                 GameObject.Find("Canvas").transform.Find("TextNotif").gameObject.SetActive(true);
                 GameObject.Find("Canvas").transform.Find("TextNotif").GetComponent<Text>().text = "Kasur penuh";
@@ -257,10 +259,10 @@ public class bed : MonoBehaviour
     {
 
         konfirmsave.SetActive(true);
-        
 
-        PlayerPrefs.SetString("save",savestate);
-        
+
+        PlayerPrefs.SetString("save", savestate);
+
     }
 
 
@@ -316,7 +318,7 @@ public class bed : MonoBehaviour
             konfirmtidur.SetActive(false);
             konfirmsave.SetActive(false);
         }
-        
+
 
     }
 
@@ -329,12 +331,12 @@ public class bed : MonoBehaviour
         PlayerPrefs.DeleteKey("save");
         GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<Controller>().enabled = true;
         GameObject.Find("CanvasHome").transform.Find("KonfirmasiLanjut").gameObject.SetActive(false);
-        if(name=="Bed1")
-        GameObject.Find("CanvasHome").transform.Find("WaitingOtherPlayer").gameObject.SetActive(false);
+        if (name == "Bed1")
+            GameObject.Find("CanvasHome").transform.Find("WaitingOtherPlayer").gameObject.SetActive(false);
         else GameObject.Find("CanvasHome").transform.Find("WaitingOtherPlayer2").gameObject.SetActive(false);
         int tempattidur = 0;
         for (int i = 0; i < orangtidur.Count; i++)
-            if (orangtidur[i] == PlayerPrefs.GetString("myname")) tempattidur = i+1;
+            if (orangtidur[i] == PlayerPrefs.GetString("myname")) tempattidur = i + 1;
         Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("keluarBobo", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, name, tempattidur);
 
     }
