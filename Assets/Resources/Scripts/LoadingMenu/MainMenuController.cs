@@ -176,6 +176,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         string KuningText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(47);
         string HijauText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(48);
         string AbuabuText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(49);
+        string PutihCokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(56);
+        string CokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(57);
+        string CokelatGelapText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(58);
 
         if (inputhaircolor.transform.Find("Dropdown List") != null)
         {
@@ -220,12 +223,12 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         if (inputskincolor.transform.Find("Dropdown List") != null)
         {
-            if (inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih Cokelat").Find("Item Image").GetComponent<Image>().color == Color.white)
+            if (inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+PutihCokelatText).Find("Item Image").GetComponent<Image>().color == Color.white)
             {
-                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: Putih Cokelat").Find("Item Image").GetComponent<Image>().color = new Color32(250, 223, 209, 255); ;
-                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: Cokelat").Find("Item Image").GetComponent<Image>().color = new Color32(229, 197, 180, 255);  
-                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: Cokelat gelap").Find("Item Image").GetComponent<Image>().color = new Color32(193, 157, 139, 255);
-                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: Hitam").Find("Item Image").GetComponent<Image>().color = new Color32(138, 108, 92, 255);
+                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 1: "+PutihCokelatText).Find("Item Image").GetComponent<Image>().color = new Color32(250, 223, 209, 255); ;
+                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 2: "+CokelatText).Find("Item Image").GetComponent<Image>().color = new Color32(229, 197, 180, 255);  
+                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 3: "+CokelatGelapText).Find("Item Image").GetComponent<Image>().color = new Color32(193, 157, 139, 255);
+                inputskincolor.transform.Find("Dropdown List").Find("Viewport").Find("Content").Find("Item 4: "+HitamText).Find("Item Image").GetComponent<Image>().color = new Color32(138, 108, 92, 255);
 
             }
         }
@@ -373,7 +376,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputnama.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(62);
             notifwrong.SetActive(true);
         }
         else
@@ -464,7 +467,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputkucing.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama kucing tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(63);
             notifwrong.SetActive(true);
         }
         else
