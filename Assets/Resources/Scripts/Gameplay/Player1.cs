@@ -49,7 +49,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     public bool destroy;
     public Player1 instance;
     bool walkingsound;
-    
+
+    public bool RotateAroundPlayer = true;
+    private float rotSpeed = 5.0f;
+    private Vector3 camOffset;
+    private float smoothFactor = 0.5f;
+
     void Awake()
     {
         instance = this;
@@ -85,6 +90,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         /*if (!CustomMatchmakingLobbyCampaignController.instance.testjoin)
         {*/
+
             Speed = 4;
             Debug.Log("create player");
 
@@ -107,6 +113,15 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
         //}
+        Vector3 pos = new Vector3();
+        pos.x = transform.position.x - 3f;
+        pos.z = transform.position.z - 3f;
+        pos.y = transform.position.y + 3f;
+
+        Camera.main.transform.position = pos;
+        Camera.main.transform.LookAt(transform);
+
+        camOffset = Camera.main.transform.position - transform.position;
 
     }
 
@@ -179,6 +194,25 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    void LateUpdate()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            RotateAroundPlayer = true;
+        }
+        if (Input.GetMouseButton(0) && RotateAroundPlayer)
+        {
+            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotSpeed , Vector3.up);
+            
+            camOffset = camTurnAngle * camOffset;
+        }
+
+        Vector3 newPos = transform.position + camOffset;
+
+        Camera.main.transform.position = newPos;
+        Camera.main.transform.LookAt(transform);
+
+    }
 
 
     // Update is called once per frame
@@ -186,16 +220,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
-            Vector3 pos = new Vector3();
-            pos.x = transform.position.x - 3f;
-            pos.z = transform.position.z - 3f;
-            pos.y = transform.position.y + 3f;
-            Vector3 velocity = Vector3.zero;
-            if (Camera.main != null)
-            {
-                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0f);
-                Camera.main.transform.LookAt(transform);
-            }
+        
+
             for(int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
                 if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)
@@ -211,20 +237,22 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Inputs.Jump)
         {
-            if(PhotonNetwork.IsConnected)
-            photonView.RPC("jump", RpcTarget.Others);
+            if (PhotonNetwork.IsConnected)
+                photonView.RPC("jump", RpcTarget.Others);
             Inputs.Jump = false;
             Grounded = Physics.OverlapSphere(transform.position, 0.3f, LayerMask.GetMask("Ground")).Length != 0;
             if (Grounded)
             {
                 AudioSource audio = GameObject.Find("Clicked").transform.Find("jumping").GetComponent<AudioSource>();
                 audio.Play();
-                GetComponent<Animator>().SetBool("JumpStart",true);
+                GetComponent<Animator>().SetBool("JumpStart", true);
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 6f, GetComponent<Rigidbody>().velocity.z);
             }
-        }else
-        if(GetComponent<Rigidbody>().velocity.y>3f) GetComponent<Animator>().SetBool("JumpEnd", true);
-        
+        }
+        else
+        {
+            if (GetComponent<Rigidbody>().velocity.y > 3f) GetComponent<Animator>().SetBool("JumpEnd", true);
+        }
         if (Inputs.attacking && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
             Inputs.attacking = false;
@@ -265,7 +293,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 GetComponent<Animator>().SetFloat("Speed", 0f);
                 transform.position = Inputs.pmrPos;
                 Inputs.moving = false;
-
             }
 
         }

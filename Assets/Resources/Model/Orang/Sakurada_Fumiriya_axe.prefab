@@ -658,6 +658,7 @@ MonoBehaviour:
   level: MasukRumah
   destroy: 0
   instance: {fileID: 0}
+  RotateAroundPlayer: 1
 --- !u!114 &2810884599639948707
 MonoBehaviour:
   m_ObjectHideFlags: 0
