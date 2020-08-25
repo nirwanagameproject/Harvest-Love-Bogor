@@ -358,7 +358,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             float angle = Mathf.Atan2(Inputs.JoystickX, Inputs.JoystickZ) * Mathf.Rad2Deg;
 
             Vector3 dir =  Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
-
+            float nPengali = Mathf.Sqrt(1 / ((dir.x * dir.x) + (dir.z * dir.z)));
+            float distJoystick = Mathf.Sqrt(Inputs.JoystickX* Inputs.JoystickX + Inputs.JoystickZ* Inputs.JoystickZ);
+            dir = new Vector3(dir.x*nPengali* distJoystick, 0f, dir.z*nPengali * distJoystick);
             Vector3 myvector = transform.position + dir * Speed * Time.deltaTime;
             if (Inputs.movingWithVehicle)
                 myvector = new Vector3(transform.position.x + Inputs.JoystickX * Speed * 15 * Time.deltaTime, transform.position.y, transform.position.z + Inputs.JoystickZ * 15 * Speed * Time.deltaTime);
