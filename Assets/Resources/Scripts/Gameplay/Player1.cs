@@ -302,7 +302,10 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
               && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WaterPlant"))
         {
             float angle = Mathf.Atan2(Inputs.JoystickX, Inputs.JoystickZ) * Mathf.Rad2Deg;
-            Vector3 myvector = new Vector3(transform.position.x + (Inputs.JoystickZ + Inputs.JoystickX) * Speed * Time.deltaTime, transform.position.y, transform.position.z + (Inputs.JoystickZ - Inputs.JoystickX) * Speed * Time.deltaTime);
+
+            Vector3 dir =  Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
+
+            Vector3 myvector = transform.position + dir * Speed * Time.deltaTime;
             if (Inputs.movingWithVehicle)
                 myvector = new Vector3(transform.position.x + Inputs.JoystickX * Speed * 15 * Time.deltaTime, transform.position.y, transform.position.z + Inputs.JoystickZ * 15 * Speed * Time.deltaTime);
 
