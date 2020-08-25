@@ -63,6 +63,13 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     float diffY = 0;
     float diffZ = 0;
 
+    private Vector3 firstpoint; //change type on Vector3
+  private Vector3 secondpoint;
+  private float xAngle  = 0.0f; //angle for axes x for rotation
+  private float yAngle = 0.0f;
+  private float xAngTemp = 0.0f; //temp variable for angle
+  private float yAngTemp = 0.0f;
+
     void Awake()
     {
         instance = this;
@@ -123,10 +130,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         //}
 
 
-        Vector3 pos = new Vector3();
-        pos.x = transform.position.x - 3;
-        pos.z = transform.position.z - 3;
-        pos.y = transform.position.y + 3;
 
         //Camera.main.transform.position = pos;
         //Camera.main.transform.LookAt(pos);
@@ -134,11 +137,11 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         Camera.main.transform.RotateAround(transform.position,
                                  Camera.main.transform.up,
-                                 0 * 360f * rotSpeed * Time.deltaTime);
+                                 0);
 
         Camera.main.transform.RotateAround(transform.position,
                                  Camera.main.transform.right,
-                                 0 * 360f * rotSpeed * Time.deltaTime);
+                                 0);
         Camera.main.transform.LookAt(transform);
 
         diffX = 2.772013f;
@@ -147,6 +150,15 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         camOffset = Camera.main.transform.position - transform.position;
 
+
+        Vector3 pos = new Vector3();
+        pos.x = transform.position.x - diffX;
+        pos.y = transform.position.y - diffY;
+        pos.z = transform.position.z - diffZ;
+
+        Camera.main.transform.position = pos;
+
+        Camera.main.transform.LookAt(transform);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -220,53 +232,106 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     void LateUpdate()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
-            RotateAroundPlayer = true;
+            if (Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    RotateAroundPlayer = true;
+                }
+
+                if (Input.GetTouch(0).phase == TouchPhase.Moved && RotateAroundPlayer)
+                {
+                    h = Input.GetAxis("Mouse X") * rotSpeed * Screen.width / 1920 ;
+                    v = Input.GetAxis("Mouse Y") * rotSpeed * Screen.height / 1080;
+
+                    if (Camera.main.transform.eulerAngles.x - v <= 5.1f || Camera.main.transform.eulerAngles.x - v >= 79.9f)
+                        v = 0;
+
+                    Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
+                    Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+
+                    camOffset = camTurnAngle * camTurnAngle2 * camOffset;
+
+
+                    Camera.main.transform.RotateAround(transform.position,
+                                             Camera.main.transform.up,
+                                             h);
+
+                    Camera.main.transform.RotateAround(transform.position,
+                                             Camera.main.transform.right,
+                                             -v);
+
+                    diffX = transform.position.x - Camera.main.transform.position.x;
+                    diffY = transform.position.y - Camera.main.transform.position.y;
+                    diffZ = transform.position.z - Camera.main.transform.position.z;
+
+                }
+
+                Vector3 pos = new Vector3();
+                pos.x = transform.position.x - diffX;
+                pos.y = transform.position.y - diffY;
+                pos.z = transform.position.z - diffZ;
+
+                Camera.main.transform.position = pos;
+
+                Camera.main.transform.LookAt(transform);
+
+                Vector3 newPos = transform.position + camOffset;
+            }
         }
-        
-        if (Input.GetMouseButton(0) && RotateAroundPlayer)
+        else
         {
-            h = rotSpeed * Input.GetAxis("Mouse X")* rotSpeed;
-            v = rotSpeed * Input.GetAxis("Mouse Y")* rotSpeed;
+            if (Input.GetMouseButtonUp(0))
+            {
+                RotateAroundPlayer = true;
+            }
 
-            if (Camera.main.transform.eulerAngles.x-v <= 5.1f || Camera.main.transform.eulerAngles.x-v >= 79.9f)
-                v = 0;
+            if (Input.GetMouseButton(0) && RotateAroundPlayer)
+            {
+                h = Input.GetAxis("Mouse X") * rotSpeed * Screen.width / 1920;
+                v = Input.GetAxis("Mouse Y") * rotSpeed * Screen.height / 1080;
 
-            Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
-            Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+                if (Camera.main.transform.eulerAngles.x - v <= 5.1f || Camera.main.transform.eulerAngles.x - v >= 79.9f)
+                    v = 0;
 
-            camOffset = camTurnAngle * camTurnAngle2 * camOffset;
+                Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
+                Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+
+                camOffset = camTurnAngle * camTurnAngle2 * camOffset;
 
 
-            Camera.main.transform.RotateAround(transform.position,
-                                     Camera.main.transform.up,
-                                     h);
+                Camera.main.transform.RotateAround(transform.position,
+                                         Camera.main.transform.up,
+                                         h);
 
-            Camera.main.transform.RotateAround(transform.position,
-                                     Camera.main.transform.right,
-                                     -v);
+                Camera.main.transform.RotateAround(transform.position,
+                                         Camera.main.transform.right,
+                                         -v);
 
-            diffX = transform.position.x - Camera.main.transform.position.x;
-            diffY = transform.position.y - Camera.main.transform.position.y;
-            diffZ = transform.position.z - Camera.main.transform.position.z;
+                diffX = transform.position.x - Camera.main.transform.position.x;
+                diffY = transform.position.y - Camera.main.transform.position.y;
+                diffZ = transform.position.z - Camera.main.transform.position.z;
+
+            }
+
+            Vector3 pos = new Vector3();
+            pos.x = transform.position.x - diffX;
+            pos.y = transform.position.y - diffY;
+            pos.z = transform.position.z - diffZ;
+
+            Camera.main.transform.position = pos;
+
+            Camera.main.transform.LookAt(transform);
+
+            Vector3 newPos = transform.position + camOffset;
 
         }
-
-        Vector3 pos = new Vector3();
-        pos.x = transform.position.x - diffX;
-        pos.y = transform.position.y - diffY;
-        pos.z = transform.position.z - diffZ;
-
-        Camera.main.transform.position = pos;
-
-        Camera.main.transform.LookAt(transform);
-
-        Vector3 newPos = transform.position + camOffset;
 
         //Camera.main.transform.position = newPos;
         //Camera.main.transform.LookAt(transform);
-     }
+    }
 
 
     // Update is called once per frame
