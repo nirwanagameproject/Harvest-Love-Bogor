@@ -23,13 +23,10 @@ Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti prog
     1. *level* = (Nama **Scene**).Contoh : `PersimpanganJalan`
     2. *respawn* = (**GameObject Spawn** yang dibuat).Contoh : `SpawnPersimpangan`
     3. pintu = (apakah pintu atau gerbang).Contoh : checklist `pintu`
-5. Perbaiki *lighting* beda setiap **scene** baru dengan mengikuti step berikut : 
-    1. klik **Windows - Rendering - Lighting**
-    2. *checklist* **Auto Generate**
-6. membuat **Cube** pembatas (agar tidak jatuh dari terrain)
-7. membuat object sesual peta dengan *mesh collider* (untuk tabrakan).
-8. klik **File - Build Settings** - *drag scane* ke *scène in build*
-9. membuat occlution culling agar menghemat memory dengan merender objek yg terlihat kamera saja.Objek yang diblok objek lain yang terlihat tidak dapat ditampilkan.
+5. membuat **Cube** pembatas (agar tidak jatuh dari terrain)
+6. membuat object sesual peta dengan *mesh collider* (untuk tabrakan).
+7. klik **File - Build Settings** - *drag scane* ke *scène in build*
+8. membuat occlution culling agar menghemat memory dengan merender objek yg terlihat kamera saja.Objek yang diblok objek lain yang terlihat tidak dapat ditampilkan.
     1. pilih **GameObject** atau Objek 3D yang ada didalam **Scene** yang bergerak statis
     2. klik tanda *dropdown* disamping tulisan *static* dibagian kanan.
     3. pilih *occluder static* lalu , *Yes change children*.
@@ -39,7 +36,10 @@ Player akan bermain sebagai anak muda yang mendapatkan kesempatan mengikuti prog
     7. ulangi langkat 1 sampai 6 pada objek yang bergerak statis sampai semuanya terpenuhi
     8. klik **Windows - Rendering - Occlution Culling**
     9. pilih *tab* **Bake** lalu klik tombol **Bake** dibawahnya
-10. ulangi langkah 9 jika menambahkan objek baru lagi.
+9. Perbaiki *lighting* beda setiap **scene** baru dengan mengikuti step berikut : 
+    1. klik **Windows - Rendering - Lighting**
+    2. *checklist* **Generate Lightning**
+10. ulangi langkah 8 dan 9 jika menambahkan objek baru lagi (tambah mesh collider juga).
 
 ### Cara membuat text dengan Terjemahan baru :
 1. membuat *component* **UI** *text*
