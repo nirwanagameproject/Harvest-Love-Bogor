@@ -234,7 +234,11 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
-            if (Input.touchCount > 0)
+            if (Input.touchCount > 1)
+            {
+                RotateAroundPlayer = false;
+            }
+            if (Input.touchCount == 1)
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
