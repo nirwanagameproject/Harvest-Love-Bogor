@@ -54,6 +54,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     private float rotSpeed = 5.0f;
     private Vector3 camOffset;
     private float smoothFactor = 0.5f;
+    float xRot = 0f;
+    float yRot = 0f;
+    float h = 0f;
+    float v = 0f;
+
+    float diffX = 0;
+    float diffY = 0;
+    float diffZ = 0;
 
     void Awake()
     {
@@ -113,13 +121,29 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
         //}
-        Vector3 pos = new Vector3();
-        pos.x = transform.position.x - 3f;
-        pos.z = transform.position.z - 3f;
-        pos.y = transform.position.y + 3f;
 
-        Camera.main.transform.position = pos;
+
+        Vector3 pos = new Vector3();
+        pos.x = transform.position.x - 3;
+        pos.z = transform.position.z - 3;
+        pos.y = transform.position.y + 3;
+
+        //Camera.main.transform.position = pos;
+        //Camera.main.transform.LookAt(pos);
+        //Camera.main.transform.LookAt(transform);
+
+        Camera.main.transform.RotateAround(transform.position,
+                                 Camera.main.transform.up,
+                                 0 * 360f * rotSpeed * Time.deltaTime);
+
+        Camera.main.transform.RotateAround(transform.position,
+                                 Camera.main.transform.right,
+                                 0 * 360f * rotSpeed * Time.deltaTime);
         Camera.main.transform.LookAt(transform);
+
+        diffX = 2.772013f;
+        diffY = -3.644201f;
+        diffZ = 2.456768f;
 
         camOffset = Camera.main.transform.position - transform.position;
 
@@ -200,19 +224,49 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             RotateAroundPlayer = true;
         }
+        
         if (Input.GetMouseButton(0) && RotateAroundPlayer)
         {
-            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotSpeed , Vector3.up);
-            
-            camOffset = camTurnAngle * camOffset;
+            h = rotSpeed * Input.GetAxis("Mouse X")* rotSpeed;
+            v = rotSpeed * Input.GetAxis("Mouse Y")* rotSpeed;
+
+            if (Camera.main.transform.eulerAngles.x-v <= 5.1f || Camera.main.transform.eulerAngles.x-v >= 79.9f)
+                v = 0;
+
+            Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
+            Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+
+            camOffset = camTurnAngle * camTurnAngle2 * camOffset;
+
+
+            Camera.main.transform.RotateAround(transform.position,
+                                     Camera.main.transform.up,
+                                     h);
+
+            Camera.main.transform.RotateAround(transform.position,
+                                     Camera.main.transform.right,
+                                     -v);
+
+            diffX = transform.position.x - Camera.main.transform.position.x;
+            diffY = transform.position.y - Camera.main.transform.position.y;
+            diffZ = transform.position.z - Camera.main.transform.position.z;
+
         }
+
+        Vector3 pos = new Vector3();
+        pos.x = transform.position.x - diffX;
+        pos.y = transform.position.y - diffY;
+        pos.z = transform.position.z - diffZ;
+
+        Camera.main.transform.position = pos;
+
+        Camera.main.transform.LookAt(transform);
 
         Vector3 newPos = transform.position + camOffset;
 
-        Camera.main.transform.position = newPos;
-        Camera.main.transform.LookAt(transform);
-
-    }
+        //Camera.main.transform.position = newPos;
+        //Camera.main.transform.LookAt(transform);
+     }
 
 
     // Update is called once per frame
