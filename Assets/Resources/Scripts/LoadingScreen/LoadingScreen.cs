@@ -37,6 +37,12 @@ public class LoadingScreen : MonoBehaviourPunCallbacks
             transisi.GetComponent<Image>().color = new Color32(0, 0, 0, 255);
         }
         Debug.Log("level : "+PlayerPrefs.GetString("level"));
+
+        Input.ResetInputAxes();
+        if(GameObject.Find("Canvas") != null)
+        {
+            GameObject.Find("Canvas").transform.Find("Fixed Joystick").GetComponent<FixedJoystick>().ResetAxis();
+        }
         if (PlayerPrefs.GetString("level") == "KeluarRumah") StartCoroutine(LoadALevel("GameplayFarm"));
         else if (PlayerPrefs.GetString("level") == "MasukRumah") StartCoroutine(LoadALevel("GameplayHome"));
         else if (PlayerPrefs.GetString("level") == "MasukKandangAyam") StartCoroutine(LoadALevel("GameplayChickenHouse"));

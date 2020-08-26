@@ -50,7 +50,27 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     public bool destroy;
     public Player1 instance;
     bool walkingsound;
-    
+
+    public bool RotateAroundPlayer = true;
+    private float rotSpeed = 5.0f;
+    private Vector3 camOffset;
+    private float smoothFactor = 0.5f;
+    float xRot = 0f;
+    float yRot = 0f;
+    float h = 0f;
+    float v = 0f;
+
+    float diffX = 0;
+    float diffY = 0;
+    float diffZ = 0;
+
+    private Vector3 firstpoint; //change type on Vector3
+  private Vector3 secondpoint;
+  private float xAngle  = 0.0f; //angle for axes x for rotation
+  private float yAngle = 0.0f;
+  private float xAngTemp = 0.0f; //temp variable for angle
+  private float yAngTemp = 0.0f;
+
     void Awake()
     {
         instance = this;
@@ -86,6 +106,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         /*if (!CustomMatchmakingLobbyCampaignController.instance.testjoin)
         {*/
+
             Speed = 4;
             Debug.Log("create player");
 
@@ -109,6 +130,36 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         //}
 
+
+
+        //Camera.main.transform.position = pos;
+        //Camera.main.transform.LookAt(pos);
+        //Camera.main.transform.LookAt(transform);
+
+        Camera.main.transform.RotateAround(transform.position,
+                                 Camera.main.transform.up,
+                                 0);
+
+        Camera.main.transform.RotateAround(transform.position,
+                                 Camera.main.transform.right,
+                                 0);
+        Camera.main.transform.LookAt(transform);
+
+        diffX = 2.772013f;
+        diffY = -3.644201f;
+        diffZ = 2.456768f;
+
+        camOffset = Camera.main.transform.position - transform.position;
+
+
+        Vector3 pos = new Vector3();
+        pos.x = transform.position.x - diffX;
+        pos.y = transform.position.y - diffY;
+        pos.z = transform.position.z - diffZ;
+
+        Camera.main.transform.position = pos;
+
+        Camera.main.transform.LookAt(transform);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -180,6 +231,112 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    void LateUpdate()
+    {
+        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.touchCount > 1)
+            {
+                //RotateAroundPlayer = false;
+            }
+            if (Input.touchCount == 1)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    //RotateAroundPlayer = true;
+                }
+
+                if (Input.GetTouch(0).phase == TouchPhase.Moved && RotateAroundPlayer)
+                {
+                    h = Input.GetAxis("Mouse X") * rotSpeed * Screen.width / 1920 ;
+                    v = Input.GetAxis("Mouse Y") * rotSpeed * Screen.height / 1080;
+
+                    if (Camera.main.transform.eulerAngles.x - v <= 5.1f || Camera.main.transform.eulerAngles.x - v >= 79.9f)
+                        v = 0;
+
+                    Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
+                    Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+
+                    camOffset = camTurnAngle * camTurnAngle2 * camOffset;
+
+
+                    Camera.main.transform.RotateAround(transform.position,
+                                             Camera.main.transform.up,
+                                             h);
+
+                    Camera.main.transform.RotateAround(transform.position,
+                                             Camera.main.transform.right,
+                                             -v);
+
+                    diffX = transform.position.x - Camera.main.transform.position.x;
+                    diffY = transform.position.y - Camera.main.transform.position.y;
+                    diffZ = transform.position.z - Camera.main.transform.position.z;
+
+                }
+
+                Vector3 pos = new Vector3();
+                pos.x = transform.position.x - diffX;
+                pos.y = transform.position.y - diffY;
+                pos.z = transform.position.z - diffZ;
+
+                Camera.main.transform.position = pos;
+
+                Camera.main.transform.LookAt(transform);
+
+                Vector3 newPos = transform.position + camOffset;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                //RotateAroundPlayer = true;
+            }
+
+            if (Input.GetMouseButton(0) && RotateAroundPlayer)
+            {
+                h = Input.GetAxis("Mouse X") * rotSpeed * Screen.width / 1920;
+                v = Input.GetAxis("Mouse Y") * rotSpeed * Screen.height / 1080;
+
+                if (Camera.main.transform.eulerAngles.x - v <= 5.1f || Camera.main.transform.eulerAngles.x - v >= 79.9f)
+                    v = 0;
+
+                Quaternion camTurnAngle = Quaternion.AngleAxis(h, Vector3.up);
+                Quaternion camTurnAngle2 = Quaternion.AngleAxis(v, Vector3.right);
+
+                camOffset = camTurnAngle * camTurnAngle2 * camOffset;
+
+
+                Camera.main.transform.RotateAround(transform.position,
+                                         Camera.main.transform.up,
+                                         h);
+
+                Camera.main.transform.RotateAround(transform.position,
+                                         Camera.main.transform.right,
+                                         -v);
+
+                diffX = transform.position.x - Camera.main.transform.position.x;
+                diffY = transform.position.y - Camera.main.transform.position.y;
+                diffZ = transform.position.z - Camera.main.transform.position.z;
+
+            }
+
+            Vector3 pos = new Vector3();
+            pos.x = transform.position.x - diffX;
+            pos.y = transform.position.y - diffY;
+            pos.z = transform.position.z - diffZ;
+
+            Camera.main.transform.position = pos;
+
+            Camera.main.transform.LookAt(transform);
+
+            Vector3 newPos = transform.position + camOffset;
+
+        }
+
+        //Camera.main.transform.position = newPos;
+        //Camera.main.transform.LookAt(transform);
+    }
 
 
     // Update is called once per frame
@@ -187,30 +344,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
-            Vector3 pos = new Vector3();
-            // if(SceneManager.GetActiveScene().name == "Perkampungan_2" ){
-            //     Debug.Log("disini");
-            //     pos.x = transform.position.x + 3f;
-            //     pos.z = transform.position.z + 8f;
-            //     pos.y = transform.position.y + 3f;
-                
-            // } else{
-                pos.x = transform.position.x - 3f;
-                pos.z = transform.position.z - 3f;
-                pos.y = transform.position.y + 3f;
-            // }
+        
 
-            Vector3 velocity = Vector3.zero;
-            if (Camera.main != null)
-            {
-                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0.1f);
-                
-                // if(SceneManager.GetActiveScene().name == "Perkampungan_2" ){
-                //     Camera.main.transform.rotation = Quaternion.Euler(8.79f, -202.701f, 0.177f);
-                // } else {
-                    Camera.main.transform.LookAt(transform);
-                // }
-            }
             for(int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
                 if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)
@@ -226,20 +361,22 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Inputs.Jump)
         {
-            if(PhotonNetwork.IsConnected)
-            photonView.RPC("jump", RpcTarget.Others);
+            if (PhotonNetwork.IsConnected)
+                photonView.RPC("jump", RpcTarget.Others);
             Inputs.Jump = false;
             Grounded = Physics.OverlapSphere(transform.position, 0.3f, LayerMask.GetMask("Ground")).Length != 0;
             if (Grounded)
             {
                 AudioSource audio = GameObject.Find("Clicked").transform.Find("jumping").GetComponent<AudioSource>();
                 audio.Play();
-                GetComponent<Animator>().SetBool("JumpStart",true);
+                GetComponent<Animator>().SetBool("JumpStart", true);
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 6f, GetComponent<Rigidbody>().velocity.z);
             }
-        }else
-        if(GetComponent<Rigidbody>().velocity.y>3f) GetComponent<Animator>().SetBool("JumpEnd", true);
-        
+        }
+        else
+        {
+            if (GetComponent<Rigidbody>().velocity.y > 3f) GetComponent<Animator>().SetBool("JumpEnd", true);
+        }
         if (Inputs.attacking && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
             Inputs.attacking = false;
@@ -280,7 +417,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 GetComponent<Animator>().SetFloat("Speed", 0f);
                 transform.position = Inputs.pmrPos;
                 Inputs.moving = false;
-
             }
 
         }
@@ -290,7 +426,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
               && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WaterPlant"))
         {
             float angle = Mathf.Atan2(Inputs.JoystickX, Inputs.JoystickZ) * Mathf.Rad2Deg;
-            Vector3 myvector = new Vector3(transform.position.x + (Inputs.JoystickZ + Inputs.JoystickX) * Speed * Time.deltaTime, transform.position.y, transform.position.z + (Inputs.JoystickZ - Inputs.JoystickX) * Speed * Time.deltaTime);
+
+            Vector3 dir =  Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
+            float nPengali = Mathf.Sqrt(1 / ((dir.x * dir.x) + (dir.z * dir.z)));
+            float distJoystick = Mathf.Sqrt(Inputs.JoystickX* Inputs.JoystickX + Inputs.JoystickZ* Inputs.JoystickZ);
+            dir = new Vector3(dir.x*nPengali* distJoystick, 0f, dir.z*nPengali * distJoystick);
+            Vector3 myvector = transform.position + dir * Speed * Time.deltaTime;
             if (Inputs.movingWithVehicle)
                 myvector = new Vector3(transform.position.x + Inputs.JoystickX * Speed * 15 * Time.deltaTime, transform.position.y, transform.position.z + Inputs.JoystickZ * 15 * Speed * Time.deltaTime);
 
