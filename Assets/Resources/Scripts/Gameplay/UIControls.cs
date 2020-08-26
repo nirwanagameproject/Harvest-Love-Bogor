@@ -17,7 +17,7 @@ public class UIControls : MonoBehaviour, IPointerDownHandler, IPointerUpHandler 
 
     public void OnPointerUp(PointerEventData eventData)
     {
-
+        if(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")")!=null)
         GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<Player1>().RotateAroundPlayer = true;
     }
 }
