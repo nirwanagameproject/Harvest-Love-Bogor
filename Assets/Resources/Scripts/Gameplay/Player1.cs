@@ -236,13 +236,13 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.touchCount > 1)
             {
-                RotateAroundPlayer = false;
+                //RotateAroundPlayer = false;
             }
             if (Input.touchCount == 1)
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                    RotateAroundPlayer = true;
+                    //RotateAroundPlayer = true;
                 }
 
                 if (Input.GetTouch(0).phase == TouchPhase.Moved && RotateAroundPlayer)
@@ -289,7 +289,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetMouseButtonUp(0))
             {
-                RotateAroundPlayer = true;
+                //RotateAroundPlayer = true;
             }
 
             if (Input.GetMouseButton(0) && RotateAroundPlayer)
