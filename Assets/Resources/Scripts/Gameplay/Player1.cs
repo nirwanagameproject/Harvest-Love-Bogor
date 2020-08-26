@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -187,14 +188,28 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
             Vector3 pos = new Vector3();
-            pos.x = transform.position.x - 3f;
-            pos.z = transform.position.z - 3f;
-            pos.y = transform.position.y + 3f;
+            // if(SceneManager.GetActiveScene().name == "Perkampungan_2" ){
+            //     Debug.Log("disini");
+            //     pos.x = transform.position.x + 3f;
+            //     pos.z = transform.position.z + 8f;
+            //     pos.y = transform.position.y + 3f;
+                
+            // } else{
+                pos.x = transform.position.x - 3f;
+                pos.z = transform.position.z - 3f;
+                pos.y = transform.position.y + 3f;
+            // }
+
             Vector3 velocity = Vector3.zero;
             if (Camera.main != null)
             {
-                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0f);
-                Camera.main.transform.LookAt(transform);
+                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, pos, ref velocity, 0.1f);
+                
+                // if(SceneManager.GetActiveScene().name == "Perkampungan_2" ){
+                //     Camera.main.transform.rotation = Quaternion.Euler(8.79f, -202.701f, 0.177f);
+                // } else {
+                    Camera.main.transform.LookAt(transform);
+                // }
             }
             for(int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
