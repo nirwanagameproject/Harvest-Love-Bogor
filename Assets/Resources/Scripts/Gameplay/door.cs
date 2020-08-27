@@ -23,7 +23,7 @@ public class door : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (transisi.activeSelf && (int)(255 * transisi.GetComponent<Image>().color.a) < 255 && PlayerPrefs.HasKey("masuk"))
+        if (PlayerPrefs.GetString("level") == level && transisi.activeSelf && (int)(255 * transisi.GetComponent<Image>().color.a) < 255 && PlayerPrefs.HasKey("masuk"))
         {
             if ((int)(255 * transisi.GetComponent<Image>().color.a) >= 240)
             {
@@ -31,6 +31,7 @@ public class door : MonoBehaviour
                 
                 PlayerPrefs.DeleteKey("masuk");
                 AudioSource audio = GameObject.Find("Clicked").transform.Find("closedoor").GetComponent<AudioSource>();
+                Debug.Log(pintu);
                 if (!audio.isPlaying && PlayerPrefs.GetString("level") != "MenuAwal" && pintu) audio.Play();
                 SceneManager.LoadSceneAsync("LoadingScreen");
             }

@@ -24,6 +24,18 @@ Material:
         m_Texture: {fileID: 2800000, guid: ed7bcc37078383f4e833579b1e22e3b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: e40d551e17d43cd4897776843906ffdf, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -32,7 +44,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 5b3f5d4b827193848b404724001b93ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OutlineWidthTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -66,16 +90,24 @@ Material:
     - _CullMode: 0
     - _Cutoff: 0.5
     - _DebugMode: 0
+    - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _IndirectLightIntensity: 0.1
     - _LightColorAttenuation: 0
     - _MToonVersion: 32
+    - _Metallic: 0
+    - _Mode: 1
+    - _OcclusionStrength: 1
     - _OutlineColorMode: 0
     - _OutlineCullMode: 1
     - _OutlineLightingMix: 1
     - _OutlineScaledMaxDistance: 2.71
     - _OutlineWidth: 0.172
     - _OutlineWidthMode: 0
+    - _Parallax: 0.02
     - _ReceiveShadowRate: 1
     - _RimFresnelPower: 1
     - _RimLift: 0
@@ -83,7 +115,10 @@ Material:
     - _ShadeShift: -0.3
     - _ShadeToony: 0
     - _ShadingGradeRate: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _UVSec: 0
     - _UvAnimRotation: 0
     - _UvAnimScrollX: 0
     - _UvAnimScrollY: 0
