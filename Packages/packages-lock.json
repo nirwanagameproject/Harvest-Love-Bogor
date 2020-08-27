@@ -7,6 +7,13 @@
       "dependencies": {},
       "url": "https://unityregistry-pa.googleapis.com"
     },
+    "com.unity.autolod": {
+      "version": "https://github.com/Unity-Technologies/AutoLOD.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a2805220a400a6994df3cb84bd3d89b70ad74810"
+    },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
       "depth": 0,
@@ -105,6 +112,13 @@
         "com.unity.shadergraph": "7.3.1"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.whinarn.unitymeshsimplifier": {
+      "version": "https://github.com/Unity-Technologies/UnityMeshSimplifier.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a6d70fb447098e8f0c9162a63afd679ac410aabb"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
