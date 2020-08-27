@@ -344,9 +344,17 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
-        
+            Vector3 pos = new Vector3();
+            pos.x = transform.position.x - diffX;
+            pos.y = transform.position.y - diffY;
+            pos.z = transform.position.z - diffZ;
 
-            for(int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
+
+            Camera.main.transform.position = pos;
+
+            Camera.main.transform.LookAt(transform);
+
+            for (int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
                 if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)
                 if (PlayerPrefs.GetString("level") == GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>().level)
