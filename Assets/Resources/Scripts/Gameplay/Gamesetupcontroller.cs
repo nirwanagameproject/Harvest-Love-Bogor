@@ -703,35 +703,52 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         //while (GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body") == null) yield return new WaitUntil(() => GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body")!=null);
         int nomormat = 0;
         Color32 hair = new Color32((byte)h1, (byte)h2, (byte)h3, 255);
-        Debug.Log("len : " + GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length);
-        for (; nomormat < GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+        GameObject go = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).gameObject;
+        //Debug.Log("len : " + GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length);
+        if (PlayerPrefs.GetString("gender") == "cewek")
         {
-            GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
+            for (; nomormat < go.transform.Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+            {
+                go.transform.Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
+            }
+        }
+        else
+        {
+            for (; nomormat < go.transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+            {
+                go.transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
+            }
         }
 
         //LOAD BAJU
         Color32 clothes = new Color32((byte)cloth1, (byte)cloth2, (byte)cloth3, 255);
-        nomormat = 6;
+        nomormat = 3;
         if (gender == "cewek") nomormat = 5;
         GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = clothes;
 
         //LOAD CELANA
         Color32 pants = new Color32((byte)pants1, (byte)pants2, (byte)pants3, 255);
-        nomormat = 4;
+        nomormat = 1;
         if (gender == "cewek") nomormat = 6;
         GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = pants;
 
         //LOAD SKIN
         Color32 skin = new Color32((byte)skin1, (byte)skin2, (byte)skin3, 255);
         nomormat = 2;
-        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[0].color = skin;
-        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[2].color = skin;
-        if (gender == "cewek") GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[7].color = skin;
-        else GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[5].color = skin;
-        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[8].color = skin;
+        go.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().materials[0].color = skin;
+        if (PlayerPrefs.GetString("gender") == "cewek")
+            go.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().materials[2].color = skin;
+        if (PlayerPrefs.GetString("gender") == "cewek") go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[7].color = skin;
+        else go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[5].color = skin;
+        if (PlayerPrefs.GetString("gender") == "cewek")
+            go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[8].color = skin;
+        else
+            go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[1].color = skin;
 
         //LOAD WEAPON
-        GameObject myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+        GameObject myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+        if (PlayerPrefs.GetString("gender") == "cewek")
+            myweapon = go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
             myweapon.transform.GetChild(i).gameObject.SetActive(false);
         myweapon.transform.Find(peralatan).gameObject.SetActive(true);
