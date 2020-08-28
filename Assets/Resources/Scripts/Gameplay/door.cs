@@ -23,7 +23,7 @@ public class door : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (PlayerPrefs.GetString("level") == level && transisi.activeSelf && (int)(255 * transisi.GetComponent<Image>().color.a) < 255 && PlayerPrefs.HasKey("masuk"))
+        if ((PlayerPrefs.GetString("level") == level || PlayerPrefs.GetString("level") == "MenuAwal") && transisi.activeSelf && (int)(255 * transisi.GetComponent<Image>().color.a) < 255 && PlayerPrefs.HasKey("masuk"))
         {
             if ((int)(255 * transisi.GetComponent<Image>().color.a) >= 240)
             {

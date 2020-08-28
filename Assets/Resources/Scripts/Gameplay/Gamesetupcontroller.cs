@@ -774,6 +774,8 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     {
         if (!otherPlayer.NickName.Contains("Player"))
         {
+            Debug.Log(otherPlayer.NickName);
+            Destroy(GameObject.Find("PlayerSpawn").transform.Find("Player ("+otherPlayer.NickName + ")").gameObject);
             GameObject.Find("Canvas").transform.Find("TextNotif").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("TextNotif").GetComponent<Text>().text = otherPlayer.NickName + " keluar dari permainan";
             if (PhotonNetwork.IsMasterClient && otherPlayer.CustomProperties["setlevel"].ToString()== "Peternakan") GameObject.Find("AISpawn").transform.Find("cow_ai").GetComponent<PhotonView>().RPC("cowaktif", RpcTarget.MasterClient, false);
