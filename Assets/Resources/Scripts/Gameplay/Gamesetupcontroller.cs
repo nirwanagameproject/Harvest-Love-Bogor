@@ -418,7 +418,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         setWarna.Add("skingreen", PlayerPrefs.GetInt("warnaskingreen"));
         setWarna.Add("skinblue", PlayerPrefs.GetInt("warnaskinblue"));
         PhotonNetwork.LocalPlayer.SetCustomProperties(setWarna);
-        GameObject myweapon = new GameObject();
+        GameObject myweapon = GameObject.Find("PlayerSpawn");
         if (PlayerPrefs.GetString("gender") == "cowok")
             myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         else if (PlayerPrefs.GetString("gender") == "cewek")
@@ -774,7 +774,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[1].color = skin;
 
         //LOAD WEAPON
-        GameObject myweapon = new GameObject();
+        GameObject myweapon = GameObject.Find("PlayerSpawn");
         if (gender == "cowok")
             myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         if (gender == "cewek")
@@ -791,7 +791,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     void changeweapon(string namaplayer, string peralatan, string barang, string gender)
     {
         //LOAD WEAPON
-        GameObject myweapon = new GameObject();
+        GameObject myweapon = GameObject.Find("PlayerSpawn");
         if (gender == "cowok")
             myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         if (gender == "cewek")

@@ -206,8 +206,8 @@ public class bag : MonoBehaviour
 
             if ((newtools.slot == 0 && sebelumtools.name != "") || (sebelumtools.slot == 0 && newtools.name != ""))
             {
-                GameObject myweapon = new GameObject();
-                if(PlayerPrefs.GetString("gender") == "cowok")
+                GameObject myweapon = GameObject.Find("PlayerSpawn");
+                if (PlayerPrefs.GetString("gender") == "cowok")
                     myweapon = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
                 else if (PlayerPrefs.GetString("gender") == "cewek")
                     myweapon = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
@@ -225,7 +225,7 @@ public class bag : MonoBehaviour
             }
             else if ((newtools.slot == 0 && sebelumtools.name == "") || (sebelumtools.slot == 0 && newtools.name == ""))
             {
-                GameObject myweapon = new GameObject();
+                GameObject myweapon = GameObject.Find("PlayerSpawn");
                 if (PlayerPrefs.GetString("gender") == "cowok")
                     myweapon = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
                 else if (PlayerPrefs.GetString("gender") == "cewek")
