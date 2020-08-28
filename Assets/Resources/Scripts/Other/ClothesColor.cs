@@ -10,13 +10,14 @@ public class ClothesColor : MonoBehaviour
     {
         Dropdown dropdown = GetComponent<Dropdown>();
 
+        //Putih
+        string teks = dropdown.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(44);
+        dropdown.options[0].text = teks;
+
         //HItam
-        string teks = dropdown.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(43);
+        teks = dropdown.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(43);
         dropdown.options[1].text = teks;
 
-        //Putih
-        teks = dropdown.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(44);
-        dropdown.options[0].text = teks;
         //Biru
         teks = dropdown.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(45);
         dropdown.options[2].text = teks;

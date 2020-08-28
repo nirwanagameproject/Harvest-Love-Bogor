@@ -57,6 +57,7 @@ public class door : MonoBehaviour
     {
         if (collision.collider.tag.Equals("Player"))
         {
+            Debug.Log("ok");
             GC.Collect();
             Gamesetupcontroller.instance.HapusObjek(collision.collider.gameObject.name);
             if (collision.collider.GetComponent<PhotonView>() != null && PhotonNetwork.IsConnected)
