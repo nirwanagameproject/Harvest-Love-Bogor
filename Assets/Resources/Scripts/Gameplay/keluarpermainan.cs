@@ -14,6 +14,6 @@ public class keluarpermainan : MonoBehaviour
     {
         PlayerPrefs.SetString("level", "MenuAwal");
         PlayerPrefs.SetString("masuk", "");
-        GameObject.Find("Canvas").transform.Find("Transisi").gameObject.SetActive(true);
+        GameObject.Find("Gamesetup").GetComponent<Gamesetupcontroller>().transisi.SetActive(true);
     }
 }
