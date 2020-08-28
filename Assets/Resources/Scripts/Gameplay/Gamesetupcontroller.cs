@@ -788,14 +788,14 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void changeweapon(string namaplayer, string peralatan, string barang)
+    void changeweapon(string namaplayer, string peralatan, string barang, string gender)
     {
         //LOAD WEAPON
         GameObject myweapon = new GameObject();
-        if (PlayerPrefs.GetString("gender") == "cowok")
-            myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
-        if (PlayerPrefs.GetString("gender") == "cewek")
-            myweapon = go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+        if (gender == "cowok")
+            myweapon = GameObject.Find("PlayerSpawn").transform.Find("Player ("+namaplayer+")").transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+        if (gender == "cewek")
+            myweapon = GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
             myweapon.transform.GetChild(i).gameObject.SetActive(false);
         if(peralatan!="")
