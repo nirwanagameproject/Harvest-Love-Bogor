@@ -110,6 +110,8 @@ public class Language : MonoBehaviour
         bahasaID.Add("Nama tidak boleh kosong"); //62
         bahasaID.Add("Nama kucing tidak boleh kosong"); //63
         bahasaID.Add("Batal"); //64
+        bahasaID.Add("Ulang tahun tidak boleh kosong"); //65
+        bahasaID.Add("Nama kebun tidak boleh kosong"); //65
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -201,6 +203,9 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Name cannot be empty"); //62
         bahasaUS.Add("Cat's name cannot be empty"); //63
         bahasaUS.Add("Cancel"); //64
+        bahasaUS.Add("Birthday cannot be empty"); //65
+        bahasaUS.Add("Farm's name cannot be empty"); //66
+
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -292,6 +297,8 @@ public class Language : MonoBehaviour
         bahasaJP.Add("Nama tidak boleh kosong"); //62
         bahasaJP.Add("Nama kucing tidak boleh kosong"); //63
         bahasaJP.Add("Batal"); //64
+        bahasaJP.Add("Ulang tahun tidak boleh kosong"); //65
+        bahasaJP.Add("Nama kebun tidak boleh kosong"); //66
 
 
     }

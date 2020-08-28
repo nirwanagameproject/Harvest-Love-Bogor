@@ -780,7 +780,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: ClickExit
         m_Mode: 1
         m_Arguments:
@@ -3593,6 +3593,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: mailbox
       objectReference: {fileID: 0}
+    - target: {fileID: 940356186120956022, guid: 5f3b00981c37c40a89c1129d40c37dd9,
+        type: 3}
+      propertyPath: mymail
+      value: 
+      objectReference: {fileID: 803726644}
+    - target: {fileID: 940356186120956022, guid: 5f3b00981c37c40a89c1129d40c37dd9,
+        type: 3}
+      propertyPath: cubeaction
+      value: 
+      objectReference: {fileID: 519352943}
     - target: {fileID: 5239109344684504791, guid: 5f3b00981c37c40a89c1129d40c37dd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3650,6 +3660,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f3b00981c37c40a89c1129d40c37dd9, type: 3}
+--- !u!114 &386482714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 940356186120956022, guid: 5f3b00981c37c40a89c1129d40c37dd9,
+    type: 3}
+  m_PrefabInstance: {fileID: 386482713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f52f65a5a9d7eb41a82bcb6256cbbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &414077471
 GameObject:
   m_ObjectHideFlags: 0
@@ -4220,7 +4242,7 @@ PrefabInstance:
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.548
+      value: 1.5479999
       objectReference: {fileID: 0}
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
@@ -4230,7 +4252,7 @@ PrefabInstance:
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
@@ -4240,7 +4262,7 @@ PrefabInstance:
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
         type: 3}
@@ -4267,8 +4289,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.30000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416972434966059479, guid: 088878362305a684db7664a2607b59fc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.30000007
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 088878362305a684db7664a2607b59fc, type: 3}
+--- !u!1 &519352943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5416972434966059474, guid: 088878362305a684db7664a2607b59fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 519352942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &527069960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4352,7 +4390,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: ClickTampilinSurat
         m_Mode: 3
         m_Arguments:
@@ -5461,13 +5499,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 386482714}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: savestate3
           m_BoolArgument: 0
@@ -6130,13 +6168,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 386482714}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: savestate4
           m_BoolArgument: 0
@@ -9303,13 +9341,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 386482714}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: savestate5
           m_BoolArgument: 0
@@ -10044,7 +10082,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: CloseDapetDuit
         m_Mode: 1
         m_Arguments:
@@ -10943,7 +10981,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: CloseTunggu
         m_Mode: 1
         m_Arguments:
@@ -11073,7 +11111,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: ClickOpenAds
         m_Mode: 1
         m_Arguments:
@@ -11700,13 +11738,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ClickTampilinKonfirmTidur
-        m_Mode: 5
+      - m_Target: {fileID: 386482714}
+        m_MethodName: ClickTampilinSurat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: savestate2
           m_BoolArgument: 0
@@ -14114,7 +14152,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 386482714}
         m_MethodName: ClickGajadiKlikIklan
         m_Mode: 1
         m_Arguments:
