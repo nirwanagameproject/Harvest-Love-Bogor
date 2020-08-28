@@ -376,8 +376,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputnama.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(62);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().indexText = 62;
             notifwrong.SetActive(true);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(62);
         }
         else
         {
@@ -429,8 +430,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputulangtaun.transform.Find("BotNotif").Find("InputField").Find("Text").GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Tanggal tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().indexText = 65;
             notifwrong.SetActive(true);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(65);
         }
         else
         {
@@ -449,8 +451,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputfarm.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Nama kebun tidak boleh kosong";
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().indexText = 66;
             notifwrong.SetActive(true);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(66);
         }
         else
         {
@@ -467,8 +470,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (inputkucing.GetComponent<Text>().text == "")
         {
             callAudioWrongClicked();
-            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(63);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().indexText = 63;
             notifwrong.SetActive(true);
+            notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<ChangeLanguage>().GetLanguage(63);
         }
         else
         {
@@ -538,7 +542,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         callAudioClicked();
         //Debug.Log("jumlah "+int.Parse(inputulangtaun.transform.Find("BotNotif").Find("InputField").Find("Text").GetComponent<Text>().text));
-        GameObject myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hairs").Find("Hair001").gameObject;
+        GameObject myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hair001").gameObject;
+        if (PlayerPrefs.GetString("gender") == "cewek")
+            myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hairs").Find("Hair001").gameObject;
         if (inputhaircolor.value == 0)
         {
             for(int nomormat=0; nomormat < myChar.GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
@@ -631,7 +637,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         //Debug.Log("jumlah "+int.Parse(inputulangtaun.transform.Find("BotNotif").Find("InputField").Find("Text").GetComponent<Text>().text));
         GameObject myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Body").gameObject;
-        int nomormat = 6;
+        int nomormat = 3;
         if (PlayerPrefs.GetString("gender") == "cewek") nomormat = 5;
         if (inputclothescolor.value == 0)
         {
@@ -648,7 +654,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             PlayerPrefs.SetInt("warnaclothesred", 0);
             PlayerPrefs.SetInt("warnaclothesgreen", 0);
             PlayerPrefs.SetInt("warnaclothesblue", 0);
-            inputpantscolor.transform.Find("Image").GetComponent<Image>().color = myChar.GetComponent<SkinnedMeshRenderer>().materials[nomormat].color;
+            inputclothescolor.transform.Find("Image").GetComponent<Image>().color = myChar.GetComponent<SkinnedMeshRenderer>().materials[nomormat].color;
 
         }
         else
@@ -708,7 +714,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
         //Debug.Log("jumlah "+int.Parse(inputulangtaun.transform.Find("BotNotif").Find("InputField").Find("Text").GetComponent<Text>().text));
         GameObject myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Body").gameObject;
-        int nomormat = 4;
+        int nomormat = 1;
         if (PlayerPrefs.GetString("gender") == "cewek") nomormat = 6;
         if (inputpantscolor.value == 0)
         {
@@ -797,9 +803,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             myChar.GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolor32;
             inputskincolor.transform.Find("Image").GetComponent<Image>().color = mycolor32;
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Face").gameObject;
-            if(PlayerPrefs.GetString("gender")=="cewek")myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
-            else myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
                 myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
+            }
+            else
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolor32;
+            }
         }
         else
         if (inputskincolor.value == 1)
@@ -812,9 +825,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             myChar.GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolor32;
             inputskincolor.transform.Find("Image").GetComponent<Image>().color = mycolor32;
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Face").gameObject;
-            if (PlayerPrefs.GetString("gender") == "cewek") myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
-                else myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
                 myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
+            }
+            else
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolor32;
+            }
 
         }
         else
@@ -828,9 +848,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             myChar.GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolor32;
             inputskincolor.transform.Find("Image").GetComponent<Image>().color = mycolor32;
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Face").gameObject;
-            if (PlayerPrefs.GetString("gender") == "cewek") myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
-            else myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
-            myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
+            }
+            else
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolor32;
+            }
 
         }
         else
@@ -844,9 +871,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             myChar.GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolor32;
             inputskincolor.transform.Find("Image").GetComponent<Image>().color = mycolor32;
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Face").gameObject;
-            if (PlayerPrefs.GetString("gender") == "cewek") myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
-            else myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
-            myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
+            }
+            else
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolor32;
+            }
         }
         else
         if (inputskincolor.value == 4)
@@ -859,9 +893,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             myChar.GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolor32;
             inputskincolor.transform.Find("Image").GetComponent<Image>().color = mycolor32;
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Face").gameObject;
-            if (PlayerPrefs.GetString("gender") == "cewek") myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
-            else myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
-            myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolor32;
+            }
+            else
+            {
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolor32;
+                myChar.GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolor32;
+            }
         }
     }
 
