@@ -454,14 +454,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             GameObject.Find("AISpawn").transform.Find("cow_ai").GetComponent<PhotonView>().RPC("cowaktif", RpcTarget.MasterClient, false);
         }
 
-        //SET POSISI/ROTATION AWAL MASUK SCENE KE SEMUA PLAYER
-        float posisix = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.x;
-        float posisiy = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.y;
-        float posisiz = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.z;
-        float rotatex = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.x;
-        float rotatey = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.y;
-        float rotatez = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.z;
-        photonView.RPC("setposisiawal", RpcTarget.Others, PhotonNetwork.NickName, posisix, posisiy, posisiz, rotatex, rotatey, rotatez);
+        //REQUEST POSISI/ROTATION AWAL MASUK SCENE KE SEMUA PLAYER
+       
+        photonView.RPC("mintaposisi", RpcTarget.Others);
 
         transisi.SetActive(true);
     }
@@ -546,10 +541,24 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
+    void mintaposisi()
+    {
+        float posisix = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.x;
+        float posisiy = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.y;
+        float posisiz = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.position.z;
+        float rotatex = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.x;
+        float rotatey = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.y;
+        float rotatez = GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.z;
+
+        photonView.RPC("setposisiawal", RpcTarget.Others, PhotonNetwork.NickName, posisix,posisiy,posisiz,rotatex,rotatey,rotatez);
+    }
+
+    [PunRPC]
     void setposisiawal(string namaplayer,float posx, float posy, float posz, float rotx, float roty, float rotz)
     {
         Vector3 vector3pos = new Vector3(posx,posy,posz);
         Vector3 vector3rot = new Vector3(rotx, roty, rotz);
+        Debug.Log(namaplayer);
         GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").transform.position = vector3pos;
         GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").transform.eulerAngles = vector3rot;
     }
