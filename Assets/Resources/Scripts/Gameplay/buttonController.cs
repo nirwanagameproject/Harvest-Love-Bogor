@@ -108,17 +108,25 @@ public class buttonController : MonoBehaviour
         if (PlayerPrefs.GetString("peralatannama0") != "")
             if (GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Run"))
             {
-                Controller.instance.pacul = true;
-                string action="";
-                if (PlayerPrefs.GetString("peralatannama0") == "watering") action = "watering";
-                if(PhotonNetwork.IsConnected)
-                GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("gunaintools",RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")",PlayerPrefs.GetString("peralatannama0"),action, PlayerPrefs.GetInt("peralatanjumlah0"));
-                else
-                {
-                    AudioSource audio = GameObject.Find("Clicked").transform.Find(PlayerPrefs.GetString("peralatannama0") + "sound").GetComponent<AudioSource>();
-                    audio.transform.position = Camera.main.transform.position;
-                    audio.Play();
-                }
+                    Controller.instance.pacul = true;
+                    string action = "";
+                    if (PlayerPrefs.GetString("peralatannama0") == "watering") action = "watering";
+                    if (PhotonNetwork.IsConnected)
+                        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("gunaintools", RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), action, PlayerPrefs.GetInt("peralatanjumlah0"));
+                    else
+                    {
+                        if (PlayerPrefs.GetString("peralatannama0") == "watering" && PlayerPrefs.GetInt("peralatanjumlah0") == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            AudioSource audio = GameObject.Find("Clicked").transform.Find(PlayerPrefs.GetString("peralatannama0") + "sound").GetComponent<AudioSource>();
+                            audio.transform.position = Camera.main.transform.position;
+                            audio.Play();
+                        }
+                    }
+          
             }
     }
 

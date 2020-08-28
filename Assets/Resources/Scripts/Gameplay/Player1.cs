@@ -71,6 +71,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
   private float xAngTemp = 0.0f; //temp variable for angle
   private float yAngTemp = 0.0f;
 
+    public bool mulaiAksi = false;
+
     void Awake()
     {
         instance = this;
@@ -527,14 +529,17 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             if(alat.Contains("peralatanbibit")) audio = GameObject.Find("Clicked").transform.Find("peralatanbibit" + "sound").GetComponent<AudioSource>();
             else audio = GameObject.Find("Clicked").transform.Find(alat + "sound").GetComponent<AudioSource>();
             audio.transform.position = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).transform.position;
-            audio.Play();
-
+            
             Collider[] air =  Physics.OverlapSphere(transform.position, 0.35f, LayerMask.GetMask("pond"));
             bool deketpond = air.Length != 0;
             if(deketpond)if (air[0].name == "river")
             {
                 air = Physics.OverlapSphere(transform.position, 0f, LayerMask.GetMask("pond"));
                 deketpond = air.Length != 0;
+            }
+            if (!(namaplayer == name && !deketpond && action == "watering"))
+            {
+                audio.Play();
             }
 
             if (photonView.IsMine)
@@ -571,16 +576,15 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                         myweapon = transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
 
                     myweapon.transform.Find("watering").Find("airkeluar").GetComponent<ParticleSystem>().Play();
-                
-                if (photonView.IsMine)
-                {
-                    PlayerPrefs.SetInt("peralatanjumlah0", PlayerPrefs.GetInt("peralatanjumlah0") - 1);
-                    GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
-                    GameObject.Find("Canvas").transform.Find("Bag").Find("BGAtas").Find("tools").GetChild(0).Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
-                    
-                }
-                
-                    GetComponent<Animator>().SetBool("WaterPlantStart", true);
+
+
+
+                    //GetComponent<Animator>().SetBool("WaterPlantStart", true);
+                    if (!mulaiAksi)
+                    {
+                        mulaiAksi = true;
+                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant",audio));
+                    }
                     Collider[] lahantani = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
 
                     if (alat == "watering" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
@@ -786,6 +790,51 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
             }
         }
+    }
+
+    const string animBaseLayer = "Base Layer";
+    int jumpAnimHash = Animator.StringToHash(animBaseLayer + ".WaterPlant");
+
+    public IEnumerator PlayAndWaitForAnim(Animator targetAnim, string stateName,AudioSource audio)
+    {
+        audio.Play();
+        //Get hash of animation
+        int animHash = 0;
+        if (stateName == "WaterPlant")
+            animHash = jumpAnimHash;
+
+        //targetAnim.Play(stateName);
+        //targetAnim.CrossFadeInFixedTime(stateName, 0.6f);
+        targetAnim.SetBool("WaterPlantStart", true);
+        //Wait until we enter the current state
+        while (targetAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != animHash)
+        {
+            yield return null;
+        }
+
+        float counter = 0;
+        float waitTime = targetAnim.GetCurrentAnimatorStateInfo(0).length;
+
+        //Now, Wait until the current state is done playing
+        while (counter < (waitTime))
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+
+        //Done playing. Do something below!
+        if(stateName == "WaterPlant")
+        {
+            if (photonView.IsMine)
+            {
+                PlayerPrefs.SetInt("peralatanjumlah0", PlayerPrefs.GetInt("peralatanjumlah0") - 1);
+                GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
+                GameObject.Find("Canvas").transform.Find("Bag").Find("BGAtas").Find("tools").GetChild(0).Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
+                mulaiAksi = false;
+            }
+        }
+        Debug.Log("Done Watering");
+
     }
 
     [PunRPC]
