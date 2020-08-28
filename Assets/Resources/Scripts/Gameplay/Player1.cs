@@ -238,7 +238,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         else GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[1].color = skin;
 
         //LOAD WEAPON
-        GameObject myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+        GameObject myweapon = new GameObject();
+        if (gender == "cowok")
+            myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         if (gender == "cewek")
             myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
