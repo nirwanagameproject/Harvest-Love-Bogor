@@ -6,7 +6,8 @@ public class UIControls : MonoBehaviour, IPointerDownHandler, IPointerUpHandler 
 {
     public void OnDeselect(BaseEventData eventData)
     {
-        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<Player1>().RotateAroundPlayer = true;
+        if (GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")") != null)
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<Player1>().RotateAroundPlayer = true;
     }
 
     //Detect if a click occurs
