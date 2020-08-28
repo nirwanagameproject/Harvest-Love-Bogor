@@ -221,7 +221,7 @@ public class bag : MonoBehaviour
                 if (PlayerPrefs.GetInt("peralatanjumlah0") == -1) GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "";
                 else if (PlayerPrefs.GetInt("peralatanjumlah0") > 0) GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
 
-                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"), PlayerPrefs.GetString("gender"));
             }
             else if ((newtools.slot == 0 && sebelumtools.name == "") || (sebelumtools.slot == 0 && newtools.name == ""))
             {
@@ -236,7 +236,7 @@ public class bag : MonoBehaviour
                 GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Image").GetComponent<Image>().enabled = false;
                 GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().enabled = false;
 
-                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"), PlayerPrefs.GetString("gender"));
             }
 
             PlayerPrefs.DeleteKey("pindahinTools");
