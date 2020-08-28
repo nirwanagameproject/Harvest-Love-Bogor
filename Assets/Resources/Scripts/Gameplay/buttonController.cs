@@ -112,7 +112,7 @@ public class buttonController : MonoBehaviour
                 string action="";
                 if (PlayerPrefs.GetString("peralatannama0") == "watering") action = "watering";
                 if(PhotonNetwork.IsConnected)
-                GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("gunaintools",RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")",PlayerPrefs.GetString("peralatannama0"),action);
+                GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("gunaintools",RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")",PlayerPrefs.GetString("peralatannama0"),action, PlayerPrefs.GetInt("peralatanjumlah0"));
                 else
                 {
                     AudioSource audio = GameObject.Find("Clicked").transform.Find(PlayerPrefs.GetString("peralatannama0") + "sound").GetComponent<AudioSource>();

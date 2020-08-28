@@ -519,7 +519,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
 
     [PunRPC]
-    void gunaintools(string namaplayer, string alat,string action)
+    void gunaintools(string namaplayer, string alat,string action,int jumlahalat)
     {
         if (GameObject.Find("PlayerSpawn").transform.Find(namaplayer).gameObject.activeInHierarchy)
         {
@@ -562,10 +562,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             else
             if (namaplayer == name && action == "watering")
             {
-                Debug.Log(PlayerPrefs.GetInt("peralatanjumlah0"));
-                if (PlayerPrefs.GetInt("peralatanjumlah0") > 0)
+                if (jumlahalat > 0)
                 {
-                    GameObject myweapon = transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+                    GameObject myweapon = GameObject.Find("PlayerSpawn");
+                    if (PlayerPrefs.GetString("gender") == "cowok")
+                        myweapon = transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+                    else if (PlayerPrefs.GetString("gender") == "cewek")
+                        myweapon = transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+
                     myweapon.transform.Find("watering").Find("airkeluar").GetComponent<ParticleSystem>().Play();
                 
                 if (photonView.IsMine)
