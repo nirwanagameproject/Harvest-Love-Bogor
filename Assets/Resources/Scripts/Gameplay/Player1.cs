@@ -253,11 +253,11 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
-            if (Input.touchCount > 1)
+            if (Input.touchCount > 1 && photonView.IsMine)
             {
                 //RotateAroundPlayer = false;
             }
-            if (Input.touchCount == 1)
+            if (Input.touchCount == 1 && photonView.IsMine)
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
@@ -291,27 +291,29 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     diffZ = transform.position.z - Camera.main.transform.position.z;
 
                 }
+                if (photonView.IsMine)
+                {
+                    Vector3 pos = new Vector3();
+                    pos.x = transform.position.x - diffX;
+                    pos.y = transform.position.y - diffY;
+                    pos.z = transform.position.z - diffZ;
 
-                Vector3 pos = new Vector3();
-                pos.x = transform.position.x - diffX;
-                pos.y = transform.position.y - diffY;
-                pos.z = transform.position.z - diffZ;
+                    Camera.main.transform.position = pos;
 
-                Camera.main.transform.position = pos;
+                    Camera.main.transform.LookAt(transform);
 
-                Camera.main.transform.LookAt(transform);
-
-                Vector3 newPos = transform.position + camOffset;
+                    Vector3 newPos = transform.position + camOffset;
+                }
             }
         }
         else
         {
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && photonView.IsMine)
             {
                 //RotateAroundPlayer = true;
             }
 
-            if (Input.GetMouseButton(0) && RotateAroundPlayer)
+            if (Input.GetMouseButton(0) && RotateAroundPlayer && photonView.IsMine)
             {
                 h = Input.GetAxis("Mouse X") * rotSpeed * Screen.width / 1920;
                 v = Input.GetAxis("Mouse Y") * rotSpeed * Screen.height / 1080;
@@ -338,18 +340,19 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 diffZ = transform.position.z - Camera.main.transform.position.z;
 
             }
+            if (photonView.IsMine)
+            {
+                Vector3 pos = new Vector3();
+                pos.x = transform.position.x - diffX;
+                pos.y = transform.position.y - diffY;
+                pos.z = transform.position.z - diffZ;
 
-            Vector3 pos = new Vector3();
-            pos.x = transform.position.x - diffX;
-            pos.y = transform.position.y - diffY;
-            pos.z = transform.position.z - diffZ;
+                Camera.main.transform.position = pos;
 
-            Camera.main.transform.position = pos;
+                Camera.main.transform.LookAt(transform);
 
-            Camera.main.transform.LookAt(transform);
-
-            Vector3 newPos = transform.position + camOffset;
-
+                Vector3 newPos = transform.position + camOffset;
+            }
         }
 
         //Camera.main.transform.position = newPos;
