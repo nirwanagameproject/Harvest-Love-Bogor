@@ -583,44 +583,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     if (!mulaiAksi)
                     {
                         mulaiAksi = true;
-                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant",audio));
+                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant",audio,namaplayer,alat));
                     }
-                    Collider[] lahantani = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
-
-                    if (alat == "watering" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
-                     && lahantani.Length != 0)
-                    {
-                        if (photonView.IsMine)
-                        {
-                            GameObject mylahanbaru = lahantani[0].transform.parent.gameObject;
-                            GameObject go = lahantani[0].transform.parent.gameObject;
-
-                            if (go.name.Contains("terpacul") || go.name.Contains("tanahbibit"))
-                            {
-                                go.transform.Find("lahan").gameObject.SetActive(false);
-                                go.transform.Find("lahansiram").gameObject.SetActive(true);
-                            }
-                            else return;
-
-                            Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.03f, LayerMask.GetMask("lahantani"));
-                            bool benergadidalem = dalemlahan.Length != 0;
-                            if (benergadidalem)
-                            {
-                                string namalahan = "";
-                                string lahan = "";
-
-                                ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
-                                string[] splitArray = go.name.Split(char.Parse("_"));
-                                setLahan.Add("lahancangkulsiram" + splitArray[1], true);
-                                PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
-
-                                namalahan = go.name;
-                                GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, Int32.Parse(splitArray[1]), go.GetComponent<customgrid>().truepos.x, go.GetComponent<customgrid>().truepos.y, go.GetComponent<customgrid>().truepos.z, lahan, namalahan, "yes");
-                                //Destroy(mylahanbaru);
-                            }
-
-                        }
-                    }
+                    
                 }
 
             }
@@ -795,7 +760,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     const string animBaseLayer = "Base Layer";
     int jumpAnimHash = Animator.StringToHash(animBaseLayer + ".WaterPlant");
 
-    public IEnumerator PlayAndWaitForAnim(Animator targetAnim, string stateName,AudioSource audio)
+    public IEnumerator PlayAndWaitForAnim(Animator targetAnim, string stateName,AudioSource audio, string namaplayer, string alat)
     {
         audio.Play();
         //Get hash of animation
@@ -830,8 +795,46 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 PlayerPrefs.SetInt("peralatanjumlah0", PlayerPrefs.GetInt("peralatanjumlah0") - 1);
                 GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
                 GameObject.Find("Canvas").transform.Find("Bag").Find("BGAtas").Find("tools").GetChild(0).Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
-                mulaiAksi = false;
             }
+
+            Collider[] lahantani = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
+
+            if (alat == "watering" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
+             && lahantani.Length != 0)
+            {
+                if (photonView.IsMine)
+                {
+                    GameObject mylahanbaru = lahantani[0].transform.parent.gameObject;
+                    GameObject go = lahantani[0].transform.parent.gameObject;
+
+                    if (go.name.Contains("terpacul") || go.name.Contains("tanahbibit"))
+                    {
+                        go.transform.Find("lahan").gameObject.SetActive(false);
+                        go.transform.Find("lahansiram").gameObject.SetActive(true);
+
+
+                        Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.03f, LayerMask.GetMask("lahantani"));
+                        bool benergadidalem = dalemlahan.Length != 0;
+                        if (benergadidalem)
+                        {
+                            string namalahan = "";
+                            string lahan = "";
+
+                            ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
+                            string[] splitArray = go.name.Split(char.Parse("_"));
+                            setLahan.Add("lahancangkulsiram" + splitArray[1], true);
+                            PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
+
+                            namalahan = go.name;
+                            GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, Int32.Parse(splitArray[1]), go.GetComponent<customgrid>().truepos.x, go.GetComponent<customgrid>().truepos.y, go.GetComponent<customgrid>().truepos.z, lahan, namalahan, "yes");
+                            //Destroy(mylahanbaru);
+                        }
+                    }
+
+
+                }
+            }
+            mulaiAksi = false;
         }
         Debug.Log("Done Watering");
 
