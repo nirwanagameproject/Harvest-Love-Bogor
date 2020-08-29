@@ -388,8 +388,23 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else GameObject.Find("ItemSpawn").transform.GetChild(i).gameObject.SetActive(false);
             }
-            
 
+            //SHOW TARGET GROUND DI LAHAN
+            GameObject myplayer = GameObject.Find("PlayerSpawn").transform.Find("Player ("+PhotonNetwork.NickName+")").gameObject;
+            Collider[] kotaklahan = Physics.OverlapSphere(myplayer.transform.Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
+            if (kotaklahan.Length != 0)
+            {
+                myplayer.transform.Find("TargetGround").transform.position = myplayer.transform.Find("AreaPacul").transform.position;
+                myplayer.transform.Find("TargetGround").GetComponent<customgrid>().gridding();
+                myplayer.transform.Find("TargetGround").transform.eulerAngles = new Vector3(0, myplayer.transform.rotation.y * -1, 0);
+                myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = true;
+            }
+            else
+            {
+                myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = false;
+            }
+            
+            
         }
 
         if (Inputs.Jump)
