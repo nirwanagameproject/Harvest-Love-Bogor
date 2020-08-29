@@ -339,7 +339,7 @@ Transform:
   m_Children:
   - {fileID: 6580568311465775873}
   m_Father: {fileID: 8014135092079157324}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657083014040147895
 GameObject:
@@ -2861,6 +2861,7 @@ Transform:
   - {fileID: 11842595338081171}
   - {fileID: 5380397990711120605}
   - {fileID: 5407104491229339236}
+  - {fileID: 780882576192048379}
   - {fileID: 1407155209531371730}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2880,10 +2881,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Armature'\n\tTransform 'Armature'\n\tTransform
-    'Armature'\n\tFrom animation clip 'Walk'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -3669,6 +3667,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4937164320727633183, guid: 08d0a54483963a549ba89aead535c762,
     type: 3}
   m_PrefabInstance: {fileID: 2224141608305839198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2836748058733326820
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8014135092079157324}
+    m_Modifications:
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335803967001619665, guid: 129ff934172b0a3498a338832a9b851d,
+        type: 3}
+      propertyPath: m_Name
+      value: TargetGround
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 129ff934172b0a3498a338832a9b851d, type: 3}
+--- !u!4 &780882576192048379 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3280986423056678175, guid: 129ff934172b0a3498a338832a9b851d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2836748058733326820}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4478651113713518980
 PrefabInstance:
