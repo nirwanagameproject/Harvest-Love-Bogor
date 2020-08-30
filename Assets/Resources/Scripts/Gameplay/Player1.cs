@@ -613,11 +613,13 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (photonView.IsMine)
                 {
+                    Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
                     GameObject go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkul"), GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, Quaternion.identity);
                     go.GetComponent<customgrid>().gridding();
+                    go.transform.position = new Vector3(go.transform.position.x, colliders[0].transform.position.y, go.transform.position.z);
                     go.transform.parent = GameObject.Find("SawahSpawn").transform;
                     
-                    Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.03f, LayerMask.GetMask("lahantani"));
+                    Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.1f, LayerMask.GetMask("lahantani"));
                     bool benergadidalem = dalemlahan.Length != 0;
                     if (benergadidalem)
                     {
