@@ -632,7 +632,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                                 setLahan.Add("lahancangkulnama" + i, "terpacul_"+i);
                                 setLahan.Add("lahancangkulsiram" + i, false);
                                 setLahan.Add("lahancangkulposx" + i, go.GetComponent<customgrid>().truepos.x);
-                                setLahan.Add("lahancangkulposy" + i, go.GetComponent<customgrid>().truepos.y);
+                                setLahan.Add("lahancangkulposy" + i, colliders[0].transform.position.y);
                                 setLahan.Add("lahancangkulposz" + i, go.GetComponent<customgrid>().truepos.z);
                                 break;
                             }
@@ -641,7 +641,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                         go.name = "terpacul_" + i;
                         PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
 
-                        GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, go.GetComponent<customgrid>().truepos.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_","no");
+                        GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, colliders[0].transform.position.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_","no");
                     }
                     else
                     {
