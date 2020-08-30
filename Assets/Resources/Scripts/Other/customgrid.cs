@@ -19,7 +19,7 @@ public class customgrid : MonoBehaviour
     public void gridding()
     {
         truepos.x = Mathf.Round(target.transform.position.x / gridSize) * gridSize;
-        truepos.y = 0.011f + (Mathf.Round(target.transform.position.y / gridSize) * gridSize);
+        truepos.y = target.transform.position.y + (Mathf.Round(target.transform.position.y / gridSize) * gridSize);
         truepos.z = Mathf.Round(target.transform.position.z / gridSize) * gridSize;
 
         structure.transform.position = truepos;
