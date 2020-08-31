@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -521,6 +522,61 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("tahun", 1);
         PlayerPrefs.SetString("jam", "06");
         PlayerPrefs.SetString("detik", "00");
+        //Load Batu di Ladang2
+        List<Vector2> posisiLadangBatu = new List<Vector2>();
+        float[] posX = new float[43];
+        float[] posY = new float[43];
+        string[] tipeLadang = new string[43];
+        for (int i = 0; i < 43; i++)
+        {
+            tipeLadang[i] = "small";
+        }
+        for (int i = 0; i < 43; i++)
+        {
+            float x = 25.5f +(21.5f) - ((1f) * UnityEngine.Random.Range(0, 12));
+            float y = 40+(7f) - (1f * UnityEngine.Random.Range(0, 12));
+
+            Vector2 pos = new Vector2();
+            pos.x = x;
+            pos.y = y;
+
+            bool add = true;
+            for(int k=0;k<posisiLadangBatu.Count; k++)
+            {
+                if(x == posisiLadangBatu[k].x && y == posisiLadangBatu[k].y)
+                {
+                    add = false;
+                }
+            }
+            if (add)
+            {
+                posisiLadangBatu.Add(pos);
+                posX[posisiLadangBatu.Count-1] = posisiLadangBatu[posisiLadangBatu.Count-1].x;
+                posY[posisiLadangBatu.Count-1] = posisiLadangBatu[posisiLadangBatu.Count-1].y;
+                if (i >= 30 && i < 41)
+                {
+                    tipeLadang[posisiLadangBatu.Count - 1] = "medium";
+                }
+                else if (i >= 41 && i < 43)
+                {
+                    tipeLadang[posisiLadangBatu.Count - 1] = "hard";
+                }
+                else
+                {
+                    tipeLadang[posisiLadangBatu.Count - 1] = "small";
+                }
+            }
+            else
+            {
+                i--;
+            }
+        }
+
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuX", posX);
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
+        PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
+
+
         CustomMatchmakingLobbyCampaignController.instance.CreateRoomOnClick();
 
     }
