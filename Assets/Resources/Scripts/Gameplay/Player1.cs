@@ -351,10 +351,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 pos.y = transform.position.y - diffY;
                 pos.z = transform.position.z - diffZ;
 
-                Camera.main.transform.position = pos;
+                if (Camera.main != null)
+                {
+                    Camera.main.transform.position = pos;
 
-                Camera.main.transform.LookAt(transform);
-
+                    Camera.main.transform.LookAt(transform);
+                }
                 Vector3 newPos = transform.position + camOffset;
             }
         }
@@ -374,11 +376,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             pos.y = transform.position.y - diffY;
             pos.z = transform.position.z - diffZ;
 
+            if (Camera.main != null)
+            {
+                Camera.main.transform.position = pos;
 
-            Camera.main.transform.position = pos;
-
-            Camera.main.transform.LookAt(transform);
-
+                Camera.main.transform.LookAt(transform);
+            }
             for (int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
             {
                 if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)

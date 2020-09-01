@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 7040371923803046576}
   - component: {fileID: 6738714751609583953}
   - component: {fileID: 5066187772788069131}
+  - component: {fileID: 4607804868821532483}
   m_Layer: 0
-  m_Name: LahanCangkulBatu2
+  m_Name: LahanCangkulBatu2medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +120,20 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
+--- !u!64 &4607804868821532483
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025645937756602809}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &299564587244294298
 PrefabInstance:
   m_ObjectHideFlags: 0
