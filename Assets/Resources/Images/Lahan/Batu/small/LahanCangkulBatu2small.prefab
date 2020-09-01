@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &912885981351334597
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5392722949286539813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba, type: 3}
 --- !u!1 &4144758873864438158
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +30,20 @@ Transform:
   m_Father: {fileID: 7950259059344220469}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &912885981351334597
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392722949286539813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba, type: 3}
 --- !u!1 &7025645937756602809
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: objek
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4742473837712756890, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.099032454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.0447761
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.00488967
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7df5b3d8cbcf4dbfa882d29cab1c7ba, type: 3}
 --- !u!4 &262050020063639409 stripped
 Transform:
