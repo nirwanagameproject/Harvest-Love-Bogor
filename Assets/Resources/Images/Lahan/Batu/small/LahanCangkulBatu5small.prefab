@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &1147653605402846474
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818159676716611929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: a90b127f8fcea4260ae4ce19a1e9d23b, type: 3}
 --- !u!1 &4144758873864438158
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +57,7 @@ GameObject:
   - component: {fileID: 6738714751609583953}
   - component: {fileID: 5066187772788069131}
   m_Layer: 0
-  m_Name: LahanCangkulBatu5
+  m_Name: LahanCangkulBatu5small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +220,12 @@ PrefabInstance:
 --- !u!4 &840408806119259149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a90b127f8fcea4260ae4ce19a1e9d23b,
+    type: 3}
+  m_PrefabInstance: {fileID: 874545115885231078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4818159676716611929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5692137152535175871, guid: a90b127f8fcea4260ae4ce19a1e9d23b,
     type: 3}
   m_PrefabInstance: {fileID: 874545115885231078}
   m_PrefabAsset: {fileID: 0}

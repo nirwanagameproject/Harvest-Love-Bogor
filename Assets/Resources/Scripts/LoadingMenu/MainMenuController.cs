@@ -526,6 +526,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         List<Vector2> posisiLadangBatu = new List<Vector2>();
         float[] posX = new float[43];
         float[] posY = new float[43];
+        float[] ranNum = new float[43];
         string[] tipeLadang = new string[43];
         for (int i = 0; i < 43; i++)
         {
@@ -551,6 +552,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             if (add)
             {
                 posisiLadangBatu.Add(pos);
+                float randomNum = UnityEngine.Random.Range(1, 5);
+                ranNum[posisiLadangBatu.Count - 1] = randomNum;
                 posX[posisiLadangBatu.Count-1] = posisiLadangBatu[posisiLadangBatu.Count-1].x;
                 posY[posisiLadangBatu.Count-1] = posisiLadangBatu[posisiLadangBatu.Count-1].y;
                 if (i >= 30 && i < 41)
@@ -574,6 +577,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         PlayerPrefsX.SetFloatArray("PosLadang2BatuX", posX);
         PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", ranNum);
         PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
 
 

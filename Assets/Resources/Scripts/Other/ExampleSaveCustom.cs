@@ -47,6 +47,11 @@ public class ExampleSaveCustom : MonoBehaviour
         public string[] peralatannama = new string[53];
         public int[] peralatanjumlah = new int[53];
 
+        public float[] ladang2BatuX = new float[43];
+        public float[] ladang2BatuY = new float[43];
+        public float[] ladang2BatuNum = new float[43];
+        public string[] ladang2BatuTipe = new string[43];
+
         public CustomData()
         {
             gender = "cowok";
@@ -187,6 +192,14 @@ public class ExampleSaveCustom : MonoBehaviour
                     customData.peralatanjumlah[i] = PlayerPrefs.GetInt("peralatanjumlah" + i);
         }
 
+        for(int i = 0; i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length; i++)
+        {
+            customData.ladang2BatuX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i];
+            customData.ladang2BatuY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i];
+            customData.ladang2BatuNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
+            customData.ladang2BatuTipe[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
+        }
+
         customData.levelbag = PlayerPrefs.GetInt("levelbag");
 
         if (PhotonNetwork.IsConnected)
@@ -260,6 +273,22 @@ public class ExampleSaveCustom : MonoBehaviour
                         PlayerPrefs.SetInt("peralatanjumlah" + i, customData.peralatanjumlah[i]);
                     else PlayerPrefs.DeleteKey("peralatanjumlah" + i);
                 }
+
+                for(int i=0;i< customData.ladang2BatuTipe.Length; i++)
+                {
+                    if (customData.ladang2BatuTipe[i] == null)
+                    {
+                        customData.ladang2BatuTipe[i] = "small";
+                    }
+                }
+
+                if(customData.ladang2BatuTipe.Length > 0) { 
+                    PlayerPrefsX.SetFloatArray("PosLadang2BatuX", customData.ladang2BatuX);
+                    PlayerPrefsX.SetFloatArray("PosLadang2BatuY", customData.ladang2BatuY);
+                    PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", customData.ladang2BatuNum);
+                    PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", customData.ladang2BatuTipe);
+                }
+
 
                 PlayerPrefs.SetInt("levelbag", customData.levelbag);
 
