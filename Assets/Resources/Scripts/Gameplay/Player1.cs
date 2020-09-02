@@ -479,26 +479,28 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
               && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WaterPlant"))
         {
             float angle = Mathf.Atan2(Inputs.JoystickX, Inputs.JoystickZ) * Mathf.Rad2Deg;
-
-            Vector3 dir =  Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
-            float nPengali = Mathf.Sqrt(1 / ((dir.x * dir.x) + (dir.z * dir.z)));
-            float distJoystick = Mathf.Sqrt(Inputs.JoystickX* Inputs.JoystickX + Inputs.JoystickZ* Inputs.JoystickZ);
-            dir = new Vector3(dir.x*nPengali* distJoystick, 0f, dir.z*nPengali * distJoystick);
-            Vector3 myvector = transform.position + dir * Speed * Time.deltaTime;
-            if (Inputs.movingWithVehicle)
-                myvector = new Vector3(transform.position.x + Inputs.JoystickX * Speed * 15 * Time.deltaTime, transform.position.y, transform.position.z + Inputs.JoystickZ * 15 * Speed * Time.deltaTime);
-
-            Inputs.pmrPos = myvector;
-            if (Vector3.Distance(Inputs.pmrPos, transform.position) > 0)
+            if (Camera.main != null)
             {
-                Vector3 pmrFront = new Vector3(Inputs.pmrPos.x, transform.position.y, Inputs.pmrPos.z);
-                Quaternion tempRot = transform.rotation;
+                Vector3 dir = Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
+                float nPengali = Mathf.Sqrt(1 / ((dir.x * dir.x) + (dir.z * dir.z)));
+                float distJoystick = Mathf.Sqrt(Inputs.JoystickX * Inputs.JoystickX + Inputs.JoystickZ * Inputs.JoystickZ);
+                dir = new Vector3(dir.x * nPengali * distJoystick, 0f, dir.z * nPengali * distJoystick);
+                Vector3 myvector = transform.position + dir * Speed * Time.deltaTime;
+                if (Inputs.movingWithVehicle)
+                    myvector = new Vector3(transform.position.x + Inputs.JoystickX * Speed * 15 * Time.deltaTime, transform.position.y, transform.position.z + Inputs.JoystickZ * 15 * Speed * Time.deltaTime);
 
-                transform.LookAt(new Vector3(Inputs.pmrPos.x, transform.position.y, Inputs.pmrPos.z));
-                Inputs.pmrRot = transform.eulerAngles;
+                Inputs.pmrPos = myvector;
+                if (Vector3.Distance(Inputs.pmrPos, transform.position) > 0)
+                {
+                    Vector3 pmrFront = new Vector3(Inputs.pmrPos.x, transform.position.y, Inputs.pmrPos.z);
+                    Quaternion tempRot = transform.rotation;
 
-                Inputs.moving = true;
-                Inputs.movingwithJoystick2 = true;
+                    transform.LookAt(new Vector3(Inputs.pmrPos.x, transform.position.y, Inputs.pmrPos.z));
+                    Inputs.pmrRot = transform.eulerAngles;
+
+                    Inputs.moving = true;
+                    Inputs.movingwithJoystick2 = true;
+                }
             }
         }
         else
