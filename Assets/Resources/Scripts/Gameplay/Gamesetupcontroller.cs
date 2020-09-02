@@ -259,7 +259,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                     setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i]);
                     setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i]);
                 }
-                setLahan.Add("PosLadang2BatuLength", PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length);
+                setLahan.Add("PosLadang2BatuLength", PlayerPrefs.GetInt("Ladang2BatuJumlah"));
 
                 PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
             }
