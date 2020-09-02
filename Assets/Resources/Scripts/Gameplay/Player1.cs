@@ -836,7 +836,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         float waitTime = targetAnim.GetCurrentAnimatorStateInfo(0).length;
 
         //Now, Wait until the current state is done playing
-        while (counter < (waitTime))
+        while (counter < (waitTime)*70/100)
         {
             counter += Time.deltaTime;
             yield return null;
