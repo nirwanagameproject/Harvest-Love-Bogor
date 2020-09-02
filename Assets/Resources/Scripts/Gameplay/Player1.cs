@@ -42,6 +42,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public Collider collider;
+
     protected bool Grounded;
     [SerializeField]
     public int maxWater;
@@ -555,7 +557,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 air = Physics.OverlapSphere(transform.position, 0f, LayerMask.GetMask("pond"));
                 deketpond = air.Length != 0;
             }
-            if (!(namaplayer == name && !deketpond && action == "watering"))
+            if (!((namaplayer == name && !deketpond && action == "watering") || (alat == "hammer")))
             {
                 audio.Play();
             }
@@ -601,14 +603,34 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     if (!mulaiAksi)
                     {
                         mulaiAksi = true;
-                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant",audio,namaplayer,alat));
+                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant", audio, namaplayer, alat));
                     }
-                    
+
                 }
 
             }
             else if (alat.Contains("peralatanbibit")) GetComponent<Animator>().SetBool("WaterPlantStart", true);
-            else GetComponent<Animator>().SetBool("HoeStart", true);
+            else if (alat == "hammer" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length != 0)
+            {
+                if (photonView.IsMine)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone"));
+                    string[] numberText = colliders[0].transform.parent.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
+                    int number = Convert.ToInt32(numberText[1]);
+
+                    if (!mulaiAksi)
+                    {
+                        mulaiAksi = true;
+                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "Hammer", audio, namaplayer, alat));
+                    }
+                }
+            }
+            else
+            {
+                audio.Play();
+                GetComponent<Animator>().SetBool("HoeStart", true);
+            }
+
 
             //CANGKUL
             if (alat == "hoe" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
@@ -616,39 +638,42 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (photonView.IsMine)
                 {
-                    Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
-                    GameObject go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkul"), GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, Quaternion.identity);
-                    go.GetComponent<customgrid>().gridding();
-                    go.transform.position = new Vector3(go.transform.position.x, colliders[0].transform.position.y, go.transform.position.z);
-                    go.transform.parent = GameObject.Find("SawahSpawn").transform;
-                    
-                    Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.1f, LayerMask.GetMask("lahantani"));
-                    bool benergadidalem = dalemlahan.Length != 0;
-                    if (benergadidalem)
+                    if (alat == "hoe" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length == 0)
                     {
-                        ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
-                        int i = 0;
-                        for (; i < i + 1; i++)
+                        Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
+                        GameObject go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkul"), GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, Quaternion.identity);
+                        go.GetComponent<customgrid>().gridding();
+                        go.transform.position = new Vector3(go.transform.position.x, colliders[0].transform.position.y, go.transform.position.z);
+                        go.transform.parent = GameObject.Find("SawahSpawn").transform;
+
+                        Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.1f, LayerMask.GetMask("lahantani"));
+                        bool benergadidalem = dalemlahan.Length != 0;
+                        if (benergadidalem)
                         {
-                            if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i] == null || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() == "")
+                            ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
+                            int i = 0;
+                            for (; i < i + 1; i++)
                             {
-                                setLahan.Add("lahancangkulnama" + i, "terpacul_"+i);
-                                setLahan.Add("lahancangkulsiram" + i, false);
-                                setLahan.Add("lahancangkulposx" + i, go.GetComponent<customgrid>().truepos.x);
-                                setLahan.Add("lahancangkulposy" + i, colliders[0].transform.position.y);
-                                setLahan.Add("lahancangkulposz" + i, go.GetComponent<customgrid>().truepos.z);
-                                break;
+                                if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i] == null || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() == "")
+                                {
+                                    setLahan.Add("lahancangkulnama" + i, "terpacul_" + i);
+                                    setLahan.Add("lahancangkulsiram" + i, false);
+                                    setLahan.Add("lahancangkulposx" + i, go.GetComponent<customgrid>().truepos.x);
+                                    setLahan.Add("lahancangkulposy" + i, colliders[0].transform.position.y);
+                                    setLahan.Add("lahancangkulposz" + i, go.GetComponent<customgrid>().truepos.z);
+                                    break;
+                                }
+
                             }
+                            go.name = "terpacul_" + i;
+                            PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
 
+                            GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, colliders[0].transform.position.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_", "no");
                         }
-                        go.name = "terpacul_" + i;
-                        PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
-
-                        GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, colliders[0].transform.position.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_","no");
-                    }
-                    else
-                    {
-                        Destroy(go);
+                        else
+                        {
+                            Destroy(go);
+                        }
                     }
                     
                 }
@@ -779,6 +804,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     const string animBaseLayer = "Base Layer";
     int jumpAnimHash = Animator.StringToHash(animBaseLayer + ".WaterPlant");
+    int jumpAnimHash2 = Animator.StringToHash(animBaseLayer + ".Hoe");
 
     public IEnumerator PlayAndWaitForAnim(Animator targetAnim, string stateName,AudioSource audio, string namaplayer, string alat)
     {
@@ -787,10 +813,17 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         int animHash = 0;
         if (stateName == "WaterPlant")
             animHash = jumpAnimHash;
+        else if (stateName == "Hammer")
+            animHash = jumpAnimHash2;
+
 
         //targetAnim.Play(stateName);
         //targetAnim.CrossFadeInFixedTime(stateName, 0.6f);
+        if(stateName=="WaterPlant")
         targetAnim.SetBool("WaterPlantStart", true);
+        else if (stateName == "Hammer")
+        targetAnim.SetBool("HoeStart", true);
+
         //Wait until we enter the current state
         while (targetAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != animHash)
         {
@@ -856,8 +889,92 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             }
             mulaiAksi = false;
         }
+        if (stateName == "Hammer")
+        {
+            if (alat == "hammer" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length != 0)
+            {
+                if (photonView.IsMine)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone"));
+                    string[] numberText = colliders[0].transform.parent.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
+                    int number = Convert.ToInt32(numberText[1]);
+                    Debug.Log(number);
+                    collider = colliders[0];
+
+                    GetComponent<PhotonView>().RPC("destroyStone", RpcTarget.All,number);
+                }
+            }
+            mulaiAksi = false;
+        }
         Debug.Log("Done Watering");
 
+    }
+
+    [PunRPC]
+    public void destroyStone(int number)
+    {
+        Destroy(GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + number).gameObject);
+
+        for (int i = number + 1; i < PlayerPrefs.GetInt("Ladang2BatuJumlah"); i++)
+        {
+            GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + i).name = "Ladang2Batu" + (i - 1);
+        }
+
+        float[] posX = new float[43];
+        float[] posY = new float[43];
+        float[] ranNum = new float[43];
+        string[] tipeLadang = new string[43];
+        ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
+
+        for (int i=0;i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length; i++)
+        {
+            if (i < number)
+            {
+                posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i];
+                posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i];
+                ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
+                tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
+
+                setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i]);
+                setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i]);
+                setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i]);
+                setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i]);
+
+            }
+            else if (i >= number && i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length-1)
+            {
+                posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i+1];
+                posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i+1];
+                ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i+1];
+                tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i+1];
+
+                setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i+1]);
+                setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i+1]);
+                setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i+1]);
+                setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i+1]);
+
+            }
+            else
+            {
+                tipeLadang[i] = "small";
+
+                setLahan.Add("PosLadang2BatuTipe" + i, "small");
+
+            }
+        }
+
+        setLahan.Add("PosLadang2BatuLength", PlayerPrefs.GetInt("Ladang2BatuJumlah") - 1);
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
+
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuX", posX);
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
+        PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", ranNum);
+        PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
+
+
+        PlayerPrefs.SetInt("Ladang2BatuJumlah", PlayerPrefs.GetInt("Ladang2BatuJumlah")-1);
+        
     }
 
     [PunRPC]
@@ -1011,6 +1128,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(Inputs.pmrRot.x);
             stream.SendNext(Inputs.pmrRot.y);
             stream.SendNext(Inputs.pmrRot.z);
+            stream.SendNext(collider);
             //stream.SendNext(name);
             //stream.SendNext(transform.parent.name);
             stream.SendNext(Inputs.LookX);
@@ -1049,7 +1167,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             Inputs.JoystickXAttack = (float)stream.ReceiveNext();
             Inputs.JoystickZAttack = (float)stream.ReceiveNext();
             level = (string)stream.ReceiveNext();
-
+            collider = (Collider)stream.ReceiveNext();
 
             
         }
