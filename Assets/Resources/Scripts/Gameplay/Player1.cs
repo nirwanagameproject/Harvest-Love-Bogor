@@ -917,7 +917,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         Destroy(GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + number).gameObject);
 
-        for (int i = number + 1; i < PlayerPrefs.GetInt("Ladang2BatuJumlah"); i++)
+        for (int i = number + 1; i < (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]; i++)
         {
             GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + i).name = "Ladang2Batu" + (i - 1);
         }
@@ -965,7 +965,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        setLahan.Add("PosLadang2BatuLength", PlayerPrefs.GetInt("Ladang2BatuJumlah") - 1);
+        setLahan.Add("PosLadang2BatuLength", (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"] - 1);
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
 
