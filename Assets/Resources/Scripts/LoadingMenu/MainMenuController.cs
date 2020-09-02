@@ -579,6 +579,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
         PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", ranNum);
         PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
+        PlayerPrefs.SetInt("Ladang2BatuJumlah",43);
 
 
         CustomMatchmakingLobbyCampaignController.instance.CreateRoomOnClick();

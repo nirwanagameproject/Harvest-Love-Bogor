@@ -180,7 +180,8 @@ MonoBehaviour:
     generateOnImport: 1
     meshSimplifier: Unity.AutoLOD.QuadricMeshSimplifier, Unity.AutoLOD.Editor, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    batcher: 
+    batcher: Unity.AutoLOD.MaterialPreservingBatcher, Unity.AutoLOD.Editor, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     maxLODGenerated: 2
     initialLODMaxPolyCount: 200000
   lod0:

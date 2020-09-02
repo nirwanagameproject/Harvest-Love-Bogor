@@ -51,6 +51,7 @@ public class ExampleSaveCustom : MonoBehaviour
         public float[] ladang2BatuY = new float[43];
         public float[] ladang2BatuNum = new float[43];
         public string[] ladang2BatuTipe = new string[43];
+        public int ladang2BatuJumlah;
 
         public CustomData()
         {
@@ -178,7 +179,7 @@ public class ExampleSaveCustom : MonoBehaviour
         customData.tahun = PlayerPrefs.GetInt("tahun");
         customData.maxstamina = PlayerPrefs.GetInt("maxstamina");
 
-        for(int i = 0; i < customData.peralatannama.Length; i++)
+        for (int i = 0; i < customData.peralatannama.Length; i++)
         {
             if(PlayerPrefs.HasKey("peralatannama"+i))
             if(PlayerPrefs.GetString("peralatannama"+i)!="")
@@ -199,6 +200,7 @@ public class ExampleSaveCustom : MonoBehaviour
             customData.ladang2BatuNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
             customData.ladang2BatuTipe[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
         }
+        customData.ladang2BatuJumlah = PlayerPrefs.GetInt("Ladang2BatuJumlah");
 
         customData.levelbag = PlayerPrefs.GetInt("levelbag");
 
@@ -288,6 +290,7 @@ public class ExampleSaveCustom : MonoBehaviour
                     PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", customData.ladang2BatuNum);
                     PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", customData.ladang2BatuTipe);
                 }
+                PlayerPrefs.SetInt("Ladang2BatuJumlah", customData.ladang2BatuJumlah);
 
 
                 PlayerPrefs.SetInt("levelbag", customData.levelbag);

@@ -265,17 +265,17 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             }
             if (PlayerPrefs.GetString("level") == "KeluarRumah")
             {
-                if (PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length != 0 && PlayerPrefsX.GetFloatArray("PosLadang2BatuY").Length != 0)
+                if (PlayerPrefs.GetInt("Ladang2BatuJumlah") != 0)
                 {
-                
-                    for (int i = 0; i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length; i++)
+                    Debug.Log(PlayerPrefs.GetInt("Ladang2BatuJumlah")) ;
+                    for (int i = 0; i < PlayerPrefs.GetInt("Ladang2BatuJumlah"); i++)
                     {
                         Vector3 pos = new Vector3(PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i], 0.01f, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i]);
                         GameObject goBatu = GameObject.Instantiate(Resources.Load<GameObject>("Images/Lahan/Batu/" + PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i] + "/lahanCangkulBatu" + PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i] + PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i]), pos, Quaternion.identity);
                         goBatu.transform.parent = GameObject.Find("SawahSpawn").transform;
-                        goBatu.name = "LadangBatu" + i;
+                        goBatu.name = "Ladang2Batu" + i;
                         goBatu.transform.Find("target").name = "batu" + PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
-
+                        goBatu.layer = 15;
                     }
                 }
             }
@@ -291,9 +291,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                         Vector3 pos = new Vector3((float)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuX"+i], 0.01f, (float)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuY" + i]);
                         GameObject goBatu = GameObject.Instantiate(Resources.Load<GameObject>("Images/Lahan/Batu/" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString() + "/lahanCangkulBatu" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuNum" + i].ToString() + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString()), pos, Quaternion.identity);
                         goBatu.transform.parent = GameObject.Find("SawahSpawn").transform;
-                        goBatu.name = "LadangBatu" + i;
+                        goBatu.name = "Ladang2Batu" + i;
                         goBatu.transform.Find("target").name = "batu" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString();
-
+                        goBatu.layer = 15;
                     }
 
                 }
