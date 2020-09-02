@@ -1128,7 +1128,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(Inputs.pmrRot.x);
             stream.SendNext(Inputs.pmrRot.y);
             stream.SendNext(Inputs.pmrRot.z);
-            stream.SendNext(collider);
             //stream.SendNext(name);
             //stream.SendNext(transform.parent.name);
             stream.SendNext(Inputs.LookX);
@@ -1167,7 +1166,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             Inputs.JoystickXAttack = (float)stream.ReceiveNext();
             Inputs.JoystickZAttack = (float)stream.ReceiveNext();
             level = (string)stream.ReceiveNext();
-            collider = (Collider)stream.ReceiveNext();
 
             
         }
