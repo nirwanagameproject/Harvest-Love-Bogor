@@ -100,7 +100,7 @@ public class NPC : MonoBehaviour
                     Vector3 direction = pos - transform.position;
                     Quaternion rotation = Quaternion.LookRotation(direction);
                     transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 3f);
-                    GetComponent<Animator>().SetFloat("Speed", 0.3f);
+                    GetComponent<Animator>().SetFloat("Speed", 0.5f);
                 }
                 
             }

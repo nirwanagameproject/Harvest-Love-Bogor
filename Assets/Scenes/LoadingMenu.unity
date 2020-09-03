@@ -2165,6 +2165,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000008210286, y: -0.00000710118}
   m_SizeDelta: {x: 0, y: 978.8}
   m_Pivot: {x: 0, y: 1}
+--- !u!1001 &92610917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 339383721}
+    m_Modifications:
+    - target: {fileID: 2667057834644159226, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_Name
+      value: Ayu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930762778575986695, guid: 7138bfd9e7e0bb541b8680933614a71c,
+        type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7138bfd9e7e0bb541b8680933614a71c, type: 3}
 --- !u!1 &94937502
 GameObject:
   m_ObjectHideFlags: 0
@@ -6447,9 +6521,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339383719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8333077, y: 0.83843076, z: 4.754548}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 987530949}
   - {fileID: 1309925583}
   m_Father: {fileID: 0}
   m_RootOrder: 15
@@ -22953,6 +23028,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980167593}
   m_CullTransparentMesh: 0
+--- !u!4 &987530949 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2667057834644160311, guid: 7138bfd9e7e0bb541b8680933614a71c,
+    type: 3}
+  m_PrefabInstance: {fileID: 92610917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &989052397
 GameObject:
   m_ObjectHideFlags: 0
@@ -31601,7 +31682,7 @@ PrefabInstance:
     - target: {fileID: 8736524249516892361, guid: 567f8e3e018a3024c85a7c47c2a7b4e1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8736524249516892361, guid: 567f8e3e018a3024c85a7c47c2a7b4e1,
         type: 3}
@@ -39076,6 +39157,183 @@ MonoBehaviour:
     - 
     - 
     peralatanjumlah: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ladang2BatuX:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    ladang2BatuY:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    ladang2BatuNum:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    ladang2BatuTipe:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    ladang2BatuJumlah: 0
   loadOnStart: 1
   cowok: {fileID: 2800000, guid: 59c6dfb7750b1c74faa030c52729570e, type: 3}
   cewek: {fileID: 2800000, guid: 5b7c3e329d97c2a4a8050479d3b967d1, type: 3}
