@@ -87,6 +87,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteKey("pindahinKantong");
         PlayerPrefs.DeleteKey("buttonTidur");
         PlayerPrefs.DeleteKey("buttonSafeBox");
+        PlayerPrefs.DeleteKey("buttonPickBale");
+        PlayerPrefs.DeleteKey("buttonNPC");
+        PlayerPrefs.DeleteKey("buttonChickenFeed");
 
         for (int i = 0; i < 53; i++)
         {

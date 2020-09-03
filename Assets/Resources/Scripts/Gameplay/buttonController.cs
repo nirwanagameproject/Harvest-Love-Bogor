@@ -28,6 +28,10 @@ public class buttonController : MonoBehaviour
 
     public void clickAction()
     {
+        Joystick joystick = GameObject.Find("Canvas").transform.Find("Fixed Joystick").GetComponent<Joystick>();
+        joystick.enabled = false;
+        joystick.enabled = true;
+
         if (PlayerPrefs.HasKey("buttonTidur"))
         {
             FindInActiveObjectByName(PlayerPrefs.GetString("buttonTidur")).SetActive(true);
@@ -41,6 +45,7 @@ public class buttonController : MonoBehaviour
             GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Apa isi dalam kotak peralatan ?", false);
             GameObject.Find("Canvas").transform.Find("Bag").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("Bag").Find("BGBawah").gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.Find("Bag").Find("ButtonBack").gameObject.SetActive(false);
             GameObject.Find("Canvas").transform.Find("SafeBox").gameObject.SetActive(true);
         }
         else if (PlayerPrefs.HasKey("buttonMailbox"))
@@ -49,6 +54,13 @@ public class buttonController : MonoBehaviour
             audio.Play();
 
             GameObject.Find("CanvasFarm").transform.Find("MyMail").gameObject.SetActive(true);
+        }
+        else if (PlayerPrefs.HasKey("buttonNPC"))
+        {
+            TanyaNPC(PlayerPrefs.GetString("buttonNPC"));
+            
+            AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
+            audio.Play();
         }
         else if (PlayerPrefs.HasKey("buttonChickenFeed"))
         {
@@ -214,6 +226,28 @@ public class buttonController : MonoBehaviour
         AudioSource audio2 = GameObject.Find("TextDialogue").GetComponent<AudioSource>();
         audio2.Stop();
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().exitpercakapan();
+    }
+
+    void TanyaNPC(string namaNPC)
+    {
+        if (namaNPC == "Ayu")
+        {
+            GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(false);
+
+            Camera.main.fieldOfView -= 20;
+
+            GameObject.Find(namaNPC).transform.LookAt(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform);
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.LookAt(GameObject.Find(namaNPC).transform);
+
+            GameObject.Find("Canvas").transform.Find("DialogName").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("DialogName").Find("Avatar").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Avatar/" + PlayerPrefs.GetString("buttonNPC"));
+            GameObject.Find("Canvas").transform.Find("DialogName").Find("NamaNPC").GetComponent<Text>().text = PlayerPrefs.GetString("buttonNPC");
+            GameObject.Find("Canvas").transform.Find("DialogBG").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Hai " + PhotonNetwork.NickName + ", ada yang bisa saya bantu?", false);
+        }
     }
 
     GameObject FindInActiveObjectByName(string name)
