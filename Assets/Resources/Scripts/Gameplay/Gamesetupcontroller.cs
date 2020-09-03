@@ -509,6 +509,24 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             GameObject.Find("AISpawn").transform.Find("cow_ai").GetComponent<PhotonView>().RPC("cowaktif", RpcTarget.MasterClient, false);
         }
 
+        //SET NPC
+        if(PlayerPrefs.GetString("level") == GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().level)
+        {
+            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<CapsuleCollider>().enabled = true;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = true;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = true;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = true;
+            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().cubeaction = GameObject.Find("CubeAction").gameObject;
+        }
+        else
+        {
+            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<CapsuleCollider>().enabled = false;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().cubeaction = null;
+        }
+
         //REQUEST POSISI/ROTATION AWAL MASUK SCENE KE SEMUA PLAYER
        
         photonView.RPC("mintaposisi", RpcTarget.Others);

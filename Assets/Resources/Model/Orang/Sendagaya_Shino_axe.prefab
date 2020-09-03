@@ -7752,6 +7752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92fd0f756de714d956a4de22922287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 0}
   maxWater: 20
   Speed: 0
   level: MasukRumah
