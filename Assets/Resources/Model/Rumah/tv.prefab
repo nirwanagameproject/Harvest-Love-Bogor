@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3023441047330522027}
+  - {fileID: 6682114150337423220}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,108 +62,93 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0161514, y: 1.1792431, z: 0.21661854}
   m_Center: {x: 3.2483454, y: -1.5262165, z: 4.8661923}
---- !u!1001 &5410220114917446506
+--- !u!1001 &6571062021318787231
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 6261119888493309812}
     m_Modifications:
-    - target: {fileID: 356581558475173437, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_Name
-      value: samsung tv
-      objectReference: {fileID: 0}
-    - target: {fileID: 356581558475173437, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2633443
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.4365953
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.843857
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.98
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 100.00018
+      value: 91.58175
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.518721
+      value: 2.2593596
       objectReference: {fileID: 0}
-    - target: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 50.00003
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 8654839309139493093, guid: c7f18a48dad22ee41b3b565068f5ff65,
+    - target: {fileID: 919132149155446097, guid: 9c7c43b8a065042b6b9a6a3f158de042,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: de6b3d1666741b24597a4349a143eeb7, type: 2}
-    - target: {fileID: 1996303148021485699, guid: c7f18a48dad22ee41b3b565068f5ff65,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
+      propertyPath: m_Name
+      value: samsung tv (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c7f18a48dad22ee41b3b565068f5ff65, type: 3}
---- !u!4 &3023441047330522027 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 9c7c43b8a065042b6b9a6a3f158de042, type: 3}
+--- !u!4 &6682114150337423220 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7125148823477506241, guid: c7f18a48dad22ee41b3b565068f5ff65,
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c7c43b8a065042b6b9a6a3f158de042,
     type: 3}
-  m_PrefabInstance: {fileID: 5410220114917446506}
+  m_PrefabInstance: {fileID: 6571062021318787231}
   m_PrefabAsset: {fileID: 0}
