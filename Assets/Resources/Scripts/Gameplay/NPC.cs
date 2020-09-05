@@ -64,9 +64,10 @@ public class NPC : MonoBehaviour
                         }
                     }
                 }
+                cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             }
             else
-            if (!enterPlayer)
+            if (!enterPlayer && PlayerPrefs.HasKey("buttonNPC"))
             {
                 cubeaction.SetActive(false);
                 PlayerPrefs.DeleteKey("buttonNPC");
