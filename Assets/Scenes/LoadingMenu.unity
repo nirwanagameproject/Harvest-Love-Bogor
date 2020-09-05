@@ -33277,6 +33277,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: cowok
       objectReference: {fileID: 0}
+    - target: {fileID: 7580280344782031164, guid: 9b7699723b9d54fb58e4ce3e11acbef5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580280344782031164, guid: 9b7699723b9d54fb58e4ce3e11acbef5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580280344782031164, guid: 9b7699723b9d54fb58e4ce3e11acbef5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7641854676708141822, guid: 9b7699723b9d54fb58e4ce3e11acbef5,
         type: 3}
       propertyPath: m_Enabled
