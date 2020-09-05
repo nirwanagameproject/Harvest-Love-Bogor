@@ -391,7 +391,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 //Debug.Log("GOGO");
                 fotoku.texture = cewek;
                 if (PhotonNetwork.IsConnectedAndReady)
-                    go = PhotonNetwork.Instantiate(Path.Combine("Model/Orang", "Sendagaya_Shino_axe"), myrespawn.transform.position, Quaternion.identity);
+                    go = PhotonNetwork.Instantiate(Path.Combine("Model/MainMenu/Prefab", "Sendagaya_Shino_axe"), myrespawn.transform.position, Quaternion.identity);
                 else
                     go = Instantiate(mycharcewe, myrespawn.transform.position, Quaternion.identity);
             }
@@ -399,7 +399,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             {
                 fotoku.texture = cowok;
                 if (PhotonNetwork.IsConnectedAndReady)
-                    go = PhotonNetwork.Instantiate(Path.Combine("Model/Orang", "Sakurada_Fumiriya_axe"), myrespawn.transform.position, Quaternion.identity);
+                    go = PhotonNetwork.Instantiate(Path.Combine("Model/MainMenu/Prefab", "Sakurada_Fumiriya_axe"), myrespawn.transform.position, Quaternion.identity);
                 else
                     go = Instantiate(mycharcowo, myrespawn.transform.position, Quaternion.identity);
             }
@@ -479,6 +479,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             myweapon = go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
             myweapon.transform.GetChild(i).gameObject.SetActive(false);
+        Debug.Log(PlayerPrefs.GetString("peralatannama0"));
         myweapon.transform.Find(PlayerPrefs.GetString("peralatannama0")).gameObject.SetActive(true);
 
         //Ubah image senjata
