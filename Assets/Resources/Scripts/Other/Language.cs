@@ -29,7 +29,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Bahasa");
         bahasaID.Add("Permainan Baru");
         bahasaID.Add("Memuat Permainan");
-        bahasaID.Add("Kembali");
+        bahasaID.Add("Kembali"); // 7
         bahasaID.Add("Tuan Rumah");
         bahasaID.Add("Bergabung");
         bahasaID.Add("Memuat Tuan Rumah");
@@ -61,7 +61,7 @@ public class Language : MonoBehaviour
             " - Programmer");
         bahasaID.Add("Tap untuk melanjutkan..");
         bahasaID.Add("Siapa nama kamu?");
-        bahasaID.Add("Ya");
+        bahasaID.Add("Ya"); // 16
         bahasaID.Add("Kapan tanggal ulang tahun kamu?");
         bahasaID.Add("Spring adalah musim semi");
         bahasaID.Add("Summer adalah musim panas");
@@ -69,7 +69,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Winter adalah musim dingin");
         bahasaID.Add("Nama");
         bahasaID.Add("Selamat datang di Kota Bogor :)");
-        bahasaID.Add("");
+        bahasaID.Add(""); //24
         bahasaID.Add("Kamu adalah seorang anak tunggal dari petani yang ditinggalkan oleh orang tua kamu.");
         bahasaID.Add("Di Kota Bogor kamu akan berjuang dengan sisa warisan dari orang tua berupa lahan pertanian dan peternakan.");
         bahasaID.Add("Pertama, silahkan masukkan nama kamu...");
@@ -85,7 +85,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Perempuan");
         bahasaID.Add("Ulang Tahun");
         bahasaID.Add("Apa ini sesuai ?");
-        bahasaID.Add("Tidak");
+        bahasaID.Add("Tidak"); //40
         bahasaID.Add("Rambut");
         bahasaID.Add("Warna"); //42
         bahasaID.Add("Hitam"); //43
@@ -111,7 +111,27 @@ public class Language : MonoBehaviour
         bahasaID.Add("Nama kucing tidak boleh kosong"); //63
         bahasaID.Add("Batal"); //64
         bahasaID.Add("Ulang tahun tidak boleh kosong"); //65
-        bahasaID.Add("Nama kebun tidak boleh kosong"); //65
+        bahasaID.Add("Nama kebun tidak boleh kosong"); //66
+        bahasaID.Add("Kamu yakin ingin tidur?" +
+        "\nSimpan permainan atau tidak? "); //67
+        bahasaID.Add("Ya, disimpan"); //68
+        bahasaID.Add("Ya, tidak disimpan"); //69
+        bahasaID.Add("Kamu yakin ingin tidur?"); //70
+        bahasaID.Add("Simpan Permainan"); //71
+        bahasaID.Add("Yakin save disini ?"); //72
+        bahasaID.Add("Menunggu pemain lain untuk tidur"); // 73
+        bahasaID.Add("Pengaturan"); // 74
+        bahasaID.Add("Keluar Permainan"); // 75
+        bahasaID.Add("Kualitas"+
+        "\nVideo"); // 76
+        bahasaID.Add("Layar"); // 77
+        bahasaID.Add("Kamu yakin ingin keluar?"); // 78
+        bahasaID.Add("Peralatan"); // 79
+        bahasaID.Add("Tas"); // 80
+        bahasaID.Add("Sedang dipakai"); // 81
+        bahasaID.Add("Host keluar atau"+
+        "\nkoneksi kamu bermasalah"); //82
+        bahasaID.Add("Keluar"); // 83
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -205,7 +225,26 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Cancel"); //64
         bahasaUS.Add("Birthday cannot be empty"); //65
         bahasaUS.Add("Farm's name cannot be empty"); //66
-
+        bahasaUS.Add("Are you sure you want to sleep?" +
+        "\nSave game or not?"); //67
+        bahasaUS.Add("Yes, saved"); //68
+        bahasaUS.Add("Yes, not saved"); //69
+        bahasaUS.Add("Are you sure you want to sleep?"); //70
+        bahasaUS.Add("Save Game"); //71
+        bahasaUS.Add("Are you sure you save here?"); //72
+        bahasaUS.Add("Waiting for other players to sleep"); // 73
+        bahasaUS.Add("Settings"); // 74
+        bahasaUS.Add("Quit Game"); // 75
+        bahasaUS.Add("Quality" +
+            "\nVideo"); // 76
+        bahasaUS.Add("Display"); // 77
+        bahasaUS.Add("Are you sure you want to leave?"); // 78
+        bahasaUS.Add("Tools"); // 79
+        bahasaUS.Add("Bag"); // 80
+        bahasaUS.Add("In use"); // 81
+        bahasaUS.Add("Outgoing host or" +
+         "\nyour connection has a problem"); //82
+        bahasaUS.Add("Quit"); // 83
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -299,7 +338,26 @@ public class Language : MonoBehaviour
         bahasaJP.Add("Batal"); //64
         bahasaJP.Add("Ulang tahun tidak boleh kosong"); //65
         bahasaJP.Add("Nama kebun tidak boleh kosong"); //66
-
+        bahasaJP.Add("Kamu yakin ingin tidur?" +
+        "\nSimpan permainan atau tidak?"); //67
+        bahasaJP.Add("Ya, simpan"); //68
+        bahasaJP.Add("Ya, tidak disimpan"); //69
+        bahasaJP.Add("Kamu yakin ingin tidur?"); //70
+        bahasaJP.Add("Simpan Permainan"); //71
+        bahasaJP.Add("Yakin save disini ?"); //72
+        bahasaJP.Add("Menunggu pemain lain untuk tidur"); // 73
+        bahasaJP.Add("Pengaturan"); // 74
+        bahasaJP.Add("Keluar Permainan"); // 75
+        bahasaJP.Add("Kualitas" +
+            "\nVideo"); // 76
+        bahasaJP.Add("Layar"); // 77
+        bahasaJP.Add("Kamu yakin ingin keluar?"); // 78
+        bahasaJP.Add("Peralatan"); // 79
+        bahasaJP.Add("Tas"); // 80
+        bahasaJP.Add("Sedang dipakai"); // 81
+        bahasaJP.Add("Host keluar atau" +
+        "\nkoneksi kamu bermasalah"); //82
+        bahasaJP.Add("Keluar"); // 83
 
     }
 
