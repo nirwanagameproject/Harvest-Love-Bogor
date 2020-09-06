@@ -220,6 +220,7 @@ public class buttonController : MonoBehaviour
         PlayerPrefs.DeleteKey("pindahinKantong");
 
         GameObject.Find("Canvas").transform.Find("Bag").Find("BGBawah").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("Bag").Find("ButtonBack").gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.Find("Bag").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("SafeBox").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().buka = 3;
