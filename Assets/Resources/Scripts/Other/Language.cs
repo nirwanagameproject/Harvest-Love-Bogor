@@ -323,41 +323,41 @@ public class Language : MonoBehaviour
         bahasaJP.Add("グレー");
         bahasaJP.Add("服"); //50
         bahasaJP.Add("髪型1"); //51
-        bahasaJP.Add("Celana"); //51
-        bahasaJP.Add("Celana1"); //53
-        bahasaJP.Add("Baju1");//54
-        bahasaJP.Add("Kulit");//55
-        bahasaJP.Add("Putih Cokelat");//56
-        bahasaJP.Add("Cokelat");//57
-        bahasaJP.Add("Cokelat Gelap");//58
-        bahasaJP.Add("Lanjut");//59
-        bahasaJP.Add("Apa kamu yakin?"); //60
-        bahasaJP.Add("Pengaturan"); //61
-        bahasaJP.Add("Nama tidak boleh kosong"); //62
-        bahasaJP.Add("Nama kucing tidak boleh kosong"); //63
-        bahasaJP.Add("Batal"); //64
-        bahasaJP.Add("Ulang tahun tidak boleh kosong"); //65
-        bahasaJP.Add("Nama kebun tidak boleh kosong"); //66
-        bahasaJP.Add("Kamu yakin ingin tidur?" +
-        "\nSimpan permainan atau tidak?"); //67
-        bahasaJP.Add("Ya, simpan"); //68
-        bahasaJP.Add("Ya, tidak disimpan"); //69
-        bahasaJP.Add("Kamu yakin ingin tidur?"); //70
-        bahasaJP.Add("Simpan Permainan"); //71
-        bahasaJP.Add("Yakin save disini ?"); //72
-        bahasaJP.Add("Menunggu pemain lain untuk tidur"); // 73
-        bahasaJP.Add("Pengaturan"); // 74
-        bahasaJP.Add("Keluar Permainan"); // 75
-        bahasaJP.Add("Kualitas" +
-            "\nVideo"); // 76
-        bahasaJP.Add("Layar"); // 77
-        bahasaJP.Add("Kamu yakin ingin keluar?"); // 78
-        bahasaJP.Add("Peralatan"); // 79
-        bahasaJP.Add("Tas"); // 80
-        bahasaJP.Add("Sedang dipakai"); // 81
-        bahasaJP.Add("Host keluar atau" +
-        "\nkoneksi kamu bermasalah"); //82
-        bahasaJP.Add("Keluar"); // 83
+        bahasaJP.Add("ボトムズ"); //51
+        bahasaJP.Add("ボトムズ1"); //53
+        bahasaJP.Add("トップス1");//54
+        bahasaJP.Add("肌");//55
+        bahasaJP.Add("薄茶色");//56
+        bahasaJP.Add("茶色");//57
+        bahasaJP.Add("暗褐色");//58
+        bahasaJP.Add("続く");//59
+        bahasaJP.Add("これでいい？"); //60
+        bahasaJP.Add("設定"); //61
+        bahasaJP.Add("名前を入れてください"); //62
+        bahasaJP.Add("猫の名前を入れてください"); //63
+        bahasaJP.Add("戻る"); //64
+        bahasaJP.Add("誕生日を入れてください"); //65
+        bahasaJP.Add("農場の名前を入れてください"); //66
+        bahasaJP.Add("寝る?" +
+        "\nセーブする?"); //67
+        bahasaJP.Add("はい、セーブ"); //68
+        bahasaJP.Add("いいえ"); //69
+        bahasaJP.Add("寝る?"); //70
+        bahasaJP.Add("セーブする"); //71
+        bahasaJP.Add("ここにセーブする?"); //72
+        bahasaJP.Add("他のプレイヤーが寝るのを待っている"); // 73
+        bahasaJP.Add("設定"); // 74
+        bahasaJP.Add("終了"); // 75
+        bahasaJP.Add("クオリティ" +
+            "\nビデオ"); // 76
+        bahasaJP.Add("スクリーン"); // 77
+        bahasaJP.Add("本当に終了したいの?"); // 78
+        bahasaJP.Add("道具"); // 79
+        bahasaJP.Add("鞄"); // 80
+        bahasaJP.Add("使ってる"); // 81
+        bahasaJP.Add("ホストまたは" +
+        "\n接続に問題がある"); //82
+        bahasaJP.Add("終了"); // 83
 
     }
 
