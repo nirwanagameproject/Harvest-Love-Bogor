@@ -40,7 +40,7 @@ public class NPC : MonoBehaviour
             Collider[] mycolliderPlayer = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Player"));
             bool enterPlayer = mycolliderPlayer.Length != 0;
 
-            if (enterPlayer)
+            if (enterPlayer && (!PlayerPrefs.HasKey("buttonNPC") || PlayerPrefs.GetString("buttonNPC")==name))
             {
                 for (int i = 0; i < mycolliderPlayer.Length; i++)
                 {
@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour
                 cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             }
             else
-            if (!enterPlayer && PlayerPrefs.HasKey("buttonNPC"))
+            if (!enterPlayer && PlayerPrefs.HasKey("buttonNPC") && PlayerPrefs.GetString("buttonNPC")==name)
             {
                 cubeaction.SetActive(false);
                 PlayerPrefs.DeleteKey("buttonNPC");

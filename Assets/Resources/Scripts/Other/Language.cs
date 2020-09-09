@@ -132,6 +132,8 @@ public class Language : MonoBehaviour
         bahasaID.Add("Host keluar atau"+
         "\nkoneksi kamu bermasalah"); //82
         bahasaID.Add("Keluar"); // 83
+        bahasaID.Add("Peta"); // 84
+        bahasaID.Add("Misi"); // 85
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -245,6 +247,8 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Outgoing host or" +
          "\nyour connection has a problem"); //82
         bahasaUS.Add("Quit"); // 83
+        bahasaUS.Add("Map"); // 84
+        bahasaUS.Add("Quest"); // 85
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -358,6 +362,8 @@ public class Language : MonoBehaviour
         bahasaJP.Add("ホストまたは" +
         "\n接続に問題がある"); //82
         bahasaJP.Add("終了"); // 83
+        bahasaJP.Add("Peta"); // 84
+        bahasaJP.Add("Quest"); // 85
 
     }
 
