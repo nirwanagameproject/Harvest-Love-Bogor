@@ -24,7 +24,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PhotonNetwork.IsConnected)
+        if(PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InRoom )
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.CustomProperties["Ayu"]==null)
         {
             ExitGames.Client.Photon.Hashtable setTgl = new ExitGames.Client.Photon.Hashtable();
@@ -74,7 +74,7 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if (name == "Ayu" && PhotonNetwork.IsMasterClient)
+        if (name == "Ayu" && PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
         {
             Vector3 pos = new Vector3();
 
