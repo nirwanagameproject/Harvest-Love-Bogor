@@ -6,11 +6,14 @@ using System.IO;
 
 public class NPCTalk : MonoBehaviour
 {
-    
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
 
+    void Update()
+    {
     }
 
     // Update is called once per frame
@@ -21,9 +24,9 @@ public class NPCTalk : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(true);
 
-        Camera.main.fieldOfView += 20;
+        Gamesetupcontroller.instance.maxFoV = true;
 
-        GameObject.Find("Canvas").transform.Find("DialogName").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("DialogBG").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().exitpercakapan();
     }

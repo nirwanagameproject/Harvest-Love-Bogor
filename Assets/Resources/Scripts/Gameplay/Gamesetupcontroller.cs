@@ -30,6 +30,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     public GameObject waitingother;
     public GameObject waitingother2;
 
+    public bool minFoV;
+    public bool maxFoV;
+
     static public Gamesetupcontroller instance;
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
@@ -511,22 +514,27 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         }
 
         //SET NPC
-        if(PlayerPrefs.GetString("level") == GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().level)
-        {
-            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<CapsuleCollider>().enabled = true;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = true;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = true;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = true;
-            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().cubeaction = GameObject.Find("CubeAction").gameObject;
-        }
-        else
-        {
-            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<CapsuleCollider>().enabled = false;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = false;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = false;
-            GameObject.Find("AISpawn").transform.Find("Ayu").Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = false;
-            GameObject.Find("AISpawn").transform.Find("Ayu").GetComponent<NPC>().cubeaction = null;
-        }
+        for(int i=0; i< GameObject.Find("AISpawn").transform.childCount;i++)
+            if(GameObject.Find("AISpawn").transform.GetChild(i).tag == "NPC")
+            {
+                if (PlayerPrefs.GetString("level") == GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<NPC>().level)
+                {
+                    GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<CapsuleCollider>().enabled = true;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = true;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = true;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = true;
+                    GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<NPC>().cubeaction = GameObject.Find("CubeAction").gameObject;
+                }
+                else
+                {
+                    GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<CapsuleCollider>().enabled = false;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Face").GetComponent<SkinnedMeshRenderer>().enabled = false;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Body").GetComponent<SkinnedMeshRenderer>().enabled = false;
+                    GameObject.Find("AISpawn").transform.GetChild(i).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().enabled = false;
+                    GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<NPC>().cubeaction = null;
+                }
+            }
+            
 
         //REQUEST POSISI/ROTATION AWAL MASUK SCENE KE SEMUA PLAYER
        
@@ -560,6 +568,17 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                // GameObject.Find("PlayerSpawn").transform.GetChild(i).GetComponent<Rigidbody>().isKinematic = true;
                 GameObject.Find("PlayerSpawn").transform.GetChild(i).gameObject.SetActive(false);
             }
+
+        if (minFoV)
+        {
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 40f, 0.1f);
+            if (Camera.main.fieldOfView <= 41) minFoV = false;
+        }
+        if (maxFoV)
+        {
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.1f);
+            if (Camera.main.fieldOfView >= 59) maxFoV = false;
+        }
 
     }
 
