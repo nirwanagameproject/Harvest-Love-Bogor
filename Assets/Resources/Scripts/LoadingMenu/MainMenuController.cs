@@ -45,6 +45,18 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     public static MainMenuController instance = null;
 
+    //Warna
+    string HitamText;
+    string PutihText;
+    string BiruText;
+    string MerahText;
+    string KuningText;
+    string HijauText;
+    string AbuabuText;
+    string PutihCokelatText;
+    string CokelatText;
+    string CokelatGelapText;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -142,6 +154,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             PlayerPrefs.SetString("bahasa", "Indonesia");
         }
 
+        
     }
 
     void Start()
@@ -173,16 +186,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
 
         //Warna
-        string HitamText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(43);
-        string PutihText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(44);
-        string BiruText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(45);
-        string MerahText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(46);
-        string KuningText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(47);
-        string HijauText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(48);
-        string AbuabuText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(49);
-        string PutihCokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(56);
-        string CokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(57);
-        string CokelatGelapText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(58);
+        HitamText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(43);
+        PutihText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(44);
+        BiruText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(45);
+        MerahText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(46);
+        KuningText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(47);
+        HijauText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(48);
+        AbuabuText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(49);
+        PutihCokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(56);
+        CokelatText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(57);
+        CokelatGelapText = inputhaircolor.transform.Find("Label").gameObject.GetComponent<ChangeLanguage>().GetLanguage(58);
 
         if (inputhaircolor.transform.Find("Dropdown List") != null)
         {
@@ -246,6 +259,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             transisi.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)myalpha);
             if((int)(255 * transisi.GetComponent<Image>().color.a)>=250) SceneManager.LoadScene("LoadingScreen");
         }
+
+        //Rotate SKYBOX
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 1.2f);
         
     }
 
