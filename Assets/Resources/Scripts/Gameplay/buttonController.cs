@@ -73,7 +73,7 @@ public class buttonController : MonoBehaviour
                 PlayerPrefs.SetInt("kantongjumlah0", 1);
                 GameObject.Find("Canvas").transform.Find("Bag").GetComponent<bag>().reloadBag();
 
-                GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Poultry", "Bale"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
+                GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Kandang Ayam/Prefab", "Bale"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
                 GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("addBale", RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, PlayerPrefs.GetString("level"));
 
             }
