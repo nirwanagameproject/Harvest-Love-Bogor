@@ -935,5 +935,4 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         }
         //PhotonNetwork.SendOutgoingCommands();
     }
-
 }
