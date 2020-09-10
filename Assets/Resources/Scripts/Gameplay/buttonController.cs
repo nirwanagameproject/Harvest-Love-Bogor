@@ -73,7 +73,7 @@ public class buttonController : MonoBehaviour
                 PlayerPrefs.SetInt("kantongjumlah0", 1);
                 GameObject.Find("Canvas").transform.Find("Bag").GetComponent<bag>().reloadBag();
 
-                GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Poultry", "Bale"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
+                GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Kandang Ayam/Prefab", "Bale"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
                 GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("addBale", RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, PlayerPrefs.GetString("level"));
 
             }
@@ -220,6 +220,7 @@ public class buttonController : MonoBehaviour
         PlayerPrefs.DeleteKey("pindahinKantong");
 
         GameObject.Find("Canvas").transform.Find("Bag").Find("BGBawah").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("Bag").Find("ButtonBack").gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.Find("Bag").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("SafeBox").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().buka = 3;
@@ -230,24 +231,23 @@ public class buttonController : MonoBehaviour
 
     void TanyaNPC(string namaNPC)
     {
-        if (namaNPC == "Ayu")
-        {
-            GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(false);
+        Gamesetupcontroller.instance.minFoV = true;
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").GetComponent<FixedJoystick>().ResetAxis();
 
-            Camera.main.fieldOfView -= 20;
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(false);
 
-            GameObject.Find(namaNPC).transform.LookAt(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform);
-            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.LookAt(GameObject.Find(namaNPC).transform);
+        GameObject.Find(namaNPC).transform.LookAt(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform);
+        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.LookAt(GameObject.Find(namaNPC).transform);
 
-            GameObject.Find("Canvas").transform.Find("DialogName").gameObject.SetActive(true);
-            GameObject.Find("Canvas").transform.Find("DialogName").Find("Avatar").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Avatar/" + PlayerPrefs.GetString("buttonNPC"));
-            GameObject.Find("Canvas").transform.Find("DialogName").Find("NamaNPC").GetComponent<Text>().text = PlayerPrefs.GetString("buttonNPC");
-            GameObject.Find("Canvas").transform.Find("DialogBG").gameObject.SetActive(true);
-            GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Hai " + PhotonNetwork.NickName + ", ada yang bisa saya bantu?", false);
-        }
+        GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").Find("Avatar").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Avatar/" + PlayerPrefs.GetString("buttonNPC"));
+        GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").Find("NamaNPC").GetComponent<Text>().text = PlayerPrefs.GetString("buttonNPC");
+        GameObject.Find("Canvas").transform.Find("DialogBG").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Hai " + PhotonNetwork.NickName + ", ada yang bisa saya bantu?", false);
+        
     }
 
     GameObject FindInActiveObjectByName(string name)
