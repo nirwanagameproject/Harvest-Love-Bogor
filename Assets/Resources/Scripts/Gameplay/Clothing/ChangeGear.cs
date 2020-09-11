@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class ChangeGear : MonoBehaviour
@@ -7,10 +8,15 @@ public class ChangeGear : MonoBehaviour
     public List<string> topi;
     private int topiIndex;
 
+    public List<string> top;
+    private int topIndex;
+
     private void Start()
     {
         topi = new List<string>();
         topiIndex = 0;
+        top = new List<string>();
+        topIndex = 0;
         equipmentScript = GetComponent<Equipment>();
         //create equipment list
         equipmentScript.InitializeEquipptedItemsList();
@@ -18,7 +24,16 @@ public class ChangeGear : MonoBehaviour
         topi.Add("conical_hat");
         topi.Add("pie_hat");
 
-        EquipItem("Body", topi[topiIndex]); 
+        top.Add("t_shirt_top");
+        top.Add("sweeter_top");
+
+
+        EquipItem("Body", topi[topiIndex]);
+        EquipItem("Hair", "japan_hair");
+        EquipItem("Top", top[topIndex]);
+        EquipItem("Bottom", "long_pants_bottom");
+        if (GetComponent<PhotonView>().IsMine)
+            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
     }
 
     public void Update()
@@ -33,6 +48,17 @@ public class ChangeGear : MonoBehaviour
             }
             EquipItem("Body", topi[topiIndex]);
             
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        { 
+            UnequipItem("Top", top[topIndex]);
+            topIndex++;
+            if (topIndex == 2)
+            {
+                topIndex = 0;
+            }
+            EquipItem("Top", top[topIndex]);
+
         }
     }
 
