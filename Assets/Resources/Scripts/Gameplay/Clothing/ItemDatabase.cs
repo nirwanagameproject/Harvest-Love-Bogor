@@ -20,19 +20,12 @@ public class ItemDatabase : MonoBehaviour
         itemList.Add(new Item(6, "", "", "no_armor", "ChestArmor"));
         itemList.Add(new Item(7, "", "", "naked_slug", "Feet"));*/
         itemList.Add(new Item(0, "", "", "conical_hat", "Body", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hat/conical_hat")));
-        itemList.Add(new Item(1, "", "", "pie_hat", "Body", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hat/pie_hat")));
-        //clothing
-        /*itemList.Add(new Item(50, "", "", "pants", "Legs", (GameObject)Resources.Load("Gear/pants")));
-        itemList.Add(new Item(51, "", "", "boots", "Feet", (GameObject)Resources.Load("Gear/boots")));
-        itemList.Add(new Item(53, "", "", "cuirass", "ChestArmor", (GameObject)Resources.Load("Gear/cuirass")));
-        itemList.Add(new Item(54, "", "", "gambeson", "Chest", (GameObject)Resources.Load("Gear/gambeson")));
-        //weapons
-        itemList.Add(new Item(300, "", "", "halberd", "HandRight", (GameObject)Resources.Load("Gear/halberd")));
-        //hair and beard
-        itemList.Add(new Item(200, "", "", "long_hair", "Hair", (GameObject)Resources.Load("Gear/long_hair")));
-        itemList.Add(new Item(201, "", "", "beard", "Beard", (GameObject)Resources.Load("Gear/beard")));
-        itemList.Add(new Item(201, "", "", "mustache", "Mustache", (GameObject)Resources.Load("Gear/mustache")));
-        */
+        itemList.Add(new Item(1, "", "", "t_shirt_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/t_shirt_top")));
+        itemList.Add(new Item(2, "", "", "japan_hair", "Hair", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hair/japan_hair")));
+        itemList.Add(new Item(3, "", "", "long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/long_pants_bottom")));
+        itemList.Add(new Item(11, "", "", "pie_hat", "Body", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hat/pie_hat")));
+        itemList.Add(new Item(21, "", "", "sweeter_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/sweeter_top")));
+        
     }
 
     public Item FetchItemByID(int id)

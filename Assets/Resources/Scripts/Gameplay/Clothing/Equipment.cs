@@ -31,14 +31,17 @@ public class Equipment : MonoBehaviour
     
     public void InitializeEquipptedItemsList()
     {
-        totalEquipmentSlots = 1;
+        totalEquipmentSlots = 4;
 
         for (int i = 0; i < totalEquipmentSlots; i++)
         {
             equippedItems.Add(new Item());
         }
 
-        AddEquipmentToList(0); //Legs
+        AddEquipmentToList(0); //Hat
+        AddEquipmentToList(1); //Legs
+        AddEquipmentToList(2); //Hair
+        AddEquipmentToList(3); //Bottom
     }
 
     public void AddEquipmentToList(int id)
@@ -55,9 +58,9 @@ public class Equipment : MonoBehaviour
 
     public void AddEquipment(Item equipmentToAdd)
     {
-        if (equipmentToAdd.ItemType == "Legs")
+        if (equipmentToAdd.ItemType == "Bottom")
             wornLegs = AddEquipmentHelper(wornLegs, equipmentToAdd);
-        else if (equipmentToAdd.ItemType == "Chest")
+        else if (equipmentToAdd.ItemType == "Top")
             wornChest = AddEquipmentHelper(wornChest, equipmentToAdd);
         else if (equipmentToAdd.ItemType == "Hair")
             wornHair = AddEquipmentHelper(wornHair, equipmentToAdd);
@@ -76,15 +79,30 @@ public class Equipment : MonoBehaviour
     public GameObject AddEquipmentHelper(GameObject wornItem, Item itemToAddToWornItem)
     {
         wornItem = Wear(itemToAddToWornItem.ItemPrefab, wornItem);
-        wornItem.name = itemToAddToWornItem.Slug;
+        if (itemToAddToWornItem.Slug.Contains("hair"))
+        {
+            wornItem.name = "Hair001";
+        }
+        else if (itemToAddToWornItem.Slug.Contains("top"))
+        {
+            wornItem.name = "Top";
+        }
+        else if (itemToAddToWornItem.Slug.Contains("bottom"))
+        {
+            wornItem.name = "Bottom";
+        }
+        else
+        {
+            wornItem.name = itemToAddToWornItem.Slug;
+        }
         return wornItem; 
     }
 
     public void RemoveEquipment(Item equipmentToAdd)
     {
-        if (equipmentToAdd.ItemType == "Legs")
-            wornLegs = RemoveEquipmentHelper(wornLegs, 0);
-        else if (equipmentToAdd.ItemType == "Chest")
+        if (equipmentToAdd.ItemType == "Bottom")
+            wornLegs = RemoveEquipmentHelper(wornLegs, 3);
+        else if (equipmentToAdd.ItemType == "Top")
             wornChest = RemoveEquipmentHelper(wornChest, 1);
         else if (equipmentToAdd.ItemType == "Hair")
             wornHair = RemoveEquipmentHelper(wornHair, 2);
@@ -123,6 +141,18 @@ public class Equipment : MonoBehaviour
         if (clothing == null)
             return null;
         clothing = (GameObject)GameObject.Instantiate(clothing);
+        if (clothing.name.Contains("hair"))
+        {
+            clothing.name = "Hair001";
+        }
+        else if (clothing.name.Contains("top"))
+        {
+            clothing.name = "Top";
+        }
+        else if (clothing.name.Contains("bottom"))
+        {
+            clothing.name = "Bottom";
+        }
         wornClothing = stitcher.Stitch(clothing, avatar);
         GameObject.Destroy(clothing);
         return wornClothing;
