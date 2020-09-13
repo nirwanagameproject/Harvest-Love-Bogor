@@ -13,6 +13,10 @@ public class ChangeGear : MonoBehaviour
 
     private void Start()
     {
+        LoadGear();
+    }
+
+    public void LoadGear() {
         topi = new List<string>();
         topiIndex = 0;
         top = new List<string>();
@@ -29,24 +33,50 @@ public class ChangeGear : MonoBehaviour
 
 
         EquipItem("Body", topi[topiIndex]);
-        if (PlayerPrefs.GetString("gender") == "cowok")
+
+        if (GetComponent<PhotonView>().IsMine)
         {
-            EquipItem("Hair", "japan_hair");
-            EquipItem("Top", top[topIndex]);
-            EquipItem("Bottom", "long_pants_bottom");
-        }
-        else
-        {
-            EquipItem("Hair", "famale_long_hair");
-            if (topIndex == 0 || topIndex == 2)
+            if (PlayerPrefs.GetString("gender") == "cowok")
             {
-                EquipItem("Top", "famale_t_shirt_top");
+                EquipItem("Hair", "japan_hair");
+                EquipItem("Top", top[topIndex]);
+                EquipItem("Bottom", "long_pants_bottom");
             }
             else
             {
-                EquipItem("Top", top[topIndex]);
+                EquipItem("Hair", "famale_long_hair");
+                if (topIndex == 0 || topIndex == 2)
+                {
+                    EquipItem("Top", "famale_t_shirt_top");
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+                EquipItem("Bottom", "famale_long_pants_bottom");
             }
-            EquipItem("Bottom", "famale_long_pants_bottom");
+        }
+        else
+        {
+            if (GetComponent<PhotonView>().Owner.CustomProperties["gender"] == "cowok")
+            {
+                EquipItem("Hair", "japan_hair");
+                EquipItem("Top", top[topIndex]);
+                EquipItem("Bottom", "long_pants_bottom");
+            }
+            else
+            {
+                EquipItem("Hair", "famale_long_hair");
+                if (topIndex == 0 || topIndex == 2)
+                {
+                    EquipItem("Top", "famale_t_shirt_top");
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+                EquipItem("Bottom", "famale_long_pants_bottom");
+            }
         }
         if (GetComponent<PhotonView>().IsMine)
             Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
@@ -73,12 +103,27 @@ public class ChangeGear : MonoBehaviour
             {
                 topIndex = 0;
             }
-            if (PlayerPrefs.GetString("gender") == "cewek")
+            if (GetComponent<PhotonView>().IsMine)
             {
-                EquipItem("Top", "famale_"+ top[topIndex]);
+                if (PlayerPrefs.GetString("gender") == "cewek")
+                {
+                    EquipItem("Top", "famale_" + top[topIndex]);
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
             }
-            else{
-                EquipItem("Top", top[topIndex]);
+            else
+            {
+                if (GetComponent<PhotonView>().Owner.CustomProperties["gender"] == "cewek")
+                {
+                    EquipItem("Top", "famale_" + top[topIndex]);
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
             }
         }
     }
