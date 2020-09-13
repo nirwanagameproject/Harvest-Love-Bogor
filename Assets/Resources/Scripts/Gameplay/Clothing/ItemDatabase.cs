@@ -30,6 +30,7 @@ public class ItemDatabase : MonoBehaviour
         itemList.Add(new Item(31, "", "", "famale_long_hair", "Hair", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hair/famale_long_hair")));
         itemList.Add(new Item(41, "", "", "famale_long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/famale_long_pants_bottom")));
 
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public Item FetchItemByID(int id)
