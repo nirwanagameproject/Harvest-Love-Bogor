@@ -433,16 +433,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         */
         //LOAD SKIN
         Color32 mycolorskin= new Color32((byte)PlayerPrefs.GetInt("warnaskinred"), (byte)PlayerPrefs.GetInt("warnaskingreen"), (byte)PlayerPrefs.GetInt("warnaskinblue"), 255);
-        int nomormat = 0;
+        int nomormat = 8;
+        go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorskin;
         go.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().materials[0].color = mycolorskin;
-        if (PlayerPrefs.GetString("gender") == "cewek")
-            go.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().materials[2].color = mycolorskin;
-        if (PlayerPrefs.GetString("gender") == "cewek") go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[7].color = mycolorskin;
-        else go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[5].color = mycolorskin;
-        if (PlayerPrefs.GetString("gender") == "cewek")
-            go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[8].color = mycolorskin;
-        else
-            go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[1].color = mycolorskin;
         //go.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
 
         ExitGames.Client.Photon.Hashtable setWarna = new ExitGames.Client.Photon.Hashtable();
@@ -461,10 +454,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         setWarna.Add("skinblue", PlayerPrefs.GetInt("warnaskinblue"));
         PhotonNetwork.LocalPlayer.SetCustomProperties(setWarna);
         GameObject myweapon = GameObject.Find("PlayerSpawn");
-        if (PlayerPrefs.GetString("gender") == "cowok")
-            myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
-        else if (PlayerPrefs.GetString("gender") == "cewek")
-            myweapon = go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+        myweapon = go.transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
             myweapon.transform.GetChild(i).gameObject.SetActive(false);
         Debug.Log(PlayerPrefs.GetString("peralatannama0"));
@@ -534,9 +524,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         int nomormat = 0;
         if (PlayerPrefs.GetString("gender") == "cewek")
         {
-            for (; nomormat < go.transform.Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+            for (; nomormat < go.transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
             {
-                go.transform.Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorhair;
+                go.transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorhair;
             }
         }
         else
@@ -549,13 +539,11 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         }
         Color32 mycolorclothes = new Color32((byte)PlayerPrefs.GetInt("warnaclothesred"), (byte)PlayerPrefs.GetInt("warnaclothesgreen"), (byte)PlayerPrefs.GetInt("warnaclothesblue"), 255);
         nomormat = 0;
-        if (PlayerPrefs.GetString("gender") == "cewek") nomormat = 5;
         go.transform.Find("Top").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorclothes;
 
         //LOAD CELANA
         Color32 mycolorcelana = new Color32((byte)PlayerPrefs.GetInt("warnapantsred"), (byte)PlayerPrefs.GetInt("warnapantsgreen"), (byte)PlayerPrefs.GetInt("warnapantsblue"), 255);
         nomormat = 0;
-        if (PlayerPrefs.GetString("gender") == "cewek") nomormat = 6;
         go.transform.Find("Bottom").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorcelana;
 
     }

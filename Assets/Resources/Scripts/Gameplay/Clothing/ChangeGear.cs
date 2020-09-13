@@ -29,9 +29,25 @@ public class ChangeGear : MonoBehaviour
 
 
         EquipItem("Body", topi[topiIndex]);
-        EquipItem("Hair", "japan_hair");
-        EquipItem("Top", top[topIndex]);
-        EquipItem("Bottom", "long_pants_bottom");
+        if (PlayerPrefs.GetString("gender") == "cowok")
+        {
+            EquipItem("Hair", "japan_hair");
+            EquipItem("Top", top[topIndex]);
+            EquipItem("Bottom", "long_pants_bottom");
+        }
+        else
+        {
+            EquipItem("Hair", "famale_long_hair");
+            if (topIndex == 0 || topIndex == 2)
+            {
+                EquipItem("Top", "famale_t_shirt_top");
+            }
+            else
+            {
+                EquipItem("Top", top[topIndex]);
+            }
+            EquipItem("Bottom", "famale_long_pants_bottom");
+        }
         if (GetComponent<PhotonView>().IsMine)
             Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
     }
@@ -57,8 +73,13 @@ public class ChangeGear : MonoBehaviour
             {
                 topIndex = 0;
             }
-            EquipItem("Top", top[topIndex]);
-
+            if (PlayerPrefs.GetString("gender") == "cewek")
+            {
+                EquipItem("Top", "famale_"+ top[topIndex]);
+            }
+            else{
+                EquipItem("Top", top[topIndex]);
+            }
         }
     }
 

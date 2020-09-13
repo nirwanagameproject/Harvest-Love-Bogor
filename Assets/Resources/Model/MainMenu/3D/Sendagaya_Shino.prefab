@@ -3201,7 +3201,48 @@ SkinnedMeshRenderer:
   - {fileID: 1013}
   - {fileID: 1071}
   - {fileID: 1170}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   m_RootBone: {fileID: 1134}
   m_AABB:
     m_Center: {x: 0.00030910224, y: 1.4998057, z: 0.03372527}
@@ -8356,10 +8397,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92fd0f756de714d956a4de22922287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 0}
   maxWater: 20
   Speed: 0
   level: MasukRumah
   destroy: 0
+  instance: {fileID: 0}
+  RotateAroundPlayer: 1
+  mulaiAksi: 0
 --- !u!114 &2131
 MonoBehaviour:
   m_ObjectHideFlags: 0
