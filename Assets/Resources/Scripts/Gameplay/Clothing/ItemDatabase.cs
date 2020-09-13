@@ -25,7 +25,11 @@ public class ItemDatabase : MonoBehaviour
         itemList.Add(new Item(3, "", "", "long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/long_pants_bottom")));
         itemList.Add(new Item(11, "", "", "pie_hat", "Body", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hat/pie_hat")));
         itemList.Add(new Item(21, "", "", "sweeter_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/sweeter_top")));
-        
+        itemList.Add(new Item(22, "", "", "famale_t_shirt_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/famale_t_shirt_top")));
+        itemList.Add(new Item(23, "", "", "famale_sweeter_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/famale_sweeter_top")));
+        itemList.Add(new Item(31, "", "", "famale_long_hair", "Hair", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hair/famale_long_hair")));
+        itemList.Add(new Item(41, "", "", "famale_long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/famale_long_pants_bottom")));
+
     }
 
     public Item FetchItemByID(int id)
