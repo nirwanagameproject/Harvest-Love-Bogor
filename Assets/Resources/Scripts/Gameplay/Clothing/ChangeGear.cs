@@ -98,37 +98,29 @@ public class ChangeGear : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            UnequipItem("Body", topi[topiIndex]);
-            topiIndex++;
-            if (topiIndex == 2)
+            if (GetComponent<PhotonView>().IsMine)
             {
-                topiIndex = 0;
+                UnequipItem("Body", topi[topiIndex]);
+                topiIndex++;
+                if (topiIndex == 2)
+                {
+                    topiIndex = 0;
+                }
+                EquipItem("Body", topi[topiIndex]);
             }
-            EquipItem("Body", topi[topiIndex]);
-            
         }
         else if (Input.GetKeyDown(KeyCode.C))
         { 
-            UnequipItem("Top", top[topIndex]);
-            topIndex++;
-            if (topIndex == 2)
-            {
-                topIndex = 0;
-            }
             if (GetComponent<PhotonView>().IsMine)
             {
+                UnequipItem("Top", top[topIndex]);
+                topIndex++;
+                if (topIndex == 2)
+                {
+                    topIndex = 0;
+                }
+
                 if (PlayerPrefs.GetString("gender") == "cewek")
-                {
-                    EquipItem("Top", "famale_" + top[topIndex]);
-                }
-                else
-                {
-                    EquipItem("Top", top[topIndex]);
-                }
-            }
-            else
-            {
-                if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cewek")
                 {
                     EquipItem("Top", "famale_" + top[topIndex]);
                 }
