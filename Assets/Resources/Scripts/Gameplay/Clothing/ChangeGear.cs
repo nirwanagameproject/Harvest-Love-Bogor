@@ -13,7 +13,6 @@ public class ChangeGear : MonoBehaviour
 
     private void Start()
     {
-        LoadGear();
     }
 
     public void LoadGear() {
@@ -23,19 +22,21 @@ public class ChangeGear : MonoBehaviour
         topIndex = 0;
         equipmentScript = GetComponent<Equipment>();
         //create equipment list
-        equipmentScript.InitializeEquipptedItemsList();
         //equip stuff
-        topi.Add("conical_hat");
-        topi.Add("pie_hat");
-
-        top.Add("t_shirt_top");
-        top.Add("sweeter_top");
-
-
-        EquipItem("Body", topi[topiIndex]);
 
         if (GetComponent<PhotonView>().IsMine)
         {
+            equipmentScript.InitializeEquipptedItemsList();
+
+            topi.Add("conical_hat");
+            topi.Add("pie_hat");
+
+            top.Add("t_shirt_top");
+            top.Add("sweeter_top");
+
+
+            EquipItem("Body", topi[topiIndex]);
+
             if (PlayerPrefs.GetString("gender") == "cowok")
             {
                 EquipItem("Hair", "japan_hair");
@@ -58,6 +59,14 @@ public class ChangeGear : MonoBehaviour
         }
         else
         {
+            topi.Add("conical_hat");
+            topi.Add("pie_hat");
+
+            top.Add("t_shirt_top");
+            top.Add("sweeter_top");
+
+            EquipItem("Body", topi[topiIndex]);
+
             if (GetComponent<PhotonView>().Owner.CustomProperties["gender"] == "cowok")
             {
                 EquipItem("Hair", "japan_hair");
