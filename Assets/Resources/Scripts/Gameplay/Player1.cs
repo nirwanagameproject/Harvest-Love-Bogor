@@ -173,13 +173,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsConnected)
             if (GetComponent<PhotonView>().IsMine)
             {
+                GetComponent<ChangeGear>().LoadGear();
                 GetComponent<PhotonView>().RPC("gantiWarna", newPlayer, name, GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString(),
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["hairred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["clothred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["skinred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skingreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skinblue"],
                     PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
-                
+
             }
 
     }

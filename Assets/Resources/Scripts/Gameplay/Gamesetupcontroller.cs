@@ -33,6 +33,8 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     public bool minFoV;
     public bool maxFoV;
 
+    public bool alreadyInitGear=false;
+
     static public Gamesetupcontroller instance;
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)

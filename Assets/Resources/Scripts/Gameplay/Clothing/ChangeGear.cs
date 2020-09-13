@@ -24,10 +24,15 @@ public class ChangeGear : MonoBehaviour
         //create equipment list
         //equip stuff
 
-        if (GetComponent<PhotonView>().IsMine)
+        if (!Gamesetupcontroller.instance.alreadyInitGear)
         {
             equipmentScript.InitializeEquipptedItemsList();
+        }
 
+        Debug.Log(GetComponent<PhotonView>().IsMine);
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            
             topi.Add("conical_hat");
             topi.Add("pie_hat");
 
@@ -59,6 +64,7 @@ public class ChangeGear : MonoBehaviour
         }
         else
         {
+            Debug.Log("MASUK");
             topi.Add("conical_hat");
             topi.Add("pie_hat");
 
