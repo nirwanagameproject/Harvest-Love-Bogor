@@ -21,19 +21,15 @@ public class ChangeGear : MonoBehaviour
         top = new List<string>();
         topIndex = 0;
         equipmentScript = GetComponent<Equipment>();
+        equipmentScript.InitializeEquipptedItemsList();
+
         //create equipment list
         //equip stuff
-
-        if (!ItemDatabase.instance.alreadyInitGear)
-        {
-            equipmentScript.InitializeEquipptedItemsList();
-            ItemDatabase.instance.alreadyInitGear = true;
-        }
 
         Debug.Log(GetComponent<PhotonView>().IsMine);
         if (GetComponent<PhotonView>().IsMine)
         {
-            
+
             topi.Add("conical_hat");
             topi.Add("pie_hat");
 
