@@ -105,6 +105,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     void Start()
     {
         instance = this;
+        Debug.Log("GameSetup Loaded");
         ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
         hash.Add("online", true);
         PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
