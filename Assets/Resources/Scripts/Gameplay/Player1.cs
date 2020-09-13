@@ -164,6 +164,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         Camera.main.transform.position = pos;
 
         Camera.main.transform.LookAt(transform);
+
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -177,6 +178,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["skinred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skingreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skinblue"],
                     PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+                
             }
     }
 
