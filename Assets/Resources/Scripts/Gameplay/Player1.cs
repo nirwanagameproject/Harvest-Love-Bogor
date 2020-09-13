@@ -165,6 +165,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         Camera.main.transform.LookAt(transform);
 
+        GetComponent<ChangeGear>().LoadGear();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -180,6 +181,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
                 
             }
+
     }
 
     [PunRPC]
@@ -210,7 +212,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            for (; nomormat < GameObject.Find("PlayerSpawn").transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+            for (; nomormat < GameObject.Find("PlayerSpawn").transform.Find(namaplayer).transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
             {
                 GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
             }
