@@ -173,7 +173,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsConnected)
             if (GetComponent<PhotonView>().IsMine)
             {
-                GetComponent<ChangeGear>().LoadGear();
                 GetComponent<PhotonView>().RPC("gantiWarna", newPlayer, name, GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString(),
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["hairred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["clothred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothblue"],
