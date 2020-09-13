@@ -24,9 +24,10 @@ public class ChangeGear : MonoBehaviour
         //create equipment list
         //equip stuff
 
-        if (!Gamesetupcontroller.instance.alreadyInitGear)
+        if (!ItemDatabase.instance.alreadyInitGear)
         {
             equipmentScript.InitializeEquipptedItemsList();
+            ItemDatabase.instance.alreadyInitGear = true;
         }
 
         Debug.Log(GetComponent<PhotonView>().IsMine);

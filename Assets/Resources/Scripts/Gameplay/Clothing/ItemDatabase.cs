@@ -4,7 +4,8 @@ using UnityEngine;
 public class ItemDatabase : MonoBehaviour
 {
     public List<Item> itemList = new List<Item>();
-    public static ItemDatabase instance; 
+    public static ItemDatabase instance;
+    public bool alreadyInitGear = false;
     private void Awake()
     {
         //create singlton
