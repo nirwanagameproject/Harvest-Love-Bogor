@@ -70,7 +70,7 @@ public class ChangeGear : MonoBehaviour
 
             EquipItem("Body", topi[topiIndex]);
 
-            if (GetComponent<PhotonView>().Owner.CustomProperties["gender"] == "cowok")
+            if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cowok")
             {
                 EquipItem("Hair", "japan_hair");
                 EquipItem("Top", top[topIndex]);
@@ -128,7 +128,7 @@ public class ChangeGear : MonoBehaviour
             }
             else
             {
-                if (GetComponent<PhotonView>().Owner.CustomProperties["gender"] == "cewek")
+                if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cewek")
                 {
                     EquipItem("Top", "famale_" + top[topIndex]);
                 }
