@@ -12,8 +12,9 @@ public class Equipment : MonoBehaviour
     public GameObject wornHair;
     public GameObject wornBeard;
     public GameObject wornMustache;
-    public GameObject wornHandRight;
+    public GameObject wornShoes;
     public GameObject wornChestArmor;
+    public GameObject wornHat;
 
     //lists
     public List<Item> equippedItems = new List<Item>(); 
@@ -42,7 +43,7 @@ public class Equipment : MonoBehaviour
         AddEquipmentToList(1); //Legs
         AddEquipmentToList(2); //Hair
         AddEquipmentToList(3); //Bottom
-        AddEquipmentToList(4); //Bottom
+        AddEquipmentToList(4); //Shoes
     }
 
     public void AddEquipmentToList(int id)
@@ -70,11 +71,11 @@ public class Equipment : MonoBehaviour
         else if (equipmentToAdd.ItemType == "Mustache")
             wornMustache = AddEquipmentHelper(wornMustache, equipmentToAdd);
         else if (equipmentToAdd.ItemType == "Shoes")
-            wornHandRight = AddEquipmentHelper(wornHandRight, equipmentToAdd);
+            wornShoes = AddEquipmentHelper(wornShoes, equipmentToAdd);
         else if (equipmentToAdd.ItemType == "ChestArmor")
             wornChestArmor = AddEquipmentHelper(wornChestArmor, equipmentToAdd);
         else if (equipmentToAdd.ItemType == "Body")
-            wornChestArmor = AddEquipmentHelper(wornChestArmor, equipmentToAdd);
+            wornHat = AddEquipmentHelper(wornHat, equipmentToAdd);
     }
 
     public GameObject AddEquipmentHelper(GameObject wornItem, Item itemToAddToWornItem)
@@ -112,11 +113,11 @@ public class Equipment : MonoBehaviour
         else if (equipmentToAdd.ItemType == "Mustache")
             wornMustache = RemoveEquipmentHelper(wornMustache, 5);
         else if (equipmentToAdd.ItemType == "Shoes")
-            wornHandRight = RemoveEquipmentHelper(wornHandRight, 4);
+            wornShoes = RemoveEquipmentHelper(wornShoes, 4);
         else if (equipmentToAdd.ItemType == "ChestArmor")
             wornChestArmor = RemoveEquipmentHelper(wornChestArmor, 7);
         else if (equipmentToAdd.ItemType == "Body")
-            wornChestArmor = RemoveEquipmentHelper(wornChestArmor, 0);
+            wornHat = RemoveEquipmentHelper(wornHat, 0);
     }
 
     public GameObject RemoveEquipmentHelper(GameObject wornItem, int nakedItemIndex)
