@@ -44,6 +44,7 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Hair", "japan_hair");
                 EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
+                EquipItem("Shoes", "pantofel_shoes");
             }
             else
             {
@@ -57,6 +58,7 @@ public class ChangeGear : MonoBehaviour
                     EquipItem("Top", top[topIndex]);
                 }
                 EquipItem("Bottom", "famale_long_pants_bottom");
+                EquipItem("Shoes", "famale_pantofel_shoes");
             }
         }
         else
@@ -75,6 +77,7 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Hair", "japan_hair");
                 EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
+                EquipItem("Shoes", "pantofel_shoes");
             }
             else
             {
@@ -88,6 +91,7 @@ public class ChangeGear : MonoBehaviour
                     EquipItem("Top", top[topIndex]);
                 }
                 EquipItem("Bottom", "famale_long_pants_bottom");
+                EquipItem("Shoes", "famale_pantofel_shoes");
             }
         }
         if (GetComponent<PhotonView>().IsMine)
