@@ -32,7 +32,7 @@ public class Equipment : MonoBehaviour
     
     public void InitializeEquipptedItemsList()
     {
-        totalEquipmentSlots = 5;
+        totalEquipmentSlots = 8;
 
         for (int i = 0; i < totalEquipmentSlots; i++)
         {
@@ -44,6 +44,9 @@ public class Equipment : MonoBehaviour
         AddEquipmentToList(2); //Hair
         AddEquipmentToList(3); //Bottom
         AddEquipmentToList(4); //Shoes
+        AddEquipmentToList(5); //Beard
+        AddEquipmentToList(6); //Mustache
+        AddEquipmentToList(7); //Armor
     }
 
     public void AddEquipmentToList(int id)
@@ -109,9 +112,9 @@ public class Equipment : MonoBehaviour
         else if (equipmentToAdd.ItemType == "Hair")
             wornHair = RemoveEquipmentHelper(wornHair, 2);
         else if (equipmentToAdd.ItemType == "Beard")
-            wornBeard = RemoveEquipmentHelper(wornBeard, 6);
+            wornBeard = RemoveEquipmentHelper(wornBeard, 5);
         else if (equipmentToAdd.ItemType == "Mustache")
-            wornMustache = RemoveEquipmentHelper(wornMustache, 5);
+            wornMustache = RemoveEquipmentHelper(wornMustache, 6);
         else if (equipmentToAdd.ItemType == "Shoes")
             wornShoes = RemoveEquipmentHelper(wornShoes, 4);
         else if (equipmentToAdd.ItemType == "ChestArmor")

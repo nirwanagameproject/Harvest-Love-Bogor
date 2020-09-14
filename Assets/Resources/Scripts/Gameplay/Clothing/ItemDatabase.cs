@@ -25,6 +25,9 @@ public class ItemDatabase : MonoBehaviour
         itemList.Add(new Item(2, "", "", "japan_hair", "Hair", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hair/japan_hair")));
         itemList.Add(new Item(3, "", "", "long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/long_pants_bottom")));
         itemList.Add(new Item(4, "", "", "pantofel_shoes", "Shoes", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Shoes/pantofel_shoes")));
+        itemList.Add(new Item(5, "", "", "short_beard", "Beard", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Beard/short_beard")));
+        itemList.Add(new Item(6, "", "", "long_mustache", "Mustache", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Mustache/long_mustache")));
+        itemList.Add(new Item(7, "", "", "cuirass_armor", "ChestArmor", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Armor/cuirass_armor")));
         itemList.Add(new Item(11, "", "", "pie_hat", "Body", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hat/pie_hat")));
         itemList.Add(new Item(21, "", "", "sweeter_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/sweeter_top")));
         itemList.Add(new Item(22, "", "", "famale_t_shirt_top", "Top", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Top/famale_t_shirt_top")));
@@ -32,6 +35,7 @@ public class ItemDatabase : MonoBehaviour
         itemList.Add(new Item(31, "", "", "famale_long_hair", "Hair", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Hair/famale_long_hair")));
         itemList.Add(new Item(41, "", "", "famale_long_pants_bottom", "Bottom", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Bottom/famale_long_pants_bottom")));
         itemList.Add(new Item(51, "", "", "famale_pantofel_shoes", "Shoes", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Shoes/famale_pantofel_shoes")));
+        itemList.Add(new Item(87, "", "", "famale_cuirass_armor", "ChestArmor", (GameObject)Resources.Load("Model/MainMenu/3D/Clothing/Armor/famale_cuirass_armor")));
 
         DontDestroyOnLoad(this.gameObject);
     }

@@ -45,6 +45,9 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
                 EquipItem("Shoes", "pantofel_shoes");
+                EquipItem("Beard", "short_beard");
+                EquipItem("Mustache", "long_mustache");
+                EquipItem("ChestArmor", "cuirass_armor");
             }
             else
             {
@@ -59,6 +62,7 @@ public class ChangeGear : MonoBehaviour
                 }
                 EquipItem("Bottom", "famale_long_pants_bottom");
                 EquipItem("Shoes", "famale_pantofel_shoes");
+                EquipItem("ChestArmor", "famale_cuirass_armor");
             }
         }
         else
@@ -78,6 +82,9 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
                 EquipItem("Shoes", "pantofel_shoes");
+                EquipItem("Beard", "short_beard");
+                EquipItem("Mustache", "long_mustache");
+                EquipItem("ChestArmor", "cuirass_armor");
             }
             else
             {
@@ -92,6 +99,7 @@ public class ChangeGear : MonoBehaviour
                 }
                 EquipItem("Bottom", "famale_long_pants_bottom");
                 EquipItem("Shoes", "famale_pantofel_shoes");
+                EquipItem("ChestArmor", "famale_cuirass_armor");
             }
         }
         if (GetComponent<PhotonView>().IsMine)
