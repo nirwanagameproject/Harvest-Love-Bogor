@@ -31,6 +31,8 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
     public GameObject waitingother2;
 
     public bool minFoV;
+    public bool minFoVClothes;
+    public bool maxFoVClothes;
     public bool maxFoV;
 
 
@@ -586,6 +588,19 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.1f);
             if (Camera.main.fieldOfView >= 59) maxFoV = false;
         }
+        if (minFoVClothes)
+        {
+            maxFoVClothes = false;
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 40f, 0.1f);
+            if (Camera.main.fieldOfView <= 41) minFoVClothes = false;
+        }
+        if (maxFoVClothes)
+        {
+            minFoVClothes = false;
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.1f);
+            if (Camera.main.fieldOfView >= 59) maxFoVClothes = false;
+        }
+
 
     }
 
