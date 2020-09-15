@@ -62,6 +62,13 @@ public class buttonController : MonoBehaviour
             AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
             audio.Play();
         }
+        else if (PlayerPrefs.HasKey("buttonChangeClothes"))
+        {
+            OpenWardrobe();
+
+            AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
+            audio.Play();
+        }
         else if (PlayerPrefs.HasKey("buttonChickenFeed"))
         {
             if (PlayerPrefs.GetString("kantongnama0") == "")
@@ -248,6 +255,67 @@ public class buttonController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("DialogBG").gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Hai " + PhotonNetwork.NickName + ", ada yang bisa saya bantu?", false);
         
+    }
+
+    void OpenWardrobe()
+    {
+        Gamesetupcontroller.instance.minFoVClothes = true;
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").GetComponent<FixedJoystick>().ResetAxis();
+
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(false);
+
+        GameObject.Find("CanvasHome").transform.Find("Dandan").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Karakter").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Aksesoris").gameObject.SetActive(false);
+
+        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles = new Vector3(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.x,
+            -90f,
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.z);
+        
+    }
+
+    public void TutupWardrobe()
+    {
+        AudioSource audio = GameObject.Find("Clicked").transform.Find("closemenu").GetComponent<AudioSource>();
+        audio.Play();
+
+        Gamesetupcontroller.instance.maxFoVClothes = true;
+
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(true);
+
+        GameObject.Find("CanvasHome").transform.Find("Dandan").gameObject.SetActive(false);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Karakter").gameObject.SetActive(false);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Aksesoris").gameObject.SetActive(false);
+
+        Color32 mycolor = new Color32(255, 221, 150, 255);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonKarakter").GetComponent<Image>().color = mycolor;
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonAksesoris").GetComponent<Image>().color = Color.white;
+        PlayerPrefs.DeleteKey("buttonChangeClothes");
+
+    }
+
+    public void KlikKarakter()
+    {
+        Color32 mycolor = new Color32(255, 221, 150, 255);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonKarakter").GetComponent<Image>().color = mycolor;
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Karakter").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonAksesoris").GetComponent<Image>().color = Color.white;
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Aksesoris").gameObject.SetActive(false);
+    }
+
+    public void KlikAksesoris()
+    {
+        Color32 mycolor = new Color32(255, 221, 150, 255);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonAksesoris").GetComponent<Image>().color = mycolor;
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Aksesoris").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonKarakter").GetComponent<Image>().color = Color.white;
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Karakter").gameObject.SetActive(false);
     }
 
     GameObject FindInActiveObjectByName(string name)

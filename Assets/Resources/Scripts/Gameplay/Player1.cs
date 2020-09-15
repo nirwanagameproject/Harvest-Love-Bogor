@@ -63,7 +63,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     float v = 0f;
 
     float diffX = 0;
-    float diffY = 0;
+    public float diffY = 0;
     float diffZ = 0;
 
     private Vector3 firstpoint; //change type on Vector3
@@ -166,6 +166,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         Camera.main.transform.LookAt(transform);
 
         GetComponent<ChangeGear>().LoadGear();
+        LoadGantiBaju();
+
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -182,6 +184,34 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
             }
 
+    }
+
+    public void LoadGantiBaju()
+    {
+        if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cewek")
+        {
+            GetComponent<ChangeGear>().UnequipItem("Top", "famale_t_shirt_top");
+            GetComponent<ChangeGear>().EquipItem("Top", "famale_" + PlayerPrefs.GetString("bajudipakai"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", "famale_t_shirt_top", "famale_" + PlayerPrefs.GetString("bajudipakai"));
+        }
+        else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
+        {
+            GetComponent<ChangeGear>().UnequipItem("Top", "t_shirt_top");
+            GetComponent<ChangeGear>().EquipItem("Top", PlayerPrefs.GetString("bajudipakai"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", "t_shirt_top", PlayerPrefs.GetString("bajudipakai"));
+        }
+    }
+
+    [PunRPC]
+    void gantiBaju(string namaplayer, string bajusebelumnya, string namabaju)
+    {
+        StartCoroutine(gantiBaju2(namaplayer,bajusebelumnya,namabaju));
+    }
+    IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju)
+    {
+        while (GameObject.Find("PlayerSpawn").transform.Find(namaplayer) == null) yield return new WaitUntil(() => GameObject.Find("PlayerSpawn").transform.Find(namaplayer) != null);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Top", bajusebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Top", namabaju);
     }
 
     [PunRPC]
