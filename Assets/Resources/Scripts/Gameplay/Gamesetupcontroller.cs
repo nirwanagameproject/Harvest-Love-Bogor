@@ -522,8 +522,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         transisi.SetActive(true);
     }
 
-    public void LoadSkinMine(GameObject go)
+    public void LoadSkinMine(GameObject go,Color32 colorbaju)
     {
+        Debug.Log("LOADSKIN"+go.name);
         Color32 mycolorhair = new Color32((byte)PlayerPrefs.GetInt("warnahairred"), (byte)PlayerPrefs.GetInt("warnahairgreen"), (byte)PlayerPrefs.GetInt("warnahairblue"), 255);
         int nomormat = 0;
         if (PlayerPrefs.GetString("gender") == "cewek")
@@ -541,9 +542,12 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 go.transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorhair;
             }
         }
-        Color32 mycolorclothes = new Color32((byte)PlayerPrefs.GetInt("warnaclothesred"), (byte)PlayerPrefs.GetInt("warnaclothesgreen"), (byte)PlayerPrefs.GetInt("warnaclothesblue"), 255);
+        Color32 mycolorclothes = colorbaju;
         nomormat = 0;
-        go.transform.Find("Top").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorclothes;
+        for (; nomormat < go.transform.Find("Top").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+        {
+            go.transform.Find("Top").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorclothes;
+        }
 
         //LOAD CELANA
         Color32 mycolorcelana = new Color32((byte)PlayerPrefs.GetInt("warnapantsred"), (byte)PlayerPrefs.GetInt("warnapantsgreen"), (byte)PlayerPrefs.GetInt("warnapantsblue"), 255);
