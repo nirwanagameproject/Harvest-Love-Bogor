@@ -214,8 +214,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
             GetComponent<ChangeGear>().EquipItem("Top", GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString());
-            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject, new Color32((byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesred"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesgreen"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesblue"]),255));
+            StartCoroutine(loadSkinMine(this.gameObject));
         }
+    }
+
+    IEnumerator loadSkinMine(GameObject go)
+    {
+        yield return new WaitUntil(() => GetComponent<Equipment>().nameWornChestLoad == namabaju);
+        Gamesetupcontroller.instance.LoadSkinMine(go, new Color32((byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesred"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesgreen"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesblue"]), 255));
     }
 
     [PunRPC]
