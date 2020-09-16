@@ -221,6 +221,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator loadSkinMine(GameObject go,string namabaju,int red, int green,int blue)
     {
         yield return new WaitUntil(() => GetComponent<Equipment>().nameWornChestLoad == namabaju);
+        yield return new WaitUntil(() => Gamesetupcontroller.instance != null);
         Gamesetupcontroller.instance.LoadSkinMine(go, new Color32((byte)red, (byte)green, (byte)blue, 255));
     }
 
