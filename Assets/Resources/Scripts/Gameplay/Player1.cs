@@ -228,6 +228,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue)
     {
+        if(GetComponent<PhotonView>().IsMine)
         if(level==levelPlayer)
         StartCoroutine(gantiBaju2(namaplayer,bajusebelumnya,namabaju,new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue,255)));
     }
