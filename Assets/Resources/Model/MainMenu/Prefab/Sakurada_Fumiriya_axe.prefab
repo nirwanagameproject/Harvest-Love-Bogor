@@ -2580,8 +2580,9 @@ MonoBehaviour:
   wornHair: {fileID: 0}
   wornBeard: {fileID: 0}
   wornMustache: {fileID: 0}
-  wornHandRight: {fileID: 0}
+  wornShoes: {fileID: 0}
   wornChestArmor: {fileID: 0}
+  wornHat: {fileID: 0}
   equippedItems: []
 --- !u!114 &4491179609319739099
 MonoBehaviour:
@@ -2602,6 +2603,7 @@ MonoBehaviour:
   destroy: 0
   instance: {fileID: 4491179609319739099}
   RotateAroundPlayer: 1
+  diffY: 0
   mulaiAksi: 0
 --- !u!54 &8706442872613417637
 Rigidbody:
