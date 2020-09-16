@@ -25,6 +25,8 @@ public class Equipment : MonoBehaviour
     public string nameWornChestArmor;
     public string nameWornHat;
 
+    public string nameWornChestLoad;
+
     //lists
     public List<Item> equippedItems = new List<Item>(); 
     //scripts
@@ -176,23 +178,32 @@ public class Equipment : MonoBehaviour
 
     private GameObject Wear(GameObject clothing, GameObject wornClothing)
     {
+        Debug.Log("Memakai");
         if (clothing == null)
             return null;
         clothing = (GameObject)GameObject.Instantiate(clothing);
+        string tipe = "";
         if (clothing.name.Contains("hair"))
         {
             clothing.name = "Hair001";
+            tipe = "Hair";
         }
         else if (clothing.name.Contains("top"))
         {
             clothing.name = "Top";
+            tipe = "Top";
         }
         else if (clothing.name.Contains("bottom"))
         {
             clothing.name = "Bottom";
+            tipe = "Bottom";
         }
         wornClothing = stitcher.Stitch(clothing, avatar);
         GameObject.Destroy(clothing);
+        if (tipe == "Top")
+        {
+            nameWornChestLoad = nameWornChest;
+        }
         return wornClothing;
     }
 }

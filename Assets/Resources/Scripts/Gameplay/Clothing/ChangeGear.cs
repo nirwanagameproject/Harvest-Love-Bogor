@@ -42,7 +42,7 @@ public class ChangeGear : MonoBehaviour
             if (PlayerPrefs.GetString("gender") == "cowok")
             {
                 EquipItem("Hair", "japan_hair");
-                EquipItem("Top", top[topIndex]);
+                //EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
                 EquipItem("Shoes", "pantofel_shoes");
                 EquipItem("Beard", "short_beard");
@@ -79,7 +79,7 @@ public class ChangeGear : MonoBehaviour
             if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cowok")
             {
                 EquipItem("Hair", "japan_hair");
-                EquipItem("Top", top[topIndex]);
+                //EquipItem("Top", top[topIndex]);
                 EquipItem("Bottom", "long_pants_bottom");
                 EquipItem("Shoes", "pantofel_shoes");
                 EquipItem("Beard", "short_beard");
@@ -102,8 +102,6 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("ChestArmor", "famale_cuirass_armor");
             }
         }
-        if (GetComponent<PhotonView>().IsMine)
-            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
     }
 
     public void Update()
