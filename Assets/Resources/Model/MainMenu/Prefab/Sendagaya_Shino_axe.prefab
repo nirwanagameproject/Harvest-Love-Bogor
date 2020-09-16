@@ -3405,6 +3405,15 @@ MonoBehaviour:
   wornShoes: {fileID: 0}
   wornChestArmor: {fileID: 0}
   wornHat: {fileID: 0}
+  nameWornLegs: 
+  nameWornChest: 
+  nameWornHair: 
+  nameWornBeard: 
+  nameWornMustache: 
+  nameWornShoes: 
+  nameWornChestArmor: 
+  nameWornHat: 
+  nameWornChestLoad: 
   equippedItems: []
 --- !u!114 &9134187540488243316
 MonoBehaviour:
@@ -3474,7 +3483,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 2
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2583848554962451586}
