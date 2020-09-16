@@ -194,6 +194,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<ChangeGear>().EquipItem("Top", "famale_" + PlayerPrefs.GetString("bajudipakai"));
             GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"] = "famale_" + PlayerPrefs.GetString("bajudipakai");
             GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"));
+            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
         }
         else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
         {
@@ -203,11 +204,13 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             custom.Add("bajudipakai", PlayerPrefs.GetString("bajudipakai"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
             GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"));
+            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
         }
         else if (!photonView.IsMine)
         {
             GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
             GetComponent<ChangeGear>().EquipItem("Top", GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString());
+            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject);
         }
     }
 
