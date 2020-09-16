@@ -188,26 +188,29 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     public void LoadGantiBaju()
     {
-        if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cewek")
+        string mygender = "";
+        if (photonView.IsMine)
         {
+            if(PlayerPrefs.GetString("gender") == "cewek")
+            mygender = "famale_";
+
             ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
-            custom.Add("bajudipakai", "famale_" + PlayerPrefs.GetString("bajudipakai"));
+            custom.Add("bajudipakai", mygender + PlayerPrefs.GetString("bajudipakai"));
             custom.Add("bajudipakaiwarnared", PlayerPrefs.GetInt("warnaclothesred"));
             custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
             custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
+
+            custom.Add("celanadipakai", mygender + PlayerPrefs.GetString("celanadipakai"));
+            custom.Add("celanadipakaiwarnared", PlayerPrefs.GetInt("warnapantsred"));
+            custom.Add("celanadipakaiwarnagreen", PlayerPrefs.GetInt("warnapantsgreen"));
+            custom.Add("celanadipakaiwarnablue", PlayerPrefs.GetInt("warnapantsblue"));
+
+            custom.Add("topidipakai", PlayerPrefs.GetString("topidipakai"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
-            
-        }
-        else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
-        {
-            ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
-            custom.Add("bajudipakai", PlayerPrefs.GetString("bajudipakai"));
-            custom.Add("bajudipakaiwarnared", PlayerPrefs.GetInt("warnaclothesred"));
-            custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
-            custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
-            GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", 
+                GetComponent<Equipment>().nameWornChest, mygender + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"),
+                GetComponent<Equipment>().nameWornLegs, PlayerPrefs.GetString("celanadipakai"), PlayerPrefs.GetInt("warnapantsred"), PlayerPrefs.GetInt("warnapantsgreen"), PlayerPrefs.GetInt("warnapantsblue"),
+                GetComponent<Equipment>().nameWornHat, PlayerPrefs.GetString("topidipakai"));
             
         }
         else if (!photonView.IsMine)
@@ -226,17 +229,27 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue)
+    void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue
+        , string celanasebelumnya, string namacelana, int colorcelanared, int colorcelanagreen, int colorcelanablue
+        , string topisebelumnya, string namatopi)
     {
         if (PlayerPrefs.GetString("level") == levelPlayer)
-           StartCoroutine(gantiBaju2(namaplayer, bajusebelumnya, namabaju, new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue, 255)));
+           StartCoroutine(gantiBaju2(namaplayer, bajusebelumnya, namabaju, new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue, 255),
+               celanasebelumnya, namacelana, new Color32((byte)colorcelanared, (byte)colorcelanagreen, (byte)colorcelanablue, 255),
+               topisebelumnya, namatopi));
         
     }
-    IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju,Color32 colorbaju)
+    IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju,Color32 colorbaju,
+        string celanasebelumnya, string namacelana, Color32 colorcelana,
+        string topisebelumnya, string namatopi)
     {
         while (GameObject.Find("PlayerSpawn").transform.Find(namaplayer) == null) yield return new WaitUntil(() => GameObject.Find("PlayerSpawn").transform.Find(namaplayer) != null);
         GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Top", bajusebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Bottom", celanasebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Body", topisebelumnya);
         GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Top", namabaju);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Bottom", namacelana);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Body", namatopi);
         StartCoroutine(loadSkin(namaplayer,namabaju,colorbaju));
     }
     IEnumerator loadSkin(string namaplayer,string namabaju,Color32 colorbaju)
