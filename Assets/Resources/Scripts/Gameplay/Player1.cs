@@ -196,7 +196,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
             custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, level, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
             
         }
         else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
@@ -207,7 +207,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
             custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, level,"Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
             
         }
         else if (!photonView.IsMine)
@@ -229,7 +229,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue)
     {
         if(GetComponent<PhotonView>().IsMine)
-        if(level==levelPlayer)
+        if(PlayerPrefs.GetString("level") == levelPlayer)
         StartCoroutine(gantiBaju2(namaplayer,bajusebelumnya,namabaju,new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue,255)));
     }
     IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju,Color32 colorbaju)
