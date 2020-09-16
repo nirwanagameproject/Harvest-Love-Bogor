@@ -28,23 +28,18 @@ public class koleksi : MonoBehaviour
         audio.Play();
 
         string tipeitem="";
-        if (namakoleksi == "Baju") tipeitem = "Top";
+        if (namakoleksi == "Baju") tipeitem = "Top";else
+        if (namakoleksi == "Celana") tipeitem = "Bottom";else
+        if (namakoleksi == "Rambut") tipeitem = "Hair";else
+        if (namakoleksi == "Topi") tipeitem = "Body";
 
-        if (PlayerPrefs.GetString("gender") == "cewek")
-        {
-            PlayerPrefs.SetString("bajudipakai", PlayerPrefsX.GetStringArray("koleksibaju")[slot]);
-            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").GetComponent<Player1>().LoadGantiBaju();
+       
+        PlayerPrefs.SetString(namakoleksi.ToLower() + "dipakai", PlayerPrefsX.GetStringArray("koleksi"+ namakoleksi.ToLower())[slot]);
+        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").GetComponent<Player1>().LoadGantiBaju();
 
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
-        }
-        else
-        {
-            PlayerPrefs.SetString("bajudipakai", PlayerPrefsX.GetStringArray("koleksibaju")[slot]);
-            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").GetComponent<Player1>().LoadGantiBaju();
-
-            gameObject.SetActive(false);
-        }
+        
     }
 
     public void openKoleksi(string namakoleksiku)
@@ -55,10 +50,16 @@ public class koleksi : MonoBehaviour
         gameObject.SetActive(true);
         namakoleksi = namakoleksiku;
         namajudul.GetComponent<Text>().text = "Koleksi "+namakoleksi;
-        for (int i = 0; i < PlayerPrefsX.GetStringArray("koleksi"+namakoleksi.ToLower()).Length; i++)
+        for (int i = 0; i < peralatan.transform.childCount; i++)
         {
-            peralatan.transform.GetChild(i).transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/" + namakoleksi + "/" + PlayerPrefsX.GetStringArray("koleksi" + namakoleksi.ToLower())[i]);
-            peralatan.transform.GetChild(i).transform.Find("Image").GetComponent<Image>().enabled = true;
+            if(i<PlayerPrefsX.GetStringArray("koleksi" + namakoleksi.ToLower()).Length)
+            {
+                peralatan.transform.GetChild(i).transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/" + namakoleksi + "/" + PlayerPrefsX.GetStringArray("koleksi" + namakoleksi.ToLower())[i]);
+                peralatan.transform.GetChild(i).transform.Find("Image").GetComponent<Image>().enabled = true;
+            }else
+            {
+                peralatan.transform.GetChild(i).transform.Find("Image").GetComponent<Image>().enabled = false;
+            }
         }
     }
 

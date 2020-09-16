@@ -103,7 +103,15 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteKey("buttonNPC");
         PlayerPrefs.DeleteKey("buttonChickenFeed");
         PlayerPrefs.DeleteKey("koleksibaju");
+        PlayerPrefs.DeleteKey("koleksirambut");
+        PlayerPrefs.DeleteKey("koleksicelana");
+        PlayerPrefs.DeleteKey("koleksitopi");
         PlayerPrefs.DeleteKey("bajudipakai");
+        PlayerPrefs.DeleteKey("rambutdipakai");
+        PlayerPrefs.DeleteKey("celanadipakai");
+        PlayerPrefs.DeleteKey("topidipakai");
+
+        PlayerPrefs.DeleteKey("buttonChangeClothes");
 
         for (int i = 0; i < 53; i++)
         {
@@ -547,9 +555,37 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("detik", "00");
 
         //Koleksi Baju
-        PlayerPrefs.SetString("bajudipakai", "t_shirt_top");
+        if (PlayerPrefs.GetString("gender") == "cowok")
+        {
+            PlayerPrefs.SetString("bajudipakai", "t_shirt_top");
+            PlayerPrefs.SetString("rambutdipakai", "japan_hair");
+            PlayerPrefs.SetString("celanadipakai", "long_pants_bottom");
+            PlayerPrefs.SetString("topidipakai", "conical_hat");
+
+            string[] koleksirambut = { "japan_hair"};
+            PlayerPrefsX.SetStringArray("koleksirambut", koleksirambut);
+            string[] koleksicelana = { "long_pants_bottom" };
+            PlayerPrefsX.SetStringArray("koleksicelana", koleksicelana);
+            
+        }
+        else
+        {
+            PlayerPrefs.SetString("bajudipakai", "t_shirt_top");
+            PlayerPrefs.SetString("rambutdipakai", "long_hair");
+            PlayerPrefs.SetString("celanadipakai", "famale_long_pants_bottom");
+            PlayerPrefs.SetString("topidipakai", "conical_hat");
+
+            string[] koleksirambut = { "famale_long_hair" };
+            PlayerPrefsX.SetStringArray("koleksirambut", koleksirambut);
+            string[] koleksicelana = { "famale_long_pants_bottom" };
+            PlayerPrefsX.SetStringArray("koleksicelana", koleksicelana);
+        }
+
+        string[] koleksitopi = { "conical_hat", "pie_hat" };
+        PlayerPrefsX.SetStringArray("koleksitopi", koleksitopi);
         string[] koleksibaju = { "t_shirt_top", "sweeter_top" };
         PlayerPrefsX.SetStringArray("koleksibaju", koleksibaju);
+
 
         //Load Batu di Ladang2
         List<Vector2> posisiLadangBatu = new List<Vector2>();
