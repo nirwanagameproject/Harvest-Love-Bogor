@@ -192,28 +192,36 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
             custom.Add("bajudipakai", "famale_" + PlayerPrefs.GetString("bajudipakai"));
+            custom.Add("bajudipakaiwarnared", PlayerPrefs.GetInt("warnaclothesred"));
+            custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
+            custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, level, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
             
         }
         else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
         {
             ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
             custom.Add("bajudipakai", PlayerPrefs.GetString("bajudipakai"));
+            custom.Add("bajudipakaiwarnared", PlayerPrefs.GetInt("warnaclothesred"));
+            custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
+            custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
             GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, level,"Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"));
             
         }
         else if (!photonView.IsMine)
         {
             GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
             GetComponent<ChangeGear>().EquipItem("Top", GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString());
+            Gamesetupcontroller.instance.LoadSkinMine(this.gameObject, new Color32((byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesred"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesgreen"]), (byte)Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesblue"]),255));
         }
     }
 
     [PunRPC]
-    void gantiBaju(string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue)
+    void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue)
     {
+        if(level==levelPlayer)
         StartCoroutine(gantiBaju2(namaplayer,bajusebelumnya,namabaju,new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue,255)));
     }
     IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju,Color32 colorbaju)
@@ -226,7 +234,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator loadSkin(string namaplayer,string namabaju,Color32 colorbaju)
     {
         yield return new WaitUntil(() => GetComponent<Equipment>().nameWornChestLoad == namabaju);
-        Debug.Log("OKE BRO");
         Gamesetupcontroller.instance.LoadSkinMine(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).gameObject, colorbaju);
     }
 
