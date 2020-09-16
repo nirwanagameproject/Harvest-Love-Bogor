@@ -190,19 +190,28 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cewek")
         {
-            GetComponent<ChangeGear>().UnequipItem("Top", "famale_t_shirt_top");
+            GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
             GetComponent<ChangeGear>().EquipItem("Top", "famale_" + PlayerPrefs.GetString("bajudipakai"));
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", "famale_t_shirt_top", "famale_" + PlayerPrefs.GetString("bajudipakai"));
+            GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"] = "famale_" + PlayerPrefs.GetString("bajudipakai");
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, "famale_" + PlayerPrefs.GetString("bajudipakai"));
         }
         else if (photonView.IsMine && PlayerPrefs.GetString("gender") == "cowok")
         {
-            GetComponent<ChangeGear>().UnequipItem("Top", "t_shirt_top");
+            GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
             GetComponent<ChangeGear>().EquipItem("Top", PlayerPrefs.GetString("bajudipakai"));
-            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", "t_shirt_top", PlayerPrefs.GetString("bajudipakai"));
+            ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
+            custom.Add("bajudipakai", PlayerPrefs.GetString("bajudipakai"));
+            GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, "Player (" + PhotonNetwork.NickName + ")", GetComponent<Equipment>().nameWornChest, PlayerPrefs.GetString("bajudipakai"));
+        }
+        else if (!photonView.IsMine)
+        {
+            GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
+            GetComponent<ChangeGear>().EquipItem("Top", GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString());
         }
     }
 
-    [PunRPC]
+        [PunRPC]
     void gantiBaju(string namaplayer, string bajusebelumnya, string namabaju)
     {
         StartCoroutine(gantiBaju2(namaplayer,bajusebelumnya,namabaju));

@@ -16,6 +16,15 @@ public class Equipment : MonoBehaviour
     public GameObject wornChestArmor;
     public GameObject wornHat;
 
+    public string nameWornLegs;
+    public string nameWornChest;
+    public string nameWornHair;
+    public string nameWornBeard;
+    public string nameWornMustache;
+    public string nameWornShoes;
+    public string nameWornChestArmor;
+    public string nameWornHat;
+
     //lists
     public List<Item> equippedItems = new List<Item>(); 
     //scripts
@@ -64,21 +73,45 @@ public class Equipment : MonoBehaviour
     public void AddEquipment(Item equipmentToAdd)
     {
         if (equipmentToAdd.ItemType == "Bottom")
+        {
+            nameWornLegs = equipmentToAdd.Slug;
             wornLegs = AddEquipmentHelper(wornLegs, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Top")
+        {
+            nameWornChest = equipmentToAdd.Slug;
             wornChest = AddEquipmentHelper(wornChest, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Hair")
+        {
+            nameWornHair = equipmentToAdd.Slug;
             wornHair = AddEquipmentHelper(wornHair, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Beard")
+        {
+            nameWornBeard = equipmentToAdd.Slug;
             wornBeard = AddEquipmentHelper(wornBeard, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Mustache")
+        {
+            nameWornMustache = equipmentToAdd.Slug;
             wornMustache = AddEquipmentHelper(wornMustache, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Shoes")
+        {
+            nameWornShoes = equipmentToAdd.Slug;
             wornShoes = AddEquipmentHelper(wornShoes, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "ChestArmor")
+        {
+            nameWornChestArmor = equipmentToAdd.Slug;
             wornChestArmor = AddEquipmentHelper(wornChestArmor, equipmentToAdd);
+        }
         else if (equipmentToAdd.ItemType == "Body")
+        {
+            nameWornHat = equipmentToAdd.Slug;
             wornHat = AddEquipmentHelper(wornHat, equipmentToAdd);
+        }
     }
 
     public GameObject AddEquipmentHelper(GameObject wornItem, Item itemToAddToWornItem)
