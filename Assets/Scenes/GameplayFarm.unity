@@ -29003,6 +29003,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776354131279813221, guid: 4068deab56583ec4d881d3e4168bc94d,
+        type: 3}
+      propertyPath: myclipspring
+      value: 
+      objectReference: {fileID: 8300000, guid: 62517a1ba81c76641874cbbf13e1a665, type: 3}
     - target: {fileID: 8776354131279813223, guid: 4068deab56583ec4d881d3e4168bc94d,
         type: 3}
       propertyPath: viewIdField

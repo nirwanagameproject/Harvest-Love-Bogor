@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "300596356012",
+    "firebase_url": "https://harvest-love-bogor-59519622.firebaseio.com",
+    "project_id": "harvest-love-bogor-59519622",
+    "storage_bucket": "harvest-love-bogor-59519622.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300596356012:android:80e18dd50a514751531009",
+        "android_client_info": {
+          "package_name": "com.FMFStudio.HarvestLoveBogor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300596356012-4aoimjcaucidlm4r6pv5cjjtfbjhmm69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.FMFStudio.HarvestLoveBogor",
+            "certificate_hash": "de7be4e32388341fbea5a7a5e21c4aecb7e0e140"
+          }
+        },
+        {
+          "client_id": "300596356012-2nkohurv7jsibqc1sas6ts1d4d5uv4lc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwtGtBgJiF7XIgyeqtLkl5W1foFXWXOtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300596356012-2nkohurv7jsibqc1sas6ts1d4d5uv4lc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "300596356012-p73icqavvt8k766afhegcmt9sngkm84n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "famale.chinese.blend"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
