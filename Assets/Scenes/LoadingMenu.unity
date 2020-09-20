@@ -4036,6 +4036,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200752302}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &205612167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4192,6 +4193,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &210897710
 GameObject:
   m_ObjectHideFlags: 0
@@ -5450,6 +5453,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295376772}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &297199669
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,6 +5532,8 @@ RectTransform:
   m_AnchoredPosition: {x: 44.946, y: -180}
   m_SizeDelta: {x: 539.89185, y: 221.99783}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &304435272
 GameObject:
   m_ObjectHideFlags: 0
@@ -8681,6 +8687,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455862272}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &463910337
 GameObject:
   m_ObjectHideFlags: 0
@@ -8759,6 +8766,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.5}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &474473000
 GameObject:
   m_ObjectHideFlags: 0
@@ -17756,6 +17765,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838879598}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &839579744
 GameObject:
   m_ObjectHideFlags: 0
@@ -17886,6 +17896,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839579744}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &846005840
 GameObject:
   m_ObjectHideFlags: 0
@@ -27873,7 +27885,11 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 1
+=======
+  m_IsActive: 0
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!114 &1275304982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27900,9 +27916,12 @@ RectTransform:
   - {fileID: 980953623}
   - {fileID: 1627991148}
   - {fileID: 689701132}
+<<<<<<< HEAD
   - {fileID: 839579745}
   - {fileID: 1835018895}
   - {fileID: 1351239250}
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
   m_Father: {fileID: 1580548876}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29131,6 +29150,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349008310}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &1351239248
 GameObject:
   m_ObjectHideFlags: 0
@@ -29271,6 +29291,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351239248}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &1353664314
 GameObject:
   m_ObjectHideFlags: 0
@@ -31084,6 +31106,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
 --- !u!1 &1432027715
 GameObject:
   m_ObjectHideFlags: 0
@@ -31145,6 +31168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myURL: https://harvest-love-bogor-59519622.firebaseio.com/
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &1438767128
 GameObject:
   m_ObjectHideFlags: 0
@@ -40361,6 +40386,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834328929}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &1835018894
 GameObject:
   m_ObjectHideFlags: 0
@@ -40491,6 +40517,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835018894}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
 --- !u!1 &1836425898
 GameObject:
   m_ObjectHideFlags: 0
@@ -47264,6 +47292,7 @@ MonoBehaviour:
     - 
     - 
     ladang2BatuJumlah: 0
+<<<<<<< HEAD
     bajudipakai: 
     celanadipakai: 
     rambutdipakai: 
@@ -47472,6 +47501,8 @@ MonoBehaviour:
     - 
     - 
     - 
+=======
+>>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
   loadOnStart: 1
   cowok: {fileID: 2800000, guid: 59c6dfb7750b1c74faa030c52729570e, type: 3}
   cewek: {fileID: 2800000, guid: 5b7c3e329d97c2a4a8050479d3b967d1, type: 3}
