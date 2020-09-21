@@ -63750,7 +63750,7 @@ PrefabInstance:
     - target: {fileID: 2923131122567704772, guid: 0e39a9f08cb7540eeab3421f8daa7d1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3343444
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 2923131122567704772, guid: 0e39a9f08cb7540eeab3421f8daa7d1d,
         type: 3}
@@ -63760,7 +63760,7 @@ PrefabInstance:
     - target: {fileID: 2923131122567704772, guid: 0e39a9f08cb7540eeab3421f8daa7d1d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.93
+      value: 3.91
       objectReference: {fileID: 0}
     - target: {fileID: 2923131122567704772, guid: 0e39a9f08cb7540eeab3421f8daa7d1d,
         type: 3}
@@ -63821,6 +63821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
       value: 0.12282875
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733617682978880065, guid: 0e39a9f08cb7540eeab3421f8daa7d1d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e39a9f08cb7540eeab3421f8daa7d1d, type: 3}
@@ -64204,6 +64209,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4792506023585486538, guid: 8c90b5ae78360447181d1bb3b07e9632,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8772436162443289703, guid: 8c90b5ae78360447181d1bb3b07e9632,
         type: 3}
       propertyPath: m_Name
@@ -64407,6 +64417,11 @@ PrefabInstance:
       propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
       value: 
       objectReference: {fileID: 2113680578640981202}
+    - target: {fileID: 6292039470409694545, guid: 10c2267e2df674b54b1c07d54dbf0f08,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8148726899879580382, guid: 10c2267e2df674b54b1c07d54dbf0f08,
         type: 3}
       propertyPath: m_Name
@@ -64507,6 +64522,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 391934267}
     m_Modifications:
+    - target: {fileID: 279261460273427551, guid: bfa5b1086a6224ca599a0d1a1b3aff29,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4098187913543501554, guid: bfa5b1086a6224ca599a0d1a1b3aff29,
         type: 3}
       propertyPath: m_Name
@@ -64715,14 +64735,11 @@ PrefabInstance:
       propertyPath: waitingother2
       value: 
       objectReference: {fileID: 714285187}
-<<<<<<< HEAD
     - target: {fileID: 8776354131279813221, guid: 4068deab56583ec4d881d3e4168bc94d,
         type: 3}
       propertyPath: myclipspring
       value: 
       objectReference: {fileID: 8300000, guid: 62517a1ba81c76641874cbbf13e1a665, type: 3}
-=======
->>>>>>> 7f98dd88ad0bd27386195f2f8f9d91bb93731506
     - target: {fileID: 8776354131279813223, guid: 4068deab56583ec4d881d3e4168bc94d,
         type: 3}
       propertyPath: viewIdField
