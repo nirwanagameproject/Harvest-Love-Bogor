@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class ChangeGear : MonoBehaviour
@@ -7,18 +8,100 @@ public class ChangeGear : MonoBehaviour
     public List<string> topi;
     private int topiIndex;
 
+    public List<string> top;
+    private int topIndex;
+
     private void Start()
     {
+    }
+
+    public void LoadGear() {
         topi = new List<string>();
         topiIndex = 0;
+        top = new List<string>();
+        topIndex = 0;
         equipmentScript = GetComponent<Equipment>();
-        //create equipment list
         equipmentScript.InitializeEquipptedItemsList();
-        //equip stuff
-        topi.Add("conical_hat");
-        topi.Add("pie_hat");
 
-        EquipItem("Body", topi[topiIndex]); 
+        //create equipment list
+        //equip stuff
+
+        Debug.Log(GetComponent<PhotonView>().IsMine);
+        if (GetComponent<PhotonView>().IsMine)
+        {
+
+            topi.Add("conical_hat");
+            topi.Add("pie_hat");
+
+            top.Add("t_shirt_top");
+            top.Add("sweeter_top");
+
+
+            EquipItem("Body", topi[topiIndex]);
+
+            if (PlayerPrefs.GetString("gender") == "cowok")
+            {
+                EquipItem("Hair", "japan_hair");
+                //EquipItem("Top", top[topIndex]);
+                EquipItem("Bottom", "long_pants_bottom");
+                EquipItem("Shoes", "pantofel_shoes");
+                EquipItem("Beard", "short_beard");
+                EquipItem("Mustache", "long_mustache");
+                EquipItem("ChestArmor", "cuirass_armor");
+            }
+            else
+            {
+                EquipItem("Hair", "famale_long_hair");
+                if (topIndex == 0 || topIndex == 2)
+                {
+                    EquipItem("Top", "famale_t_shirt_top");
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+                EquipItem("Bottom", "famale_long_pants_bottom");
+                EquipItem("Shoes", "famale_pantofel_shoes");
+                EquipItem("ChestArmor", "famale_cuirass_armor");
+            }
+        }
+        else
+        {
+            Debug.Log("MASUK");
+            topi.Add("conical_hat");
+            topi.Add("pie_hat");
+
+            top.Add("t_shirt_top");
+            top.Add("sweeter_top");
+
+            EquipItem("Body", topi[topiIndex]);
+
+            if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cowok")
+            {
+                EquipItem("Hair", "japan_hair");
+                //EquipItem("Top", top[topIndex]);
+                EquipItem("Bottom", "long_pants_bottom");
+                EquipItem("Shoes", "pantofel_shoes");
+                EquipItem("Beard", "short_beard");
+                EquipItem("Mustache", "long_mustache");
+                EquipItem("ChestArmor", "cuirass_armor");
+            }
+            else
+            {
+                EquipItem("Hair", "famale_long_hair");
+                if (topIndex == 0 || topIndex == 2)
+                {
+                    EquipItem("Top", "famale_t_shirt_top");
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+                EquipItem("Bottom", "famale_long_pants_bottom");
+                EquipItem("Shoes", "famale_pantofel_shoes");
+                EquipItem("ChestArmor", "famale_cuirass_armor");
+            }
+        }
     }
 
     public void Update()
@@ -33,6 +116,37 @@ public class ChangeGear : MonoBehaviour
             }
             EquipItem("Body", topi[topiIndex]);
             
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        { 
+            UnequipItem("Top", top[topIndex]);
+            topIndex++;
+            if (topIndex == 2)
+            {
+                topIndex = 0;
+            }
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                if (PlayerPrefs.GetString("gender") == "cewek")
+                {
+                    EquipItem("Top", "famale_" + top[topIndex]);
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+            }
+            else
+            {
+                if (GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString() == "cewek")
+                {
+                    EquipItem("Top", "famale_" + top[topIndex]);
+                }
+                else
+                {
+                    EquipItem("Top", top[topIndex]);
+                }
+            }
         }
     }
 

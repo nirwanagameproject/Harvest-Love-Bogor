@@ -6,7 +6,6 @@ using System.IO;
 
 public class NPC : MonoBehaviour
 {
-    public int cek;
     public GameObject cubeaction;
     public string level;
     private Animator anim;
@@ -14,7 +13,6 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cek = 1;
         anim = GetComponent<Animator>();
 
         

@@ -102,6 +102,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteKey("buttonPickBale");
         PlayerPrefs.DeleteKey("buttonNPC");
         PlayerPrefs.DeleteKey("buttonChickenFeed");
+        PlayerPrefs.DeleteKey("koleksibaju");
+        PlayerPrefs.DeleteKey("koleksirambut");
+        PlayerPrefs.DeleteKey("koleksicelana");
+        PlayerPrefs.DeleteKey("koleksitopi");
+        PlayerPrefs.DeleteKey("bajudipakai");
+        PlayerPrefs.DeleteKey("rambutdipakai");
+        PlayerPrefs.DeleteKey("celanadipakai");
+        PlayerPrefs.DeleteKey("topidipakai");
+
+        PlayerPrefs.DeleteKey("buttonChangeClothes");
 
         for (int i = 0; i < 53; i++)
         {
@@ -141,6 +151,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         //Kantong
         PlayerPrefs.SetString("kantongnama1", "apple");
         PlayerPrefs.SetInt("kantongjumlah1", 5);
+
+        
 
         if (GameObject.Find("Canvas").transform.Find("Fixed Joystick") != null)
         {
@@ -541,6 +553,40 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("tahun", 1);
         PlayerPrefs.SetString("jam", "06");
         PlayerPrefs.SetString("detik", "00");
+
+        //Koleksi Baju
+        if (PlayerPrefs.GetString("gender") == "cowok")
+        {
+            PlayerPrefs.SetString("bajudipakai", "t_shirt_top");
+            PlayerPrefs.SetString("rambutdipakai", "japan_hair");
+            PlayerPrefs.SetString("celanadipakai", "long_pants_bottom");
+            PlayerPrefs.SetString("topidipakai", "conical_hat");
+
+            string[] koleksirambut = { "japan_hair"};
+            PlayerPrefsX.SetStringArray("koleksirambut", koleksirambut);
+            string[] koleksicelana = { "long_pants_bottom" };
+            PlayerPrefsX.SetStringArray("koleksicelana", koleksicelana);
+            
+        }
+        else
+        {
+            PlayerPrefs.SetString("bajudipakai", "t_shirt_top");
+            PlayerPrefs.SetString("rambutdipakai", "long_hair");
+            PlayerPrefs.SetString("celanadipakai", "famale_long_pants_bottom");
+            PlayerPrefs.SetString("topidipakai", "conical_hat");
+
+            string[] koleksirambut = { "famale_long_hair" };
+            PlayerPrefsX.SetStringArray("koleksirambut", koleksirambut);
+            string[] koleksicelana = { "famale_long_pants_bottom" };
+            PlayerPrefsX.SetStringArray("koleksicelana", koleksicelana);
+        }
+
+        string[] koleksitopi = { "conical_hat", "pie_hat" };
+        PlayerPrefsX.SetStringArray("koleksitopi", koleksitopi);
+        string[] koleksibaju = { "t_shirt_top", "sweeter_top" };
+        PlayerPrefsX.SetStringArray("koleksibaju", koleksibaju);
+
+
         //Load Batu di Ladang2
         List<Vector2> posisiLadangBatu = new List<Vector2>();
         float[] posX = new float[43];
@@ -622,9 +668,10 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         callAudioClicked();
         //Debug.Log("jumlah "+int.Parse(inputulangtaun.transform.Find("BotNotif").Find("InputField").Find("Text").GetComponent<Text>().text));
-        GameObject myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hair001").gameObject;
+        GameObject myChar = null;
         if (PlayerPrefs.GetString("gender") == "cewek")
             myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hairs").Find("Hair001").gameObject;
+        else myChar = GameObject.Find("TerrainLoadingMenu").transform.Find(PlayerPrefs.GetString("gender")).Find("Hair001").gameObject;
         if (inputhaircolor.value == 0)
         {
             for(int nomormat=0; nomormat < myChar.GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)

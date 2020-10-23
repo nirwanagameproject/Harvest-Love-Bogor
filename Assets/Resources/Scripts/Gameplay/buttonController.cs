@@ -62,6 +62,13 @@ public class buttonController : MonoBehaviour
             AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
             audio.Play();
         }
+        else if (PlayerPrefs.HasKey("buttonChangeClothes"))
+        {
+            OpenWardrobe();
+
+            AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
+            audio.Play();
+        }
         else if (PlayerPrefs.HasKey("buttonChickenFeed"))
         {
             if (PlayerPrefs.GetString("kantongnama0") == "")
@@ -249,6 +256,28 @@ public class buttonController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru("Hai " + PhotonNetwork.NickName + ", ada yang bisa saya bantu?", false);
         
     }
+
+    void OpenWardrobe()
+    {
+        Gamesetupcontroller.instance.minFoVClothes = true;
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").GetComponent<FixedJoystick>().ResetAxis();
+
+        GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIkanan").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("UIKiri").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").gameObject.SetActive(false);
+
+        GameObject.Find("CanvasHome").transform.Find("Dandan").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Karakter").gameObject.SetActive(true);
+        GameObject.Find("CanvasHome").transform.Find("Dandan").Find("Aksesoris").gameObject.SetActive(false);
+
+        GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles = new Vector3(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.x,
+            -90f,
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + PhotonNetwork.NickName + ")").transform.eulerAngles.z);
+        
+    }
+
+    
 
     GameObject FindInActiveObjectByName(string name)
     {

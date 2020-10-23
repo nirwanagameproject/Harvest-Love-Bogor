@@ -63,7 +63,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     float v = 0f;
 
     float diffX = 0;
-    float diffY = 0;
+    public float diffY = 0;
     float diffZ = 0;
 
     private Vector3 firstpoint; //change type on Vector3
@@ -164,6 +164,10 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         Camera.main.transform.position = pos;
 
         Camera.main.transform.LookAt(transform);
+
+        GetComponent<ChangeGear>().LoadGear();
+        LoadGantiBaju();
+
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -177,7 +181,81 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsblue"],
                     (int)GetComponent<PhotonView>().Owner.CustomProperties["skinred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skingreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skinblue"],
                     PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+
             }
+
+    }
+
+    public void LoadGantiBaju()
+    {
+        string mygender = "";
+        if (photonView.IsMine)
+        {
+            if(PlayerPrefs.GetString("gender") == "cewek")
+            mygender = "famale_";
+
+            ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
+            custom.Add("bajudipakai", mygender + PlayerPrefs.GetString("bajudipakai"));
+            custom.Add("bajudipakaiwarnared", PlayerPrefs.GetInt("warnaclothesred"));
+            custom.Add("bajudipakaiwarnagreen", PlayerPrefs.GetInt("warnaclothesgreen"));
+            custom.Add("bajudipakaiwarnablue", PlayerPrefs.GetInt("warnaclothesblue"));
+
+            custom.Add("celanadipakai", mygender + PlayerPrefs.GetString("celanadipakai"));
+            custom.Add("celanadipakaiwarnared", PlayerPrefs.GetInt("warnapantsred"));
+            custom.Add("celanadipakaiwarnagreen", PlayerPrefs.GetInt("warnapantsgreen"));
+            custom.Add("celanadipakaiwarnablue", PlayerPrefs.GetInt("warnapantsblue"));
+
+            custom.Add("topidipakai", PlayerPrefs.GetString("topidipakai"));
+            GetComponent<PhotonView>().Owner.SetCustomProperties(custom);
+            GetComponent<PhotonView>().RPC("gantiBaju", RpcTarget.All, PlayerPrefs.GetString("level"), "Player (" + PhotonNetwork.NickName + ")", 
+                GetComponent<Equipment>().nameWornChest, mygender + PlayerPrefs.GetString("bajudipakai"), PlayerPrefs.GetInt("warnaclothesred"), PlayerPrefs.GetInt("warnaclothesgreen"), PlayerPrefs.GetInt("warnaclothesblue"),
+                GetComponent<Equipment>().nameWornLegs, PlayerPrefs.GetString("celanadipakai"), PlayerPrefs.GetInt("warnapantsred"), PlayerPrefs.GetInt("warnapantsgreen"), PlayerPrefs.GetInt("warnapantsblue"),
+                GetComponent<Equipment>().nameWornHat, PlayerPrefs.GetString("topidipakai"));
+            
+        }
+        else if (!photonView.IsMine)
+        {
+            GetComponent<ChangeGear>().UnequipItem("Top", GetComponent<Equipment>().nameWornChest);
+            GetComponent<ChangeGear>().EquipItem("Top", GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString());
+            StartCoroutine(loadSkinMine(this.gameObject, GetComponent<PhotonView>().Owner.CustomProperties["bajudipakai"].ToString(), Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesred"]), Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesgreen"]), Convert.ToInt32(GetComponent<PhotonView>().Owner.CustomProperties["warnaclothesblue"])));
+        }
+    }
+
+    IEnumerator loadSkinMine(GameObject go,string namabaju,int red, int green,int blue)
+    {
+        yield return new WaitUntil(() => GetComponent<Equipment>().nameWornChestLoad == namabaju);
+        yield return new WaitUntil(() => Gamesetupcontroller.instance != null);
+        Gamesetupcontroller.instance.LoadSkinMine(go, new Color32((byte)red, (byte)green, (byte)blue, 255));
+    }
+
+    [PunRPC]
+    void gantiBaju(string levelPlayer,string namaplayer, string bajusebelumnya, string namabaju,int colorbajured, int colorbajugreen, int colorbajublue
+        , string celanasebelumnya, string namacelana, int colorcelanared, int colorcelanagreen, int colorcelanablue
+        , string topisebelumnya, string namatopi)
+    {
+        if (PlayerPrefs.GetString("level") == levelPlayer)
+           StartCoroutine(gantiBaju2(namaplayer, bajusebelumnya, namabaju, new Color32((byte)colorbajured, (byte)colorbajugreen, (byte)colorbajublue, 255),
+               celanasebelumnya, namacelana, new Color32((byte)colorcelanared, (byte)colorcelanagreen, (byte)colorcelanablue, 255),
+               topisebelumnya, namatopi));
+        
+    }
+    IEnumerator gantiBaju2(string namaplayer, string bajusebelumnya, string namabaju,Color32 colorbaju,
+        string celanasebelumnya, string namacelana, Color32 colorcelana,
+        string topisebelumnya, string namatopi)
+    {
+        while (GameObject.Find("PlayerSpawn").transform.Find(namaplayer) == null) yield return new WaitUntil(() => GameObject.Find("PlayerSpawn").transform.Find(namaplayer) != null);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Top", bajusebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Bottom", celanasebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().UnequipItem("Body", topisebelumnya);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Top", namabaju);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Bottom", namacelana);
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<ChangeGear>().EquipItem("Body", namatopi);
+        StartCoroutine(loadSkin(namaplayer,namabaju,colorbaju));
+    }
+    IEnumerator loadSkin(string namaplayer,string namabaju,Color32 colorbaju)
+    {
+        yield return new WaitUntil(() => GetComponent<Equipment>().nameWornChestLoad == namabaju);
+        Gamesetupcontroller.instance.LoadSkinMine(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).gameObject, colorbaju);
     }
 
     [PunRPC]
@@ -208,45 +286,33 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            for (; nomormat < GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
+            for (; nomormat < GameObject.Find("PlayerSpawn").transform.Find(namaplayer).transform.Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials.Length; nomormat++)
             {
-                GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hairs").Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
+                GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Hair001").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = hair;
             }
         }
 
         //LOAD BAJU
         Color32 clothes = new Color32((byte)cloth1, (byte)cloth2, (byte)cloth3, 255);
         //nomormat = 6;
-        nomormat = 3;
-        if (gender == "cewek") nomormat = 5;
-        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = clothes;
+        nomormat = 0;
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Top").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = clothes;
 
         //LOAD CELANA
         Color32 pants = new Color32((byte)pants1, (byte)pants2, (byte)pants3, 255);
         //nomormat = 4;
-        nomormat = 1;
-        if (gender == "cewek") nomormat = 6;
-        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = pants;
+        nomormat = 0;
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Bottom").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = pants;
 
         //LOAD SKIN
         Color32 skin = new Color32((byte)skin1, (byte)skin2, (byte)skin3, 255);
-        nomormat = 2;
+        nomormat = 8;
         GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[0].color = skin;
-        //
-        if (gender == "cewek")
-            GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Body").GetComponent<SkinnedMeshRenderer>().materials[2].color = skin;
-        if (gender == "cewek") GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[7].color = skin;
-        else GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[5].color = skin;
-        if (gender == "cewek")
-            GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[8].color = skin;
-        else GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[1].color = skin;
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Face").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = skin;
 
         //LOAD WEAPON
         GameObject myweapon = GameObject.Find("PlayerSpawn");
-        if (gender == "cowok")
-            myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
-        if (gender == "cewek")
-            myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
+        myweapon = GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
         for (int i = 0; i < myweapon.transform.childCount; i++)
             myweapon.transform.GetChild(i).gameObject.SetActive(false);
         myweapon.transform.Find(peralatan).gameObject.SetActive(true);
@@ -592,11 +658,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 if (jumlahalat > 0)
                 {
                     GameObject myweapon = GameObject.Find("PlayerSpawn");
-                    if (PlayerPrefs.GetString("gender") == "cowok")
-                        myweapon = transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
-                    else if (PlayerPrefs.GetString("gender") == "cewek")
-                        myweapon = transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
-
+                    myweapon = transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+                    
                     myweapon.transform.Find("watering").Find("airkeluar").GetComponent<ParticleSystem>().Play();
 
 

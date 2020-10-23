@@ -53,6 +53,15 @@ public class ExampleSaveCustom : MonoBehaviour
         public string[] ladang2BatuTipe = new string[43];
         public int ladang2BatuJumlah;
 
+        public string bajudipakai;
+        public string celanadipakai;
+        public string rambutdipakai;
+        public string topidipakai;
+        public string[] koleksibaju = new string[50];
+        public string[] koleksicelana = new string[50];
+        public string[] koleksirambut = new string[50];
+        public string[] koleksitopi = new string[50];
+
         public CustomData()
         {
             gender = "cowok";
@@ -200,6 +209,16 @@ public class ExampleSaveCustom : MonoBehaviour
             customData.ladang2BatuNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
             customData.ladang2BatuTipe[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
         }
+
+        customData.koleksibaju = PlayerPrefsX.GetStringArray("koleksibaju");
+        customData.koleksicelana = PlayerPrefsX.GetStringArray("koleksicelana");
+        customData.koleksirambut = PlayerPrefsX.GetStringArray("koleksirambut");
+        customData.koleksitopi = PlayerPrefsX.GetStringArray("koleksitopi");
+        customData.bajudipakai = PlayerPrefs.GetString("bajudipakai");
+        customData.celanadipakai = PlayerPrefs.GetString("celanadipakai");
+        customData.rambutdipakai = PlayerPrefs.GetString("rambutdipakai");
+        customData.topidipakai = PlayerPrefs.GetString("topidipakai");
+
         customData.ladang2BatuJumlah = PlayerPrefs.GetInt("Ladang2BatuJumlah");
 
         customData.levelbag = PlayerPrefs.GetInt("levelbag");
@@ -290,8 +309,29 @@ public class ExampleSaveCustom : MonoBehaviour
                     PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", customData.ladang2BatuNum);
                     PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", customData.ladang2BatuTipe);
                 }
+                PlayerPrefs.SetString("bajudipakai", customData.bajudipakai);
+                PlayerPrefs.SetString("celanadipakai", customData.celanadipakai);
+                PlayerPrefs.SetString("rambutdipakai", customData.rambutdipakai);
+                PlayerPrefs.SetString("topidipakai", customData.topidipakai);
+
                 PlayerPrefs.SetInt("Ladang2BatuJumlah", customData.ladang2BatuJumlah);
 
+                if (customData.koleksibaju.Length > 0)
+                {
+                    PlayerPrefsX.SetStringArray("koleksibaju", customData.koleksibaju);
+                }
+                if (customData.koleksicelana.Length > 0)
+                {
+                    PlayerPrefsX.SetStringArray("koleksicelana", customData.koleksicelana);
+                }
+                if (customData.koleksirambut.Length > 0)
+                {
+                    PlayerPrefsX.SetStringArray("koleksirambut", customData.koleksirambut);
+                }
+                if (customData.koleksitopi.Length > 0)
+                {
+                    PlayerPrefsX.SetStringArray("koleksitopi", customData.koleksitopi);
+                }
 
                 PlayerPrefs.SetInt("levelbag", customData.levelbag);
 
