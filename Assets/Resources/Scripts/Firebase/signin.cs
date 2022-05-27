@@ -43,6 +43,44 @@ public class signin : MonoBehaviour
     
     public void FBLogin()
     {
+        MainMenuController.instance.notifkonek.SetActive(true);
+        if (FB.IsLoggedIn)
+        {
+            // AccessToken class will have session details
+            var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
+            // Print current access token's User ID
+            Debug.Log(aToken.UserId);
+            statusTextFB.text = aToken.UserId;
+
+            Firebase.Auth.Credential credential =
+    Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
+            firedatabase.auth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("SignInWithCredentialAsync was canceled.");
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("SignInWithCredentialAsync encountered an error: " + task.Exception);
+                    return;
+                }
+                if (task.IsCompleted)
+                {
+                    Firebase.Auth.FirebaseUser newUser = task.Result;
+                    LinkedAcc linkedAcc = new LinkedAcc("Facebook", newUser.Email, newUser.DisplayName, newUser.UserId);
+                    firedatabase.instance.cekidexist("Facebook", newUser.UserId.ToString());
+                }
+                MainMenuController.instance.notifkonek.SetActive(false);
+
+                //Debug.LogFormat("User signed in successfully: {0} ({1})",
+                //    newUser.DisplayName, newUser.UserId);
+                //FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string>() { });
+
+
+            });
+
+        }else
         FB.LogInWithReadPermissions(perms, AuthCallback);
     }
 
@@ -55,18 +93,41 @@ public class signin : MonoBehaviour
             // Print current access token's User ID
             Debug.Log(aToken.UserId);
             statusTextFB.text = aToken.UserId;
-            // Print current access token's granted permissions
-            foreach (string perm in aToken.Permissions)
-            {
-                Debug.Log(perm);
-            }
-            FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string>() { });
+
+            Firebase.Auth.Credential credential =
+    Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
+            firedatabase.auth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("SignInWithCredentialAsync was canceled.");
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("SignInWithCredentialAsync encountered an error: " + task.Exception);
+                    return;
+                }
+                if (task.IsCompleted)
+                {
+                    Firebase.Auth.FirebaseUser newUser = task.Result;
+                    LinkedAcc linkedAcc = new LinkedAcc("Facebook", newUser.Email, newUser.DisplayName, newUser.UserId);
+                    firedatabase.instance.cekidexist("Facebook", newUser.UserId.ToString());
+                }
+                MainMenuController.instance.notifkonek.SetActive(false);
+
+                //Debug.LogFormat("User signed in successfully: {0} ({1})",
+                //    newUser.DisplayName, newUser.UserId);
+                //FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string>() { });
+
+
+            });            
 
         }
         else
         {
             Debug.Log("User cancelled login");
             statusTextFB.text = "User cancelled login";
+            MainMenuController.instance.notifkonek.SetActive(false);
         }
     }
 
@@ -78,8 +139,9 @@ public class signin : MonoBehaviour
             Debug.Log(result.ResultDictionary["name"].ToString());
             Debug.Log(result.ResultDictionary["email"].ToString());
 
-            LinkedAcc linkedAcc = new LinkedAcc("Facebook", result.ResultDictionary["email"].ToString(), result.ResultDictionary["name"].ToString(), result.ResultDictionary["id"].ToString());
-            StartCoroutine(firedatabase.instance.WriteNewUser(inputField.text, linkedAcc));
+            
+            
+            //StartCoroutine(firedatabase.instance.WriteNewUser(inputField.text, linkedAcc));
         }
         else
         {
@@ -98,10 +160,16 @@ public class signin : MonoBehaviour
           OnAuthenticationFinished);
     }
 
-    public void OnSignOut()
+    public void OnSignOut(string tipeacc)
     {
         AddStatusText("Calling SignOut");
-        GoogleSignIn.DefaultInstance.SignOut();
+        if (tipeacc == "Google")
+            GoogleSignIn.DefaultInstance.SignOut();
+        else if (tipeacc == "Facebook")
+        {
+            Debug.Log("Keluar FB");
+            FB.LogOut();
+        }
     }
 
     public void OnDisconnect()

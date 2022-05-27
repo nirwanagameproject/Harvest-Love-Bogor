@@ -14,6 +14,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     public GameObject singleplayerOBJ;
     public GameObject loadgameOBJ;
     public GameObject multiplayerOBJ;
+    public GameObject loginmultiplayerOBJ;
     public GameObject earlyOBJ;
     public GameObject permainanbaruOBJ;
     public GameObject loadgamemultiplayerOBJ;
@@ -342,6 +343,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         }
         mainmenuOBJ.SetActive(true);
         singleplayerOBJ.SetActive(false);
+        loginmultiplayerOBJ.SetActive(false);
         multiplayerOBJ.SetActive(false);
         notifkonek.SetActive(false);
         PlayerPrefs.DeleteKey("online");
@@ -359,6 +361,22 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         multiplayerOBJ.SetActive(true);
         notifkonek.SetActive(true);
         MyConnection.Instance.KonekKeMaster();
+    }
+
+    public void ClickLoginMultiPlayer()
+    {
+        callAudioClicked();
+
+        mainmenuOBJ.SetActive(false);
+        loginmultiplayerOBJ.SetActive(true);
+    }
+
+    public void ClickBackLoginMultiplayer()
+    {
+        callAudioClicked();
+
+        loginmultiplayerOBJ.SetActive(false);
+        mainmenuOBJ.SetActive(true);
     }
 
     public void ClickPermainanBaru()
