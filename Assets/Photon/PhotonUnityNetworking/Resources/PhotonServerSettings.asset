@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 162f4fbb-2882-405f-a12f-9f6ab04df729
+    AppIdRealtime: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -36,13 +36,16 @@ MonoBehaviour:
   - deleteBale
   - DestroyRpc
   - DestroySpaceship
+  - destroyStone
   - dropBale
   - Fire
+  - gantiBaju
   - gantiWarna
   - getChat
   - gunaintools
   - jump
   - keluarBobo
+  - mintaposisi
   - ngajakBobo
   - OrangJoin
   - paculan
@@ -50,11 +53,8 @@ MonoBehaviour:
   - pindahlevel
   - pindahposisikasur
   - RespawnSpaceship
+  - setposisiawal
   - sinkronWaktu
   - tidursemua
-  - setposisiawal
-  - mintaposisi
-  - destroyStone
-  - gantiBaju
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
