@@ -18,6 +18,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     public GameObject earlyOBJ;
     public GameObject permainanbaruOBJ;
     public GameObject loadgamemultiplayerOBJ;
+    public GameObject loadInventoryOBJ;
+    public GameObject loadShopOBJ;
     public GameObject pilihkarakterOBJ;
     public GameObject lobbyOBJ;
     public GameObject settingOBJ;
@@ -25,6 +27,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     public GameObject notifwrong;
     public GameObject notifkonek;
+    public GameObject notifpurchased;
     public GameObject konfirmlanjut;
     public GameObject transisi;
 
@@ -40,6 +43,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     public Dropdown inputclothescolor;
     public Dropdown inputpantscolor;
     public Dropdown inputskincolor;
+    public Dropdown inputDropdownLanguage;
 
     public string roomName;
     public string pilihMenu;
@@ -319,6 +323,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         mainmenuOBJ.SetActive(false);
         singleplayerOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickMulaiBaruMultiplayer()
@@ -328,6 +333,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         permainanbaruOBJ.SetActive(true);
         loadgamemultiplayerOBJ.SetActive(false);
         multiplayerOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void BackToLoadingMenu()
@@ -351,6 +357,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Disconnect();
         }
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickMultiPlayer()
@@ -361,6 +368,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         multiplayerOBJ.SetActive(true);
         notifkonek.SetActive(true);
         MyConnection.Instance.KonekKeMaster();
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickLoginMultiPlayer()
@@ -369,6 +377,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         mainmenuOBJ.SetActive(false);
         loginmultiplayerOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBackLoginMultiplayer()
@@ -377,6 +386,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         loginmultiplayerOBJ.SetActive(false);
         mainmenuOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickPermainanBaru()
@@ -386,6 +396,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         earlyOBJ.SetActive(false);
         singleplayerOBJ.SetActive(false);
         permainanbaruOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
 
     }
 
@@ -396,7 +407,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         earlyOBJ.SetActive(false);
         singleplayerOBJ.SetActive(false);
         GameObject.Find("Canvas").transform.Find("Credits").gameObject.SetActive(true);
-
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBackCredits()
@@ -411,6 +422,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteKey("online");
         if (PhotonNetwork.IsConnected)
             PhotonNetwork.Disconnect();
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickOKNotifWrong()
@@ -418,6 +430,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
 
         notifwrong.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickOKSetNama()
@@ -1057,6 +1070,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         mainmenuOBJ.SetActive(false);
         loadgameOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBatalLoadGame()
@@ -1065,6 +1079,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         //mainmenuOBJ.SetActive(true);
         loadgameOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickLoadGameLanjut(string loadstate)
@@ -1077,16 +1092,16 @@ public class MainMenuController : MonoBehaviourPunCallbacks
                     if (loadgamemultiplayerOBJ.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Button" + i).Find("Text").gameObject.activeInHierarchy)
                     {
                         callAudioWrongClicked();
-                        notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Ga ada save-an";
                         notifwrong.SetActive(true);
+                        ClickChangeLanguage(inputDropdownLanguage);
                         return;
                     }
                 if (loadstate == "savestate" + i)
                     if (pilihkarakterOBJ.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Button" + i).Find("Text").gameObject.activeInHierarchy)
                     {
                         callAudioWrongClicked();
-                        notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Ga ada save-an";
                         notifwrong.SetActive(true);
+                        ClickChangeLanguage(inputDropdownLanguage);
                         return;
                     }
             }
@@ -1094,9 +1109,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             if(loadstate=="savestate"+i)
                 if(loadgameOBJ.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Button"+i).Find("Text").gameObject.activeInHierarchy)
                 {
-                        callAudioWrongClicked();
-                        notifwrong.transform.Find("BotNotif").Find("Text").GetComponent<Text>().text = "Ga ada save-an";
+                    callAudioWrongClicked();
                     notifwrong.SetActive(true);
+                    ClickChangeLanguage(inputDropdownLanguage);
                     return;
                 }
         callAudioClicked();
@@ -1142,6 +1157,49 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         if (GameObject.Find("PlayerSpawn").transform.childCount > 0)
             GameObject.Find("PlayerSpawn").transform.GetChild(0).GetComponent<PhotonView>().RPC("OrangJoin", RpcTarget.Others, PlayerPrefs.GetString("myname"));
 
+    }
+
+    //INVENTORY BUTTON
+    public void ClickInventoryButton(string tipe)
+    {
+        callAudioClicked();
+
+        loadInventoryOBJ.SetActive(true);
+        StartCoroutine(firedatabase.instance.cekInventory(tipe));
+    }
+    public void ClickBatalInventoryButton()
+    {
+        callAudioClicked();
+
+        loadInventoryOBJ.SetActive(false);
+    }
+
+    
+
+    public void ClickOKPurchaseCompleted()
+    {
+        callAudioClicked();
+        notifpurchased.transform.Find("BotNotif").Find("RawImage").transform.GetComponent<RawImage>().texture = Resources.Load<Texture2D>("Images/loading");
+        notifpurchased.transform.Find("BotNotif").Find("TextAmount").transform.GetComponent<Text>().text = "";
+        notifpurchased.SetActive(false);
+    }
+
+    //SHOP BUTTON
+    public void ClickShopButton(string tipe)
+    {
+        callAudioClicked();
+
+        loadShopOBJ.SetActive(true);
+        loadShopOBJ.transform.Find("Text").transform.GetComponent<ChangeLanguage>().ChangedLanguge();
+        loadShopOBJ.transform.Find("ButtonUang").Find("Text").transform.GetComponent<ChangeLanguage>().ChangedLanguge();
+        loadShopOBJ.transform.Find("ButtonBarang").Find("Text").transform.GetComponent<ChangeLanguage>().ChangedLanguge();
+        StartCoroutine(firedatabase.instance.cekShop(tipe));
+    }
+    public void ClickBatalShopButton()
+    {
+        callAudioClicked();
+
+        loadShopOBJ.SetActive(false);
     }
 
     //HOST BUTTON

@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.google.external-dependency-manager": {
-      "version": "1.2.157",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unityregistry-pa.googleapis.com"
-    },
-    "com.unity.autolod": {
-      "version": "https://github.com/Unity-Technologies/AutoLOD.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a2805220a400a6994df3cb84bd3d89b70ad74810"
-    },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
       "depth": 0,
@@ -45,10 +31,17 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.purchasing": {
-      "version": "2.0.6",
+      "version": "4.1.5",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.unityanalytics": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.services.core": "1.0.1"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
@@ -57,6 +50,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.services.core": {
+      "version": "1.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -112,13 +114,6 @@
         "com.unity.shadergraph": "7.3.1"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.whinarn.unitymeshsimplifier": {
-      "version": "https://github.com/Unity-Technologies/UnityMeshSimplifier.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a6d70fb447098e8f0c9162a63afd679ac410aabb"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
-using Firebase.Unity.Editor;
 using Firebase.Database;
 
 [Serializable]

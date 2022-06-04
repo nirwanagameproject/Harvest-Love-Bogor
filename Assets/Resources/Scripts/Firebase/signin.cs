@@ -6,6 +6,8 @@ using Google;
 using UnityEngine;
 using UnityEngine.UI;
 using Facebook.Unity;
+using Firebase.Auth;
+using System.Collections;
 
 public class signin : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class signin : MonoBehaviour
     public string webClientId = "300596356012-2nkohurv7jsibqc1sas6ts1d4d5uv4lc.apps.googleusercontent.com";
 
     private GoogleSignInConfiguration configuration;
+    private FirebaseAuth auth;
+    private string myUserID;
+    private string myTipeLinkedAcc;
 
     // Defer the configuration creation until Awake so the web Client ID
     // Can be set via the property inspector in the Editor.
@@ -25,9 +30,12 @@ public class signin : MonoBehaviour
         configuration = new GoogleSignInConfiguration
         {
             WebClientId = webClientId,
-            RequestIdToken = true
+            RequestEmail = true,
+            RequestIdToken = true,
         };
-        
+        auth = FirebaseAuth.DefaultInstance;
+
+
         if (!FB.IsInitialized)
         {
             // Initialize the Facebook SDK
@@ -37,6 +45,8 @@ public class signin : MonoBehaviour
         {
             // Already initialized, signal an app activation App Event
             FB.ActivateApp();
+            if (FB.IsLoggedIn)
+                FB.LogOut();
         }
         
     }
@@ -69,7 +79,7 @@ public class signin : MonoBehaviour
                 {
                     Firebase.Auth.FirebaseUser newUser = task.Result;
                     LinkedAcc linkedAcc = new LinkedAcc("Facebook", newUser.Email, newUser.DisplayName, newUser.UserId);
-                    firedatabase.instance.cekidexist("Facebook", newUser.UserId.ToString());
+                    firedatabase.instance.cekIDGoogle("Facebook", newUser.UserId.ToString(), newUser.Email.ToString());
                 }
                 MainMenuController.instance.notifkonek.SetActive(false);
 
@@ -110,17 +120,24 @@ public class signin : MonoBehaviour
                 if (task.IsCompleted)
                 {
                     Firebase.Auth.FirebaseUser newUser = task.Result;
-                    LinkedAcc linkedAcc = new LinkedAcc("Facebook", newUser.Email, newUser.DisplayName, newUser.UserId);
-                    firedatabase.instance.cekidexist("Facebook", newUser.UserId.ToString());
+                    Debug.Log("Welcome: " + newUser.DisplayName + "!");
+                    Debug.Log("Email = " + newUser.Email);
+                    Debug.Log("Facebook ID Token = " + newUser.UserId);
+                    myUserID = newUser.UserId;
+
+
                 }
                 MainMenuController.instance.notifkonek.SetActive(false);
 
                 //Debug.LogFormat("User signed in successfully: {0} ({1})",
                 //    newUser.DisplayName, newUser.UserId);
-                //FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string>() { });
+                
 
 
-            });            
+
+            });
+
+            FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string>() { });
 
         }
         else
@@ -131,16 +148,25 @@ public class signin : MonoBehaviour
         }
     }
 
+    IEnumerator WaitAndPrint(IResult result)
+    {
+        myTipeLinkedAcc = "Facebook";
+        Debug.Log("myTipeLinkedAcc : "+ myTipeLinkedAcc);
+        yield return new WaitUntil(() => myUserID!=null);
+        string myemail = "";
+        if (result.ResultDictionary.ContainsKey("email")) if (!result.ResultDictionary["email"].ToString().Equals("")) myemail = result.ResultDictionary["email"].ToString();
+         LinkedAcc linkedAcc = new LinkedAcc("Facebook", myemail, result.ResultDictionary["name"].ToString(), result.ResultDictionary["id"].ToString());
+        firedatabase.instance.cekIDGoogle("Facebook", myUserID, myemail);
+    }
+
     public void GetFacebookInfo(IResult result)
     {
         if (result.Error == null)
         {
-            Debug.Log(result.ResultDictionary["id"].ToString());
+            Debug.Log(myUserID);
             Debug.Log(result.ResultDictionary["name"].ToString());
-            Debug.Log(result.ResultDictionary["email"].ToString());
 
-            
-            
+            StartCoroutine(WaitAndPrint(result));
             //StartCoroutine(firedatabase.instance.WriteNewUser(inputField.text, linkedAcc));
         }
         else
@@ -155,13 +181,16 @@ public class signin : MonoBehaviour
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
         AddStatusText("Calling SignIn");
-
+        Debug.Log(webClientId);
+        MainMenuController.instance.notifkonek.SetActive(true);
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(
           OnAuthenticationFinished);
     }
 
-    public void OnSignOut(string tipeacc)
+    public void OnSignOut()
     {
+        string tipeacc = myTipeLinkedAcc;
+        Debug.Log("Keluar "+ myTipeLinkedAcc);
         AddStatusText("Calling SignOut");
         if (tipeacc == "Google")
             GoogleSignIn.DefaultInstance.SignOut();
@@ -170,6 +199,7 @@ public class signin : MonoBehaviour
             Debug.Log("Keluar FB");
             FB.LogOut();
         }
+        myUserID = null;
     }
 
     public void OnDisconnect()
@@ -189,22 +219,69 @@ public class signin : MonoBehaviour
                 {
                     GoogleSignIn.SignInException error =
                             (GoogleSignIn.SignInException)enumerator.Current;
-                    AddStatusText("Got Error: " + error.Status + " " + error.Message);
+                    Debug.Log("Got Error: " + error.Status + " " + error.Message);
                 }
                 else
                 {
-                    AddStatusText("Got Unexpected Exception?!?" + task.Exception);
+                    Debug.Log("Got Unexpected Exception?!?" + task.Exception);
                 }
             }
         }
         else if (task.IsCanceled)
         {
-            AddStatusText("Canceled");
+            Debug.Log("Canceled");
         }
         else
         {
-            AddStatusText("Welcome: " + task.Result.DisplayName + "!");
+            Debug.Log("Welcome: " + task.Result.DisplayName + "!");
+            Debug.Log("Email = " + task.Result.Email);
+            Debug.Log("Google ID Token = " + task.Result.IdToken);
+            Debug.Log("Email = " + task.Result.Email);
+            SignInWithGoogleOnFirebase(task.Result.IdToken, task.Result.Email);
+            MainMenuController.instance.notifkonek.SetActive(false);
         }
+    }
+
+    private void SignInWithGoogleOnFirebase(string idToken, string myEmail)
+    {
+        Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
+
+        auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
+        {
+            AggregateException ex = task.Exception;
+            if (ex != null)
+            {
+                if (ex.InnerExceptions[0] is Firebase.FirebaseException inner && (inner.ErrorCode != 0))
+                    Debug.Log("\nError code = " + inner.ErrorCode + " Message = " + inner.Message);
+            }
+            else
+            {
+                Debug.Log("Sign In Successful.");
+                myTipeLinkedAcc = "Google";
+                Debug.Log("myTipeLinkedAcc : "+ myTipeLinkedAcc);
+                Firebase.Auth.FirebaseUser newUser = task.Result;
+                LinkedAcc linkedAcc = new LinkedAcc("Google", newUser.Email, newUser.DisplayName, newUser.UserId);
+                firedatabase.instance.cekIDGoogle("Google", newUser.UserId.ToString(), myEmail);
+            }
+        });
+    }
+
+    private void CheckFirebaseDependencies()
+    {
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                if (task.Result == Firebase.DependencyStatus.Available)
+                    auth = FirebaseAuth.DefaultInstance;
+                else
+                    Debug.Log("Could not resolve all Firebase dependencies: " + task.Result.ToString());
+            }
+            else
+            {
+                Debug.Log("Dependency check was not completed. Error : " + task.Exception.Message);
+            }
+        });
     }
 
     public void OnSignInSilently()
@@ -239,6 +316,8 @@ public class signin : MonoBehaviour
             FB.ActivateApp();
             // Continue with Facebook SDK
             // ...
+            if (FB.IsLoggedIn)
+                FB.LogOut();
         }
         else
         {

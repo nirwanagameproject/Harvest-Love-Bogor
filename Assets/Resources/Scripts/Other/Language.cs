@@ -28,7 +28,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Tentang kami");
         bahasaID.Add("Bahasa");
         bahasaID.Add("Permainan Baru");
-        bahasaID.Add("Memuat Permainan");
+        bahasaID.Add("Memuat Permainan"); // 6
         bahasaID.Add("Kembali"); // 7
         bahasaID.Add("Tuan Rumah");
         bahasaID.Add("Bergabung");
@@ -69,7 +69,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Winter adalah musim dingin");
         bahasaID.Add("Nama");
         bahasaID.Add("Selamat datang di Kota Bogor :)");
-        bahasaID.Add(""); //24
+        bahasaID.Add("Ga ada save-an bro"); //24
         bahasaID.Add("Kamu adalah seorang anak tunggal dari petani yang ditinggalkan oleh orang tua kamu.");
         bahasaID.Add("Di Kota Bogor kamu akan berjuang dengan sisa warisan dari orang tua berupa lahan pertanian dan peternakan.");
         bahasaID.Add("Pertama, silahkan masukkan nama kamu...");
@@ -134,6 +134,16 @@ public class Language : MonoBehaviour
         bahasaID.Add("Keluar"); // 83
         bahasaID.Add("Peta"); // 84
         bahasaID.Add("Misi"); // 85
+        bahasaID.Add("Barang Inventaris"); // 86
+        bahasaID.Add("Inventaris"); // 87
+        bahasaID.Add("Teman"); // 88
+        bahasaID.Add("Belanja"); // 89
+        bahasaID.Add("Uang"); // 90
+        bahasaID.Add("Barang"); // 91
+        bahasaID.Add("Mohon tunggu..."); // 92
+        bahasaID.Add("Mantap, pembelian berhasil !!"); // 93
+        bahasaID.Add("Menyambungkan ke server..."); // 94
+        bahasaID.Add("Tidak ada save dislot ini"); // 95
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -184,7 +194,7 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Winter is season after fall");
         bahasaUS.Add("Name");
         bahasaUS.Add("Welcome to Bogor City :)");
-        bahasaUS.Add(""); //24
+        bahasaUS.Add("Nothing save file here"); //24
         bahasaUS.Add("You're an only child from a farmer who was abandoned by your parents.");
         bahasaUS.Add("In Bogor City, you will struggle with the remaining inheritance from your parents in the form of agricultural land and livestock.");
         bahasaUS.Add("First, please enter your name...");
@@ -249,6 +259,16 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Quit"); // 83
         bahasaUS.Add("Map"); // 84
         bahasaUS.Add("Quest"); // 85
+        bahasaUS.Add("Inventory"); // 86
+        bahasaUS.Add("Inventory"); // 87
+        bahasaUS.Add("Friends"); // 88
+        bahasaUS.Add("Shop"); // 89
+        bahasaUS.Add("Money"); // 90
+        bahasaUS.Add("Items"); // 91
+        bahasaUS.Add("Please Wait..."); // 92
+        bahasaUS.Add("Cool, you got new stuff !!"); // 93
+        bahasaUS.Add("Connecting to the server..."); // 94
+        bahasaUS.Add("No save file here"); // 95
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -299,7 +319,7 @@ public class Language : MonoBehaviour
         bahasaJP.Add("Winterは冬");
         bahasaJP.Add("名前");
         bahasaJP.Add("ボゴールへようこそ！　:)");
-        bahasaJP.Add("");
+        bahasaJP.Add("ここにストレージはありません");
         bahasaJP.Add("君は一人っ子。ご両親はもういなくなった。");
         bahasaJP.Add("この街にご両親からの遺産で生きている。");
         bahasaJP.Add("まずは、君の名は？");
@@ -362,8 +382,18 @@ public class Language : MonoBehaviour
         bahasaJP.Add("ホストまたは" +
         "\n接続に問題がある"); //82
         bahasaJP.Add("終了"); // 83
-        bahasaJP.Add("Peta"); // 84
-        bahasaJP.Add("Quest"); // 85
+        bahasaJP.Add("地図"); // 84
+        bahasaJP.Add("クエスト"); // 85
+        bahasaJP.Add("在庫"); // 86
+        bahasaJP.Add("在庫"); // 87
+        bahasaJP.Add("友達"); // 88
+        bahasaJP.Add("店"); // 89
+        bahasaJP.Add("お金"); // 90
+        bahasaJP.Add("品"); // 91
+        bahasaJP.Add("お待ちください..."); // 92
+        bahasaJP.Add("素晴らしい、成功した購入！"); // 93
+        bahasaJP.Add("サーバーへの接続..."); // 94
+        bahasaJP.Add("ここに保存ファイルはありません"); // 95
 
     }
 

@@ -53,7 +53,7 @@ public class LoadingScreen : MonoBehaviourPunCallbacks
 
             for (int i = 0; i < GameObjects.Length; i++)
             {
-                if (GameObjects[i].name != "PhotonMono" && GameObjects[i].name != "[Debug Updater]" && GameObjects[i].tag != "Transisi")
+                if (GameObjects[i].name != "Firebase Services" && GameObjects[i].name != "PhotonMono" && GameObjects[i].name != "UnityFacebookSDKPlugin" && GameObjects[i].name != "[Debug Updater]" && GameObjects[i].tag != "Transisi")
                     Destroy(GameObjects[i]);
             }
             PhotonNetwork.LeaveRoom();
