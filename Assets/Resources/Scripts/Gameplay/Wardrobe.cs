@@ -8,6 +8,9 @@ public class Wardrobe : MonoBehaviour
 {
     public GameObject cubeaction;
     public string level;
+    bool munculcubeaction = false;
+    bool enterPlayer = false;
+    Collider[] mycolliderPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,44 +28,42 @@ public class Wardrobe : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (cubeaction != null)
+
+        mycolliderPlayer = Physics.OverlapSphere(transform.position, 0.5f, LayerMask.GetMask("Player"));
+
+        for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") { enterPlayer = true; break; }
+
+        if (enterPlayer && PhotonNetwork.CurrentRoom.CustomProperties["wardrobe"].Equals(""))
         {
-            Collider[] mycolliderPlayer = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Player"));
-            bool enterPlayer = mycolliderPlayer.Length != 0;
-
-            if (enterPlayer && (!PlayerPrefs.HasKey("buttonChangeClothes") || PlayerPrefs.GetString("buttonChangeClothes") ==name))
+            for (int k = 0; k < mycolliderPlayer.Length; k++)
             {
-                for (int i = 0; i < mycolliderPlayer.Length; i++)
+                if (mycolliderPlayer[k].GetComponent<PhotonView>().IsMine)
                 {
-                    if (mycolliderPlayer[i].GetComponent<PhotonView>().IsMine)
-                    {
-                        if (!PlayerPrefs.HasKey("buttonChangeClothes"))
-                        {
-                            cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
-                            cubeaction.SetActive(true);
-                        }
-                        PlayerPrefs.SetString("buttonChangeClothes", name);
-
-                        break;
-                    }
-                    else
-                    {
-                        if (PlayerPrefs.HasKey("buttonChangeClothes") && i == mycolliderPlayer.Length - 1)
-                        {
-                            cubeaction.SetActive(false);
-                            PlayerPrefs.DeleteKey("buttonChangeClothes");
-                        }
-                    }
+                    if (cubeaction == null)
+                        cubeaction = CariGameObject.FindInActiveObjectByName("CubeAction");
+                    cubeaction.SetActive(true);
+                    cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                    munculcubeaction = true;
+                    PlayerPrefs.SetString("buttonChangeClothes", name);
                 }
-                cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
-            }
-            else
-            if (!enterPlayer && PlayerPrefs.HasKey("buttonChangeClothes") && PlayerPrefs.GetString("buttonChangeClothes") ==name)
-            {
-                cubeaction.SetActive(false);
-                PlayerPrefs.DeleteKey("buttonChangeClothes");
             }
         }
+        else if (munculcubeaction)
+        {
+            cubeaction.SetActive(false);
+            munculcubeaction = false;
+            PlayerPrefs.DeleteKey("buttonChangeClothes");
+        }
+        else if(PhotonNetwork.LocalPlayer.NickName==PhotonNetwork.CurrentRoom.CustomProperties["wardrobe"].ToString())
+        {
+            mycolliderPlayer = Physics.OverlapSphere(transform.position, 0.5f, LayerMask.GetMask("Player"));
+            for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PhotonNetwork.CurrentRoom.CustomProperties["wardrobe"] + ")") { enterPlayer = true; break; }
+            if (!enterPlayer)
+            {
+                GameObject.Find("CanvasHome").transform.Find("Dandan").Find("PilihKoleksi").GetComponent<koleksi>().TutupWardrobe();
+            }
+        }
+        enterPlayer = false;
 
         
 

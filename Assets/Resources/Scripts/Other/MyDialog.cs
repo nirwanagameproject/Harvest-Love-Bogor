@@ -32,8 +32,8 @@ public class MyDialog : ChangeLanguage
 
     IEnumerator intro1()
     {
-        Debug.Log("Mulai");
-        Debug.Log(GetLanguage(23));
+        Debug.Log("Mulai New Game");
+        isitext.text = "";
         PercakapanBaru(GetLanguage(23), true);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
         {

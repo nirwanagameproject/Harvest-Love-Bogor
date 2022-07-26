@@ -91,6 +91,9 @@ public class koleksi : MonoBehaviour
         GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonKarakter").GetComponent<Image>().color = mycolor;
         GameObject.Find("CanvasHome").transform.Find("Dandan").Find("ButtonAksesoris").GetComponent<Image>().color = Color.white;
         PlayerPrefs.DeleteKey("buttonChangeClothes");
+        ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
+        custom.Add("wardrobe", "");
+        PhotonNetwork.CurrentRoom.SetCustomProperties(custom);
 
     }
 

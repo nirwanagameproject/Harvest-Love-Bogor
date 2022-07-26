@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: 162f4fbb-2882-405f-a12f-9f6ab04df729
+    AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -21,15 +22,21 @@ MonoBehaviour:
     FixedRegion: 
     Server: 
     Port: 0
+    ProxyServer: 
     Protocol: 0
-    EnableLobbyStatistics: 0
+    EnableProtocolFallback: 0
+    AuthMode: 0
+    EnableLobbyStatistics: 1
     NetworkLogging: 1
+  DevRegion: asia
   PunLogging: 0
-  EnableSupportLogger: 0
+  EnableSupportLogger: 1
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
   - addBale
+  - addHewan
+  - ayamspawn
   - changeweapon
   - ClickRpc
   - cowaktif
@@ -37,24 +44,48 @@ MonoBehaviour:
   - DestroyRpc
   - DestroySpaceship
   - destroyStone
+  - destroyTaneman
+  - destroyTaneman2
   - dropBale
+  - dropHewan
+  - EatGiftRpc
+  - endPercakapanSemua
   - Fire
   - gantiBaju
+  - gantiLevel
+  - gantipemilik
   - gantiWarna
   - getChat
   - gunaintools
   - jump
   - keluarBobo
+  - melihatYgNanya
   - mintaposisi
+  - mintareqnama
   - ngajakBobo
   - OrangJoin
   - paculan
   - pickBale
+  - pickHewan
+  - pickItem
   - pindahlevel
   - pindahposisikasur
+  - randomSound
+  - refreshTiemout
   - RespawnSpaceship
+  - setActiveGameobject
+  - setActiveGameobjectChild
   - setposisiawal
+  - setTvChannel
+  - setWidthTextDialog
   - sinkronWaktu
+  - talkSamaan
+  - talkSamaanHaiDulu
   - tidursemua
+  - tumbuhBuah
+  - turnOnTv
+  - tutupDialogTimeout
+  - updatePlayerUI
   DisableAutoOpenWizard: 1
   ShowSettings: 1
+  DevRegionSetOnce: 1

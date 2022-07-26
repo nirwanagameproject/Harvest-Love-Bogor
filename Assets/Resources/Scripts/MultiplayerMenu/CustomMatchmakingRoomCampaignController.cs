@@ -109,22 +109,8 @@ public class CustomMatchmakingRoomCampaignController : MonoBehaviourPunCallbacks
     {
         /*if (!CustomMatchmakingLobbyCampaignController.instance.testjoin)
         {*/
-            ExitGames.Client.Photon.Hashtable setValue = new ExitGames.Client.Photon.Hashtable();
-            setValue.Add("ItemCount", 0);
-            setValue.Add("box1", false);
-            setValue.Add("box2", false);
-            setValue.Add("box3", false);
-            setValue.Add("box4", false);
-            setValue.Add("box5", false);
-            setValue.Add("box6", false);
-            setValue.Add("box7", false);
-            setValue.Add("box8", false);
-            setValue.Add("box9", false);
-            setValue.Add("box10", false);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(setValue);
-            Debug.Log("asd" + (int)PhotonNetwork.CurrentRoom.CustomProperties["ItemCount"]);
 
-            notifpanel.SetActive(false);
+            //notifpanel.SetActive(false);
             if (PhotonNetwork.IsMasterClient)
             {
                 MainMenuController.instance.transisi.SetActive(true);

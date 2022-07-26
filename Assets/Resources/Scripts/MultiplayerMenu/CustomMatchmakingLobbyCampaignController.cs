@@ -82,54 +82,38 @@ public class CustomMatchmakingLobbyCampaignController : MonoBehaviourPunCallback
         //FirstConnect();
     }
 
-    public void Update()
-    {
-        /*waktu += Time.deltaTime;
 
-        if(waktu >= 3)
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        //SET CHIKEN / COW / GOAT TO MASTERCLIENT
+        if (propertiesThatChanged.ToStringFull().Contains("CowLevel") &&
+            propertiesThatChanged.ToStringFull().Contains("CowMilk") &&
+            propertiesThatChanged.ToStringFull().Contains("CowHeart") && 
+            propertiesThatChanged.ToStringFull().Contains("CowSick") && 
+            PhotonNetwork.IsMasterClient)
         {
-            if (redejoin != null)
+            int i = 0;
+            for(;i<(int)PhotonNetwork.CurrentRoom.CustomProperties["CowMax"];i++)
+            foreach (var key in propertiesThatChanged.Keys)
             {
-                Debug.Log(redejoin.Count);
-                bool sudh = false;
-                for (int i = 0; i < redejoin.Count; i++)
+                if ("Cow"+i == key.ToString() && PlayerPrefs.GetString("Cow" + i) == "")
                 {
-                    if (redejoin.Count > 0)
-                    {
-                        Debug.Log("Join Ruang"+ redejoin[i]);
-                        Debug.Log("Sudah Join : " + sudahjoin);
-                        if((konekMaster && sudahjoin && !awalites && methodJoinAwal))
-                        {
-                            Debug.Log("Berhasil Join Ruang");
-                            PhotonNetwork.JoinRoom(tempRoomListings[i].Name);
-                            methodJoinAwal = false;
-                        }
-                        if ((konekMaster && sudahjoin && PhotonNetwork.IsConnectedAndReady && redejoin[i]))
-                        {
-                            Debug.Log("Berhasil Join Ruang");
-                            PhotonNetwork.JoinRoom(tempRoomListings[i].Name);
-                        }
-                        if (sudahroom && !awalites && methodLeftAwal)
-                        {
-                            Debug.Log("Berhasil Left Ruang");
-                            TinggalkanRuangan(i);
-                            methodLeftAwal = false;
-                        }
-                        if ((sudahroom && PhotonNetwork.IsConnectedAndReady && rederoom[i]) )
-                        {
-                            Debug.Log("Berhasil Left Ruang");
-                            TinggalkanRuangan(i);
-                        }
-                        sudh = true;
-                    }
+                    PlayerPrefs.SetString("Cow" + i, PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString());
+                    PlayerPrefs.SetInt("CowHeart" + i, 0);
+                    PlayerPrefs.SetString("CowLevel" + i, "MasukKandangSapi");
+                    PlayerPrefs.SetInt("CowSick" + i, 0);
+                    PlayerPrefs.SetInt("CowSilver" + i, 0);
+                    PlayerPrefs.SetInt("CowGold" + i, 0);
+                    PlayerPrefs.SetString("CowMilk" + i, "");
+                    PlayerPrefs.SetFloat("CowPosX" + i, 1);
+                    PlayerPrefs.SetFloat("CowPosY" + i, 1);
+                    PlayerPrefs.SetFloat("CowPosZ" + i, 4);
+                    PlayerPrefs.SetString("CowTipe" + i, PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[0]);
+                    Debug.Log("SET "+ PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[0] + " BARU: "+key.ToString());
                 }
-                if (sudh)
-                {
-                    awals = 0;
-                }
+                break;
             }
-            waktu = 0;
-        }*/
+        }
     }
 
 
@@ -273,21 +257,7 @@ public class CustomMatchmakingLobbyCampaignController : MonoBehaviourPunCallback
         sudahjoin = true;
     }
 
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Room berhasil dimuat");
-        if (sudahroom == false)
-        {
 
-        }
-        else
-        {
-            rederoom[awals] = true;
-            awals++;
-        }
-        sudahroom = true;
-        Debug.Log("Room berhasil dimuat (finish)");
-    }
 
     public override void OnJoinRoomFailed(short returnCode,string message)
     {
@@ -451,7 +421,8 @@ public class CustomMatchmakingLobbyCampaignController : MonoBehaviourPunCallback
 
             //PhotonNetwork.CreateRoom(chosenLevel, true, true, 10, customPropertiesToSet, customPropertiesForLobby);
 
-            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = false, MaxPlayers = (byte)roomSize, BroadcastPropsChangeToAll = true };
+            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = false, MaxPlayers = (byte)roomSize, BroadcastPropsChangeToAll = false, CleanupCacheOnLeave = false };
+            roomOps.EmptyRoomTtl = 10000;
             //TypedLobby typedLobby = new TypedLobby() { Name = "campaign", Type = LobbyType.Default };
             roomOps.CustomRoomPropertiesForLobby = new string[] { "campaign", "ai", "tanggal", "musim", "tahun", "jam", "detik" };
             roomOps.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "campaign", 2020 } , { "tanggal", PlayerPrefs.GetInt("tanggal") }, { "musim", PlayerPrefs.GetString("musim") }, { "tahun", PlayerPrefs.GetInt("tahun") }

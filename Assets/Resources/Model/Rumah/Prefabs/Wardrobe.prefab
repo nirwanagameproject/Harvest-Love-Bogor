@@ -89,7 +89,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2674729612197198600}
-  - component: {fileID: 7153004562875796601}
   m_Layer: 0
   m_Name: Wardrobe
   m_TagString: Untagged
@@ -112,33 +111,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &7153004562875796601
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3338676702888534450}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.0000009536743, y: 0.000010788441, z: 0.00000500679}
-  m_Size: 1.9907503
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.12282875
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.03483812
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  m_Enabled: 1
 --- !u!1 &4309235271910003087
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,9 @@ public class Bale : MonoBehaviour
                 for (int i = 0; i < transform.Find("modelbale").childCount; i++)
                 {
                     mycolliderPlayer = Physics.OverlapSphere(transform.Find("modelbale").GetChild(i).position, 1f, LayerMask.GetMask("Player"));
-                    bool enterPlayer = mycolliderPlayer.Length != 0;
+                    bool enterPlayer = false;
+
+                    for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") { enterPlayer = true; break; }
 
                     if (enterPlayer && (cek == 1 || cek == 3))
                     {

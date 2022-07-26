@@ -26,6 +26,11 @@ public class LoadingScreen : MonoBehaviourPunCallbacks
         StartCoroutine(TextLoading());
     }
 
+    void Awake()
+    {
+
+    }
+
     void Start()
     {
         //if (PlayerPrefs.HasKey("ActScene"))
@@ -45,7 +50,9 @@ public class LoadingScreen : MonoBehaviourPunCallbacks
         }
         if (PlayerPrefs.GetString("level") == "KeluarRumah") StartCoroutine(LoadALevel("GameplayFarm"));
         else if (PlayerPrefs.GetString("level") == "MasukRumah") StartCoroutine(LoadALevel("GameplayHome"));
+        else if (PlayerPrefs.GetString("level") == "MasukRumahSamsul") StartCoroutine(LoadALevel("RumahSamsul"));
         else if (PlayerPrefs.GetString("level") == "MasukKandangAyam") StartCoroutine(LoadALevel("GameplayChickenHouse"));
+        else if (PlayerPrefs.GetString("level") == "MasukKandangSapi") StartCoroutine(LoadALevel("GameplayCowHouse"));
         else if (PlayerPrefs.GetString("level") == "MenuAwal")
         {
             

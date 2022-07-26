@@ -54,6 +54,7 @@ public class signin : MonoBehaviour
     public void FBLogin()
     {
         MainMenuController.instance.notifkonek.SetActive(true);
+        MainMenuController.instance.ClickChangeLanguage(MainMenuController.instance.inputDropdownLanguage);
         if (FB.IsLoggedIn)
         {
             // AccessToken class will have session details
@@ -177,12 +178,14 @@ public class signin : MonoBehaviour
 
     public void OnSignIn()
     {
+        if(GoogleSignIn.Configuration==null)
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
         AddStatusText("Calling SignIn");
         Debug.Log(webClientId);
         MainMenuController.instance.notifkonek.SetActive(true);
+        MainMenuController.instance.ClickChangeLanguage(MainMenuController.instance.inputDropdownLanguage);
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(
           OnAuthenticationFinished);
     }
@@ -200,6 +203,7 @@ public class signin : MonoBehaviour
             FB.LogOut();
         }
         myUserID = null;
+        firedatabase.instance.currentUsername = null;
     }
 
     public void OnDisconnect()

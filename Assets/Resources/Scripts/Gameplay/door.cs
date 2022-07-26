@@ -68,6 +68,12 @@ public class door : MonoBehaviour
                 }
                 else
                 {
+                    if (collision.collider.transform.Find("AreaPegang").Find("Item") != null)
+                    {
+                        PhotonNetwork.Destroy(collision.collider.transform.Find("AreaPegang").Find("Item").GetComponent<PhotonView>());
+                    }else
+                    if (collision.collider.transform.Find("AreaPegang").childCount>0)
+                        PhotonNetwork.Destroy(collision.collider.transform.Find("AreaPegang").GetChild(0).GetComponent<PhotonView>());
                     PhotonNetwork.Destroy(collision.collider.GetComponent<PhotonView>());
                     Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("pindahlevel", RpcTarget.Others, collision.collider.name,level);
                 }
@@ -84,6 +90,7 @@ public class door : MonoBehaviour
             PhotonNetwork.SetPlayerCustomProperties(setlevel);
             PlayerPrefs.SetString("masuk", "");
             Debug.Log("masuk");
+
         }
     }
 }

@@ -216,7 +216,7 @@ public class kotakperalatan : MonoBehaviour
 
         if (mypage + 1 <= maxpage) mypage++;
         else mypage = 1;
-        transform.Find("BGBawah").Find("Text").GetComponent<Text>().text = "Kotak Penyimpanan (" + mypage+"/"+ maxpage+")";
+        transform.Find("BGBawah").Find("Text").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(115)+" (" + mypage+"/"+ maxpage+")";
         peralatan = transform.Find("BGBawah").Find("tools").gameObject;
 
         for (int i = 0; i < mybag.Capacity; i++)
@@ -236,7 +236,7 @@ public class kotakperalatan : MonoBehaviour
 
         if (mypage -1 >= 1) mypage--;
         else mypage = maxpage;
-        transform.Find("BGBawah").Find("Text").GetComponent<Text>().text = "Kotak Penyimpanan (" + mypage + "/" + maxpage + ")";
+        transform.Find("BGBawah").Find("Text").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(115) + " (" + mypage + "/" + maxpage + ")";
         peralatan = transform.Find("BGBawah").Find("tools").gameObject;
 
         for (int i = 0; i < mybag.Capacity; i++)

@@ -26,6 +26,7 @@ public class RoomButton : MonoBehaviour
         MainMenuController.instance.roomName = roomName;
         notifpanel.SetActive(true);
         CustomMatchmakingLobbyCampaignController.instance.testjoin = false;
+        MainMenuController.instance.GantiBahasa();
     }
 
     public void SetRoom(string nameInput, int sizeInput, int countInput) //public function called in CMM lobby contoller for each new room listing created

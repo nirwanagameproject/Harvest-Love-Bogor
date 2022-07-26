@@ -264,7 +264,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4476759306739962840}
-  - component: {fileID: 8681457353715246249}
   m_Layer: 0
   m_Name: WoodenSign1
   m_TagString: Untagged
@@ -287,33 +286,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -137.08, z: 0}
---- !u!205 &8681457353715246249
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849298340660939106}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.055781484, y: 1.2882662, z: 0.0501497}
-  m_Size: 2.567995
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.5
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 7205463302030237221}
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 4751017353052305707}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2553693377196076268}
-  m_Enabled: 1
 --- !u!1 &5573471684873407942
 GameObject:
   m_ObjectHideFlags: 0

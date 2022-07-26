@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     public GameObject loadgamemultiplayerOBJ;
     public GameObject loadInventoryOBJ;
     public GameObject loadShopOBJ;
+    public GameObject loadFriendListOBJ;
     public GameObject pilihkarakterOBJ;
     public GameObject lobbyOBJ;
     public GameObject settingOBJ;
@@ -85,7 +87,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("tanggal", 1);
         PlayerPrefs.SetString("musim", "Spring");
         PlayerPrefs.SetInt("tahun", 2020);
-        PlayerPrefs.SetInt("money", 5000);
+        PlayerPrefs.SetInt("money", 150000);
         PlayerPrefs.SetInt("maxstamina", 150);
         PlayerPrefs.SetInt("stamina", 150);
         PlayerPrefs.SetInt("levelbag", 1);
@@ -97,6 +99,19 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("ambilduitharian", "no");
         PlayerPrefs.SetString("newday", "no");
         PlayerPrefs.SetString("myserver", "asia");
+        PlayerPrefs.SetString("buttonNPC", "");
+
+        //SET FRIENDSHIP
+        PlayerPrefs.SetInt("SamsulFriendship", 0);
+        PlayerPrefs.SetInt("SamsulKenalan", 1);
+        PlayerPrefs.SetInt("MikaFriendship", 60);
+        PlayerPrefs.SetInt("MikaGift", 1);
+        PlayerPrefs.SetInt("AyuFriendship", 0);
+        PlayerPrefs.SetInt("AyuKenalan", 1);
+        PlayerPrefs.SetInt("AfifahFriendship", 0);
+        PlayerPrefs.SetInt("AfifahKenalan", 1);
+        PlayerPrefs.SetInt("OtongFriendship", 0);
+        PlayerPrefs.SetInt("OtongKenalan", 1);
 
         PlayerPrefs.DeleteKey("online");
         PlayerPrefs.DeleteKey("mautidur");
@@ -153,11 +168,183 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("peralatannama16", "peralatanbibit1");
         PlayerPrefs.SetInt("peralatanjumlah16", 5);
 
+        PlayerPrefs.DeleteKey("buttonPickUpItem");
         //Kantong
-        PlayerPrefs.SetString("kantongnama1", "apple");
-        PlayerPrefs.SetInt("kantongjumlah1", 5);
+        PlayerPrefs.SetString("kantongnama1", "apple-1");
+        PlayerPrefs.SetInt("kantongjumlah1", 1);
+        PlayerPrefs.SetString("kantongnama2", "tomat-1");
+        PlayerPrefs.SetInt("kantongjumlah2", 1);
 
-        
+        //AYAM
+        PlayerPrefs.SetInt("ChickenFood", 10);
+        PlayerPrefs.SetInt("ChickenMax", 10);
+        for (int i = 0; i < 10; i++)
+        {
+            if (PlayerPrefs.HasKey("Chicken" + i))
+                PlayerPrefs.DeleteKey("Chicken" + i);
+            if (PlayerPrefs.HasKey("ChickenHeart" + i))
+                PlayerPrefs.DeleteKey("ChickenHeart" + i);
+            if (PlayerPrefs.HasKey("ChickenLevel" + i))
+                PlayerPrefs.DeleteKey("ChickenLevel" + i);
+            if (PlayerPrefs.HasKey("ChickenSick" + i))
+                PlayerPrefs.DeleteKey("ChickenSick" + i);
+            if (PlayerPrefs.HasKey("ChickenSilver" + i))
+                PlayerPrefs.DeleteKey("ChickenSilver" + i);
+            if (PlayerPrefs.HasKey("ChickenGold" + i))
+                PlayerPrefs.DeleteKey("ChickenGold" + i);
+            if (PlayerPrefs.HasKey("ChickenPosX" + i))
+                PlayerPrefs.DeleteKey("ChickenPosX" + i);
+            if (PlayerPrefs.HasKey("ChickenPosY" + i))
+                PlayerPrefs.DeleteKey("ChickenPosY" + i);
+            if (PlayerPrefs.HasKey("ChickenPosZ" + i))
+                PlayerPrefs.DeleteKey("ChickenPosZ" + i);
+        }
+
+        //CREATE AYAM / BEBEK
+
+        for (int i = 0; i < 2; i++)
+        {
+            PlayerPrefs.SetString("Chicken" + i, "ayam"+i);
+            PlayerPrefs.SetInt("ChickenHeart" + i, 45);
+            PlayerPrefs.SetString("ChickenLevel" + i, "MasukKandangAyam");
+            PlayerPrefs.SetInt("ChickenSick" + i, 0);
+            PlayerPrefs.SetInt("ChickenSilver" + i, 0);
+            PlayerPrefs.SetInt("ChickenGold" + i, 0);
+            PlayerPrefs.SetFloat("ChickenPosX" + i, i);
+            PlayerPrefs.SetFloat("ChickenPosY" + i, 1);
+            PlayerPrefs.SetFloat("ChickenPosZ" + i, i);
+            PlayerPrefs.SetString("ChickenTipe" + i, "Chicken");
+
+            PlayerPrefs.SetString("box" + (i + 1), "");
+        }
+
+        for (int i = 2; i < 4; i++)
+        {
+            PlayerPrefs.SetString("Chicken" + i, "bebek" + i);
+            PlayerPrefs.SetInt("ChickenHeart" + i, 75);
+            PlayerPrefs.SetString("ChickenLevel" + i, "MasukKandangAyam");
+            PlayerPrefs.SetInt("ChickenSick" + i, 0);
+            PlayerPrefs.SetInt("ChickenSilver" + i, 0);
+            PlayerPrefs.SetInt("ChickenGold" + i, 0);
+            PlayerPrefs.SetFloat("ChickenPosX" + i, i);
+            PlayerPrefs.SetFloat("ChickenPosY" + i, 1);
+            PlayerPrefs.SetFloat("ChickenPosZ" + i, i);
+            PlayerPrefs.SetString("ChickenTipe" + i, "Duck");
+
+            PlayerPrefs.SetString("box" + (i + 1), "");
+        }
+
+        for (int i = 4; i < PlayerPrefs.GetInt("ChickenMax"); i++)
+        {
+            PlayerPrefs.SetString("Chicken" + i, "");
+            PlayerPrefs.SetInt("ChickenHeart" + i, 0);
+            PlayerPrefs.SetString("ChickenLevel" + i, "");
+            PlayerPrefs.SetInt("ChickenSick" + i, 0);
+            PlayerPrefs.SetInt("ChickenSilver" + i, 0);
+            PlayerPrefs.SetInt("ChickenGold" + i, 0);
+            PlayerPrefs.SetFloat("ChickenPosX" + i, 0);
+            PlayerPrefs.SetFloat("ChickenPosY" + i, 0);
+            PlayerPrefs.SetFloat("ChickenPosZ" + i, 0);
+            PlayerPrefs.SetString("ChickenTipe" + i, "");
+
+            PlayerPrefs.SetString("box" + (i+1), "");
+        }
+
+        //Sapi
+        PlayerPrefs.SetInt("CowFood", 5);
+        PlayerPrefs.SetInt("CowMax", 10);
+        for (int i = 0; i < 10; i++)
+        {
+            if (PlayerPrefs.HasKey("Cow" + i))
+                PlayerPrefs.DeleteKey("Cow" + i);
+            if (PlayerPrefs.HasKey("CowHeart" + i))
+                PlayerPrefs.DeleteKey("CowHeart" + i);
+            if (PlayerPrefs.HasKey("CowLevel" + i))
+                PlayerPrefs.DeleteKey("CowLevel" + i);
+            if (PlayerPrefs.HasKey("CowSick" + i))
+                PlayerPrefs.DeleteKey("CowSick" + i);
+            if (PlayerPrefs.HasKey("CowSilver" + i))
+                PlayerPrefs.DeleteKey("CowSilver" + i);
+            if (PlayerPrefs.HasKey("CowGold" + i))
+                PlayerPrefs.DeleteKey("CowGold" + i);
+            if (PlayerPrefs.HasKey("CowMilk" + i))
+                PlayerPrefs.DeleteKey("CowMilk" + i);
+            if (PlayerPrefs.HasKey("CowPosX" + i))
+                PlayerPrefs.DeleteKey("CowPosX" + i);
+            if (PlayerPrefs.HasKey("CowPosY" + i))
+                PlayerPrefs.DeleteKey("CowPosY" + i);
+            if (PlayerPrefs.HasKey("CowPosZ" + i))
+                PlayerPrefs.DeleteKey("CowPosZ" + i);
+        }
+
+        //CREATE SAPI / KAMBING
+        PlayerPrefs.SetString("Cow0", "kambing0");
+        PlayerPrefs.SetInt("CowHeart0", 5);
+        PlayerPrefs.SetString("CowLevel0", "MasukKandangSapi");
+        PlayerPrefs.SetInt("CowSick0", 0);
+        PlayerPrefs.SetInt("CowSilver0", 0);
+        PlayerPrefs.SetInt("CowGold0", 0);
+        PlayerPrefs.SetString("CowMilk0", "small");
+        PlayerPrefs.SetFloat("CowPosX0", 4);
+        PlayerPrefs.SetFloat("CowPosY0", 1);
+        PlayerPrefs.SetFloat("CowPosZ0", 4);
+        PlayerPrefs.SetString("CowTipe0", "Goat");
+
+        PlayerPrefs.SetString("boxcow1", "");
+
+        PlayerPrefs.SetString("Cow" + 1, "sapi1");
+        PlayerPrefs.SetInt("CowHeart" + 1, 0);
+        PlayerPrefs.SetString("CowLevel" + 1, "MasukKandangSapi");
+        PlayerPrefs.SetInt("CowSick" + 1, 0);
+        PlayerPrefs.SetInt("CowSilver" + 1, 0);
+        PlayerPrefs.SetInt("CowGold" + 1, 0);
+        PlayerPrefs.SetString("CowMilk" + 1, "small");
+        PlayerPrefs.SetFloat("CowPosX" + 1, 1);
+        PlayerPrefs.SetFloat("CowPosY" + 1, 1);
+        PlayerPrefs.SetFloat("CowPosZ" + 1, 4);
+        PlayerPrefs.SetString("CowTipe" + 1, "Cow");
+
+        PlayerPrefs.SetString("boxcow" + 2, "");
+
+        for (int i = 2; i < PlayerPrefs.GetInt("CowMax"); i++)
+        {
+            /*
+            PlayerPrefs.SetString("Cow" + i, "sapi"+i);
+            PlayerPrefs.SetInt("CowHeart" + i, 0);
+            PlayerPrefs.SetString("CowLevel" + i, "MasukKandangSapi");
+            PlayerPrefs.SetInt("CowSick" + i, 0);
+            PlayerPrefs.SetInt("CowSilver" + i, 0);
+            PlayerPrefs.SetInt("CowGold" + i, 0);
+            PlayerPrefs.SetInt("CowMilk"+i, 0);
+            PlayerPrefs.SetFloat("CowPosX" + i, i);
+            PlayerPrefs.SetFloat("CowPosY" + i, 1);
+            PlayerPrefs.SetFloat("CowPosZ" + i, 4);
+            PlayerPrefs.SetString("CowTipe" + i, "Cow");
+
+            PlayerPrefs.SetString("boxcow" + (i + 1), "");
+            */
+
+            PlayerPrefs.SetString("Cow" + i, "");
+            PlayerPrefs.SetInt("CowHeart" + i, 0);
+            PlayerPrefs.SetString("CowLevel" + i, "");
+            PlayerPrefs.SetInt("CowSick" + i, 0);
+            PlayerPrefs.SetInt("CowSilver" + i, 0);
+            PlayerPrefs.SetInt("CowGold" + i, 0);
+            PlayerPrefs.SetString("CowMilk" + i, "");
+            PlayerPrefs.SetFloat("CowPosX" + i, 0);
+            PlayerPrefs.SetFloat("CowPosY" + i, 0);
+            PlayerPrefs.SetFloat("CowPosZ" + i, 0);
+            PlayerPrefs.SetString("CowTipe" + i, "");
+
+            PlayerPrefs.SetString("boxcow" + (i + 1), "");
+        }
+
+        //SET SHOP IN GAME
+        PlayerPrefs.SetInt("buyCow",0);
+        PlayerPrefs.SetInt("buyCalf",0);
+        PlayerPrefs.SetInt("buyGoat",0);
+        PlayerPrefs.SetInt("buyBabyGoat",0);
+        PlayerPrefs.SetInt("buyBale",0);
 
         if (GameObject.Find("Canvas").transform.Find("Fixed Joystick") != null)
         {
@@ -176,6 +363,9 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        //SET SKYBOX
+        RenderSettings.skybox.SetFloat("_Exposure", 1f);
+
         //AUTO AMBIL SETTINGAN
         if (PlayerPrefs.HasKey("Music"))
         {
@@ -315,6 +505,12 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         }
     }
 
+    //CHANGE LANGUAGE
+    public void GantiBahasa()
+    {
+        ClickChangeLanguage(inputDropdownLanguage);
+    }
+
     public void ClickSinglePlayer()
     {
         callAudioClicked();
@@ -330,6 +526,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         callAudioClicked();
 
+        earlyOBJ.SetActive(false);
         permainanbaruOBJ.SetActive(true);
         loadgamemultiplayerOBJ.SetActive(false);
         multiplayerOBJ.SetActive(false);
@@ -579,6 +776,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         callAudioClicked();
         PhotonNetwork.NickName = PlayerPrefs.GetString("myname");
+        PlayerPrefs.SetString("hari","Senin");
         PlayerPrefs.SetInt("tanggal",1);
         PlayerPrefs.SetString("musim", "Spring");
         PlayerPrefs.SetInt("tahun", 1);
@@ -1129,7 +1327,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Roomku berhasil dimuat");
+        Debug.Log("Roomku berhasil dimuat MainMenuController");
 
         if (PhotonNetwork.CurrentRoom == null)
         {
@@ -1139,6 +1337,85 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.NickName = PlayerPrefs.GetString("myname");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
+                custom.Add("wardrobe", "");
+                custom.Add("nanyaNPCAyu", "");
+                custom.Add("nanyaNPCMika", "");
+                custom.Add("nanyaNPCSamsul", "");
+                custom.Add("nanyaNPCAnggun", "");
+                custom.Add("nanyaNPCAfifah", "");
+                custom.Add("nanyaNPCOtong", "");
+                custom.Add("nanyaNPCmotorkopi", "");
+                custom.Add("nanyaNPCWindi", "");
+                custom.Add("nanyaBarangtv", "");
+                custom.Add("openGateSekolah", false);
+                custom.Add("channelTv", 1);
+                custom.Add("nyalaTv", false);
+                custom.Add("Cat", "");
+                custom.Add("ItemCount", 0);
+                custom.Add("ChickenFood", PlayerPrefs.GetInt("ChickenFood"));
+                custom.Add("CowFood", PlayerPrefs.GetInt("CowFood"));
+                custom.Add("ChickenMax", PlayerPrefs.GetInt("ChickenMax"));
+                custom.Add("CowMax", PlayerPrefs.GetInt("CowMax"));
+                custom.Add("mykucing", PlayerPrefs.GetString("mykucing"));
+                custom.Add("mykebun", PlayerPrefs.GetString("mykebun"));
+                custom.Add("tanggal", PlayerPrefs.GetInt("tanggal"));
+                custom.Add("hari", PlayerPrefs.GetString("hari"));
+                custom.Add("tahun", PlayerPrefs.GetInt("tahun"));
+                custom.Add("musim", PlayerPrefs.GetString("musim"));
+                custom.Add("jam", "06");
+                custom.Add("detik", "00");
+                custom.Add("skyboxfloat", 0.7f);
+
+                for (int i=0;i<PlayerPrefs.GetInt("ChickenMax");i++) custom.Add("box"+(i+1), "");
+                for(int i=0;i<PlayerPrefs.GetInt("CowMax");i++) custom.Add("boxcow"+(i+1), "");
+                PhotonNetwork.CurrentRoom.SetCustomProperties(custom);
+                GameObject.Find("AISpawn").transform.Find("Cat-8").GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                GameObject.Find("AISpawn").transform.Find("Cat-8").gameObject.name = "Cat-" + PlayerPrefs.GetString("mykucing") + "-8";
+
+                //SPAWN CHICKEN | DUCK
+                for (int i = 0; i < PlayerPrefs.GetInt("ChickenMax"); i++)
+                {
+                    if (PlayerPrefs.GetString("Chicken" + i) != "")
+                    {
+                        GameObject ayam = PhotonNetwork.Instantiate(Path.Combine("Model/Kandang Ayam/Prefab", PlayerPrefs.GetString("ChickenTipe" + i)), new Vector3(PlayerPrefs.GetFloat("ChickenPosX" + i), PlayerPrefs.GetFloat("ChickenPosY" + i), PlayerPrefs.GetFloat("ChickenPosZ" + i)), Quaternion.identity);
+                        ayam.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                        custom = new ExitGames.Client.Photon.Hashtable();
+                        custom.Add("Chicken" + i, PlayerPrefs.GetString("ChickenTipe" + i)+ "-" + PlayerPrefs.GetString("Chicken" + i) +"-"+ayam.GetPhotonView().ViewID);
+                        custom.Add("ChickenLevel" + i, PlayerPrefs.GetString("ChickenLevel" + i));
+                        custom.Add("ChickenHeart" + i, PlayerPrefs.GetInt("ChickenHeart" + i));
+                        custom.Add("ChickenSick" + i, PlayerPrefs.GetInt("ChickenSick" + i));
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(custom);
+                        ayam.GetComponent<PhotonView>().RPC("ayamspawn", RpcTarget.All, PlayerPrefs.GetString("ChickenTipe" + i) + "-" + PlayerPrefs.GetString("Chicken" + i), PlayerPrefs.GetString("ChickenLevel" + i));
+                    }
+                }
+
+                //SPAWN SAPI | KAMBING
+                for (int i = 0; i < PlayerPrefs.GetInt("CowMax"); i++)
+                {
+                    if (PlayerPrefs.GetString("Cow" + i) != "")
+                    {
+                        Debug.Log("SPAWN SAPI: "+ PlayerPrefs.GetString("Cow" + i));
+                        GameObject ayam = PhotonNetwork.Instantiate(Path.Combine("Model/Kandang Sapi/Prefab", PlayerPrefs.GetString("CowTipe" + i)), new Vector3(PlayerPrefs.GetFloat("CowPosX" + i), PlayerPrefs.GetFloat("CowPosY" + i), PlayerPrefs.GetFloat("CowPosZ" + i)), Quaternion.identity);
+                        ayam.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                        custom = new ExitGames.Client.Photon.Hashtable();
+                        custom.Add("Cow" + i, PlayerPrefs.GetString("CowTipe" + i) + "-" + PlayerPrefs.GetString("Cow" + i) + "-" + ayam.GetPhotonView().ViewID);
+                        custom.Add("CowLevel" + i, PlayerPrefs.GetString("CowLevel" + i));
+                        custom.Add("CowMilk" + i, PlayerPrefs.GetString("CowMilk" + i));
+                        custom.Add("CowHeart" + i, PlayerPrefs.GetInt("CowHeart" + i));
+                        custom.Add("CowSick" + i, PlayerPrefs.GetInt("CowSick" + i));
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(custom);
+                        ayam.GetComponent<PhotonView>().RPC("ayamspawn", RpcTarget.All, PlayerPrefs.GetString("CowTipe" + i) + "-" + PlayerPrefs.GetString("Cow" + i), PlayerPrefs.GetString("CowLevel" + i));
+                    }
+                }
+
+            }
+            else
+            {
+                GameObject.Find("AISpawn").transform.Find("Cat-8").GetComponent<PhotonView>().RPC("mintareqnama",RpcTarget.MasterClient);
+            }
             for (int i = 0; i < GameObject.Find("PlayerSpawn").transform.childCount; i++)
             {
                 if ("Player (" + PhotonNetwork.NickName + ")" == GameObject.Find("PlayerSpawn").transform.GetChild(i).name)
@@ -1150,6 +1427,11 @@ public class MainMenuController : MonoBehaviourPunCallbacks
                     return;
                 }
             }
+            ExitGames.Client.Photon.Hashtable setPlayer = new ExitGames.Client.Photon.Hashtable();
+            setPlayer.Add("stamina", PlayerPrefs.GetInt("stamina"));
+            setPlayer.Add("gender", PlayerPrefs.GetString("gender"));
+            setPlayer.Add("money", PlayerPrefs.GetInt("money"));
+            PhotonNetwork.LocalPlayer.SetCustomProperties(setPlayer);
             transisi.SetActive(true);
 
             loadgameOBJ.SetActive(false);
@@ -1166,12 +1448,14 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         loadInventoryOBJ.SetActive(true);
         StartCoroutine(firedatabase.instance.cekInventory(tipe));
+        GantiBahasa();
     }
     public void ClickBatalInventoryButton()
     {
         callAudioClicked();
 
         loadInventoryOBJ.SetActive(false);
+        GantiBahasa();
     }
 
     
@@ -1194,12 +1478,41 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         loadShopOBJ.transform.Find("ButtonUang").Find("Text").transform.GetComponent<ChangeLanguage>().ChangedLanguge();
         loadShopOBJ.transform.Find("ButtonBarang").Find("Text").transform.GetComponent<ChangeLanguage>().ChangedLanguge();
         StartCoroutine(firedatabase.instance.cekShop(tipe));
+        GantiBahasa();
     }
     public void ClickBatalShopButton()
     {
         callAudioClicked();
 
         loadShopOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
+    }
+
+    //FRIENDLIST BUTTON
+    public void ClickFriendListButton()
+    {
+        callAudioClicked();
+
+        loadFriendListOBJ.SetActive(true);
+        StartCoroutine(firedatabase.instance.cekFriendList("friend"));
+        ClickChangeLanguage(inputDropdownLanguage);
+    }
+    public void ClickBatalFriendListButton()
+    {
+        callAudioClicked();
+
+        loadFriendListOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
+    }
+
+    //FRIENDLIST REQUEST BUTTON
+    public void ClickFriendRequestButton()
+    {
+        callAudioClicked();
+
+        loadFriendListOBJ.SetActive(true);
+        StartCoroutine(firedatabase.instance.cekFriendList("request"));
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     //HOST BUTTON
@@ -1209,6 +1522,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         pilihMenu = "Host";
 
         loadgamemultiplayerOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBatalLoadGameMulti()
@@ -1217,6 +1531,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
         //mainmenuOBJ.SetActive(true);
         loadgamemultiplayerOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickJoinButton()
@@ -1225,6 +1540,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         pilihMenu = "Join";
 
         lobbyOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBatalJoin()
@@ -1232,6 +1548,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
 
         lobbyOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickBatalJoinPilihKarakter()
@@ -1239,6 +1556,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
 
         pilihkarakterOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickSettingButton()
@@ -1246,6 +1564,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
 
         settingOBJ.SetActive(true);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
     public void ClickSettingButtonClose()
@@ -1253,6 +1572,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         callAudioClicked();
 
         settingOBJ.SetActive(false);
+        ClickChangeLanguage(inputDropdownLanguage);
     }
 
 }

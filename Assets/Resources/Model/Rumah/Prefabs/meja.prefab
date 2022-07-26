@@ -2002,7 +2002,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8654183449906110963}
-  - component: {fileID: 3823837172555990701}
   - component: {fileID: 8654183449905724270}
   m_Layer: 0
   m_Name: meja
@@ -2034,57 +2033,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
---- !u!205 &3823837172555990701
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8654183449905626579}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0, z: 22.459051}
-  m_Size: 147.6952
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.04873863
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 7051321517323065606}
-    - renderer: {fileID: 2790475117573706785}
-    - renderer: {fileID: 1534993308201152744}
-    - renderer: {fileID: 1242988387552067631}
-    - renderer: {fileID: 170939582489239705}
-    - renderer: {fileID: 8198011744010989723}
-    - renderer: {fileID: 9174049679180092821}
-    - renderer: {fileID: 7854724510559169208}
-    - renderer: {fileID: 8987773877428020695}
-  - screenRelativeHeight: 0.024050463
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5747848818073248007}
-    - renderer: {fileID: 1769206686109788270}
-    - renderer: {fileID: 3560551671845569968}
-    - renderer: {fileID: 5922056823872211455}
-    - renderer: {fileID: 7913870345403418476}
-    - renderer: {fileID: 5112847435102360633}
-    - renderer: {fileID: 6128487474139321979}
-    - renderer: {fileID: 7131141512959787556}
-    - renderer: {fileID: 5449105981085550472}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8538572729970866254}
-    - renderer: {fileID: 4904558802993378904}
-    - renderer: {fileID: 5992876434000899375}
-    - renderer: {fileID: 4995575301074429850}
-    - renderer: {fileID: 4311874425745805050}
-    - renderer: {fileID: 7691297328429259183}
-    - renderer: {fileID: 9031000141769785866}
-    - renderer: {fileID: 2158979026429475503}
-    - renderer: {fileID: 3662455795500833571}
-  m_Enabled: 1
 --- !u!65 &8654183449905724270
 BoxCollider:
   m_ObjectHideFlags: 0

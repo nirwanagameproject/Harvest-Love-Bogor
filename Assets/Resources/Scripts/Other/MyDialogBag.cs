@@ -14,6 +14,7 @@ public class MyDialogBag : MonoBehaviour
     public string isidialog;
     public bool percakapanaktif;
     public bool lanjutGa;
+    public bool gabisadipencet;
     int i;
 
     public static MyDialogBag instance;
@@ -28,7 +29,7 @@ public class MyDialogBag : MonoBehaviour
 
     IEnumerator intro1()
     {
-        PercakapanBaru("Pilih barang atau peralatan untuk dipindahkan", false);
+        PercakapanBaru(ChangeLanguage.instance.GetLanguage(117), false);
         while (percakapanaktif == true) yield return new WaitUntil(() => percakapanaktif == false);
 
     }
@@ -38,9 +39,9 @@ public class MyDialogBag : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (sr.rect.height < 150 && buka==1)
+        if (sr.rect.height < 200 && buka==1)
             sr.sizeDelta = new Vector2(sr.rect.width, sr.rect.height+20f);
-        else if(sr.rect.height >= 150 && buka == 1)
+        else if(sr.rect.height >= 200 && buka == 1)
         {
             buka = 2;
             InvokeRepeating("jalaninText", 0f, 0.025f);
@@ -81,8 +82,9 @@ public class MyDialogBag : MonoBehaviour
         isitext.text = isidialog;
     }
 
-    public void exitpercakapan()
+    public void exitpercakapan(bool hideButtonTapToContinue)
     {
+        if(!hideButtonTapToContinue && !gabisadipencet)
         if (buka == 2)
         {
             fulltext();
@@ -103,12 +105,14 @@ public class MyDialogBag : MonoBehaviour
 
     public void percakapanDeskripsi(string namaperalatan)
     {
-        if(namaperalatan=="hoe")PercakapanBaru("Pacul - Alat untuk menggali tanah, gunakan ini untuk membuat lahan penanaman bibit dan mencangkul lahan pertambangan.",false);
-        else if(namaperalatan=="axe")PercakapanBaru("Kapak - Alat untuk membelah kayu, dapat digunakan untuk mendapatkan kayu dalam membangun rumah.",false);
-        else if(namaperalatan=="hammer")PercakapanBaru("Palu - Alat untuk menghancurkan batu.",false);
-        else if(namaperalatan=="sickle")PercakapanBaru("Sabit - Alat untuk memotong rumput.",false);
-        else if(namaperalatan=="watering")PercakapanBaru("Penyiram - Alat untuk menyiram tanaman/bibit, isi penyiram dengan mendekati sumber air terdekat.",false);
-        else if(namaperalatan=="peralatanbibit1")PercakapanBaru("Bibit Tomat - Tanam diwaktu spring, buah tomat segar dijual dengan harga Rp 8000 per satuan",false);
-        else if (namaperalatan == "bale") PercakapanBaru("Bibit Tomat - Tanam diwaktu spring, buah tomat segar dijual dengan harga Rp 8000 per satuan", false);
+        if(namaperalatan=="hoe")PercakapanBaru(ChangeLanguage.instance.GetLanguage(118), false);
+        else if(namaperalatan=="axe")PercakapanBaru(ChangeLanguage.instance.GetLanguage(119), false);
+        else if(namaperalatan=="hammer")PercakapanBaru(ChangeLanguage.instance.GetLanguage(120), false);
+        else if(namaperalatan=="sickle")PercakapanBaru(ChangeLanguage.instance.GetLanguage(121), false);
+        else if(namaperalatan=="watering")PercakapanBaru(ChangeLanguage.instance.GetLanguage(122), false);
+        else if(namaperalatan=="peralatanbibit1")PercakapanBaru(ChangeLanguage.instance.GetLanguage(123), false);
+        else if (namaperalatan.Contains("apple")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(124), false);
+        else if (namaperalatan.Contains("tomat")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(125), false);
+        else if (namaperalatan.Contains("FeedChicken")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(130), false);
     }
 }

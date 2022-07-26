@@ -23,6 +23,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         public float JoystickXAttack;
         public float JoystickZ;
         public float JoystickZAttack;
+        public Vector3 cameraforward;
+        public Vector3 cameraright;
         public Vector3 pmrPos;
         public Vector3 pmrRot;
         public bool Jump;
@@ -108,29 +110,88 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-        /*if (!CustomMatchmakingLobbyCampaignController.instance.testjoin)
-        {*/
+        StartCoroutine("loadDuluPhoton");
 
-            Speed = 4;
-            Debug.Log("create player");
+    }
 
-            if (PhotonNetwork.IsConnected)
-                name = "Player (" + GetComponent<PhotonView>().Owner.NickName + ")";
-            if (GameObject.Find("PlayerSpawn") != null)
+    IEnumerator loadDuluPhoton()
+    {
+        yield return new WaitUntil(() => photonView.Owner != null);
+        yield return new WaitUntil(() => GetComponent<PhotonView>().Owner.CustomProperties["skinblue"] != null);
+
+        Speed = 4;
+        Debug.Log("create player");
+
+        if (PhotonNetwork.IsConnected)
+            name = "Player (" + GetComponent<PhotonView>().Owner.NickName + ")";
+        if (GameObject.Find("PlayerSpawn") != null)
+        {
+            transform.parent = GameObject.Find("PlayerSpawn").transform;
+        }
+
+        if (PhotonNetwork.IsConnected)
+            if (GetComponent<PhotonView>().IsMine)
             {
-                transform.parent = GameObject.Find("PlayerSpawn").transform;
-            }
-
-            if (PhotonNetwork.IsConnected)
-                if (GetComponent<PhotonView>().IsMine)
+                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("gantiWarna", RpcTarget.All, name, GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString(),
+                    (int)GetComponent<PhotonView>().Owner.CustomProperties["hairred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairblue"],
+                    (int)GetComponent<PhotonView>().Owner.CustomProperties["clothred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothblue"],
+                    (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsblue"],
+                    (int)GetComponent<PhotonView>().Owner.CustomProperties["skinred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skingreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skinblue"],
+                    PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+                if (PlayerPrefs.GetString("kantongnama0") != "")
                 {
-                    Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("gantiWarna", RpcTarget.Others, name, GetComponent<PhotonView>().Owner.CustomProperties["gender"].ToString(),
-                        (int)GetComponent<PhotonView>().Owner.CustomProperties["hairred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["hairblue"],
-                        (int)GetComponent<PhotonView>().Owner.CustomProperties["clothred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["clothblue"],
-                        (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsgreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["pantsblue"],
-                        (int)GetComponent<PhotonView>().Owner.CustomProperties["skinred"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skingreen"], (int)GetComponent<PhotonView>().Owner.CustomProperties["skinblue"],
-                        PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("barangnama0"));
+                    string tipePegang = "Item";
+                    string methodRPC = "addBale";
+                    string[] namaitem = PlayerPrefs.GetString("kantongnama0").Split('-');
+                    if (namaitem[0].Contains("Cat")) { tipePegang = "Binatang"; methodRPC = "addHewan"; }
+                    else if (namaitem[0].Equals("Chicken") || namaitem[0].Equals("Duck")) { tipePegang = "Kandang Ayam"; methodRPC = "addHewan"; }
+                    GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/" + tipePegang + "/Prefab", namaitem[0]), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
+                    //item.GetComponent<PhotonView>().TransferOwnership(0);
+                    if (methodRPC == "addHewan") GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC(methodRPC, RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, PlayerPrefs.GetString("level"), PlayerPrefs.GetString("kantongnama0"));
+                    else GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC(methodRPC, RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, PlayerPrefs.GetString("level"));
                 }
+
+                for (int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
+                {
+                    if (GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Buah>() != null)
+                        if (PlayerPrefs.GetString("level") == GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Buah>().level)
+                        {
+                            GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Rigidbody>().useGravity = true;
+                            GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Collider>().isTrigger = false;
+                        }
+                        else
+                        {
+                            foreach (var player in PhotonNetwork.PlayerList)
+                            {
+                                for (int mulai = 0; mulai < GameObject.Find("PlayerSpawn").transform.childCount; mulai++)
+                                {
+                                    if (GameObject.Find("PlayerSpawn").transform.GetChild(mulai).name.Contains(player.NickName) &&
+                                        GameObject.Find("PlayerSpawn").transform.GetChild(mulai).GetComponent<Player1>().level == GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Buah>().level)
+                                    {
+                                        GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<PhotonView>().TransferOwnership(player);
+                                        break;
+                                    }
+                                }
+                            }
+                            GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Rigidbody>().useGravity = false;
+                        }
+                }
+
+                for (int i = 0; i < GameObject.Find("AISpawn").transform.childCount; i++)
+                {
+                    if (GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Cat>() != null)
+                        if (PlayerPrefs.GetString("level") == GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Cat>().level)
+                        {
+                            GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Rigidbody>().useGravity = true;
+                            GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Collider>().isTrigger = false;
+                        }
+                        else
+                        {
+                            GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Collider>().isTrigger = true;
+                            GameObject.Find("AISpawn").transform.GetChild(i).GetComponent<Rigidbody>().useGravity = false;
+                        }
+                }
+            }
 
         //}
 
@@ -139,35 +200,37 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         //Camera.main.transform.position = pos;
         //Camera.main.transform.LookAt(pos);
         //Camera.main.transform.LookAt(transform);
-
-        Camera.main.transform.RotateAround(transform.position,
+        if (photonView.IsMine)
+        {
+            Camera.main.transform.RotateAround(transform.position,
                                  Camera.main.transform.up,
                                  0);
 
-        Camera.main.transform.RotateAround(transform.position,
-                                 Camera.main.transform.right,
-                                 0);
-        Camera.main.transform.LookAt(transform);
+            Camera.main.transform.RotateAround(transform.position,
+                                     Camera.main.transform.right,
+                                     0);
+            Camera.main.transform.LookAt(transform);
 
-        diffX = 2.772013f;
-        diffY = -3.644201f;
-        diffZ = 2.456768f;
+            diffX = 2.772013f;
+            diffY = -3.644201f;
+            diffZ = 2.456768f;
 
-        camOffset = Camera.main.transform.position - transform.position;
+            camOffset = Camera.main.transform.position - transform.position;
 
 
-        Vector3 pos = new Vector3();
-        pos.x = transform.position.x - diffX;
-        pos.y = transform.position.y - diffY;
-        pos.z = transform.position.z - diffZ;
+            Vector3 pos = new Vector3();
+            pos.x = transform.position.x - diffX;
+            pos.y = transform.position.y - diffY;
+            pos.z = transform.position.z - diffZ;
 
-        Camera.main.transform.position = pos;
+            Camera.main.transform.position = pos;
 
-        Camera.main.transform.LookAt(transform);
+            Camera.main.transform.LookAt(transform);
+        }
+
 
         GetComponent<ChangeGear>().LoadGear();
-        LoadGantiBaju();
-
+        //LoadGantiBaju();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -374,6 +437,8 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                     Camera.main.transform.LookAt(transform);
 
+                    Inputs.cameraforward = Camera.main.transform.forward;
+                    Inputs.cameraright = Camera.main.transform.right;
                     Vector3 newPos = transform.position + camOffset;
                 }
             }
@@ -424,6 +489,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     Camera.main.transform.position = pos;
 
                     Camera.main.transform.LookAt(transform);
+
+                    Inputs.cameraforward = Camera.main.transform.forward;
+                    Inputs.cameraright = Camera.main.transform.right;
                 }
                 Vector3 newPos = transform.position + camOffset;
             }
@@ -450,32 +518,81 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                 Camera.main.transform.LookAt(transform);
             }
-            for (int i = 0; i < GameObject.Find("ItemSpawn").transform.childCount; i++)
-            {
-                if(GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>()!=null)
-                if (PlayerPrefs.GetString("level") == GameObject.Find("ItemSpawn").transform.GetChild(i).GetComponent<Bale>().level)
-                {
-                        GameObject.Find("ItemSpawn").transform.GetChild(i).gameObject.SetActive(true);
-                }
-                else GameObject.Find("ItemSpawn").transform.GetChild(i).gameObject.SetActive(false);
-            }
+            
 
             //SHOW TARGET GROUND DI LAHAN
             GameObject myplayer = GameObject.Find("PlayerSpawn").transform.Find("Player ("+PhotonNetwork.NickName+")").gameObject;
             Collider[] kotaklahan = Physics.OverlapSphere(myplayer.transform.Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
-            if (kotaklahan.Length != 0)
+
+            if (PlayerPrefs.GetString("peralatannama0").Contains("peralatanbibit"))
             {
-                myplayer.transform.Find("TargetGround").transform.position = myplayer.transform.Find("AreaPacul").transform.position;
-                myplayer.transform.Find("TargetGround").GetComponent<customgrid>().gridding();
-                myplayer.transform.Find("TargetGround").transform.eulerAngles = new Vector3(0, myplayer.transform.rotation.y * -1, 0);
-                myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = true;
+                List<Vector3> directional = new List<Vector3>();
+                Vector3 tengah = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                Vector3 ataskanan = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z);
+                Vector3 ataskiri = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
+                Vector3 bawahkiri = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+                Vector3 bawahkanan = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
+                directional.Add(tengah);
+                directional.Add(ataskanan);
+                directional.Add(ataskiri);
+                directional.Add(bawahkiri);
+                directional.Add(bawahkanan);
+
+                Vector3 atas = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z + 1f);
+                Vector3 bawah = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z - 1f);
+                Vector3 kanan = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z - 1f);
+                Vector3 kiri = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z + 1f);
+                directional.Add(atas);
+                directional.Add(bawah);
+                directional.Add(kanan);
+                directional.Add(kiri);
+
+                for (int i = 1; i <= 9; i++)
+                {
+                    string tambahan = "";
+                    if (i > 1) tambahan = "" + i;
+                    myplayer.transform.Find("TargetGround" + tambahan).transform.position = directional[i - 1];
+                    myplayer.transform.Find("TargetGround" + tambahan).GetComponent<customgrid>().gridding();
+                    myplayer.transform.Find("TargetGround" + tambahan).transform.eulerAngles = new Vector3(0, myplayer.transform.rotation.y * -1, 0);
+
+                    kotaklahan = Physics.OverlapSphere(myplayer.transform.Find("TargetGround" + tambahan).Find("lahan").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
+                    if (kotaklahan.Length != 0 && Physics.OverlapSphere(myplayer.transform.Find("TargetGround" + tambahan).Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length==0)
+                    {
+                        myplayer.transform.Find("TargetGround" + tambahan).transform.Find("lahan").GetComponent<MeshRenderer>().enabled = true;
+                    }
+                    else
+                    {
+                        tambahan = "";
+                        if (i > 1) tambahan = "" + i;
+                        myplayer.transform.Find("TargetGround" + tambahan).transform.Find("lahan").GetComponent<MeshRenderer>().enabled = false;
+                    }
+                }
             }
             else
             {
-                myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = false;
+                for (int i = 2; i <= 9; i++) myplayer.transform.Find("TargetGround" + i).transform.Find("lahan").GetComponent<MeshRenderer>().enabled = false;
+                myplayer.transform.Find("TargetGround").transform.position = myplayer.transform.Find("AreaPacul").transform.position;
+                myplayer.transform.Find("TargetGround").GetComponent<customgrid>().gridding();
+                myplayer.transform.Find("TargetGround").transform.eulerAngles = new Vector3(0, myplayer.transform.rotation.y * -1, 0);
+
+                bool cangkul = true;
+                if (PlayerPrefs.GetString("peralatannama0").Contains("hoe")) cangkul = Physics.OverlapSphere(myplayer.transform.Find("TargetGround").transform.position, 0.1f, LayerMask.GetMask("ditanam")).Length == 0;
+                if (Physics.OverlapSphere(myplayer.transform.Find("TargetGround").transform.position, 0.11f, LayerMask.GetMask("lahantani")).Length != 0
+                 && cangkul
+                 && Physics.OverlapSphere(myplayer.transform.Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length == 0)
+                {
+                    
+                    myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = true;
+                }
+                else
+                {
+                    myplayer.transform.Find("TargetGround").transform.Find("lahan").GetComponent<MeshRenderer>().enabled = false;
+                    
+                }
             }
             
-            
+
+
         }
 
         if (Inputs.Jump)
@@ -489,7 +606,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 AudioSource audio = GameObject.Find("Clicked").transform.Find("jumping").GetComponent<AudioSource>();
                 audio.Play();
                 GetComponent<Animator>().SetBool("JumpStart", true);
-                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 6f, GetComponent<Rigidbody>().velocity.z);
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 8f, GetComponent<Rigidbody>().velocity.z);
             }
         }
         else
@@ -547,7 +664,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             float angle = Mathf.Atan2(Inputs.JoystickX, Inputs.JoystickZ) * Mathf.Rad2Deg;
             if (Camera.main != null)
             {
-                Vector3 dir = Camera.main.transform.forward * Inputs.JoystickZ + Camera.main.transform.right * Inputs.JoystickX;
+                Vector3 dir = Inputs.cameraforward * Inputs.JoystickZ + Inputs.cameraright * Inputs.JoystickX;
                 float nPengali = Mathf.Sqrt(1 / ((dir.x * dir.x) + (dir.z * dir.z)));
                 float distJoystick = Mathf.Sqrt(Inputs.JoystickX * Inputs.JoystickX + Inputs.JoystickZ * Inputs.JoystickZ);
                 dir = new Vector3(dir.x * nPengali * distJoystick, 0f, dir.z * nPengali * distJoystick);
@@ -634,6 +751,10 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             {
                 PlayerPrefs.SetInt("stamina", PlayerPrefs.GetInt("stamina") - 2);
                 GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextStamina").GetComponent<Text>().text = "" + PlayerPrefs.GetInt("stamina");
+                ExitGames.Client.Photon.Hashtable setStamina = new ExitGames.Client.Photon.Hashtable();
+                setStamina.Add("stamina", PlayerPrefs.GetInt("stamina"));
+                PhotonNetwork.LocalPlayer.SetCustomProperties(setStamina);
+                Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("updatePlayerUI", RpcTarget.All);
             }
 
             //WATERING
@@ -680,7 +801,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 if (photonView.IsMine)
                 {
                     Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone"));
-                    string[] numberText = colliders[0].transform.parent.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
+                    string[] numberText = colliders[0].transform.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
                     int number = Convert.ToInt32(numberText[1]);
 
                     if (!mulaiAksi)
@@ -690,6 +811,19 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     }
                 }
             }
+            else if (alat == "sickle")
+            {
+                if (photonView.IsMine)
+                {
+                    if (!mulaiAksi)
+                    {
+                        
+
+                        mulaiAksi = true;
+                        StartCoroutine(PlayAndWaitForAnim(GetComponent<Animator>(), "WaterPlant", audio, namaplayer, alat));
+                    }
+                }else GetComponent<Animator>().SetBool("WaterPlantStart", true);
+            }
             else
             {
                 audio.Play();
@@ -698,17 +832,19 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
 
             //CANGKUL
-            if (alat == "hoe" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
-                 && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("ditanam")).Length == 0)
+            Collider[] colliderscangkul = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
+
+            if (alat == "hoe" && colliderscangkul.Length != 0
+                 && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").transform.position, 0.1f, LayerMask.GetMask("ditanam")).Length == 0)
             {
                 if (photonView.IsMine)
                 {
                     if (alat == "hoe" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone")).Length == 0)
                     {
-                        Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani"));
-                        GameObject go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkul"), GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, Quaternion.identity);
+                        
+                        GameObject go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkul"), GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").transform.position, Quaternion.identity);
                         go.GetComponent<customgrid>().gridding();
-                        go.transform.position = new Vector3(go.transform.position.x, colliders[0].transform.position.y, go.transform.position.z);
+                        go.transform.position = new Vector3(go.transform.position.x, colliderscangkul[0].transform.position.y, go.transform.position.z);
                         go.transform.parent = GameObject.Find("SawahSpawn").transform;
 
                         Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.1f, LayerMask.GetMask("lahantani"));
@@ -722,18 +858,31 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                                 if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i] == null || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() == "")
                                 {
                                     setLahan.Add("lahancangkulnama" + i, "terpacul_" + i);
-                                    setLahan.Add("lahancangkulsiram" + i, false);
+                                    if((bool)PhotonNetwork.CurrentRoom.CustomProperties["rain"])
+                                        setLahan.Add("lahancangkulsiram" + i, true);
+                                    else setLahan.Add("lahancangkulsiram" + i, false);
                                     setLahan.Add("lahancangkulposx" + i, go.GetComponent<customgrid>().truepos.x);
-                                    setLahan.Add("lahancangkulposy" + i, colliders[0].transform.position.y);
+                                    setLahan.Add("lahancangkulposy" + i, colliderscangkul[0].transform.position.y);
                                     setLahan.Add("lahancangkulposz" + i, go.GetComponent<customgrid>().truepos.z);
+                                    setLahan.Add("lahancangkulmati" + i, 0);
                                     break;
                                 }
 
                             }
                             go.name = "terpacul_" + i;
                             PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
+                            if ((bool)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulsiram" + i])
+                            {
+                                go.transform.Find("lahan").gameObject.SetActive(false);
+                                go.transform.Find("lahansiram").gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                go.transform.Find("lahan").gameObject.SetActive(true);
+                                go.transform.Find("lahansiram").gameObject.SetActive(false);
+                            }
 
-                            GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, colliders[0].transform.position.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_", "no");
+                            GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, i, go.GetComponent<customgrid>().truepos.x, colliderscangkul[0].transform.position.y, go.GetComponent<customgrid>().truepos.z, "LahanCangkul", "terpacul_", "no");
                         }
                         else
                         {
@@ -753,21 +902,21 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                     
 
                     List<Vector3> directional = new List<Vector3>();
-                    Vector3 tengah = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                    Vector3 ataskanan = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z);
-                    Vector3 ataskiri = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
-                    Vector3 bawahkiri = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
-                    Vector3 bawahkanan = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
+                    Vector3 tengah = transform.Find("TargetGround").Find("lahan").transform.position;
+                    Vector3 ataskanan = transform.Find("TargetGround2").Find("lahan").transform.position;
+                    Vector3 ataskiri = transform.Find("TargetGround3").Find("lahan").transform.position;
+                    Vector3 bawahkiri = transform.Find("TargetGround4").Find("lahan").transform.position;
+                    Vector3 bawahkanan = transform.Find("TargetGround5").Find("lahan").transform.position;
                     directional.Add(tengah);
                     directional.Add(ataskanan);
                     directional.Add(ataskiri);
                     directional.Add(bawahkiri);
                     directional.Add(bawahkanan);
 
-                    Vector3 atas = new Vector3(transform.position.x+1f, transform.position.y, transform.position.z+1f);
-                    Vector3 bawah = new Vector3(transform.position.x-1f, transform.position.y, transform.position.z - 1f);
-                    Vector3 kanan = new Vector3(transform.position.x+1f, transform.position.y, transform.position.z - 1f);
-                    Vector3 kiri = new Vector3(transform.position.x-1f, transform.position.y, transform.position.z + 1f);
+                    Vector3 atas = transform.Find("TargetGround6").Find("lahan").transform.position;
+                    Vector3 bawah = transform.Find("TargetGround7").Find("lahan").transform.position;
+                    Vector3 kanan = transform.Find("TargetGround8").Find("lahan").transform.position;
+                    Vector3 kiri = transform.Find("TargetGround9").Find("lahan").transform.position;
                     directional.Add(atas);
                     directional.Add(bawah);
                     directional.Add(kanan);
@@ -775,23 +924,25 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                     for(int j = 0; j < directional.Count; j++)
                     {
-                        Collider[] lahantani = Physics.OverlapSphere(directional[j], 0.02f, LayerMask.GetMask("ditanam"));
-                        if (Physics.OverlapSphere(directional[j], 0.1f, LayerMask.GetMask("lahantani")).Length != 0
-                         && lahantani.Length != 0)
+                        Collider[] lahantani = Physics.OverlapSphere(directional[j], 0.1f, LayerMask.GetMask("ditanam"));
+                        if (lahantani.Length != 0)
                         {
                             if (photonView.IsMine)
                             {
                                 GameObject mylahanbaru = lahantani[0].transform.parent.gameObject;
                                 GameObject go = null;
                                 Debug.Log("berhasil ga = " + mylahanbaru.name);
-                                if (mylahanbaru.name.Contains("terpacul")) go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkulBibit"), mylahanbaru.transform.position, Quaternion.identity);
-                                else continue;
+                                string[] splitnamalahan = mylahanbaru.name.Split('_');
+                                if (splitnamalahan[0].Equals("terpacul"))
+                                {
+                                    go = Instantiate(Resources.Load<GameObject>("Images/Lahan/LahanCangkulBibit"), mylahanbaru.transform.position, Quaternion.identity);
+                                
                                 go.GetComponent<customgrid>().gridding();
                                 go.transform.parent = GameObject.Find("SawahSpawn").transform;
 
-                                Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.03f, LayerMask.GetMask("lahantani"));
+                                Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.032f, LayerMask.GetMask("lahantani"));
                                 bool benergadidalem = dalemlahan.Length != 0;
-                                if (benergadidalem)
+                                if (true)
                                 {
                                     string namalahan = "";
                                     string lahan = "";
@@ -806,7 +957,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                                     if (alat.Contains("peralatanbibit1"))
                                     {
-                                        namabuah = "Tomat";
+                                        namabuah = "tomat";
                                         renewable = true;
                                         maxumur = 2;
                                         maxumurberbuah = 3;
@@ -853,6 +1004,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                                 {
                                     DestroyImmediate(go);
                                 }
+                                }
                             }
                         }
 
@@ -889,6 +1041,15 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         else if (stateName == "Hammer")
         targetAnim.SetBool("HoeStart", true);
 
+        GameObject myweapon = GameObject.Find("PlayerSpawn");
+        myweapon = transform.Find("Armature").Find("Hips").Find("Spine").Find("Chest").Find("Right shoulder").Find("Right arm").Find("Right elbow").Find("Right wrist").Find("weapon").gameObject;
+        Vector3 tempeuler = new Vector3(myweapon.transform.localEulerAngles.x, myweapon.transform.localEulerAngles.y,myweapon.transform.localEulerAngles.z);
+        Debug.Log("EULER ANGLES: " + myweapon.transform.localEulerAngles.x + " - " + myweapon.transform.localEulerAngles.y);
+        if (alat == "sickle")
+        {
+            myweapon.transform.localEulerAngles = new Vector3(303.8f, 36.99f, myweapon.transform.localEulerAngles.z);
+        }
+
         //Wait until we enter the current state
         while (targetAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != animHash)
         {
@@ -908,17 +1069,16 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
         //Done playing. Do something below!
         if(stateName == "WaterPlant")
         {
-            if (photonView.IsMine)
+            if (photonView.IsMine && alat!="sickle")
             {
                 PlayerPrefs.SetInt("peralatanjumlah0", PlayerPrefs.GetInt("peralatanjumlah0") - 1);
                 GameObject.Find("Canvas").transform.Find("ButtonBwhKanan").Find("ButtonToolsAxe").Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
                 GameObject.Find("Canvas").transform.Find("Bag").Find("BGAtas").Find("tools").GetChild(0).Find("Text").GetComponent<Text>().text = "X " + PlayerPrefs.GetInt("peralatanjumlah0");
             }
 
-            Collider[] lahantani = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
+            Collider[] lahantani = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
 
-            if (alat == "watering" && Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("AreaPacul").transform.position, 0.1f, LayerMask.GetMask("lahantani")).Length != 0
-             && lahantani.Length != 0)
+            if (alat == "watering" && lahantani.Length != 0)
             {
                 if (photonView.IsMine)
                 {
@@ -933,25 +1093,42 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                         Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.03f, LayerMask.GetMask("lahantani"));
                         bool benergadidalem = dalemlahan.Length != 0;
-                        if (benergadidalem)
+                        if (true)
                         {
                             string namalahan = "";
                             string lahan = "";
 
                             ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
-                            string[] splitArray = go.name.Split(char.Parse("_"));
+                            string[] splitArray = go.name.Split('_');
                             setLahan.Add("lahancangkulsiram" + splitArray[1], true);
                             PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
 
                             namalahan = go.name;
                             GetComponent<PhotonView>().RPC("paculan", RpcTarget.Others, namaplayer, Int32.Parse(splitArray[1]), go.GetComponent<customgrid>().truepos.x, go.GetComponent<customgrid>().truepos.y, go.GetComponent<customgrid>().truepos.z, lahan, namalahan, "yes");
                             //Destroy(mylahanbaru);
+
+                            Debug.Log("Done Watering "+ go.name);
                         }
                     }
 
 
                 }
+            }else if (alat == "sickle")
+            {
+                myweapon.transform.localEulerAngles = tempeuler;
+                if (photonView.IsMine)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("ditanam"));
+                    if (colliders.Length != 0)
+                    {
+                        collider = colliders[0];
+
+                        if(collider.transform.parent.transform.Find("lahanpohon")!=null)
+                        GetComponent<PhotonView>().RPC("destroyTaneman", RpcTarget.MasterClient, collider.transform.parent.name);
+                    }
+                }
             }
+
             mulaiAksi = false;
         }
         if (stateName == "Hammer")
@@ -961,9 +1138,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                 if (photonView.IsMine)
                 {
                     Collider[] colliders = Physics.OverlapSphere(GameObject.Find("PlayerSpawn").transform.Find(namaplayer).Find("TargetGround").Find("lahan").transform.position, 0.1f, LayerMask.GetMask("stone"));
-                    string[] numberText = colliders[0].transform.parent.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
+                    string[] numberText = colliders[0].transform.parent.parent.name.Split(new string[] { "Ladang2Batu" }, System.StringSplitOptions.None);
                     int number = Convert.ToInt32(numberText[1]);
-                    Debug.Log(number);
+                    //Debug.Log(number);
                     collider = colliders[0];
 
                     GetComponent<PhotonView>().RPC("destroyStone", RpcTarget.All,number);
@@ -971,75 +1148,137 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             }
             mulaiAksi = false;
         }
-        Debug.Log("Done Watering");
 
     }
 
     [PunRPC]
+    public void destroyTaneman(string namataneman)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("UPDATE LAHAN: " + namataneman);
+            for (int i = 0; i < PhotonNetwork.CurrentRoom.CustomProperties.Count; i++)
+            {
+                if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("lahancangkulnama" + i))
+                {
+                    if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() != "")
+                    {
+                        if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() == namataneman)
+                        {
+                                
+                            ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
+                            setLahan.Add("lahancangkulnama" + i, "terpacul_"+i);
+                            setLahan.Add("lahancangkulbuah" + i, "");
+                            PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
+                            GetComponent<PhotonView>().RPC("destroyTaneman2", RpcTarget.All, collider.transform.parent.name,i);
+                            break;
+                        }
+                    }
+                }
+            }
+                            
+        }
+    }
+
+    [PunRPC]
+    public void destroyTaneman2(string namataneman, int i)
+    {
+        if (level == "KeluarRumah")
+        {
+            GameObject go = GameObject.Find("SawahSpawn").transform.Find(namataneman).gameObject;
+            go.name = "terpacul_" + i;
+            go.transform.Find("lahanpohon").gameObject.SetActive(false);
+        }
+    }
+
+        [PunRPC]
     public void destroyStone(int number)
     {
-        Destroy(GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + number).gameObject);
-        Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]);
-        for (int i = number + 1; i < (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]; i++)
-        {
-            GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + i).name = "Ladang2Batu" + (i - 1);
-        }
-
-        float[] posX = new float[43];
-        float[] posY = new float[43];
-        float[] ranNum = new float[43];
-        string[] tipeLadang = new string[43];
-        ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
-
-        for (int i=0;i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length; i++)
-        {
-            if (i < number)
-            {
-                posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i];
-                posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i];
-                ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
-                tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
-
-                setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i]);
-                setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i]);
-                setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i]);
-                setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i]);
-
-            }
-            else if (i >= number && i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length-1)
-            {
-                posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i+1];
-                posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i+1];
-                ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i+1];
-                tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i+1];
-
-                setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i+1]);
-                setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i+1]);
-                setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i+1]);
-                setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i+1]);
-
-            }
-            else
-            {
-                tipeLadang[i] = "small";
-
-                setLahan.Add("PosLadang2BatuTipe" + i, "small");
-
-            }
-        }
-
-        setLahan.Add("PosLadang2BatuLength", (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"] - 1);
-        if(PhotonNetwork.IsMasterClient)
-        PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
-        Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]);
-        PlayerPrefsX.SetFloatArray("PosLadang2BatuX", posX);
-        PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
-        PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", ranNum);
-        PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
-
-
-        PlayerPrefs.SetInt("Ladang2BatuJumlah", PlayerPrefs.GetInt("Ladang2BatuJumlah")-1);
         
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            
+
+            float[] posX = new float[43];
+            float[] posY = new float[43];
+            float[] ranNum = new float[43];
+            string[] tipeLadang = new string[43];
+            ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
+
+            for (int i = 0; i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length; i++)
+            {
+                if (i < number)
+                {
+                    posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i];
+                    posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i];
+                    ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i];
+                    tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i];
+
+                    setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i]);
+                    setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i]);
+                    setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i]);
+                    setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i]);
+
+                }
+                else if (i >= number && i < PlayerPrefsX.GetFloatArray("PosLadang2BatuX").Length - 1)
+                {
+                    posX[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i + 1];
+                    posY[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i + 1];
+                    ranNum[i] = PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i + 1];
+                    tipeLadang[i] = PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i + 1];
+
+                    setLahan.Add("PosLadang2BatuX" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuX")[i + 1]);
+                    setLahan.Add("PosLadang2BatuY" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuY")[i + 1]);
+                    setLahan.Add("PosLadang2BatuNum" + i, PlayerPrefsX.GetFloatArray("PosLadang2BatuNum")[i + 1]);
+                    setLahan.Add("PosLadang2BatuTipe" + i, PlayerPrefsX.GetStringArray("PosLadang2BatuTipe")[i + 1]);
+
+                }
+                else
+                {
+                    tipeLadang[i] = "small";
+
+                    setLahan.Add("PosLadang2BatuTipe" + i, "small");
+
+                }
+            }
+
+            setLahan.Add("PosLadang2BatuLength", (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"] - 1);
+            if (PhotonNetwork.IsMasterClient)
+                PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
+            //Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]);
+            PlayerPrefsX.SetFloatArray("PosLadang2BatuX", posX);
+            PlayerPrefsX.SetFloatArray("PosLadang2BatuY", posY);
+            PlayerPrefsX.SetFloatArray("PosLadang2BatuNum", ranNum);
+            PlayerPrefsX.SetStringArray("PosLadang2BatuTipe", tipeLadang);
+            PlayerPrefs.SetInt("Ladang2BatuJumlah", PlayerPrefs.GetInt("Ladang2BatuJumlah") - 1);
+        }
+
+        if (level == "KeluarRumah")
+        {
+            StartCoroutine(createbatu());
+            
+        }
+    }
+
+    IEnumerator createbatu()
+    {
+        Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"] +" - "+ GameObject.Find("SawahSpawn").transform.childCount);
+        yield return new WaitUntil(()=> (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]< GameObject.Find("SawahSpawn").transform.childCount);
+        for (int i = 0; i < (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]+1; i++)
+        {
+            Destroy(GameObject.Find("SawahSpawn").transform.Find("Ladang2Batu" + i).gameObject);
+        }
+
+        for (int i = 0; i < (int)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuLength"]; i++)
+        {
+            Vector3 pos = new Vector3((float)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuX" + i], 0.01f, (float)PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuY" + i]);
+            GameObject goBatu = GameObject.Instantiate(Resources.Load<GameObject>("Images/Lahan/Batu/" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString() + "/lahanCangkulBatu" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuNum" + i].ToString() + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString()), pos, Quaternion.identity);
+            goBatu.transform.parent = GameObject.Find("SawahSpawn").transform;
+            goBatu.name = "Ladang2Batu" + i;
+            goBatu.transform.Find("target").name = "batu" + PhotonNetwork.CurrentRoom.CustomProperties["PosLadang2BatuTipe" + i].ToString();
+            goBatu.layer = 15;
+        }
     }
 
     [PunRPC]
@@ -1079,17 +1318,167 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    void tumbuhBuah(string NamePlayer, string namaobjitem, string mylevel)
+    {
+        GameObject go = CariGameObject.FindInActiveObjectByName(namaobjitem);
+        Debug.Log(NamePlayer + " - " + namaobjitem + " " + mylevel);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Collider>().isTrigger = true;
+        go.GetComponent<Buah>().cubeaction = CariGameObject.FindInActiveObjectByName("CubeAction");
+        go.GetComponent<Buah>().picked = false;
+        
+        ExitGames.Client.Photon.Hashtable setValue = new ExitGames.Client.Photon.Hashtable();
+        int i = 0;
+        for (; i < i + 1; i++)
+        {
+            if (PhotonNetwork.CurrentRoom.CustomProperties["ItemDrop" + i] == null || PhotonNetwork.CurrentRoom.CustomProperties["ItemDrop" + i].ToString() == "")
+            {
+                setValue.Add("ItemDrop" + i, i);
+                break;
+            }
+
+        }
+        string[] splitku = namaobjitem.Split('(');
+        go.name = splitku[0]+"-"+ go.GetPhotonView().ViewID;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(setValue);
+        if (go.GetComponent<Buah>() != null)
+            go.GetComponent<Buah>().level = mylevel;
+    }
+
+    [PunRPC]
+    void addHewan(string NamePlayer, string namaobjitem, string mylevel,string namahewanasli)
+    {
+        GameObject go = CariGameObject.FindInActiveObjectByName(namaobjitem);
+        Debug.Log(NamePlayer + " - " + namaobjitem + " " + mylevel);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Collider>().isTrigger = true;
+        go.GetComponent<Cat>().cubeaction = CariGameObject.FindInActiveObjectByName("CubeAction");
+        go.GetComponent<Cat>().picked = true;
+        if (PhotonNetwork.IsMasterClient) go.GetComponent<PhotonView>().TransferOwnership(GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).GetComponent<PhotonView>().Owner);
+
+        GameObject myparent = null;
+        if (GameObject.Find("PlayerSpawn").transform.Find(NamePlayer) == null)
+        {
+            myparent = transform.gameObject;
+        }
+        else myparent = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).gameObject;
+
+        go.transform.parent = myparent.transform.Find("AreaPegang").transform;
+        go.GetComponent<PhotonView>().ViewID = 0;
+        if (namahewanasli.Split('-')[0]=="Cat")
+        go.GetComponent<PhotonView>().ViewID = 8;
+        else go.GetComponent<PhotonView>().ViewID = Int32.Parse(namahewanasli.Split('-')[2]);
+        go.name = namahewanasli;
+        go.transform.localPosition = new Vector3(0, 0, 0);
+        go.GetComponent<Cat>().StopAllCoroutines();
+        go.GetComponent<Cat>().CR_running = false;
+        ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
+        setProperti.Add(namahewanasli, "");
+        PhotonNetwork.CurrentRoom.SetCustomProperties(setProperti);
+
+        if (go.GetComponent<Cat>() != null)
+            go.GetComponent<Cat>().level = mylevel;
+    }
+
+    [PunRPC]
     void addBale(string NamePlayer, string namaobjitem, string mylevel)
     {
-        GameObject go = GameObject.Find(namaobjitem);
-        go.GetComponent<Rigidbody>().isKinematic = true;
+        GameObject go = CariGameObject.FindInActiveObjectByName(namaobjitem);
+        Debug.Log(NamePlayer + " - " + namaobjitem + " " + mylevel);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Collider>().isTrigger = true;
+        go.GetComponent<Buah>().cubeaction = CariGameObject.FindInActiveObjectByName("CubeAction");
+        go.GetComponent<Buah>().picked = true;
+
+        GameObject myparent = null;
+        if (GameObject.Find("PlayerSpawn").transform.Find(NamePlayer) == null)
+        {
+            myparent = transform.gameObject;
+        }
+        else myparent = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).gameObject;
+        
+        go.transform.parent = myparent.transform.Find("AreaPegang").transform;
+        go.name = "Item";
+        go.transform.localPosition = new Vector3(0, 0, 0);
+
+        if (go.GetComponent<Buah>() != null)
+            go.GetComponent<Buah>().level = mylevel;
+    }
+
+    public IEnumerator tungguItemSpawn(string NamePlayer, string namaobjitem, string mylevel)
+    {
+        yield return new WaitUntil(() => CariGameObject.FindInActiveObjectByName(NamePlayer) != null);
+        
+    }
+    [PunRPC]
+    void pickItem(string NamePlayer, string namaobjitem, string mylevel)
+    {
+        
+        GameObject go = GameObject.Find("ItemSpawn").transform.Find(namaobjitem).gameObject;
+
+        string[] splitString = go.name.Split('-');
+        Debug.Log("NAMA ASLI: "+go.name +" , NAMA AWAL: "+ splitString[0]);
+        string namaitem = splitString[0];
+        int itemno = System.Convert.ToInt32(splitString[1]);
+
+        int banyakitem = System.Convert.ToInt32((PhotonNetwork.CurrentRoom.CustomProperties["ItemCount"]));
+
+        for (int n = itemno; n <= banyakitem; n++)
+        {
+            Debug.Log("ITEM NO: "+n);
+            if (GameObject.Find("ItemSpawn").transform.Find(namaitem + "-" + n) == null) break;
+            GameObject.Find("ItemSpawn").transform.Find(namaitem +"-"+ n).name = namaitem + "-" + (n - 1);
+        }
+
+        if (PhotonNetwork.IsMasterClient) go.GetComponent<PhotonView>().TransferOwnership(GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).GetComponent<PhotonView>().Owner);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Collider>().isTrigger = true;
 
         go.transform.parent = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform;
+        go.transform.position = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.position;
+        go.transform.eulerAngles = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.eulerAngles;
         //go.transform.rotation = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).rotation;
         go.name = "Item";
 
-        if (go.GetComponent<Bale>() != null)
-        go.GetComponent<Bale>().level = mylevel;
+        go.GetComponent<Buah>().CancelInvoke("destroyself");
+        go.GetComponent<Buah>().destroying = false;
+        go.GetComponent<Buah>().picked = true;
+
+        PlayerPrefs.DeleteKey("buttonPickUpItem");
+
+        if (go.GetComponent<Buah>() != null)
+            go.GetComponent<Buah>().level = mylevel;
+    }
+
+    [PunRPC]
+    void pickHewan(string NamePlayer, string namaobjitem, string mylevel)
+    {
+        Debug.Log("PICKHEWAN: "+NamePlayer+" - "+namaobjitem+" - "+mylevel);
+        GameObject go = GameObject.Find("AISpawn").transform.Find(namaobjitem).gameObject;
+
+        string[] splitString = go.name.Split('-');
+        Debug.Log("NAMA ASLI: " + go.name + " , NAMA AWAL: " + splitString[0]);
+
+        if (PhotonNetwork.IsMasterClient) go.GetComponent<PhotonView>().TransferOwnership(GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).GetComponent<PhotonView>().Owner);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Collider>().isTrigger = true;
+        go.GetComponent<Cat>().picked = true;
+
+        go.transform.parent = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform;
+        go.transform.position = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.position;
+        go.transform.eulerAngles = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.eulerAngles;
+        //go.name = "Item";
+        go.GetComponent<Cat>().StopAllCoroutines();
+        go.GetComponent<Cat>().CR_running = false;
+        ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
+        setProperti.Add(namaobjitem, "");
+        PhotonNetwork.CurrentRoom.SetCustomProperties(setProperti);
+        //go.GetComponent<Cat>().CancelInvoke("destroyself");
+
+        PlayerPrefs.DeleteKey("buttonPickUpHewan");
+
+        if (go.GetComponent<Cat>() != null)
+            go.GetComponent<Cat>().level = mylevel;
 
     }
 
@@ -1108,12 +1497,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             GameObject.Find("ItemSpawn").transform.Find("bale" + n).name = "bale" + (n - 1);
         }
 
-        go.GetComponent<Rigidbody>().isKinematic = true;
+        if (PhotonNetwork.IsMasterClient) go.GetComponent<PhotonView>().TransferOwnership(GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).GetComponent<PhotonView>().Owner);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
         go.transform.parent = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform;
         go.transform.position = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.position;
         go.transform.eulerAngles = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).Find("AreaPegang").transform.eulerAngles;
-        //go.transform.rotation = GameObject.Find("PlayerSpawn").transform.Find(NamePlayer).rotation;
         go.name = "Item";
 
         go.GetComponent<Bale>().drop = 0;
@@ -1149,22 +1538,27 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             GameObject.Find("ItemSpawn").transform.Find("bale" + (n)).GetComponent<Bale>().cek = 1;
         }
     }
+
+    [PunRPC]
+    void dropHewan(string namaPlayer, string namabarang)
+    {
+        GameObject goob = GameObject.Find("PlayerSpawn").transform.Find(namaPlayer).Find("AreaPegang").GetChild(0).gameObject;
+        goob.GetComponent<Cat>().picked = false;
+        goob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        goob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        goob.GetComponent<Collider>().isTrigger = false;
+        GameObject.Find("PlayerSpawn").transform.Find(namaPlayer).Find("AreaPegang").GetChild(0).parent = GameObject.Find("AISpawn").transform;
+    }
     [PunRPC]
     void dropBale(string namaPlayer, string namabarang)
     {
-        int jumlahPakan = 0;
-        for (int n = 0; n < 10;n++)
-        {
-            if (System.Convert.ToBoolean(PhotonNetwork.CurrentRoom.CustomProperties["box" + n]))
-            {
-                jumlahPakan++;
-            }
-        }
         GameObject goob = GameObject.Find("PlayerSpawn").transform.Find(namaPlayer).Find("AreaPegang").Find("Item").gameObject;
-        goob.GetComponent<Bale>().drop = 1;
+        goob.GetComponent<Buah>().picked = false;
         GameObject.Find("PlayerSpawn").transform.Find(namaPlayer).Find("AreaPegang").Find("Item").parent = GameObject.Find("ItemSpawn").transform;
-        GameObject.Find("ItemSpawn").transform.Find("Item").GetComponent<Rigidbody>().isKinematic = false;
-        GameObject.Find("ItemSpawn").transform.Find("Item").name = namabarang + PhotonNetwork.CurrentRoom.CustomProperties["ItemCount"].ToString();
+        GameObject.Find("ItemSpawn").transform.Find("Item").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        GameObject.Find("ItemSpawn").transform.Find("Item").GetComponent<Collider>().isTrigger = false;
+        string[] splitnama = namabarang.Split('-');
+        GameObject.Find("ItemSpawn").transform.Find("Item").name = splitnama[0]+"-"+ goob.GetComponent<PhotonView>().ViewID;
         ExitGames.Client.Photon.Hashtable setValue = new ExitGames.Client.Photon.Hashtable();
         int i = 0;
         for (; i < i + 1; i++)
@@ -1205,6 +1599,12 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(Inputs.JoystickXAttack);
             stream.SendNext(Inputs.JoystickZAttack);
             stream.SendNext(level);
+            stream.SendNext(Inputs.cameraforward.x);
+            stream.SendNext(Inputs.cameraforward.y);
+            stream.SendNext(Inputs.cameraforward.z);
+            stream.SendNext(Inputs.cameraright.x);
+            stream.SendNext(Inputs.cameraright.y);
+            stream.SendNext(Inputs.cameraright.z);
 
         }
         else
@@ -1231,8 +1631,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
             Inputs.JoystickXAttack = (float)stream.ReceiveNext();
             Inputs.JoystickZAttack = (float)stream.ReceiveNext();
             level = (string)stream.ReceiveNext();
+            Inputs.cameraforward.x = (float)stream.ReceiveNext();
+            Inputs.cameraforward.y = (float)stream.ReceiveNext();
+            Inputs.cameraforward.z = (float)stream.ReceiveNext();
+            Inputs.cameraright.x = (float)stream.ReceiveNext();
+            Inputs.cameraright.y = (float)stream.ReceiveNext();
+            Inputs.cameraright.z = (float)stream.ReceiveNext();
 
-            
+
         }
     }
 

@@ -10,15 +10,16 @@ public class mailbox : MonoBehaviour
     public GameObject mymail;
     public GameObject transisi;
     public GameObject cubeaction;
-    
+    bool munculcubeaction = false;
+    bool enterPlayer = false;
+    Collider[] mycolliderPlayer;
+
     public string mysave;
     public string respawn;
-    public int cek;
 
     // Start is called before the first frame update
     void Start()
     {
-        cek = 1;
         transisi = GameObject.Find("Canvas").transform.Find("Transisi").gameObject;
 
         if (PlayerPrefs.GetString("ambilduitharian") == "yes")
@@ -31,39 +32,38 @@ public class mailbox : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        Collider[] mycolliderPlayer = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Player"));
-        bool enterPlayer = mycolliderPlayer.Length != 0;
 
-        if (enterPlayer && (cek == 1 || cek==3))
+        mycolliderPlayer = Physics.OverlapSphere(transform.position, 0.5f, LayerMask.GetMask("Player"));
+
+        for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") { enterPlayer = true; break; }
+
+        if (enterPlayer)
         {
-            for (int i = 0; i < mycolliderPlayer.Length; i++)
+            for (int k = 0; k < mycolliderPlayer.Length; k++)
             {
-                if (!PhotonNetwork.IsConnected || mycolliderPlayer[i].GetComponent<PhotonView>().IsMine)
+                if (!PhotonNetwork.IsConnected || mycolliderPlayer[k].GetComponent<PhotonView>().IsMine)
                 {
-                    cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                    if (cubeaction == null)
+                        cubeaction = CariGameObject.FindInActiveObjectByName("CubeAction");
                     cubeaction.SetActive(true);
-
+                    cubeaction.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                    munculcubeaction = true;
                     PlayerPrefs.SetString("buttonMailbox", name);
-                    if (cek > 2) cek = 1;
-                    else cek++;
-
                 }
             }
         }
-        else
-        if (!enterPlayer && cek == 3)
+        else if (munculcubeaction)
         {
             cubeaction.SetActive(false);
+            munculcubeaction = false;
             PlayerPrefs.DeleteKey("buttonMailbox");
-            if (cek > 2) cek = 1;
-            else cek++;
+            if (GameObject.Find("CanvasFarm").transform.Find("MyMail").gameObject.activeInHierarchy)
+            {
+                GameObject.Find("mailbox").GetComponent<mailbox>().ClickExit();
+            }
         }
-        else
-        if (!enterPlayer && cek == 2) cek = 3;
-        else if (enterPlayer && cek == 3) cek = 1;
-        
-        
+
+        enterPlayer = false;
 
     }
 

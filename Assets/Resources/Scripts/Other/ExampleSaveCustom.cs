@@ -40,8 +40,11 @@ public class ExampleSaveCustom : MonoBehaviour
         public int[] warnaskin = new int[3];
         public int tanggal;
         public string musim;
+        public string hari;
         public int tahun;
         public int maxstamina;
+        public int friendshipmika;
+        public int giftmika;
 
         public int levelbag;
         public string[] peralatannama = new string[53];
@@ -62,6 +65,38 @@ public class ExampleSaveCustom : MonoBehaviour
         public string[] koleksirambut = new string[50];
         public string[] koleksitopi = new string[50];
 
+        //AYAM BEBEK
+        public int ChickenFood;
+        public int ChickenMax;
+        public string[] Chicken = new string[20];
+        public string[] ChickenLevel = new string[20];
+        public int[] ChickenHeart = new int[20];
+        public int[] ChickenSick = new int[20];
+        public int[] ChickenSilver = new int[20];
+        public int[] ChickenGold = new int[20];
+        public float[] ChickenPosX = new float[20];
+        public float[] ChickenPosY = new float[20];
+        public float[] ChickenPosZ = new float[20];
+        public string[] ChickenTipe = new string[20];
+        public string[] box = new string[21];
+
+        //SAPI KAMBING
+        public int CowFood;
+        public int CowMax;
+        public string[] Cow = new string[20];
+        public string[] CowLevel = new string[20];
+        public int[] CowHeart = new int[20];
+        public int[] CowSick = new int[20];
+        public int[] CowSilver = new int[20];
+        public int[] CowGold = new int[20];
+        public string[] CowMilk = new string[20];
+        public float[] CowPosX = new float[20];
+        public float[] CowPosY = new float[20];
+        public float[] CowPosZ = new float[20];
+        public string[] CowTipe = new string[20];
+        public string[] boxcow = new string[21];
+
+
         public CustomData()
         {
             gender = "cowok";
@@ -70,11 +105,14 @@ public class ExampleSaveCustom : MonoBehaviour
             namakucing = "cowok";
             musimlahir = "cowok";
             musim = "cowok";
+            hari = "cowok";
             tgllahir = 1;
             money = 1;
             tanggal = 1;
             tahun = 1;
             maxstamina = 1;
+            friendshipmika = 0;
+            giftmika = 1;
             warnahair[0] = 1;
             warnahair[1] = 1;
             warnahair[2] = 1;
@@ -185,8 +223,19 @@ public class ExampleSaveCustom : MonoBehaviour
 
         customData.tanggal = PlayerPrefs.GetInt("tanggal");
         customData.musim = PlayerPrefs.GetString("musim");
+        string haribaru = "";
+        if (PlayerPrefs.GetString("hari") == "Senin") haribaru = "Selasa";
+        else if (PlayerPrefs.GetString("hari") == "Selasa") haribaru = "Rabu";
+        else if (PlayerPrefs.GetString("hari") == "Rabu") haribaru = "Kamis";
+        else if (PlayerPrefs.GetString("hari") == "Kamis") haribaru = "Jumat";
+        else if (PlayerPrefs.GetString("hari") == "Jumat") haribaru = "Sabtu";
+        else if (PlayerPrefs.GetString("hari") == "Sabtu") haribaru = "Selasa";
+        else if (PlayerPrefs.GetString("hari") == "Minggu") haribaru = "Senin";
+        customData.hari = haribaru;
         customData.tahun = PlayerPrefs.GetInt("tahun");
         customData.maxstamina = PlayerPrefs.GetInt("maxstamina");
+        customData.friendshipmika = PlayerPrefs.GetInt("MikaFriendship");
+        customData.giftmika = PlayerPrefs.GetInt("MikaGift");
 
         for (int i = 0; i < customData.peralatannama.Length; i++)
         {
@@ -223,6 +272,45 @@ public class ExampleSaveCustom : MonoBehaviour
 
         customData.levelbag = PlayerPrefs.GetInt("levelbag");
 
+        //SET SAVE AYAM
+        customData.ChickenFood = PlayerPrefs.GetInt("ChickenFood");
+        customData.ChickenMax = PlayerPrefs.GetInt("ChickenMax");
+        for (int i = 0; i < PlayerPrefs.GetInt("ChickenMax"); i++)
+        {
+            customData.Chicken[i] = PlayerPrefs.GetString("Chicken" + i);
+            customData.ChickenHeart[i] = PlayerPrefs.GetInt("ChickenHeart" + i);
+            customData.ChickenLevel[i] = PlayerPrefs.GetString("ChickenLevel" + i);
+            customData.ChickenSick[i] = PlayerPrefs.GetInt("ChickenSick" + i);
+            customData.ChickenSilver[i] = PlayerPrefs.GetInt("ChickenSilver" + i);
+            customData.ChickenGold[i] = PlayerPrefs.GetInt("ChickenGold" + i);
+            customData.ChickenPosX[i] = PlayerPrefs.GetFloat("ChickenPosX" + i);
+            customData.ChickenPosY[i] = PlayerPrefs.GetFloat("ChickenPosY" + i);
+            customData.ChickenPosZ[i] = PlayerPrefs.GetFloat("ChickenPosZ" + i);
+            customData.ChickenTipe[i] = PlayerPrefs.GetString("ChickenTipe" + i);
+
+            customData.box[i+1] = PlayerPrefs.GetString("box" + (i+1));
+        }
+
+        //SET SAVE SAPI KAMBING
+        customData.CowFood = PlayerPrefs.GetInt("CowFood");
+        customData.CowMax = PlayerPrefs.GetInt("CowMax");
+        for (int i = 0; i < PlayerPrefs.GetInt("CowMax"); i++)
+        {
+            customData.Cow[i] = PlayerPrefs.GetString("Cow" + i);
+            customData.CowHeart[i] = PlayerPrefs.GetInt("CowHeart" + i);
+            customData.CowLevel[i] = PlayerPrefs.GetString("CowLevel" + i);
+            customData.CowSick[i] = PlayerPrefs.GetInt("CowSick" + i);
+            customData.CowSilver[i] = PlayerPrefs.GetInt("CowSilver" + i);
+            customData.CowGold[i] = PlayerPrefs.GetInt("CowGold" + i);
+            customData.CowMilk[i] = PlayerPrefs.GetString("CowMilk" + i);
+            customData.CowPosX[i] = PlayerPrefs.GetFloat("CowPosX" + i);
+            customData.CowPosY[i] = PlayerPrefs.GetFloat("CowPosY" + i);
+            customData.CowPosZ[i] = PlayerPrefs.GetFloat("CowPosZ" + i);
+            customData.CowTipe[i] = PlayerPrefs.GetString("CowTipe" + i);
+
+            customData.boxcow[i + 1] = PlayerPrefs.GetString("boxcow" + (i + 1));
+        }
+
         if (PhotonNetwork.IsConnected)
         if (PhotonNetwork.IsMasterClient)
         {
@@ -230,6 +318,7 @@ public class ExampleSaveCustom : MonoBehaviour
             setTgl.Add("tanggal", PlayerPrefs.GetInt("tanggal"));
             setTgl.Add("tahun", PlayerPrefs.GetInt("tahun"));
             setTgl.Add("musim", PlayerPrefs.GetString("musim"));
+            setTgl.Add("hari", PlayerPrefs.GetString("hari"));
             setTgl.Add("jam", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextJam").GetComponent<Text>().text);
             setTgl.Add("detik", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text);
             PhotonNetwork.CurrentRoom.SetCustomProperties(setTgl);
@@ -277,9 +366,59 @@ public class ExampleSaveCustom : MonoBehaviour
 
                 PlayerPrefs.SetInt("tanggal", customData.tanggal);
                 PlayerPrefs.SetString("musim", customData.musim);
+                PlayerPrefs.SetString("hari", customData.hari);
                 PlayerPrefs.SetInt("tahun", customData.tahun);
-                PlayerPrefs.SetInt("money", customData.money);
+                //PlayerPrefs.SetInt("money", customData.money);
                 PlayerPrefs.SetInt("maxstamina", customData.maxstamina);
+                PlayerPrefs.SetInt("MikaFriendship", customData.friendshipmika);
+                PlayerPrefs.SetInt("MikaGift", customData.giftmika);
+
+                //LOAD AYAM
+                PlayerPrefs.SetInt("ChickenFood", customData.ChickenFood);
+                PlayerPrefs.SetInt("ChickenMax", customData.ChickenMax);
+
+                for (int i = 0; i < customData.ChickenMax; i++)
+                {
+                    if (customData.Chicken[i] != null)
+                    {
+                        /*
+                        PlayerPrefs.SetString("Chicken" + i, customData.Chicken[i]);
+                        PlayerPrefs.SetInt("ChickenHeart" + i, customData.ChickenHeart[i]);
+                        PlayerPrefs.SetString("ChickenLevel" + i, customData.ChickenLevel[i]);
+                        PlayerPrefs.SetInt("ChickenSick" + i, customData.ChickenSick[i]);
+                        PlayerPrefs.SetInt("ChickenSilver" + i, customData.ChickenSilver[i]);
+                        PlayerPrefs.SetInt("ChickenGold" + i, customData.ChickenGold[i]);
+                        PlayerPrefs.SetFloat("ChickenPosX" + i, customData.ChickenPosX[i]);
+                        PlayerPrefs.SetFloat("ChickenPosY" + i, customData.ChickenPosY[i]);
+                        PlayerPrefs.SetFloat("ChickenPosZ" + i, customData.ChickenPosZ[i]);
+                        PlayerPrefs.SetString("ChickenTipe" + i, customData.ChickenTipe[i]);
+                        PlayerPrefs.SetString("box" + (i+1), customData.box[i + 1]);*/
+                    }
+                }
+
+                //LOAD SAPI KAMBING
+                PlayerPrefs.SetInt("CowFood", customData.CowFood);
+                PlayerPrefs.SetInt("CowMax", customData.CowMax);
+
+                for (int i = 0; i < customData.CowMax; i++)
+                {
+                    if (customData.Cow[i] != null)
+                    {
+                        /*
+                        PlayerPrefs.SetString("Cow" + i, customData.Cow[i]);
+                        PlayerPrefs.SetInt("CowHeart" + i, customData.CowHeart[i]);
+                        PlayerPrefs.SetString("CowLevel" + i, customData.CowLevel[i]);
+                        PlayerPrefs.SetInt("CowSick" + i, customData.CowSick[i]);
+                        PlayerPrefs.SetInt("CowSilver" + i, customData.CowSilver[i]);
+                        PlayerPrefs.SetInt("CowGold" + i, customData.CowGold[i]);
+                        PlayerPrefs.SetString("CowMilk" + i, customData.CowMilk[i]);
+                        PlayerPrefs.SetFloat("CowPosX" + i, customData.CowPosX[i]);
+                        PlayerPrefs.SetFloat("CowPosY" + i, customData.CowPosY[i]);
+                        PlayerPrefs.SetFloat("CowPosZ" + i, customData.CowPosZ[i]);
+                        PlayerPrefs.SetString("CowTipe" + i, customData.CowTipe[i]);
+                        PlayerPrefs.SetString("boxcow" + (i+1), customData.boxcow[i + 1]);*/
+                    }
+                }
 
                 for (int i = 0; i < customData.peralatannama.Length; i++)
                 {

@@ -70,9 +70,11 @@ public class bag : MonoBehaviour
             {
                 Alltools newtools = new Alltools();
                 newtools.slot = i;
-                newtools.name = PlayerPrefs.GetString("kantongnama" + i);
+                string[] namaitem = PlayerPrefs.GetString("kantongnama" + i).Split('-');
+                newtools.name = namaitem[0];
+                Debug.Log(newtools.name);
                 newtools.jumlah = PlayerPrefs.GetInt("kantongjumlah" + i);
-                newtools.resource = "Images/Barang/" + PlayerPrefs.GetString("kantongnama" + i);
+                newtools.resource = "Images/Barang/" + namaitem[0];
                 //mybag.Insert(i,newtools);
                 barang.transform.GetChild(i).Find("Image").GetComponent<Image>().enabled = true;
                 barang.transform.GetChild(i).Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(newtools.resource);
@@ -268,15 +270,17 @@ public class bag : MonoBehaviour
 
             Alltools newtools = new Alltools();
             newtools.slot = slot;
+            string[] namaitem = PlayerPrefs.GetString("kantongnama" + slot).Split('-');
             newtools.name = PlayerPrefs.GetString("kantongnama" + slot);
             newtools.jumlah = PlayerPrefs.GetInt("kantongjumlah" + slot);
-            newtools.resource = "Images/Barang/" + PlayerPrefs.GetString("kantongnama" + slot);
+            newtools.resource = "Images/Barang/" + namaitem[0];
 
             Alltools sebelumtools = new Alltools();
             sebelumtools.slot = PlayerPrefs.GetInt("pindahinKantong");
+            string[] namaitem2 = PlayerPrefs.GetString("kantongnama" + sebelumtools.slot).Split('-');
             sebelumtools.name = PlayerPrefs.GetString("kantongnama" + sebelumtools.slot);
             sebelumtools.jumlah = PlayerPrefs.GetInt("kantongjumlah" + sebelumtools.slot);
-            sebelumtools.resource = "Images/Barang/" + PlayerPrefs.GetString("kantongnama" + sebelumtools.slot);
+            sebelumtools.resource = "Images/Barang/" + namaitem2[0];
 
             if (sebelumtools.name != "")
             {
@@ -309,26 +313,45 @@ public class bag : MonoBehaviour
             PlayerPrefs.SetString("kantongnama" + sebelumtools.slot, newtools.name);
             PlayerPrefs.SetInt("kantongjumlah" + sebelumtools.slot, newtools.jumlah);
 
-            if (newtools.slot == 0 && sebelumtools.name != "")
+            if ((newtools.slot == 0 && sebelumtools.name != "") || (sebelumtools.slot==0 && newtools.name!=""))
             {
-               // GameObject myweapon = Gamesetupcontroller.instance.go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
-               // for (int i = 0; i < myweapon.transform.childCount; i++)
-                //    myweapon.transform.GetChild(i).gameObject.SetActive(false);
-                //myweapon.transform.Find(PlayerPrefs.GetString("peralatannama0")).gameObject.SetActive(true);
-               // Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("kantongnama0"));
+                string resourceprefab = "";
+                if (sebelumtools.slot == 0 && newtools.name != "")
+                {
+                    resourceprefab = namaitem[0];
+                    if(sebelumtools.name!="")
+                    PhotonNetwork.Destroy(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").Find("Item").GetComponent<PhotonView>());
+                }
+                else if (newtools.slot == 0 && sebelumtools.name != "")
+                {
+                    resourceprefab = namaitem2[0];
+                    if(newtools.name!="")
+                    PhotonNetwork.Destroy(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").Find("Item").GetComponent<PhotonView>());
+                }
+                GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Item/Prefab", resourceprefab), GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").rotation);
+                //item.GetComponent<PhotonView>().TransferOwnership(0);
+                GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("addBale", RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, PlayerPrefs.GetString("level"));
             }
             else if (newtools.slot == 0 && sebelumtools.name == "")
             {
-                //GameObject myweapon = Gamesetupcontroller.instance.go.transform.Find("Root").Find("J_Bip_C_Hips").Find("J_Bip_C_Spine").Find("J_Bip_C_Chest").Find("J_Bip_C_UpperChest").Find("J_Bip_R_Shoulder").Find("J_Bip_R_UpperArm").Find("J_Bip_R_LowerArm").Find("J_Bip_R_Hand").Find("weapon").gameObject;
-                //for (int i = 0; i < myweapon.transform.childCount; i++)
-                //    myweapon.transform.GetChild(i).gameObject.SetActive(false);
-                //Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("changeweapon", RpcTarget.Others, "Player (" + PlayerPrefs.GetString("myname") + ")", PlayerPrefs.GetString("peralatannama0"), PlayerPrefs.GetString("kantongnama0"));
+                if (newtools.name != "")
+                {
+                    PhotonNetwork.Destroy(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").Find("Item").GetComponent<PhotonView>());
+                }
+            }
+            else if (sebelumtools.slot == 0 && newtools.name == "")
+            {
+                if (sebelumtools.name != "")
+                {
+                    PhotonNetwork.Destroy(GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").Find("AreaPegang").Find("Item").GetComponent<PhotonView>());
+                }
             }
 
             PlayerPrefs.DeleteKey("pindahinKantong");
         }
         else
         {
+            Debug.Log("KANTONG PENCET: "+ PlayerPrefs.GetString("kantongnama" + slot));
             barang.transform.GetChild(slot).GetComponent<Image>().color = new Color32(131, 255, 255, 255);
             MyDialogBag.instance.percakapanDeskripsi(PlayerPrefs.GetString("kantongnama" + slot));
             PlayerPrefs.SetInt("pindahinKantong", slot);

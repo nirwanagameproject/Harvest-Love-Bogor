@@ -23,16 +23,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PersimpanganJalan.unity
     guid: 0b587e7ab45f148df9a3ebee631b17a9
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/GameplayCowHouse.unity
+    guid: 7e80c656f688d1b40b069a3bf005691e
+  - enabled: 1
     path: Assets/Scenes/Peternakan.unity
     guid: d364b1c62d89d42b88313b931477eada
+  - enabled: 1
+    path: Assets/Scenes/RumahSamsul.unity
+    guid: d72bd52ff48805f41a5ec131f537cebf
+  - enabled: 1
+    path: Assets/Scenes/RumahEko.unity
+    guid: 3e50f5f2b2a469049b2acd9dfa02a984
   - enabled: 0
     path: Assets/Scenes/Bts.unity
     guid: 14b3c0e04524b4a0694cd4c0abe8dc97
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Perkampungan_1.unity
     guid: 86a8f1173ba75df4eb0d940efabc7f95
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Perkampungan_2.unity
     guid: b202db73a16677c4481aed38508517a6
+  - enabled: 1
+    path: Assets/Scenes/HutanWest.unity
+    guid: 545d9be18564030429865a37a3a01630
+  - enabled: 1
+    path: Assets/Scenes/HutanSouth.unity
+    guid: 96791106c37d2bf48ad7d584d320a4d0
+  - enabled: 1
+    path: Assets/Scenes/HutanSouthWest.unity
+    guid: 9060daf2509c40f429f5f28d6aaa7bfe
+  - enabled: 1
+    path: Assets/Scenes/Gunung1.unity
+    guid: 641944e839899b74c9406e921995f33a
+  - enabled: 1
+    path: Assets/Scenes/Toko.unity
+    guid: 02d12410d7716134abc1a24e0d977846
   m_configObjects: {}

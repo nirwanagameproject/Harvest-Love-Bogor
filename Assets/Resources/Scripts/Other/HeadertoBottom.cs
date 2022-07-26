@@ -12,7 +12,6 @@ public class HeadertoBottom : MonoBehaviour
     void Start()
     {
         sr = GetComponent<RectTransform>();
-        
     }
 
     // Update is called once per frame
