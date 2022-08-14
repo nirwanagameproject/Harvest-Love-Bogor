@@ -28,8 +28,8 @@ public class LanguageMotorKopi : MonoBehaviour
         bahasaID = new List<string>();
         bahasaID.Add("Ngopi napa woi. 1000 koin nambah 25 stamina"); //0
         bahasaID.Add("Ngopi cuy biar seger tuh mata. 1000 koin nambah 25 stamina"); //1
-        bahasaID.Add("Senangnya sudah tidak ada kegiatan bersekolah hehe. Kalau mau beli keperluan ternak, ke kakakku saja ya kak."); //2
-        bahasaID.Add("apa kamu ingin membeli sesuatu ?"); //3
+        bahasaID.Add("Mantap, selamat menikmati bos"); //2
+        bahasaID.Add("Hilih, duit kamu ga cukup woi"); //3
         bahasaID.Add("Beli"); //4
         bahasaID.Add("Jual"); //5
         bahasaID.Add("Silahkan pilih sapi atau kambing mana yang kamu suka"); //6
@@ -42,8 +42,8 @@ public class LanguageMotorKopi : MonoBehaviour
         bahasaUS = new List<string>();
         bahasaUS.Add("Drink coffee please.. 1000 coin can bring 25 stamina up"); //0
         bahasaUS.Add("Have a cup of coffee so your eyes are fresh. 1000 coin can bring 25 stamina up"); //1
-        bahasaUS.Add("It's good that there are no school activities hehe. If you want to buy livestock needs, just go to my brother."); //2
-        bahasaUS.Add("Do you want to buy something ?"); //3
+        bahasaUS.Add("Excelent, enjoy your coffee boss"); //2
+        bahasaUS.Add("WTH, your money isn't enough"); //3
         bahasaUS.Add("Buy"); //4
         bahasaUS.Add("Sell"); //5
         bahasaUS.Add("Please choose which cow or goat you like"); //6
@@ -56,8 +56,8 @@ public class LanguageMotorKopi : MonoBehaviour
         bahasaJP = new List<string>();
         bahasaJP.Add("コーヒーを飲んでください.. 1000 コインで 25 スタミナを上げることができます"); //0
         bahasaJP.Add("あなたの目が新鮮になるようにコーヒーを一杯飲んでください. 1000 コインで 25 スタミナを上げることができます"); //1
-        bahasaJP.Add("学校の活動がないのはいいですね。家畜のニーズを購入したい場合は、私の兄に行ってください。"); //2
-        bahasaJP.Add("何か買いたいですか？"); //3
+        bahasaJP.Add("素晴らしい、あなたのコーヒーボスをお楽しみください"); //2
+        bahasaJP.Add("なんてこった、あなたのお金は十分ではない"); //3
         bahasaJP.Add("買う"); //4
         bahasaJP.Add("売る"); //5
         bahasaJP.Add("好きな牛や山羊を選んでください"); //6
@@ -106,6 +106,50 @@ public class LanguageMotorKopi : MonoBehaviour
     void setActiveGameobjectChild(string parentobject,string namaobject, bool aktifga)
     {
         GameObject.Find("Canvas").transform.Find(parentobject).Find(namaobject).gameObject.SetActive(aktifga);
+    }
+
+    Collider[] mycolliderPlayer;
+    bool enterPlayer = false;
+    void FixedUpdate()
+    {
+        mycolliderPlayer = Physics.OverlapSphere(transform.GetChild(0).Find("TargetKlakson").position, 1.5f, LayerMask.GetMask("Player"));
+        for (int j = 0; j < mycolliderPlayer.Length; j++) if (mycolliderPlayer[j].name == "Player (" + PlayerPrefs.GetString("myname") + ")") { enterPlayer = true; break; }
+        
+        if(PhotonNetwork.CurrentRoom!=null)
+            if (PhotonNetwork.CurrentRoom.CustomProperties[name] != null)
+            {
+                if (enterPlayer && PhotonNetwork.CurrentRoom.CustomProperties["nanyaNPC" + name].Equals(""))
+                {
+
+                    for (int k = 0; k < mycolliderPlayer.Length; k++)
+                    {
+                        if (mycolliderPlayer[k].GetComponent<PhotonView>().IsMine)
+                        {
+                            if (GetComponent<NPC>().level == PlayerPrefs.GetString("level"))
+                            {
+                                if (!transform.GetChild(0).Find("AudioKlakson").GetComponent<AudioSource>().isPlaying)
+                                    transform.GetChild(0).Find("AudioKlakson").GetComponent<AudioSource>().Play();
+                                if (PhotonNetwork.CurrentRoom.CustomProperties[name].ToString() == "jalan1")
+                                {
+                                    ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
+                                    setProperti.Add(name, "klakson");
+                                    PhotonNetwork.CurrentRoom.SetCustomProperties(setProperti);
+                                }
+
+                            }
+                        }
+                    }
+                }
+                if (!enterPlayer && PhotonNetwork.CurrentRoom.CustomProperties[name].ToString().Equals("klakson"))
+                {
+                    
+                    ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
+                    setProperti.Add(name, "jalan1");
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(setProperti);
+                }
+            }
+        enterPlayer = false;
+        
     }
 
     public IEnumerator NPCMikaJalan()
@@ -555,6 +599,35 @@ public class LanguageMotorKopi : MonoBehaviour
         {
             GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru(
             ChangeLanguage.instance.GetLanguageNPC(0, name), false);
+            yield return new WaitUntil(() => answer != "");
+            if (answer == "yes")
+            {
+                answer = "";
+                GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").Find("TempatButton").gameObject.SetActive(false);
+                if (PlayerPrefs.GetInt("money") >= 1000)
+                {
+                    GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru(
+                    ChangeLanguage.instance.GetLanguageNPC(2, name), false);
+                    PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") - 1000);
+                    if((PlayerPrefs.GetInt("stamina")+25)>= PlayerPrefs.GetInt("maxstamina"))
+                        PlayerPrefs.SetInt("stamina", PlayerPrefs.GetInt("maxstamina"));
+                    else PlayerPrefs.SetInt("stamina", PlayerPrefs.GetInt("stamina") + 25);
+                    ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
+                    setProperti.Add("money", PlayerPrefs.GetInt("money"));
+                    setProperti.Add("stamina", PlayerPrefs.GetInt("stamina"));
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(setProperti);
+                    GameObject.Find("Canvas").transform.Find("UIkanan").Find("JumlahDuit").GetComponent<Text>().text = "" + PlayerPrefs.GetInt("money");
+                    Gamesetupcontroller.instance.GetComponent<PhotonView>().RPC("updatePlayerUI", RpcTarget.All);
+                    GetComponent<PhotonView>().RPC("DrinkRPC", RpcTarget.All, PhotonNetwork.NickName, PlayerPrefs.GetString("level"));
+                    GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextStamina").GetComponent<Text>().text = PlayerPrefs.GetInt("stamina").ToString();
+                }
+                else
+                {
+                    GameObject.Find("Canvas").transform.Find("DialogBG").GetComponent<MyDialogBag>().PercakapanBaru(
+                    ChangeLanguage.instance.GetLanguageNPC(3, name), false);
+                }
+                
+            }
         }
         else if (PlayerPrefs.GetInt(name+"Friendship") < 40)
         {
@@ -625,7 +698,7 @@ public class LanguageMotorKopi : MonoBehaviour
 
 
     [PunRPC]
-    void EatGiftRpc(string namaplayer,string level)
+    void DrinkRPC(string namaplayer,string level)
     {
         AudioSource audio = GameObject.Find("Clicked").transform.Find("eating").GetComponent<AudioSource>();
         audio.transform.position = GameObject.Find("PlayerSpawn").transform.Find("Player ("+namaplayer+")").transform.position;
@@ -636,7 +709,7 @@ public class LanguageMotorKopi : MonoBehaviour
 
     IEnumerator EatGift(string namaplayer, string level)
     {
-        GameObject item = PhotonNetwork.Instantiate(System.IO.Path.Combine("Model/Item/Prefab", "cake"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").rotation);
+        GameObject item = PhotonNetwork.Instantiate(System.IO.Path.Combine("Model/Item/Prefab", "coffee"), GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").Find("AreaPegang").transform.position, GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").rotation);
         GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaplayer + ")").GetComponent<PhotonView>().RPC("addBale", RpcTarget.All, "Player (" + namaplayer + ")", item.name, level);
         yield return new WaitForSeconds(5f);
         PhotonNetwork.Destroy(item);

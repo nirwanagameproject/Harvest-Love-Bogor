@@ -62,7 +62,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Jumat") hariskrg = ChangeLanguage.instance.GetLanguage(112);
             else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Sabtu") hariskrg = ChangeLanguage.instance.GetLanguage(113);
             else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Minggu") hariskrg = ChangeLanguage.instance.GetLanguage(114);
-            dateskrg.text = hariskrg + ", "+ PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
+            dateskrg.text = hariskrg + ", "+ PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + musimText(PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString()) + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
             if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Spring") mymusim.sprite = weather[0];
             else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Summer") mymusim.sprite = weather[1];
             else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Fall") mymusim.sprite = weather[2];
@@ -120,6 +120,37 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             }
         }
         
+    }
+
+    public string musimText(string musim)
+    {
+        if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Spring" && PlayerPrefs.GetString("bahasa") == "Indonesia")
+            return "Penghujan";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Summer" && PlayerPrefs.GetString("bahasa") == "Indonesia")
+            return "Pancaroba-1";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Autumn" && PlayerPrefs.GetString("bahasa") == "Indonesia")
+            return "Kemarau";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Winter" && PlayerPrefs.GetString("bahasa") == "Indonesia")
+            return "Pancaroba-2";
+
+        if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Spring" && PlayerPrefs.GetString("bahasa") == "Inggris")
+            return "Rainy";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Summer" && PlayerPrefs.GetString("bahasa") == "Inggris")
+            return "Pancaroba-1";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Autumn" && PlayerPrefs.GetString("bahasa") == "Inggris")
+            return "Autumn";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Winter" && PlayerPrefs.GetString("bahasa") == "Inggris")
+            return "Pancaroba-2";
+
+        if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Spring" && PlayerPrefs.GetString("bahasa") == "Jepang")
+            return "梅雨";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Summer" && PlayerPrefs.GetString("bahasa") == "Jepang")
+            return "移行-1";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Autumn" && PlayerPrefs.GetString("bahasa") == "Jepang")
+            return "秋";
+        else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Winter" && PlayerPrefs.GetString("bahasa") == "Jepang")
+            return "移行-2";
+        return "GAGAL";
     }
 
     public void HapusObjek(String name)
@@ -208,16 +239,24 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 }
 
                 //Debug.Log("MODULO "+ (nexthari));
-                dateskrg.text = PlayerPrefs.GetString("hari") + ", " + PlayerPrefs.GetInt("tanggal") + " " + PlayerPrefs.GetString("musim") + " " + PlayerPrefs.GetInt("tahun");
+                string hariskrg = "";
+                if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Senin") hariskrg = ChangeLanguage.instance.GetLanguage(108);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Selasa") hariskrg = ChangeLanguage.instance.GetLanguage(109);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Rabu") hariskrg = ChangeLanguage.instance.GetLanguage(110);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Kamis") hariskrg = ChangeLanguage.instance.GetLanguage(111);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Jumat") hariskrg = ChangeLanguage.instance.GetLanguage(112);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Sabtu") hariskrg = ChangeLanguage.instance.GetLanguage(113);
+                else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Minggu") hariskrg = ChangeLanguage.instance.GetLanguage(114);
+                dateskrg.text = hariskrg + ", " + PlayerPrefs.GetInt("tanggal") + " " + musimText(PlayerPrefs.GetString("musim")) + " " + PlayerPrefs.GetInt("tahun");
 
                 ExitGames.Client.Photon.Hashtable setTgl = new ExitGames.Client.Photon.Hashtable();
                 
                 PhotonNetwork.CurrentRoom.SetCustomProperties(setTgl);
-                Debug.Log("KEBUNKU "+PhotonNetwork.CurrentRoom.CustomProperties["mykucing"].ToString());
+                Debug.Log("HARI SKRG "+ hariskrg);
             }
             else
             {
-                dateskrg.text = PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
+                dateskrg.text = PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + musimText(PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString()) + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
                 if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Spring") mymusim.sprite = weather[0];
                 else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Summer") mymusim.sprite = weather[1];
                 else if (PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() == "Fall") mymusim.sprite = weather[2];
@@ -384,6 +423,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         int nomormat = 8;
         go.transform.Find("Face").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorskin;
         go.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().materials[0].color = mycolorskin;
+        
         //go.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
 
         ExitGames.Client.Photon.Hashtable setWarna = new ExitGames.Client.Photon.Hashtable();
@@ -459,6 +499,9 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         nomormat = 0;
         go.transform.Find("Bottom").GetComponent<SkinnedMeshRenderer>().materials[nomormat].color = mycolorcelana;
 
+        //LOAD BAG
+        Material newMat = Resources.Load("Model/MainMenu/Material/level"+((int)go.GetComponent<PhotonView>().Owner.CustomProperties["levelbag"])+"bag", typeof(Material)) as Material;
+        go.transform.Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>().material = newMat;
     }
 
     // Update is called once per frame
@@ -570,6 +613,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         {
             PlayerPrefs.SetString("ambilduitharian", "no");
             PlayerPrefs.SetFloat("directionalSun", 0);
+            RenderSettings.skybox.SetFloat("_Exposure", 0.7f);
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -768,7 +812,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                                     //KALO UDAH MATI
                                     if (System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulmati" + i].ToString()) > 3 || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulseason" + i].ToString() != PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString())
                                     {
-                                        setLahan.Add("lahancangkulsiram" + i, false);
+                                        //setLahan.Add("lahancangkulsiram" + i, false);
                                     }
                                     else
                                     {
@@ -784,7 +828,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                                                 //Max UMUR BERBUAH
                                                 if (System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumur" + i].ToString()) + 1 == System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulmaxumur" + i].ToString()))
                                                 {
-
+                                                    Debug.Log("MAX UMUR BERBUAH");
                                                 }
                                             }
                                             //Max UMUR BERBUAH JUGA
@@ -807,6 +851,31 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                                                 else
                                                     setLahan.Add("lahancangkulumurberbuah" + i, System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumurberbuah" + i].ToString()) + 1);
                                             }
+                                            //Max UMUR BERBUAH JUGA NON RENEWABLE
+                                            else if (!(bool)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulrenewable" + i])
+                                            {
+                                                //Max UMUR BERBUAH
+                                                if (System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumurberbuah" + i].ToString()) == System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulmaxumurberbuah" + i].ToString()))
+                                                {
+                                                    setLahan.Add("lahancangkulumurberbuah" + i, 1);
+
+                                                    GameObject item = PhotonNetwork.Instantiate(Path.Combine("Model/Item/Prefab", PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulbuah" + i].ToString()),
+                                                        new Vector3((float)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulposx" + i] + NextFloat(-0.3f, 0.3f),
+                                                        (float)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulposy" + i],
+                                                        (float)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulposz" + i] + NextFloat(-0.3f, 0.3f)),
+                                                        Quaternion.identity);
+                                                    
+                                                    GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("destroyTaneman2", RpcTarget.All, PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama"+i].ToString(), i);
+
+                                                    setLahan.Add("lahancangkulnama" + i, "terpacul_" + i);
+                                                    setLahan.Add("lahancangkulbuah" + i, "");
+
+                                                    GameObject.Find("PlayerSpawn").transform.Find("Player (" + PlayerPrefs.GetString("myname") + ")").GetComponent<PhotonView>().RPC("tumbuhBuah", RpcTarget.All, "Player (" + PlayerPrefs.GetString("myname") + ")", item.name, "KeluarRumah");
+
+                                                }
+                                                else
+                                                    setLahan.Add("lahancangkulumurberbuah" + i, System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumurberbuah" + i].ToString()) + 1);
+                                            }
                                         }
 
                                         
@@ -814,7 +883,7 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                                 }
                             }
                             //Set TANEMAN DISIRAM apa ngga pas hari hujan
-                            if ((bool)PhotonNetwork.CurrentRoom.CustomProperties["rain"])
+                            if ((bool)PhotonNetwork.CurrentRoom.CustomProperties["rain"] || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulbuah" + i].ToString().Contains("padi"))
                             {
                                 setLahan.Add("lahancangkulsiram" + i, true);
                             }
@@ -827,15 +896,19 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 }
                 PhotonNetwork.CurrentRoom.SetCustomProperties(setLahan);
 
+                //SET HARI
+
                 System.Random rnd = new System.Random();
                 int randomint = rnd.Next(0, 100);
                 //SetNexthujan
                 ExitGames.Client.Photon.Hashtable setnextrain = new ExitGames.Client.Photon.Hashtable();
-                if (PlayerPrefs.GetString("musim") == "Spring" && randomint <= 20)
+                if (PlayerPrefs.GetString("musim") == "Spring" && randomint <= 50)
                     setnextrain.Add("nextrain", true);
-                else if (PlayerPrefs.GetString("musim") == "Summer" && randomint <= 50)
+                else if (PlayerPrefs.GetString("musim") == "Summer" && randomint <= 35)
                     setnextrain.Add("nextrain", true);
-                else if (PlayerPrefs.GetString("musim") == "Fall" && randomint <= 35)
+                else if (PlayerPrefs.GetString("musim") == "Fall" && randomint <= 20)
+                    setnextrain.Add("nextrain", true);
+                else if (PlayerPrefs.GetString("musim") == "Winter" && randomint <= 35)
                     setnextrain.Add("nextrain", true);
                 else setnextrain.Add("nextrain", false);
                 PhotonNetwork.CurrentRoom.SetCustomProperties(setnextrain);
@@ -843,21 +916,35 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 //SET NPC RESET
                 Debug.Log("RESET NPC");
                 GameObject.Find("AISpawn").transform.Find("Mika").transform.position = new Vector3(72f,0, 59f);
+                GameObject.Find("AISpawn").transform.Find("Mika").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "KeluarRumah");
                 LanguageMika.instance.gameObject.SetActive(false);
                 LanguageMika.instance.gameObject.SetActive(true);
                 LanguageMika.instance.StartCoroutine(LanguageMika.instance.NPCMikaJalan());
                 GameObject.Find("AISpawn").transform.Find("Samsul").transform.position = new Vector3(13.4f, 0, 13.6f);
+                GameObject.Find("AISpawn").transform.Find("Samsul").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "RumahSamsul");
                 LanguageSamsul.instance.gameObject.SetActive(false);
                 LanguageSamsul.instance.gameObject.SetActive(true);
                 LanguageSamsul.instance.StartCoroutine(LanguageSamsul.instance.NPCMikaJalan());
                 GameObject.Find("AISpawn").transform.Find("Afifah").transform.position = new Vector3(9.54f, 0, 13.03f);
+                GameObject.Find("AISpawn").transform.Find("Afifah").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "RumahSamsul");
                 LanguageAfifah.instance.gameObject.SetActive(false);
                 LanguageAfifah.instance.gameObject.SetActive(true);
                 LanguageAfifah.instance.StartCoroutine(LanguageAfifah.instance.NPCMikaJalan());
                 GameObject.Find("AISpawn").transform.Find("Otong").transform.position = new Vector3(40.843f, 0.628f, 26.935f);
+                GameObject.Find("AISpawn").transform.Find("Otong").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "Perkampungan_1");
                 LanguageOtong.instance.gameObject.SetActive(false);
                 LanguageOtong.instance.gameObject.SetActive(true);
                 LanguageOtong.instance.StartCoroutine(LanguageOtong.instance.NPCMikaJalan());
+                GameObject.Find("AISpawn").transform.Find("motorkopi").transform.position = new Vector3(12.57f, 0, 18f);
+                GameObject.Find("AISpawn").transform.Find("motorkopi").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "Toko");
+                LanguageMotorKopi.instance.gameObject.SetActive(false);
+                LanguageMotorKopi.instance.gameObject.SetActive(true);
+                LanguageMotorKopi.instance.StartCoroutine(LanguageMotorKopi.instance.NPCMikaJalan());
+                GameObject.Find("AISpawn").transform.Find("Mini").transform.position = new Vector3(2.133f, 0, 10.168f);
+                GameObject.Find("AISpawn").transform.Find("Mini").GetComponent<PhotonView>().RPC("gantiLevel", RpcTarget.All, "RumahEko");
+                LanguageMini.instance.gameObject.SetActive(false);
+                LanguageMini.instance.gameObject.SetActive(true);
+                LanguageMini.instance.StartCoroutine(LanguageMini.instance.NPCMikaJalan());
             }
 
             //Debug.Log("MASUK HARI BARU, BESOK HUJAN ? "+(bool)PhotonNetwork.CurrentRoom.CustomProperties["nextrain"]);
@@ -908,10 +995,14 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                             go.name = namalahan + i;
                             if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("tanahbibit_" + i))
                             {
+                                Debug.Log("NAMA POHON: "+ PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulbuah" + i].ToString());
+                                float tinggipohon = -1.2f;
+                                if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulbuah" + i].ToString().Contains("padi")) tinggipohon = -1.8f;
+                                if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulbuah" + i].ToString().Contains("cabbage")) tinggipohon = -0.6f;
                                 var hasilbagi = (float)System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumur" + i].ToString()) / (float)System.Int32.Parse(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulmaxumur" + i].ToString());
                                 Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulumur" + i].ToString() + " / " + PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulmaxumur" + i].ToString());
                                 if (go.transform.Find("lahanpohon") != null)
-                                    go.transform.Find("lahanpohon").transform.position = new Vector3(go.transform.Find("lahanpohon").transform.position.x, -1.2f + hasilbagi, go.transform.Find("lahanpohon").transform.position.z);
+                                    go.transform.Find("lahanpohon").transform.position = new Vector3(go.transform.Find("lahanpohon").transform.position.x, tinggipohon + hasilbagi, go.transform.Find("lahanpohon").transform.position.z);
                             }
 
                             if ((bool)PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulsiram" + i])
@@ -1104,6 +1195,17 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
             GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("Scroll View Farm").GetChild(0).GetChild(0).GetChild(1).Find("player" + playerku).gameObject.SetActive(false);
     }
     [PunRPC]
+    void updateBagLevel(string namaPlayer)
+    {
+        //LOAD BAG
+        Material newMat = Resources.Load("Model/MainMenu/Material/level" + ((int)GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaPlayer + ")").GetComponent<PhotonView>().Owner.CustomProperties["levelbag"]) + "bag", typeof(Material)) as Material;
+        if (GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaPlayer + ")").Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>() == null)
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaPlayer + ")").transform.Find("famale_cuirass_armor").GetComponent<MeshRenderer>().material = newMat;
+        else
+            GameObject.Find("PlayerSpawn").transform.Find("Player (" + namaPlayer + ")").transform.Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>().material = newMat;
+    }
+
+    [PunRPC]
     void ngajakBobo(string ygngajakBobo,string namabed, int bedno)
     {
         if (PhotonNetwork.IsMasterClient)
@@ -1195,6 +1297,24 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
                 }
             }
 
+            if (PlayerPrefs.GetString("hari") == "Senin") PlayerPrefs.SetString("hari", "Selasa");
+            else if (PlayerPrefs.GetString("hari") == "Selasa") PlayerPrefs.SetString("hari", "Rabu");
+            else if (PlayerPrefs.GetString("hari") == "Rabu") PlayerPrefs.SetString("hari", "Kamis");
+            else if (PlayerPrefs.GetString("hari") == "Kamis") PlayerPrefs.SetString("hari", "Jumat");
+            else if (PlayerPrefs.GetString("hari") == "Jumat") PlayerPrefs.SetString("hari", "Sabtu");
+            else if (PlayerPrefs.GetString("hari") == "Sabtu") PlayerPrefs.SetString("hari", "Minggu");
+            else if (PlayerPrefs.GetString("hari") == "Minggu") PlayerPrefs.SetString("hari", "Senin");
+
+            setTgl = new ExitGames.Client.Photon.Hashtable();
+            setTgl.Add("tanggal", PlayerPrefs.GetInt("tanggal"));
+            setTgl.Add("tahun", PlayerPrefs.GetInt("tahun"));
+            setTgl.Add("musim", PlayerPrefs.GetString("musim"));
+            setTgl.Add("hari", PlayerPrefs.GetString("hari"));
+            setTgl.Add("jam", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextJam").GetComponent<Text>().text);
+            setTgl.Add("detik", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(setTgl);
+            Debug.Log("HARI SAVE: " + PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString());
+
             if (PlayerPrefs.HasKey("save"))
             {
                 ExampleSaveCustom loadsave = new ExampleSaveCustom();
@@ -1214,13 +1334,6 @@ public class Gamesetupcontroller : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("tidur", "");
         PlayerPrefs.SetInt("stamina", PlayerPrefs.GetInt("maxstamina"));
         PlayerPrefs.SetString("newday", "no");
-        if (PlayerPrefs.GetString("hari") == "Senin") PlayerPrefs.SetString("hari", "Selasa");
-        else if (PlayerPrefs.GetString("hari") == "Selasa") PlayerPrefs.SetString("hari", "Rabu");
-        else if (PlayerPrefs.GetString("hari") == "Rabu") PlayerPrefs.SetString("hari", "Kamis");
-        else if (PlayerPrefs.GetString("hari") == "Kamis") PlayerPrefs.SetString("hari", "Jumat");
-        else if (PlayerPrefs.GetString("hari") == "Jumat") PlayerPrefs.SetString("hari", "Sabtu");
-        else if (PlayerPrefs.GetString("hari") == "Sabtu") PlayerPrefs.SetString("hari", "Minggu");
-        else if (PlayerPrefs.GetString("hari") == "Minggu") PlayerPrefs.SetString("hari", "Senin");
 
         
     }

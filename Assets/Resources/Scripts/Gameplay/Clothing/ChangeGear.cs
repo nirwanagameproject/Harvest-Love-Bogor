@@ -47,7 +47,7 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Shoes", "pantofel_shoes");
                 //EquipItem("Beard", "short_beard");
                 //EquipItem("Mustache", "long_mustache");
-                EquipItem("ChestArmor", "cuirass_armor");
+                //EquipItem("ChestArmor", "cuirass_armor");
             }
             else
             {
@@ -84,7 +84,7 @@ public class ChangeGear : MonoBehaviour
                 EquipItem("Shoes", "pantofel_shoes");
                 //EquipItem("Beard", "short_beard");
                 //EquipItem("Mustache", "long_mustache");
-                EquipItem("ChestArmor", "cuirass_armor");
+                //EquipItem("ChestArmor", "cuirass_armor");
             }
             else
             {

@@ -230,6 +230,14 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
 
         GetComponent<ChangeGear>().LoadGear();
+
+        //LOAD BAG
+        Material newMat = Resources.Load("Model/MainMenu/Material/level" + ((int)GetComponent<PhotonView>().Owner.CustomProperties["levelbag"]) + "bag", typeof(Material)) as Material;
+        if(transform.Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>()==null)
+            transform.Find("famale_cuirass_armor").GetComponent<MeshRenderer>().material = newMat;
+        else
+        transform.Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>().material = newMat;
+
         //LoadGantiBaju();
     }
 
@@ -382,6 +390,9 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
         StopCoroutine(gantiWarna2(namaplayer, gender, h1, h2, h3, cloth1, cloth2, cloth3, pants1, pants2, pants3, skin1, skin2, skin3, peralatan, barang));
 
+        //LOAD BAG
+        Material newMat = Resources.Load("Model/MainMenu/Material/level" + ((int)GameObject.Find("PlayerSpawn").transform.Find(namaplayer).GetComponent<PhotonView>().Owner.CustomProperties["levelbag"]) + "bag", typeof(Material)) as Material;
+        GameObject.Find("PlayerSpawn").transform.Find(namaplayer).transform.Find("famale_cuirass_armor").GetComponent<SkinnedMeshRenderer>().material = newMat;
     }
 
     void LateUpdate()
@@ -858,7 +869,7 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                                 if (PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i] == null || PhotonNetwork.CurrentRoom.CustomProperties["lahancangkulnama" + i].ToString() == "")
                                 {
                                     setLahan.Add("lahancangkulnama" + i, "terpacul_" + i);
-                                    if((bool)PhotonNetwork.CurrentRoom.CustomProperties["rain"])
+                                    if((bool)PhotonNetwork.CurrentRoom.CustomProperties["rain"] || dalemlahan[0].name=="SawahSpawn3" || dalemlahan[0].name == "SawahSpawn4")
                                         setLahan.Add("lahancangkulsiram" + i, true);
                                     else setLahan.Add("lahancangkulsiram" + i, false);
                                     setLahan.Add("lahancangkulposx" + i, go.GetComponent<customgrid>().truepos.x);
@@ -931,7 +942,6 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                             {
                                 GameObject mylahanbaru = lahantani[0].transform.parent.gameObject;
                                 GameObject go = null;
-                                Debug.Log("berhasil ga = " + mylahanbaru.name);
                                 string[] splitnamalahan = mylahanbaru.name.Split('_');
                                 if (splitnamalahan[0].Equals("terpacul"))
                                 {
@@ -940,8 +950,10 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
                                 go.GetComponent<customgrid>().gridding();
                                 go.transform.parent = GameObject.Find("SawahSpawn").transform;
 
-                                Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.032f, LayerMask.GetMask("lahantani"));
+                                Collider[] dalemlahan = Physics.OverlapSphere(go.transform.position, 0.1f, LayerMask.GetMask("lahantani"));
                                 bool benergadidalem = dalemlahan.Length != 0;
+                                //Debug.Log("berhasil ga = " + dalemlahan[0].name);
+
                                 if (true)
                                 {
                                     string namalahan = "";
@@ -957,12 +969,53 @@ public class Player1 : MonoBehaviourPunCallbacks, IPunObservable
 
                                     if (alat.Contains("peralatanbibit1"))
                                     {
+                                        namabuah = "padi";
+                                        renewable = false;
+                                        maxumur = 4;
+                                        maxumurberbuah = 4;
+                                        season = "Spring";
+                                            if (dalemlahan[0].name != "SawahSpawn3" && dalemlahan[0].name != "SawahSpawn4") { DestroyImmediate(go); break; }
+                                    }
+
+                                    if (alat.Contains("peralatanbibit2"))
+                                    {
+                                        namabuah = "manggis";
+                                        renewable = true;
+                                        maxumur = 5;
+                                        maxumurberbuah = 3;
+                                        season = "Spring";
+                                        if(dalemlahan[0].name=="SawahSpawn3" || dalemlahan[0].name == "SawahSpawn4") { DestroyImmediate(go); break; }
+                                        }
+
+                                    if (alat.Contains("peralatanbibit3"))
+                                    {
+                                        namabuah = "lime";
+                                        renewable = true;
+                                        maxumur = 7;
+                                        maxumurberbuah = 2;
+                                        season = "Spring";
+                                        if(dalemlahan[0].name=="SawahSpawn3" || dalemlahan[0].name == "SawahSpawn4") { DestroyImmediate(go); break; }
+                                        }
+
+                                    if (alat.Contains("peralatanbibit4"))
+                                    {
+                                        namabuah = "cabbage";
+                                        renewable = false;
+                                        maxumur = 10;
+                                        maxumurberbuah = 10;
+                                        season = "Spring";
+                                        if(dalemlahan[0].name=="SawahSpawn3" || dalemlahan[0].name == "SawahSpawn4") { DestroyImmediate(go); break; }
+                                        }
+
+                                    if (alat.Contains("peralatanbibit5"))
+                                    {
                                         namabuah = "tomat";
                                         renewable = true;
                                         maxumur = 2;
                                         maxumurberbuah = 3;
-                                        season = "Spring";
-                                    }
+                                        season = "Summer";
+                                        if(dalemlahan[0].name=="SawahSpawn3" || dalemlahan[0].name == "SawahSpawn4") { DestroyImmediate(go); break; }
+                                        }
 
                                     ExitGames.Client.Photon.Hashtable setLahan = new ExitGames.Client.Photon.Hashtable();
                                     string[] splitArray = mylahanbaru.name.Split(char.Parse("_"));

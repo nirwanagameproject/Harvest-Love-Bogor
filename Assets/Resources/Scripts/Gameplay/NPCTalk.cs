@@ -38,6 +38,10 @@ public class NPCTalk : MonoBehaviour
             custom.Add("nanyaNPC" + PlayerPrefs.GetString("buttonNPC"), "");
             PhotonNetwork.CurrentRoom.SetCustomProperties(custom);
             PlayerPrefs.DeleteKey("buttonNPC");
+            if (PlayerPrefs.HasKey("EmonSell"))
+            {
+                ShopInGameController.instance.KembaliSell();
+            }
         }else if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.CustomProperties["nanyaBarangtv"].ToString())
         {
             GameObject.Find("Canvas").transform.Find("Fixed Joystick").gameObject.SetActive(true);
@@ -66,6 +70,11 @@ public class NPCTalk : MonoBehaviour
     {
         if (PlayerPrefs.GetString("buttonNPC") == "Mika") LanguageMika.instance.answer = "yes";
         if (PlayerPrefs.GetString("buttonNPC") == "Samsul") LanguageSamsul.instance.answer = "yes";
+        if (PlayerPrefs.GetString("buttonNPC") == "motorkopi") LanguageMotorKopi.instance.answer = "yes";
+        if (PlayerPrefs.GetString("buttonNPC") == "Anggun") LanguageAnggun.instance.answer = "yes";
+        if (PlayerPrefs.GetString("buttonNPC") == "Windi") LanguageWindi.instance.answer = "yes";
+        if (PlayerPrefs.GetString("buttonNPC") == "Emon") LanguageEmon.instance.answer = "yes";
+        if (PlayerPrefs.GetString("buttonNPC") == "Mini") LanguageMini.instance.answer = "yes";
 
         //NONTON TV NEXT
         if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.CustomProperties["nanyaBarangtv"].ToString())
@@ -87,7 +96,9 @@ public class NPCTalk : MonoBehaviour
     public void ClickNo(string namaNPC)
     {
         if (PlayerPrefs.GetString("buttonNPC") == "Mika") LanguageMika.instance.answer = "no";
-        if (PlayerPrefs.GetString("buttonNPC") == "Samsul") LanguageMika.instance.answer = "no";
+        if (PlayerPrefs.GetString("buttonNPC") == "Samsul") LanguageSamsul.instance.answer = "no";
+        if (PlayerPrefs.GetString("buttonNPC") == "Emon") LanguageEmon.instance.answer = "no";
+        if (PlayerPrefs.GetString("buttonNPC") == "Mini") LanguageMini.instance.answer = "no";
 
         //NONTON TV PREV
         if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.CustomProperties["nanyaBarangtv"].ToString())

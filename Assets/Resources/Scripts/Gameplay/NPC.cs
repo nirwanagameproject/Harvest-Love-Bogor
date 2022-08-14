@@ -24,6 +24,9 @@ public class NPC : MonoBehaviour
         if (name == "Samsul")StartCoroutine(LanguageSamsul.instance.NPCMikaJalan());
         if (name == "Afifah")StartCoroutine(LanguageAfifah.instance.NPCMikaJalan());
         if (name == "motorkopi")StartCoroutine(LanguageMotorKopi.instance.NPCMikaJalan());
+        if (name == "Anggun")StartCoroutine(LanguageAnggun.instance.NPCMikaJalan());
+        if (name == "Windi")StartCoroutine(LanguageWindi.instance.NPCMikaJalan());
+        if (name == "Mini")StartCoroutine(LanguageMini.instance.NPCMikaJalan());
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class NPC : MonoBehaviour
         float jauhcube = 1f;
         float tinggicube = 2f;
         if (name == "Samsul")if(Vector3.Distance(transform.position, new Vector3(13.03f, 0, 1.63f)) < 1 && level=="MasukRumahSamsul") jauhcube = 3f;
+        if (name == "Mini")if(Vector3.Distance(transform.position, new Vector3(9.23f, 0, 3.25f)) < 1 && level=="RumahEko") jauhcube = 3f;
         if (name == "motorkopi")jauhcube = 2.3f;
         mycolliderPlayer = Physics.OverlapSphere(transform.position, jauhcube, LayerMask.GetMask("Player"));
 
@@ -84,7 +88,7 @@ public class NPC : MonoBehaviour
         enterPlayer = false;
 
         //NPC MIKA
-        if ((name == "motorkopi" || name == "Samsul" || name == "Mika" || name == "Afifah" || name == "Otong") && PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
+        if ((name == "Mini" || name == "Windi" || name == "Anggun" || name == "motorkopi" || name == "Samsul" || name == "Mika" || name == "Afifah" || name == "Otong") && PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
         {
             string namaNPC = name;
             if(pos!=null && PhotonNetwork.CurrentRoom.CustomProperties[namaNPC]!=null)

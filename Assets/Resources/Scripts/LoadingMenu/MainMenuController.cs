@@ -87,7 +87,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("tanggal", 1);
         PlayerPrefs.SetString("musim", "Spring");
         PlayerPrefs.SetInt("tahun", 2020);
-        PlayerPrefs.SetInt("money", 150000);
+        PlayerPrefs.SetInt("money", 25000);
         PlayerPrefs.SetInt("maxstamina", 150);
         PlayerPrefs.SetInt("stamina", 150);
         PlayerPrefs.SetInt("levelbag", 1);
@@ -112,6 +112,12 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("AfifahKenalan", 1);
         PlayerPrefs.SetInt("OtongFriendship", 0);
         PlayerPrefs.SetInt("OtongKenalan", 1);
+        PlayerPrefs.SetInt("motorkopiFriendship", 0);
+        PlayerPrefs.SetInt("AnggunFriendship", 0);
+        PlayerPrefs.SetInt("WindiFriendship", 0);
+        PlayerPrefs.SetInt("EmonFriendship", 0);
+        PlayerPrefs.SetInt("MiniFriendship", 0);
+        PlayerPrefs.SetInt("MiniKenalan", 1);
 
         PlayerPrefs.DeleteKey("online");
         PlayerPrefs.DeleteKey("mautidur");
@@ -168,11 +174,20 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("peralatannama16", "peralatanbibit1");
         PlayerPrefs.SetInt("peralatanjumlah16", 5);
 
+        PlayerPrefs.SetString("peralatannama17", "peralatanbibit2");
+        PlayerPrefs.SetInt("peralatanjumlah17", 5);
+
+        PlayerPrefs.SetString("peralatannama18", "peralatanbibit3");
+        PlayerPrefs.SetInt("peralatanjumlah18", 5);
+
+        PlayerPrefs.SetString("peralatannama19", "peralatanbibit4");
+        PlayerPrefs.SetInt("peralatanjumlah19", 5);
+
         PlayerPrefs.DeleteKey("buttonPickUpItem");
         //Kantong
-        PlayerPrefs.SetString("kantongnama1", "apple-1");
+        PlayerPrefs.SetString("kantongnama1", "Apple-1");
         PlayerPrefs.SetInt("kantongjumlah1", 1);
-        PlayerPrefs.SetString("kantongnama2", "tomat-1");
+        PlayerPrefs.SetString("kantongnama2", "Tomat-1");
         PlayerPrefs.SetInt("kantongjumlah2", 1);
 
         //AYAM
@@ -345,6 +360,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         PlayerPrefs.SetInt("buyGoat",0);
         PlayerPrefs.SetInt("buyBabyGoat",0);
         PlayerPrefs.SetInt("buyBale",0);
+        if(PlayerPrefs.HasKey("EmonSell"))
+        PlayerPrefs.DeleteKey("EmonSell");
 
         if (GameObject.Find("Canvas").transform.Find("Fixed Joystick") != null)
         {
@@ -1349,6 +1366,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
                 custom.Add("nanyaNPCOtong", "");
                 custom.Add("nanyaNPCmotorkopi", "");
                 custom.Add("nanyaNPCWindi", "");
+                custom.Add("nanyaNPCEmon", "");
+                custom.Add("nanyaNPCMini", "");
                 custom.Add("nanyaBarangtv", "");
                 custom.Add("openGateSekolah", false);
                 custom.Add("channelTv", 1);
@@ -1431,6 +1450,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
             setPlayer.Add("stamina", PlayerPrefs.GetInt("stamina"));
             setPlayer.Add("gender", PlayerPrefs.GetString("gender"));
             setPlayer.Add("money", PlayerPrefs.GetInt("money"));
+            setPlayer.Add("levelbag", PlayerPrefs.GetInt("levelbag"));
             PhotonNetwork.LocalPlayer.SetCustomProperties(setPlayer);
             transisi.SetActive(true);
 

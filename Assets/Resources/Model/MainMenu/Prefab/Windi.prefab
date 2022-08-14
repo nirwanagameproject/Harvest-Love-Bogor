@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 3568344340994397229}
   - component: {fileID: 1137424327479036519}
   - component: {fileID: 7788096624064409967}
+  - component: {fileID: 3219519425320938680}
   m_Layer: 16
   m_Name: Windi
   m_TagString: NPC
@@ -977,6 +978,23 @@ CapsuleCollider:
   m_Height: 1.6638825
   m_Direction: 1
   m_Center: {x: -0.007739648, y: 0.8202647, z: 0}
+--- !u!114 &3219519425320938680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143636905433655845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4797dfab8bbeb9040a3ba5751dea9ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bahasaID: []
+  bahasaUS: []
+  bahasaJP: []
+  tas: {fileID: 0}
+  answer: 
 --- !u!1 &2348020858306839350
 GameObject:
   m_ObjectHideFlags: 0

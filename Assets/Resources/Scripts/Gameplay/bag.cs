@@ -14,6 +14,10 @@ public class bag : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        UpdateBagSlot();
+    }
+    public void UpdateBagSlot()
+    {
         peralatan = transform.Find("BGAtas").Find("tools").gameObject;
         barang = transform.Find("BGBawah").Find("tools").gameObject;
 
@@ -258,11 +262,66 @@ public class bag : MonoBehaviour
 
     }
 
+    public void selectAllBarang()
+    {
+        AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
+        audio.Play();
+        int diselect = 0;
+        for (int slot = 0; slot < mybag.Capacity; slot++)
+            if (barang.transform.GetChild(slot).GetComponent<Image>().color.r <= 0.859f &&
+                    barang.transform.GetChild(slot).GetComponent<Image>().color.r >= 0.857f)
+            {
+                barang.transform.GetChild(slot).GetComponent<Image>().color = new Color32(131, 255, 255, 255);
+                string namabuah = PlayerPrefs.GetString("kantongnama" + slot);
+                int jumlahbuah = PlayerPrefs.GetInt("kantongjumlah" + slot);
+                int hargabuah = ShopInGameController.instance.hargajualbuah(namabuah);
+                int totalharga = (jumlahbuah * hargabuah) + System.Int32.Parse(GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text);
+                GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text = "" + totalharga;
+            }
+            else diselect++;
+        if (diselect == mybag.Capacity)
+            for (int slot = 0; slot < mybag.Capacity; slot++)
+            {
+                barang.transform.GetChild(slot).GetComponent<Image>().color = new Color(0.858f, 0.858f, 0.858f, 1);
+                string namabuah = PlayerPrefs.GetString("kantongnama" + slot);
+                int jumlahbuah = PlayerPrefs.GetInt("kantongjumlah" + slot);
+                int hargabuah = ShopInGameController.instance.hargajualbuah(namabuah);
+                int totalharga = System.Int32.Parse(GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text) - (jumlahbuah * hargabuah);
+                GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text = "" + totalharga;
+            }
+    }
+
     public void selectBarang(int slot)
     {
         AudioSource audio = GameObject.Find("Clicked").GetComponent<AudioSource>();
         audio.Play();
 
+        if (PlayerPrefs.HasKey("EmonSell"))
+        {
+            if (barang.transform.GetChild(slot).GetComponent<Image>().color.r <= 0.859f &&
+                barang.transform.GetChild(slot).GetComponent<Image>().color.r >= 0.857f)
+            {
+                barang.transform.GetChild(slot).GetComponent<Image>().color = new Color32(131, 255, 255, 255);
+                string namabuah = PlayerPrefs.GetString("kantongnama" + slot);
+                int jumlahbuah = PlayerPrefs.GetInt("kantongjumlah" + slot);
+                int hargabuah = ShopInGameController.instance.hargajualbuah(namabuah);
+                int totalharga = (jumlahbuah * hargabuah) + System.Int32.Parse(GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text);
+                GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text = "" + totalharga;
+                return;
+            }
+            else
+            {
+                barang.transform.GetChild(slot).GetComponent<Image>().color = new Color(0.858f, 0.858f, 0.858f, 1);
+                string namabuah = PlayerPrefs.GetString("kantongnama" + slot);
+                int jumlahbuah = PlayerPrefs.GetInt("kantongjumlah" + slot);
+                int hargabuah = ShopInGameController.instance.hargajualbuah(namabuah);
+                int totalharga = System.Int32.Parse(GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text) - (jumlahbuah * hargabuah);
+                GameObject.Find("Canvas").transform.Find("SeedShopSell").Find("BGBawah").Find("TotalHarga").GetComponent<Text>().text = "" + totalharga;
+                return;
+
+            }
+            
+        }
         if (PlayerPrefs.HasKey("pindahinKantong"))
         {
             barang.transform.GetChild(PlayerPrefs.GetInt("pindahinKantong")).GetComponent<Image>().color = new Color32(219, 219, 219, 255);
@@ -275,12 +334,25 @@ public class bag : MonoBehaviour
             newtools.jumlah = PlayerPrefs.GetInt("kantongjumlah" + slot);
             newtools.resource = "Images/Barang/" + namaitem[0];
 
+            
+
             Alltools sebelumtools = new Alltools();
             sebelumtools.slot = PlayerPrefs.GetInt("pindahinKantong");
             string[] namaitem2 = PlayerPrefs.GetString("kantongnama" + sebelumtools.slot).Split('-');
             sebelumtools.name = PlayerPrefs.GetString("kantongnama" + sebelumtools.slot);
             sebelumtools.jumlah = PlayerPrefs.GetInt("kantongjumlah" + sebelumtools.slot);
             sebelumtools.resource = "Images/Barang/" + namaitem2[0];
+
+            Debug.Log("NAMA ITEM: " + namaitem[0]);
+            if (namaitem[0].Contains("Cat") || namaitem[0].Contains("Chicken") || namaitem[0].Contains("Duck")
+                || namaitem[0].Contains("Goat") || namaitem[0].Contains("Cow") || namaitem2[0].Contains("Cat") || namaitem2[0].Contains("Chicken") || namaitem2[0].Contains("Duck")
+                || namaitem2[0].Contains("Goat") || namaitem2[0].Contains("Cow"))
+            {
+                audio = GameObject.Find("Clicked").transform.Find("ClickedWrong").GetComponent<AudioSource>();
+                audio.Play();
+                PlayerPrefs.DeleteKey("pindahinKantong");
+                return;
+            }
 
             if (sebelumtools.name != "")
             {

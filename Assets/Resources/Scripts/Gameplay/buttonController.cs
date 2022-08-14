@@ -328,6 +328,9 @@ public class buttonController : MonoBehaviour
     {
         AudioSource audio = GameObject.Find("Clicked").transform.Find("openmenu").GetComponent<AudioSource>();
         audio.Play();
+        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonFarm").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonNeighbor").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonCow").gameObject.SetActive(true);
 
         GameObject.Find("Canvas").transform.Find("ProfileStatus").gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").gameObject.SetActive(false);
@@ -363,41 +366,46 @@ public class buttonController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonChicken").GetComponent<Image>().color = new Color32(188, 163, 112, 255); 
         GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonCow").GetComponent<Image>().color = new Color32(255, 226, 165, 255);
         
-        for(int i=0;i< (int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenMax"]; i++)
+        for(int i=0;i< 20; i++)
         {
             if (PhotonNetwork.CurrentRoom.CustomProperties["Chicken" + i] != null)
             {
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);
-                //FOTO
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("Avatar").GetComponent<RawImage>().texture = Resources.Load<Texture>("Images/Barang/"+PhotonNetwork.CurrentRoom.CustomProperties["Chicken"+i].ToString().Split('-')[0]);
-                //NAMA
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.CustomProperties["Chicken" + i].ToString().Split('-')[1];
-                //HEART
-                for(int j = 0; j < ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenHeart"+i]/10);j++)
+                if(PhotonNetwork.CurrentRoom.CustomProperties["Chicken" + i].ToString() != "")
                 {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(true);
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);
+                    //FOTO
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("Avatar").GetComponent<RawImage>().texture = Resources.Load<Texture>("Images/Barang/" + PhotonNetwork.CurrentRoom.CustomProperties["Chicken" + i].ToString().Split('-')[0]);
+                    //NAMA
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.CustomProperties["Chicken" + i].ToString().Split('-')[1];
+                    //HEART
+                    for (int j = 0; j < ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenHeart" + i] / 10); j++)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(true);
+                    }
+                    for (int j = ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenHeart" + i] / 10); j < 10; j++)
+                    {
+                        if (GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.activeSelf)
+                            GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(false);
+                    }
+                    //SICK OR NO
+                    if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] <= 1)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(71, 168, 58, 255);
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(147);
+                    }
+                    else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] == 2)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(205, 136, 28, 255);
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(148);
+                    }
+                    else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] == 3)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = Color.red;
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(149);
+                    }
                 }
-                for (int j = ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenHeart" + i] / 10); j < 10; j++)
-                {
-                    if(GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.activeSelf)
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(false);
-                }
-                //SICK OR NO
-                if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] <= 1)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(71, 168, 58, 255);
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(147);
-                }
-                else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] == 2)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(205, 136, 28, 255);
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(148);
-                }
-                else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["ChickenSick" + i] == 3)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = Color.red;
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(149);
-                }
+                else GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(false);
+
             }
             else GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
@@ -425,41 +433,46 @@ public class buttonController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonCow").GetComponent<Image>().color = new Color32(188, 163, 112, 255);
         GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ButtonChicken").GetComponent<Image>().color = new Color32(255, 226, 165, 255);
 
-        for (int i = 0; i < (int)PhotonNetwork.CurrentRoom.CustomProperties["CowMax"]; i++)
+        for (int i = 0; i < 20; i++)
         {
             if (PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i] != null)
             {
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);
-                //FOTO
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("Avatar").GetComponent<RawImage>().texture = Resources.Load<Texture>("Images/Barang/" + PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[0]);
-                //NAMA
-                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[1];
-                //HEART
-                for (int j = 0; j < ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowHeart" + i] / 10); j++)
+                if(PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString() != "")
                 {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(true);
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);
+                    //FOTO
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("Avatar").GetComponent<RawImage>().texture = Resources.Load<Texture>("Images/Barang/" + PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[0]);
+                    //NAMA
+                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.CustomProperties["Cow" + i].ToString().Split('-')[1];
+                    //HEART
+                    for (int j = 0; j < ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowHeart" + i] / 10); j++)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(true);
+                    }
+                    for (int j = ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowHeart" + i] / 10); j < 10; j++)
+                    {
+                        if (GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.activeSelf)
+                            GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(false);
+                    }
+                    //SICK OR NO
+                    if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] <= 1)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(71, 168, 58, 255);
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(147);
+                    }
+                    else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] == 2)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(205, 136, 28, 255);
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(148);
+                    }
+                    else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] == 3)
+                    {
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = Color.red;
+                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(149);
+                    }
                 }
-                for (int j = ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowHeart" + i] / 10); j < 10; j++)
-                {
-                    if (GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.activeSelf)
-                        GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("heart").GetChild(j).gameObject.SetActive(false);
-                }
-                //SICK OR NO
-                if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] <= 1)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(71, 168, 58, 255);
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(147);
-                }
-                else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] == 2)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = new Color32(205, 136, 28, 255);
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(148);
-                }
-                else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["CowSick" + i] == 3)
-                {
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().color = Color.red;
-                    GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).Find("health").GetComponent<Text>().text = ChangeLanguage.instance.GetLanguage(149);
-                }
+                else GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(false);
+
             }
             else GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewBarn").GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
@@ -511,6 +524,16 @@ public class buttonController : MonoBehaviour
         AudioSource audio = GameObject.Find("Clicked").transform.Find("closemenu").GetComponent<AudioSource>();
         audio.Play();
 
+        if(PhotonNetwork.CurrentRoom.CustomProperties["nanyaNPCMini"].ToString()==PhotonNetwork.LocalPlayer.NickName ||
+            PhotonNetwork.CurrentRoom.CustomProperties["nanyaNPCSamsul"].ToString() == PhotonNetwork.LocalPlayer.NickName)
+        {
+            GameObject.Find("Canvas").transform.Find("DialogBG").Find("DialogName").Find("TempatButton").Find("Button3").GetComponent<NPCTalk>().Gajadi(name);
+            for (int i = 0; i < GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).childCount; i++)
+            {
+                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("health").gameObject.SetActive(true);
+                GameObject.Find("Canvas").transform.Find("ProfileStatus").Find("ScrollViewPoultry").GetChild(0).GetChild(0).GetChild(i).Find("Accept").gameObject.SetActive(false);
+            }
+        }
         GameObject.Find("Canvas").transform.Find("ProfileStatus").gameObject.SetActive(false);
     }
 
@@ -564,6 +587,10 @@ public class buttonController : MonoBehaviour
         if (namaNPC == "Afifah") LanguageAfifah.instance.StartCoroutine(LanguageAfifah.instance.nanyaFriendship());
         if (namaNPC == "Otong") LanguageOtong.instance.StartCoroutine(LanguageOtong.instance.nanyaFriendship());
         if (namaNPC == "motorkopi") LanguageOtong.instance.StartCoroutine(LanguageMotorKopi.instance.nanyaFriendship());
+        if (namaNPC == "Anggun") LanguageAnggun.instance.StartCoroutine(LanguageAnggun.instance.nanyaFriendship());
+        if (namaNPC == "Windi") LanguageWindi.instance.StartCoroutine(LanguageWindi.instance.nanyaFriendship());
+        if (namaNPC == "Emon") LanguageEmon.instance.StartCoroutine(LanguageEmon.instance.nanyaFriendship());
+        if (namaNPC == "Mini") LanguageMini.instance.StartCoroutine(LanguageMini.instance.nanyaFriendship());
 
         ExitGames.Client.Photon.Hashtable custom = new ExitGames.Client.Photon.Hashtable();
         custom.Add("nanyaNPC"+ namaNPC, PhotonNetwork.LocalPlayer.NickName);

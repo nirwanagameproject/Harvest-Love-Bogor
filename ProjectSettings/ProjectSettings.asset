@@ -247,7 +247,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: user.keystore'
+  AndroidKeystoreName: '{dedicated}: .android/user.keystore'
   AndroidKeyaliasName: fmfstudio
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

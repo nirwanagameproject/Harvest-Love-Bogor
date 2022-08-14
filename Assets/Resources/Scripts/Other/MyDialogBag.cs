@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -105,14 +106,34 @@ public class MyDialogBag : MonoBehaviour
 
     public void percakapanDeskripsi(string namaperalatan)
     {
-        if(namaperalatan=="hoe")PercakapanBaru(ChangeLanguage.instance.GetLanguage(118), false);
-        else if(namaperalatan=="axe")PercakapanBaru(ChangeLanguage.instance.GetLanguage(119), false);
-        else if(namaperalatan=="hammer")PercakapanBaru(ChangeLanguage.instance.GetLanguage(120), false);
-        else if(namaperalatan=="sickle")PercakapanBaru(ChangeLanguage.instance.GetLanguage(121), false);
-        else if(namaperalatan=="watering")PercakapanBaru(ChangeLanguage.instance.GetLanguage(122), false);
-        else if(namaperalatan=="peralatanbibit1")PercakapanBaru(ChangeLanguage.instance.GetLanguage(123), false);
-        else if (namaperalatan.Contains("apple")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(124), false);
-        else if (namaperalatan.Contains("tomat")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(125), false);
+        if (namaperalatan == "hoe") PercakapanBaru(ChangeLanguage.instance.GetLanguage(118), false);
+        else if (namaperalatan == "axe") PercakapanBaru(ChangeLanguage.instance.GetLanguage(119), false);
+        else if (namaperalatan == "hammer") PercakapanBaru(ChangeLanguage.instance.GetLanguage(120), false);
+        else if (namaperalatan == "sickle") PercakapanBaru(ChangeLanguage.instance.GetLanguage(121), false);
+        else if (namaperalatan == "watering") PercakapanBaru(ChangeLanguage.instance.GetLanguage(122), false);
+        else if (namaperalatan == "peralatanbibit5") PercakapanBaru(ChangeLanguage.instance.GetLanguage(123), false);
+        else if (namaperalatan.Contains("Corn")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(176), false);
+        else if (namaperalatan.Contains("Apple")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(124), false);
+        else if (namaperalatan.Contains("Tomat")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(125), false);
         else if (namaperalatan.Contains("FeedChicken")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(130), false);
+        else if (namaperalatan.Contains("milkCowsmall")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(177), false);
+        else if (namaperalatan.Contains("milkCowmedium")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(178), false);
+        else if (namaperalatan.Contains("milkCowlarge")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(179), false);
+        else if (namaperalatan.Contains("milkGoatsmall")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(180), false);
+        else if (namaperalatan.Contains("milkGoatmedium")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(181), false);
+        else if (namaperalatan.Contains("milkGoatLarge")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(182), false);
+        else if (namaperalatan.Contains("telorChicken")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(183), false);
+        else if (namaperalatan.Contains("telorDuck")) PercakapanBaru(ChangeLanguage.instance.GetLanguage(184), false);
+        else if (namaperalatan.Contains("Cat")) PercakapanBaru(PhotonNetwork.CurrentRoom.CustomProperties["mykucing"].ToString() + " - " + ChangeLanguage.instance.GetLanguage(186) + PhotonNetwork.MasterClient.NickName, false);
+        else if (namaperalatan.Contains("Chicken")) 
+        {
+            string[] splitnama = namaperalatan.Split('-');
+            PercakapanBaru(splitnama[1] + " - " + ChangeLanguage.instance.GetLanguage(187) + PhotonNetwork.MasterClient.NickName, false); 
+        }
+        else if (namaperalatan.Contains("Duck"))
+        {
+            string[] splitnama = namaperalatan.Split('-');
+            PercakapanBaru(splitnama[1] + " - " + ChangeLanguage.instance.GetLanguage(188) + PhotonNetwork.MasterClient.NickName, false);
+        }
     }
 }

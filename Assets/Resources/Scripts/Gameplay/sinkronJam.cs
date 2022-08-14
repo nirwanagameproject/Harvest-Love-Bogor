@@ -79,6 +79,7 @@ public class sinkronJam : MonoBehaviour
                 setTgl.Add("jam", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextJam").GetComponent<Text>().text);
                 setTgl.Add("detik", GameObject.Find("Canvas").transform.Find("UIKiri").Find("TextDetik").GetComponent<Text>().text);
                 PhotonNetwork.CurrentRoom.SetCustomProperties(setTgl);
+                Debug.Log("HARI SINKRON: "+PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString());
             }
 
             PlayerPrefs.SetString("ambilduitharian", "no");
@@ -121,7 +122,6 @@ public class sinkronJam : MonoBehaviour
         PlayerPrefs.SetFloat("directionalSun", jumlahdsun);
         else PlayerPrefs.SetFloat("directionalSun", 355);
 
-        Debug.Log("EXPOSURE: "+ RenderSettings.skybox.GetFloat("_Exposure"));
         if(RenderSettings.skybox.GetFloat("_Exposure")==1)
             RenderSettings.skybox.SetFloat("_Exposure", 0.7f);
         else

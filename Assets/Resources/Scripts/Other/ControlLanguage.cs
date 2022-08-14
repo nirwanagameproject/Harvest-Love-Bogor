@@ -56,7 +56,7 @@ public class ControlLanguage : MonoBehaviour
                 else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Jumat") hariskrg = ChangeLanguage.instance.GetLanguage(112);
                 else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Sabtu") hariskrg = ChangeLanguage.instance.GetLanguage(113);
                 else if (PhotonNetwork.CurrentRoom.CustomProperties["hari"].ToString() == "Minggu") hariskrg = ChangeLanguage.instance.GetLanguage(114);
-                dateskrg.text = hariskrg + ", " + PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString() + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
+                dateskrg.text = hariskrg + ", " + PhotonNetwork.CurrentRoom.CustomProperties["tanggal"].ToString() + " " + Gamesetupcontroller.instance.musimText(PhotonNetwork.CurrentRoom.CustomProperties["musim"].ToString()) + " " + PhotonNetwork.CurrentRoom.CustomProperties["tahun"].ToString();
             }
             else
                 GameObject.FindGameObjectsWithTag("Language")[i].GetComponent<ChangeLanguage>().ChangedLanguge();

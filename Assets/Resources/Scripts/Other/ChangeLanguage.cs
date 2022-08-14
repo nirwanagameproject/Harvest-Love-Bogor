@@ -70,6 +70,14 @@ public class ChangeLanguage : MonoBehaviour
                 tekstranslate = LanguageOtong.instance.bahasaID[indexCari];
             else if (namanpc.Equals("motorkopi"))
                 tekstranslate = LanguageMotorKopi.instance.bahasaID[indexCari];
+            else if (namanpc.Equals("Anggun"))
+                tekstranslate = LanguageAnggun.instance.bahasaID[indexCari];
+            else if (namanpc.Equals("Windi"))
+                tekstranslate = LanguageWindi.instance.bahasaID[indexCari];
+            else if (namanpc.Equals("Emon"))
+                tekstranslate = LanguageEmon.instance.bahasaID[indexCari];
+            else if (namanpc.Equals("Mini"))
+                tekstranslate = LanguageMini.instance.bahasaID[indexCari];
         }
         else if (PlayerPrefs.GetString("bahasa") == "Inggris")
         {
@@ -83,6 +91,14 @@ public class ChangeLanguage : MonoBehaviour
                 tekstranslate = LanguageOtong.instance.bahasaUS[indexCari];
             else if (namanpc.Equals("motorkopi"))
                 tekstranslate = LanguageMotorKopi.instance.bahasaUS[indexCari];
+            else if (namanpc.Equals("Anggun"))
+                tekstranslate = LanguageAnggun.instance.bahasaUS[indexCari];
+            else if (namanpc.Equals("Windi"))
+                tekstranslate = LanguageWindi.instance.bahasaUS[indexCari];
+            else if (namanpc.Equals("Emon"))
+                tekstranslate = LanguageEmon.instance.bahasaUS[indexCari];
+            else if (namanpc.Equals("Mini"))
+                tekstranslate = LanguageMini.instance.bahasaUS[indexCari];
         }
         else if (PlayerPrefs.GetString("bahasa") == "Jepang")
         {
@@ -96,6 +112,14 @@ public class ChangeLanguage : MonoBehaviour
                 tekstranslate = LanguageOtong.instance.bahasaJP[indexCari];
             else if (namanpc.Equals("motorkopi"))
                 tekstranslate = LanguageMotorKopi.instance.bahasaJP[indexCari];
+            else if (namanpc.Equals("Anggun"))
+                tekstranslate = LanguageAnggun.instance.bahasaJP[indexCari];
+            else if (namanpc.Equals("Windi"))
+                tekstranslate = LanguageWindi.instance.bahasaJP[indexCari];
+            else if (namanpc.Equals("Emon"))
+                tekstranslate = LanguageEmon.instance.bahasaJP[indexCari];
+            else if (namanpc.Equals("Mini"))
+                tekstranslate = LanguageMini.instance.bahasaJP[indexCari];
         }
         return tekstranslate;
     }

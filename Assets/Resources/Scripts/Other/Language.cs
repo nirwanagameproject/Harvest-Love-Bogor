@@ -63,10 +63,10 @@ public class Language : MonoBehaviour
         bahasaID.Add("Siapa nama kamu?");
         bahasaID.Add("Ya"); // 16
         bahasaID.Add("Kapan tanggal ulang tahun kamu?");
-        bahasaID.Add("Spring adalah musim semi");
-        bahasaID.Add("Summer adalah musim panas");
-        bahasaID.Add("Fall adalah musim gugur");
-        bahasaID.Add("Winter adalah musim dingin");
+        bahasaID.Add("Penghujan adalah musim semi yang sering terjadi hujan");
+        bahasaID.Add("Pancaroba-1 adalah musim peralihan dari musim hujan ke musim kemarau");
+        bahasaID.Add("Kemarau adalah musim gugur dimana daun-daun pada berguguran");
+        bahasaID.Add("Pancaroba-2 adalah musim peralihan dari musim kemarau ke musim hujan");
         bahasaID.Add("Nama");
         bahasaID.Add("Selamat datang di Kota Bogor :)");
         bahasaID.Add("Ga ada save-an bro"); //24
@@ -171,7 +171,7 @@ public class Language : MonoBehaviour
         bahasaID.Add("Palu - Alat untuk menghancurkan batu."); // 120
         bahasaID.Add("Sabit - Alat untuk memotong rumput."); // 121
         bahasaID.Add("Penyiram - Alat untuk menyiram tanaman/bibit, isi penyiram dengan mendekati sumber air terdekat."); // 122
-        bahasaID.Add("Bibit Tomat - Tanam diwaktu spring, buah tomat segar dijual dengan harga 8000 Koin per satuan."); // 123
+        bahasaID.Add("Bibit Tomat - Tanam diwaktu spring, buah tomat segar dijual dengan harga 600 Koin per satuan."); // 123
         bahasaID.Add("Apel - Buah yang diproduksi dari pohon buah apel. Buah apel biasanya berwarna merah kulitnya jika masak dan (siap dimakan)"); // 124
         bahasaID.Add("Tomat - Buah kaya serat dan memiliki sejumlah vitamin serta zat antioksidan penting bagi tubuh"); // 125
         bahasaID.Add("Pilih saluran yang ingin ditonton."); // 126
@@ -210,6 +210,38 @@ public class Language : MonoBehaviour
         bahasaID.Add("Hutan Barat"); // 159
         bahasaID.Add("Hutan Barat daya"); // 160
         bahasaID.Add("Hutan Selatan"); // 161
+        bahasaID.Add("Persimpangan Jalan"); // 162
+        bahasaID.Add("PASAR\n24 Jam"); // 163
+        bahasaID.Add("Lapangan"); // 164
+        bahasaID.Add("Toko Produk Lahan"); // 165
+        bahasaID.Add("Bibit"); // 166
+        bahasaID.Add("Produk"); // 167
+        bahasaID.Add("Tomat"); // 168
+        bahasaID.Add("Jagung"); // 169
+        bahasaID.Add("Susu Sapi Mini"); // 170
+        bahasaID.Add("Susu Kambing Mini"); // 171
+        bahasaID.Add("Telur Ayam"); // 172
+        bahasaID.Add("Telur Bebek"); // 173
+        bahasaID.Add("Pilih Semua"); // 174
+        bahasaID.Add("Jual"); // 175
+        bahasaID.Add("Jagung - Salah satu tanaman pangan penghasil karbohidrat yang terpenting di dunia, selain gandum dan padi"); // 176
+        bahasaID.Add("Susu Sapi Mini - Sumber protein dan kalsium yang baik, serta nutrisi termasuk vitamin B12, magnesium dan yodium"); // 177
+        bahasaID.Add("Susu Sapi Medium - Sumber protein dan kalsium yang baik, serta nutrisi termasuk vitamin B12, magnesium dan yodium"); // 178
+        bahasaID.Add("Susu Sapi Besar - Sumber protein dan kalsium yang baik, serta nutrisi termasuk vitamin B12, magnesium dan yodium"); // 179
+        bahasaID.Add("Susu Kambing Mini - Memiliki manfaat yang potensial dalam menjaga serta menguatkan tulang dan gigi dan menjaga sistem pencernaan"); // 180
+        bahasaID.Add("Susu Kambing Medium - Memiliki manfaat yang potensial dalam menjaga serta menguatkan tulang dan gigi dan menjaga sistem pencernaan"); // 181
+        bahasaID.Add("Susu Kambing Besar - Memiliki manfaat yang potensial dalam menjaga serta menguatkan tulang dan gigi dan menjaga sistem pencernaan"); // 182
+        bahasaID.Add("Telur Ayam - Nutrisi yang terkandung di dalam sebuah telur cukup lengkap, mulai dari asam amino, lemak, vitamin, mineral hingga lutein"); // 183
+        bahasaID.Add("Telur Bebek - Selain mengandung protein, lemak, dan karbohidrat, telur bebek juga mengandung multivitamin dan mineral"); // 184
+        bahasaID.Add("Tas kamu sudah full / tidak muat"); // 185
+        bahasaID.Add("Kucing gemas dan lucu punya "); // 186
+        bahasaID.Add("Ayam gemas dan lucu punya "); // 187
+        bahasaID.Add("Bebek gemas dan lucu punya "); // 188
+        bahasaID.Add("Toko Unggas"); // 189
+        bahasaID.Add("Ayam"); // 190
+        bahasaID.Add("Bebek"); // 191
+        bahasaID.Add("Makanan Ayam"); // 192
+        bahasaID.Add("Yakin ingin menjual ?"); // 193
 
         //Translate Bahasa Inggris
         bahasaUS = new List<string>();
@@ -254,10 +286,10 @@ public class Language : MonoBehaviour
         bahasaUS.Add("Who is your name?");
         bahasaUS.Add("Ok"); // 16
         bahasaUS.Add("When is your birthday?");
-        bahasaUS.Add("Spring is season after winter");
-        bahasaUS.Add("Summer is season after spring");
-        bahasaUS.Add("Fall is season after summer");
-        bahasaUS.Add("Winter is season after fall");
+        bahasaUS.Add("Rainy is Spring Season it often rains");
+        bahasaUS.Add("Pancaroba-1 is transition season from Rainy Season to Autumn");
+        bahasaUS.Add("Autumn is season when leaves fall from trees");
+        bahasaUS.Add("Pancaroba-2 is transition season from Autumn to Rainy Season");
         bahasaUS.Add("Name");
         bahasaUS.Add("Welcome to Bogor City :)");
         bahasaUS.Add("Nothing save file here"); //24
@@ -401,6 +433,38 @@ public class Language : MonoBehaviour
         bahasaUS.Add("West Forest"); // 159
         bahasaUS.Add("SouthWest Forest"); // 160
         bahasaUS.Add("South Forest"); // 161
+        bahasaUS.Add("Junction"); // 162
+        bahasaUS.Add("24 Hours\nMarket"); // 163
+        bahasaUS.Add("Field"); // 164
+        bahasaUS.Add("Seed & Farm Products Shop"); // 165
+        bahasaUS.Add("Seed"); // 166
+        bahasaUS.Add("Products"); // 167
+        bahasaUS.Add("Tomato"); // 168
+        bahasaUS.Add("Corn"); // 169
+        bahasaUS.Add("Small Cow Milk"); // 170
+        bahasaUS.Add("Small Goat Milk"); // 171
+        bahasaUS.Add("Chicken Egg"); // 172
+        bahasaUS.Add("Duck Egg"); // 173
+        bahasaUS.Add("Select All"); // 174
+        bahasaUS.Add("Sell"); // 175
+        bahasaUS.Add("Corn - One of the most important carbohydrate-producing food crops in the world, besides wheat and rice"); // 176
+        bahasaUS.Add("Small Cow Milk - Good source of protein and calcium, as well as nutrients including vitamin B12, magnesium and iodine"); // 177
+        bahasaUS.Add("Medium Cow Milk - Good source of protein and calcium, as well as nutrients including vitamin B12, magnesium and iodine"); // 178
+        bahasaUS.Add("Large Cow Milk - Good source of protein and calcium, as well as nutrients including vitamin B12, magnesium and iodine"); // 179
+        bahasaUS.Add("Small Goat Milk - Has potential benefits in maintaining and strengthening bones and teeth and maintaining the digestive system"); // 180
+        bahasaUS.Add("Medium Goat Milk - Has potential benefits in maintaining and strengthening bones and teeth and maintaining the digestive system"); // 181
+        bahasaUS.Add("Large Goat Milk - Has potential benefits in maintaining and strengthening bones and teeth and maintaining the digestive system"); // 182
+        bahasaUS.Add("Chicken Eggs - The nutrients contained in an egg are quite complete, ranging from amino acids, fats, vitamins, minerals to lutein"); // 183
+        bahasaUS.Add("Duck Eggs - In addition to containing protein, fat, and carbohydrates, duck eggs also contain multivitamins and minerals"); // 184
+        bahasaUS.Add("Your bag is full / doesn't fit"); // 185
+        bahasaUS.Add("Little cute Cat owned by "); // 186
+        bahasaUS.Add("Little cute Chicken owned by "); // 187
+        bahasaUS.Add("Little cute Duck owned by "); // 188
+        bahasaUS.Add("Poultry Shop"); // 189
+        bahasaUS.Add("Chicken"); // 190
+        bahasaUS.Add("Duck"); // 191
+        bahasaUS.Add("Chicken Feed"); // 192
+        bahasaUS.Add("Are you sure want to sell?"); // 193
 
         //Translate Bahasa Jepang
         bahasaJP = new List<string>();
@@ -443,12 +507,12 @@ public class Language : MonoBehaviour
             " - Programmer");
         bahasaJP.Add("杉のページ");
         bahasaJP.Add("お名前は？");
-        bahasaJP.Add("はい");
+        bahasaJP.Add("はい"); //16
         bahasaJP.Add("お誕生日は？");
-        bahasaJP.Add("Springは春");
-        bahasaJP.Add("Summerは夏");
-        bahasaJP.Add("Fallは秋");
-        bahasaJP.Add("Winterは冬");
+        bahasaJP.Add("梅雨は春の季節で、よく雨が降ります");
+        bahasaJP.Add("Pancaroba-1 は梅雨から秋への移行シーズンです");
+        bahasaJP.Add("秋は木の葉が落ちる季節");
+        bahasaJP.Add("Pancaroba-2 は秋から梅雨への移行シーズンです");
         bahasaJP.Add("名前");
         bahasaJP.Add("ボゴールへようこそ！　:)");
         bahasaJP.Add("ここにストレージはありません");
@@ -592,8 +656,41 @@ public class Language : MonoBehaviour
         bahasaJP.Add("西の森"); // 159
         bahasaJP.Add("南西の森"); // 160
         bahasaJP.Add("南の森"); // 161
+        bahasaJP.Add("ジャンクション"); // 162
+        bahasaJP.Add("24時間\n市場"); // 163
+        bahasaJP.Add("分野"); // 164
+        bahasaJP.Add("種子・農産物販売店"); // 165
+        bahasaJP.Add("シード"); // 166
+        bahasaJP.Add("製品"); // 167
+        bahasaJP.Add("トマト"); // 168
+        bahasaJP.Add("コーン"); // 169
+        bahasaJP.Add("小さな牛乳"); // 170
+        bahasaJP.Add("小さな山羊乳"); // 171
+        bahasaJP.Add("鶏卵"); // 172
+        bahasaJP.Add("アヒルの卵"); // 173
+        bahasaJP.Add("すべて選択"); // 174
+        bahasaJP.Add("売る"); // 175
+        bahasaJP.Add("トウモロコシ - 小麦や米に加えて、世界で最も重要な炭水化物生産食用作物の1つ"); // 176
+        bahasaJP.Add("小さな牛乳 - たんぱく質とカルシウム、そしてビタミンB12、マグネシウム、ヨウ素などの栄養素の優れた供給源"); // 177
+        bahasaJP.Add("ミディアムカウミルク - たんぱく質とカルシウム、そしてビタミンB12、マグネシウム、ヨウ素などの栄養素の優れた供給源"); // 178
+        bahasaJP.Add("大きな牛乳 - タンパク質とカルシウムのほか、ビタミン B12、マグネシウム、ヨウ素などの栄養素の優れた供給源"); // 179
+        bahasaJP.Add("小さなヤギのミルク - 骨と歯の維持と強化、および消化器系の維持に潜在的な利点があります"); // 180
+        bahasaJP.Add("ミディアム ゴート ミルク - 骨と歯の維持と強化、および消化器系の維持に潜在的な利点があります"); // 181
+        bahasaJP.Add("ラージ ゴート ミルク - 骨と歯の維持と強化、および消化器系の維持に潜在的な利点があります"); // 182
+        bahasaJP.Add("鶏卵 - 卵に含まれる栄養素は、アミノ酸、脂肪、ビタミン、ミネラルからルテインに至るまで、非常に完全です"); // 183
+        bahasaJP.Add("アヒルの卵 - アヒルの卵には、タンパク質、脂肪、炭水化物が含まれているだけでなく、マルチビタミンとミネラルも含まれています"); // 184
+        bahasaJP.Add("バッグがいっぱいです/収まりません"); // 185
+        bahasaJP.Add("所有する小さなかわいい猫 "); // 186
+        bahasaJP.Add("所有する小さなかわいい鶏 "); // 187
+        bahasaJP.Add("所有する小さなかわいいアヒル "); // 188
+        bahasaJP.Add("鶏肉屋"); // 189
+        bahasaJP.Add("チキン"); // 190
+        bahasaJP.Add("アヒル"); // 191
+        bahasaJP.Add("鶏の飼料"); // 192
+        bahasaJP.Add("本当に売りたいですか？"); // 193
 
     }
+
 
     // Update is called once per frame
     void Update()
