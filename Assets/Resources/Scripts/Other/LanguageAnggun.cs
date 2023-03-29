@@ -290,6 +290,7 @@ public class LanguageAnggun : MonoBehaviour
                     PlayerPrefs.SetInt("levelbag", PlayerPrefs.GetInt("levelbag") + 1);
                     ExitGames.Client.Photon.Hashtable setProperti = new ExitGames.Client.Photon.Hashtable();
                     setProperti.Add("money", PlayerPrefs.GetInt("money"));
+                    setProperti.Add("levelbag", PlayerPrefs.GetInt("levelbag"));
                     PhotonNetwork.LocalPlayer.SetCustomProperties(setProperti);
                     GameObject.Find("Canvas").transform.Find("UIkanan").Find("JumlahDuit").GetComponent<Text>().text = "" + PlayerPrefs.GetInt("money");
                     GameObject.Find("Canvas").transform.Find("Bag").GetComponent<bag>().UpdateBagSlot();
